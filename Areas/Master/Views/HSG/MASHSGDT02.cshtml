@@ -1,0 +1,259 @@
+﻿@{
+    ViewBag.Title = "MASHSGDT02";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">สร้างข้อมูลหลักเล้า</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Housing</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Create</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">สร้าง</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุรหัสเล้า">
+                                        <span class="input-group-text col-lg-3">รหัสเล้า</span>
+                                        <input type="text"
+                                               id="HSG_ID"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input">
+                                        <span class="input-group-text col-lg-4">รหัสเล้าที่ใข้งาน</span>
+                                        <input type="text"
+                                               id="HSG_CODE"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุรายละเอียดเล้า">
+                                        <span class="input-group-text col-lg-3">รายละเอียดเล้า</span>
+                                        <input type="text"
+                                               id="HSG_DSC"
+                                               class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุฟาร์ม">
+                                        <span class="input-group-text col-lg-4">ฟาร์ม</span>
+                                        <select class="form-select form-control dropdown input-req-select" id="SITE_ID" required>
+                                            <option value=""></option>
+                                            @foreach (var sit in ViewBag.MAS_SITE)
+                                            {
+                                                <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>*@
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-5">รหัสโครงสร้างประเภทเล้า</span>
+                                        <input type="text"
+                                               id="HSG_TP_CODE"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-5">ชื่อโครงสร้างประเภทเล้า</span>
+                                        <input type="text"
+                                               id="HSG_TP_NM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">โซน</span>
+                                        <input type="text"
+                                               id="ZON"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">ลำดับ</span>
+                                        <input type="text"
+                                               id="SEQ"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">COST GROUP</span>
+                                        <input type="text"
+                                               id="COST_GRP"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-5">COST GROUP DESCRIPTION</span>
+                                        <input type="text"
+                                               id="COST_GRP_DSC"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+       
+        //$('#SITE_ID').select2({
+        //    theme: "bootstrap-5",
+        //    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        //    placeholder: $(this).data('placeholder'),
+        //    closeOnSelect: false,
+        //    tags: true
+        //});
+        $($(HSG_ID).parent()).removeClass('alert-validate');
+        $($(HSG_CODE).parent()).removeClass('alert-validate');
+        $($(HSG_DSC).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#HSG_ID").val() != "" && $("#HSG_DSC").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Edit this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#HSG_ID").val() == "") {
+                    $($(HSG_ID).parent()).addClass('alert-validate');
+                }
+                if ($("#HSG_DSC").val() == "") {
+                    $($(HSG_DSC).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+
+
+        function save() {
+            var MAS_HSG = {};
+            MAS_HSG.HSG_ID = $("#HSG_ID").val();
+            MAS_HSG.HSG_CODE = $("#HSG_CODE").val();
+            MAS_HSG.HSG_DSC = $("#HSG_DSC").val();
+            MAS_HSG.HSG_TP_CODE = $("#HSG_TP_CODE").val();
+            MAS_HSG.HSG_TP_NM = $("#HSG_TP_NM").val();
+            MAS_HSG.ZON = $("#ZON").val();
+            MAS_HSG.SEQ = $("#SEQ").val();
+            MAS_HSG.COST_GRP = $("#COST_GRP").val();
+            MAS_HSG.COST_GRP_DSC = $("#COST_GRP_DSC").val();
+            MAS_HSG.UDT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/HSG/MASHSGDT02_INSERT",
+                dataType: "json",
+                data: JSON.stringify({ MAS_HSG: MAS_HSG }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved',
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASHSGDT03", "HSG", new {
+                                                     HSG_SK = "HSG_SKRedirect"
+                                                 }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("HSG_SKRedirect", data.HSG_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>

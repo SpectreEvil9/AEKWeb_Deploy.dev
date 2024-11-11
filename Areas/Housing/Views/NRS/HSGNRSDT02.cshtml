@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "HSGNRSDT02";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HSGNRSDT02</title>
+</head>
+<body>
+    <div>
+        <table id="basic-datatables" style="width:280%" border="1"
+               class="display table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th rowspan="2" width="3%" style="text-align:center !important">เล้า</th>
+                    <th rowspan="2" width="2%" style="text-align:center !important">รุ่น</th>
+                    <th rowspan="2" width="3%" style="text-align:center !important">อายุเฉลียสุกร</th>
+                    <th rowspan="2" width="3%" style="text-align:center !important">สัปดาห์การเลี้ยง</th>
+                    <th colspan="9" style="text-align:center !important">จำนวนสุกร</th>
+                    <th colspan="12" style="text-align:center !important">สาเหตุการตาย(ตัว)</th>
+                    <th colspan="12" style="text-align:center !important">สาเหตุการคัดทิ้ง(ตัว)</th>
+                    <th colspan="12" style="text-align:center !important">สุขภาพในเล้า (ปกติ/ ป่วย)</th>
+                    <th colspan="3" style="text-align:center !important">อุณหภูมิ (T)</th>
+                    <th colspan="3" style="text-align:center !important">ความชื้น (H)</th>
+                </tr>
+                <tr>
+                    <th width="5%" style="text-align:center !important">รับหย่านม</th>
+                    <th style="text-align:center !important">ย้าย</th>
+                    <th width="5%" style="text-align:center !important">ไป</th>
+                    <th style="text-align:center !important">รับ</th>
+                    <th width="3%" style="text-align:center !important">จาก</th>
+                    <th style="text-align:center !important">ตาย</th>
+                    <th style="text-align:center !important">คัดทิ้ง</th>
+                    <th style="text-align:center !important">ขาย</th>
+                    <th style="text-align:center !important">คงเหลือ</th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="หายใจด้วยช่องท้อง">1</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ไอ">2</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ถ่ายท้อง">3</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ขาเจ็บข้อบวม">4</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="จุดม่วง">5</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ตามตัว">6</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ชักเกร็ง">7</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ผอมโทรมหลังแหลม">8</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ตัวซีดเหลือง">9</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ตัวแดง/ใข้สูง">10</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ใส้เลื่อน">11</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="อื่นๆ">12</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="หายใจด้วยช่องท้อง">1</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ไอ">2</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ถ่ายท้อง">3</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ขาเจ็บข้อบวม">4</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="จุดม่วง">5</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ตามตัว">6</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ชักเกร็ง">7</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ผอมโทรมหลังแหลม">8</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ตัวซีดเหลือง">9</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ตัวแดง/ใข้สูง">10</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="ใส้เลือน">11</a></th>
+                    <th style="text-align:center !important"><a href="#" style="color:black;" title="อื่นๆ">12</a></th>
+                    <th style="text-align:center !important">1</th>
+                    <th style="text-align:center !important">2</th>
+                    <th style="text-align:center !important">3</th>
+                    <th style="text-align:center !important">4</th>
+                    <th style="text-align:center !important">5</th>
+                    <th style="text-align:center !important">6</th>
+                    <th style="text-align:center !important">7</th>
+                    <th style="text-align:center !important">8</th>
+                    <th style="text-align:center !important">9</th>
+                    <th style="text-align:center !important">10</th>
+                    <th style="text-align:center !important">11</th>
+                    <th style="text-align:center !important">12</th>
+                    <th style="text-align:center !important">เช้า</th>
+                    <th style="text-align:center !important">เย็น</th>
+                    <th style="text-align:center !important">เฉลี่ย</th>
+                    <th style="text-align:center !important">เช้า</th>
+                    <th style="text-align:center !important">เย็น</th>
+                    <th style="text-align:center !important">เฉลี่ย</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>C01</td>
+                    <td style="text-align:center !important">1</td>
+                    <td><input type="text" class="form-control" value="1W2D" readonly /></td>
+                    <td><input type="text" class="form-control" value="1W" readonly /></td>
+                    <td>
+                        <div class="input-group">
+                            <input type="number" class="form-control" value="20" readonly />
+                            <button type="button" id="modal" class="input-group-icon">
+                                <i class="bi bi-arrow-return-left"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td><input type='text' class='form-control' autocomplete='off' oninput='input(this)' id='' value='' /></td>
+                    <td>
+                        <div class="input-group">
+                            <select class="form-select form-control"
+                                    id="smallSelect">
+                                <option></option>
+                            </select>
+                            <span class="input-group-icon">
+                                <i class="fas fa-random"></i>
+                            </span>
+                        </div>
+                    </td>
+                    <td><input type="number" class="form-control" readonly /></td>
+                    <td>
+                        <select class="form-select form-control" disabled
+                                id="smallSelect">
+                            <option></option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="form-control" readonly /></td>
+                    <td><input type="number" class="form-control" readonly /></td>
+                    <td><input type="number" class="form-control" readonly /></td>
+                    <td><input type="number" class="form-control" readonly /></td>
+
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                    <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" readonly /></td>
+
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="number" class="form-control" readonly /></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        var table = null;
+        $(document).ready(function () {
+            table = $("#basic-datatables").DataTable({ searching: false, scrollTo: 1200 });
+        });
+        function input(btn) {
+            console.log("555");
+            table.draw(false);
+        }
+    </script>
+</body>
+</html>

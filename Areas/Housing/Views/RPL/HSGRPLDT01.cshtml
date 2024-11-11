@@ -1,0 +1,688 @@
+﻿
+@{
+    ViewBag.Title = "HSGRPLDT01";
+}
+
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">ข้อมูลประจำวันโรงเรือนทดแทน</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Tables</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Datatables</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <ol class="activity-feed">
+                <li class="feed-item feed-item-info">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">1.ข้อมูลภาพรวมรายงานประจำวัน</h4>
+                                @using (Html.BeginForm("HSGRPLDT01", "RPL", FormMethod.Get, new { enctype = "multipart/form-data", @class = " bordered-row" }))
+                                {
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">ฟาร์ม</span>
+                                                    <select class="form-select dropdown-multiple" id="searchSiteId" multiple="multiple">
+                                                        @foreach (var sit in ViewBag.MAS_SITE)
+                                                        {
+                                                            <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">วันที่</span>
+                                                    <input type="text"
+                                                           id="date"
+                                                           class="form-control"
+                                                           placeholder="Select Date"
+                                                           aria-describedby="basic-addon1" />
+                                                    <span class="input-group-icon">
+                                                        <i class="fas fa-calendar-alt"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">สัปดาห์ที่</span>
+                                                    <input type="text"
+                                                           id="weekOfYear"
+                                                           class="form-control"
+                                                           placeholder="37"
+                                                           aria-describedby="basic-addon1" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">เล้า</span>
+                                                    <select class="form-select dropdown-multiple" id="searchHousingId" multiple="multiple">
+                                                        @foreach (var hsg in ViewBag.MAS_HSG)
+                                                        {
+                                                            <option value="@hsg.HSG_ID">@hsg.HSG_CODE</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-12 d-flex" style="justify-content:flex-end !important">
+                                            <button class="btn btn-primary btn-round">Search</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="tb_detail" style="width:120%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" width="2%" style="text-align:center !important">No.</th>
+                                                <th rowspan="2" width="5%" style="text-align:center !important">เล้า</th>
+                                                <th rowspan="2" width="10%" style="text-align:center !important">ประเภท</th>
+                                                <th rowspan="2" width="10%" style="text-align:center !important">ชุด/วันที่รับเข้า</th>
+                                                <th colspan="8" style="text-align:center !important">จำนวนสุกร</th>
+                                                <th colspan="3" style="text-align:center !important">อุณหภูมิ (T)</th>
+                                                <th colspan="3" style="text-align:center !important">ความชื้น (H)</th>
+                                            </tr>
+                                            <tr>
+
+                                                <th width="5%" style="text-align:center !important">ยกมา</th>
+                                                <th width="5%" style="text-align:center !important">รับซื้อ/โอนเข้า</th>
+                                                <th style="text-align:center !important">ย้าย</th>
+                                                <th style="text-align:center !important">รับ</th>
+                                                <th style="text-align:center !important">ตาย</th>
+                                                <th style="text-align:center !important">คัดทิ้ง</th>
+                                                <th style="text-align:center !important">ขาย</th>
+                                                <th style="text-align:center !important">คงเหลือ</th>
+
+                                                <th style="text-align:center !important">เช้า</th>
+                                                <th style="text-align:center !important">เย็น</th>
+                                                <th style="text-align:center !important">เฉลี่ย</th>
+                                                <th style="text-align:center !important">เช้า</th>
+                                                <th style="text-align:center !important">เย็น</th>
+                                                <th style="text-align:center !important">เฉลี่ย</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!--<tr>
+                                                <td style="text-align:center !important;">1</td>
+                                                <td>RB01/1</td>
+                                                <td>
+                                                    <select class="form-select form-control"
+                                                            id="smallSelect" readonly>
+                                                        <option>สุกรหนุ่ม</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="text" class="form-control" placeholder="28 Aug 2024" readonly /></td>
+                                                <td>
+                                                    <input type="number" class="form-control" readonly />
+                                                </td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+                                                <td>
+                                                    <div class="input-icon">--> <!-- movement-->
+                                                        <!--<input type="number" class="form-control" readonly />
+                                                        <a href="#container1" id="addMovement">
+                                                            <span class="input-icon-addon">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                        <a href="#container2">
+                                                            <span class="input-icon-addon">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                        <a href="#container2">
+                                                            <span class="input-icon-addon">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+
+                                                <td><input type="number" class="form-control" readonly /></td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center !important;">2</td>
+                                                <td>RB01/2</td>
+                                                <td>
+                                                    <select class="form-select form-control"
+                                                            id="smallSelect" readonly>
+                                                        <option>สุกรหนุ่ม</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="text" class="form-control" placeholder="28 Aug 2024" readonly /></td>
+                                                <td>
+                                                    <input type="number" class="form-control" readonly />
+                                                </td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                        <a href="#container1">
+                                                            <span class="input-icon-addon">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                        <a href="#container2">
+                                                            <span class="input-icon-addon">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                        <a href="#container2">
+                                                            <span class="input-icon-addon">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center !important;">3</td>
+                                                <td>RB01/3</td>
+                                                <td>
+                                                    <select class="form-select form-control"
+                                                            id="smallSelect" readonly>
+                                                        <option>สุกรสาว</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="text" class="form-control" placeholder="28 Aug 2024" readonly /></td>
+                                                <td>
+                                                    <input type="number" class="form-control" readonly />
+                                                </td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                        <a href="#container1">
+                                                            <span class="input-icon-addon">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                        <a href="#container2">
+                                                            <span class="input-icon-addon">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-icon">
+                                                        <input type="number" class="form-control" readonly />
+                                                        <a href="#container2">
+                                                            <span class="input-icon-addon">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" /></td>
+                                                <td><input type="number" class="form-control" readonly /></td>
+                                            </tr>-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                                <button class="btn btn-primary btn-round">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="feed-item feed-item-info">
+                    <ol class="activity-feed">
+                        <li class="feed-item feed-item-info">
+                            <div id="container1" class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">1.1 การย้าย</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="tb_movement" style="width:100%" border="1"
+                                                   class="display table table-striped table-hover table-bordered">
+                                                <thead>
+                                                    <tr style="text-align:center !important">
+                                                        <th>โรงเรือนต้นทาง</th>
+                                                        <th style="text-align:center !important">เบอร์สุกรที่ย้าย</th>
+                                                        <th style="text-align:center !important">โรงเรือนปลายทาง</th>
+                                                        <th style="align-content:center">
+                                                            <div class="d-flex align-items-center selectgroup-pills">
+                                                                <button type="button"
+                                                                        id="addMovement"
+                                                                        class="selectgroup-button selectgroup-button-icon">
+                                                                    <i class="fa fa-plus text-success"></i>
+                                                                </button>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr style="text-align:center !important">
+                                                        <td>
+                                                            <select class="form-select form-control" disabled
+                                                                    id="HSG_CODE">
+                                                                <option value="RB01/1" id="hsgOrigin">RB01/1</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุเบอร์สุกรที่ย้าย">
+                                                                <select class="form-select form-control dropdown input-req-select" required
+                                                                        id="HSG_DSC">
+                                                                    <option>2805762178</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุโรงเรือนปลายทาง">
+                                                                <select class="form-select form-control dropdown input-req-select" required
+                                                                        id="DEST_HSG_ID">
+                                                                    <option>RB01/2</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center selectgroup-pills">
+                                                                <button type="button"
+                                                                        id="delMovement"
+                                                                        class="selectgroup-button selectgroup-button-icon">
+                                                                    <i class="fas fa-trash text-danger"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                                        <button class="btn btn-primary btn-round" id="saveMovement">Save</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                        <li class="feed-item feed-item-info">
+                            <div id="container2" class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">1.2 สุกรตาย/คัดทิ้ง</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="basic-datatables2" style="width:100%" border="1"
+                                                   class="display table table-striped table-hover table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2" width="15%" style="text-align:center !important">เบอร์หู</th>
+                                                        <th rowspan="2" style="text-align:center !important">ตาย</th>
+                                                        <th rowspan="2" style="text-align:center !important">คัดทิ้ง</th>
+                                                        <th colspan="10" style="text-align:center !important">สาเหตุ</th>
+                                                        <th rowspan="2" width="4%" style="align-content:center">
+                                                            <div class="d-flex align-items-center selectgroup-pills">
+                                                                <button type="button"
+                                                                        class="selectgroup-button selectgroup-button-icon">
+                                                                    <i class="fa fa-plus text-success"></i>
+                                                                </button>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="text-align:center !important">รูปร่าง</th>
+                                                        <th style="text-align:center !important">เต้านม</th>
+                                                        <th style="text-align:center !important">ขา</th>
+                                                        <th style="text-align:center !important">อวัยวะเพศ</th>
+                                                        <th style="text-align:center !important">น้ำเชื้อ</th>
+                                                        <th style="text-align:center !important">ถ่ายดำ/แดง</th>
+                                                        <th style="text-align:center !important">โรคผิวหนัง</th>
+                                                        <th style="text-align:center !important">โรคปอด</th>
+                                                        <th style="text-align:center !important">ป่วย</th>
+                                                        <th style="text-align:center !important">ไม่ทราบสาเหตุ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr style="text-align:center !important">
+                                                        <td>
+                                                            <select class="form-select form-control"
+                                                                    id="smallSelect">
+                                                                <option>6703660266</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td><input class="form-check-input" type="checkbox" value="" style="text-align:center !important"></td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center selectgroup-pills">
+                                                                <button type="button"
+                                                                        class="selectgroup-button selectgroup-button-icon">
+                                                                    <i class="fas fa-trash text-danger"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                                        <button class="btn btn-primary btn-round">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+<script>
+    $('#searchSiteId, #searchHousingId').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+        closeOnSelect: false,
+        tags: true
+    });
+
+    /*$('#addMovement').on('click', function () {
+        $('#housingOrigin').val();
+    });*/
+
+    $(document).ready(function () {
+
+        $("#date").datepicker({
+            todayHighlight: true,
+            orientation: 'bottom left',
+            format: 'dd-M-yyyy',
+            todayBtn: 'linked',
+            autoclose: 'true',
+            assumeNearbyYear: true
+        }).datepicker("setDate", "-1d");
+
+        function SetTypeInput() {
+            $('.int').inputmask({
+                'alias': 'currency',
+                'integerDigits': '12',
+                'prefix': '',
+                rightAlign: false
+            });
+        }
+
+        tableDetail = $("#tb_detail").DataTable({
+            "searching": false,
+            "paging": true,
+            "ordering": true,
+            "info": false,
+            "bAutoWidth": false,
+            "lengthChange": false,
+            "order": [],
+            responsive: !0,
+            "columnDefs": [
+                {
+                    targets: [0, 1, 2, 3],
+                    orderable: false,
+                    className: "text-center",
+                },
+                {
+                    targets: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+                    orderable: false,
+                    className: "text-right",
+                }
+            ],
+            "columns": [
+                {
+                    "render": function (data, type, full, meta) {
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                        return (meta.row + 1) + page;
+                    }
+                },
+                { 'data': 'HSG_ID' },
+                { 'data': 'BRDR_GND' },
+                { 'data': 'TXN_DT', render: function (data, type, row) { return data != "" ? resJsonToDate(data) : ""; }},
+                { 'data': 'NET_QTY_YEST' },
+                { 'data': 'NEW_ARRV_QTY' },
+                { 'data': 'TFR_QTY' },
+                { 'data': 'RCV_QTY' },
+                { 'data': 'DIED_TOT' },
+                { 'data': 'DSCRD_TOT' },
+                { 'data': 'BRDR_SALE_TOT' },
+                { 'data': 'NET_QTY' },
+                { 'data': 'TEMP_MNNG' },
+                { 'data': 'TEMP_EVNNG' },
+                { 'data': 'TEMP_AVG' },
+                { 'data': 'HMD_MNNG' },
+                { 'data': 'HMD_EVNNG' },
+                { 'data': 'HMD_AVG' }
+            ],
+            "drawCallback": function (settings) {
+            $(".int").inputmask({
+                'alias': 'currency',
+                'integerDigits': '12',
+                'digits': 0,
+                'prefix': '',
+                rightAlign: false
+            });
+            }
+        });
+        tableDetail.on('order.dt', function () {
+            tableDetail.column(0, { order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw(false);
+
+        SelectTbDetail();
+        SetTypeInput();
+
+        $('#addMovement').on('click', function () {
+            var newrow = $('#tb_movement tbody').find('tr').first().clone();
+            $('#tb_movement tbody').append(newrow);
+        });
+
+        $('#delMovement').on('click', function () {
+            $(this).closest('tr').remove();
+        });
+    });
+
+    function SelectTbDetail() {
+        $.ajax({
+            type: "POST",
+            url: pathServer + "/RPL/HSGRPLDT01_SELECT",
+            dataType: "json",
+            cache: false,
+            success: function (data) {
+                var V_REPLACEMENT = data.V_REPLACEMENT;
+                tableDetail.rows.add(V_REPLACEMENT).draw();
+            },
+            error: function () {
+            }
+        });
+    }
+
+    $($(HSG_DSC).parent()).removeClass('alert-validate');
+    $($(DEST_HSG_ID).parent()).removeClass('alert-validate');
+
+    $("#saveMovement").click(function () {
+        if ($("#HSG_DSC").val() != "" && $("#DEST_HSG_ID").val() != "") {
+            Swal.fire({
+                icon: "question",
+                title: 'Do you want to save?',
+                text: "Are you sure to Add movement",
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    saveMovement();
+                }
+            });
+        } else {
+            if ($("#HSG_ID").val() == "") {
+                $($(HSG_ID).parent()).addClass('alert-validate');
+            }
+            if ($("#DEST_HSG_ID").val() == "") {
+                $($(DEST_HSG_ID).parent()).addClass('alert-validate');
+            }
+        }
+    });
+
+    function saveMovement() {
+        let BRDR_MVMT = {};
+        BRDR_MVMT.HSG_ID = $("#HSG_CODE").val();
+        BRDR_MVMT.BRDR_ID = $("#HSG_DSC").val();
+        BRDR_MVMT.DEST_HSG_ID = $("#DEST_HSG_ID").val();
+
+        let REPLACEMENT = {};
+        REPLACEMENT.SITE_ID = $('#SITE_ID').val();
+        REPLACEMENT.TXN_DT = $('#date').val();
+
+        console.log("BRDR_MVMT => " + BRDR_MVMT);
+        console.log("REPLACEMENT => " + REPLACEMENT);
+
+        $.ajax({
+        contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+        type: "POST",
+            url: pathServer + "/RPL/HSGNRSDT02_INSERT",
+            dataType: "json",
+            data: JSON.stringify({ BRDR_MVMT: BRDR_MVMT, REPLACEMENT: REPLACEMENT }), //parameter Object,List
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                let timerInterval;
+                xhr_loading(xhr);
+                clearInterval(timerInterval);
+            return xhr;
+        },
+            success: function (data) {
+
+            clearInterval(interVal);
+            $('#progress').css('width', 100 + "%");
+                //successMessage.init();
+                setTimeout(function () {
+                    //Attach_File();
+                    Swal.fire({
+                        icon: "success",
+                        title: 'Your data has been saved',
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                    var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("HSGRPLDT01", "RPL", new {
+                                                 HSG_RPLCMT_SK = "HSG_RPLCMT_SKRedirect"
+                                             }).ToString())");
+                    const parseResult = new DOMParser().parseFromString(url, "text/html");
+                    url = parseResult.documentElement.textContent;
+                        url = url.replace("HSG_RPLCMT_SKRedirect", data.HSG_RPLCMT_SK);
+                        window.location.replace(url);
+                    });
+                }, 1500);
+            },
+            error: function () {
+                errorAlert.init();
+            }
+        });
+    }
+
+</script>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3c4df22b0d7041daa23c108f5e6e8c7b" Name="Diagram1">
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.HSG_ALL_HLT_CHK" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.HSG_TEMP_HMD" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.TXN_HSG_NRSRY" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.V_REPLACEMENT" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.BRDR_MVMT" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.TXN_HSG_RPLCMT" Width="1.5" PointX="7.375" PointY="5.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "Home Master";
+}
+
+<div class="container">
+    <div class="page-inner">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+            <div>
+                <h3 class="fw-bold mb-3">
+                    Master Data
+                </h3>
+                <h6 class="op-7 mb-2"></h6>
+            </div>
+            <div class="ms-md-auto py-2 py-md-0">
+                <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-buildings-fill"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ชื่อบริษัทในเครื่องเอกกรุ๊ป (Company)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="@HttpUtility.UrlDecode(Url.Action("MASSITDT01", "SIT" , new {}).ToString())" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-houses-fill"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูล ชื่อฟาร์มของแต่ละบริษัท ( Farm หรือ Site)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="@HttpUtility.UrlDecode(Url.Action("MASHSGDT01","HSG", new {}).ToString())" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-geo-alt-fill"></i></span>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลเล้า (Storage Dimension)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-basket"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลกลุ่มผลิตภัณฑ์ (Item Group)
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-bag-plus-fill"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลผลิตภัณฑ์ (Item /Product)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-clipboard-data"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลมิติทางการเงิน (Financial Dimension)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-people-fill"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลลูกค้า (Customer)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-list-ul"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลที่อยู่ลูกค้า (Customer Address)
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-stack-overflow"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลผังบัญชี (Account) ในระบบ AX
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-postcard"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลพ่อ-แม่พันธุ์ เบอร์หู (BOAR CARD)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-box2-fill"></i></span>
+                    </div>
+                    <span class="ms-3">
+                        ข้อมูลปริมาณอาหารมาตรฐานของพ่อ-แม่พันธุ์-สุกรสาว (Standard Feed)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-eyedropper"></i></span>
+                    </div>
+                    <span class="ms-3">
+                        ข้อมูลการให้วัคซีนแม่ผสม-อุ้มท้อง (Standard Vaccine)
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-capsule-pill"></i></span>
+                    </div>
+                    <span class="ms-3">
+                        ข้อมูลสุขภาพในเล้า กรณีป่วย (environment and diseases)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-receipt"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลราคาขายตามประกาศ (Sale Price)
+                    </span>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mas-menu-padding">
+                <a href="#" style="color:black;justify-content:flex-start !important" class="d-flex">
+                    <div>
+                        <span class="avatar avatar-title rounded-circle border border-white bg-warning"><i class="bi bi-plus-slash-minus"></i></span>
+                    </div>
+                    <span class="pt-1 ms-3">
+                        ข้อมูลเกณฑ์การพิจารณาส่วนลด กรณีขายสุกร (Discount)
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1131 @@
+﻿
+@{
+    ViewBag.Title = "HSGNRSDT01";
+}
+
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">ข้อมูลประจำวันโรงเรือนอนุบาล</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Tables</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Datatables</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">1.ข้อมูลการเลี้ยง (รายงานประจำวัน)</h4>
+                        <form class="m-form m-form--fit m-form--label-align-right">
+                            @using (Html.BeginForm("HSGNRSDT01", "NRS", FormMethod.Get, new { enctype = "multipart/form-data", @class = " bordered-row" }))
+                            {
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์ม</span>
+                                                <select class="form-select dropdown-multiple" id="searchSiteid" name="searchSiteid" multiple="multiple">
+                                                    @foreach (var sit in ViewBag.MAS_SITE)
+                                                    {
+                                                        <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text col-lg-3" id="basic-addon1">เล้า</span>
+                                                <select class="form-select dropdown-multiple" id="searchHsgid" name="searchHsgid" multiple="multiple">
+                                                    @foreach (var hsg in ViewBag.MAS_HSG)
+                                                    {
+                                                        <option value="@hsg.HSG_ID">@hsg.HSG_CODE</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3 date validate-input" data-validate="โปรดระบุวันที่">
+                                                <span class="input-group-text" id="basic-addon1">วันที่</span>
+                                                @Html.TextBox("searchDate", ViewBag.searchDate as string, new { @class = "form-control input-req-date", autocomplete = "off", tabindex = "1", placeholder = "Select Date", id = "searchDate" })
+                                                @*<input type="text"
+                                                    id="searchDate"
+                                                    class="form-control input-req-date"
+                                                    placeholder="Select Date" />*@
+                                                <span class="input-group-icon">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">สัปดาห์ที่</span>
+                                                <input type="text" id="WEEK" class="form-control" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-12 d-flex" style="justify-content:flex-end !important">
+                                        <button type="submit"  class="btn btn-primary btn-round">Search</button>
+                                    </div>
+                                </div>
+                            }
+                        </form>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="position: relative; overflow: auto; width: 100%;">
+                            <table id="tb_detail" style="width:280%" border="1" class="display table table-striped table-hover table-bordered table-checkable nowrap dataTable" role="grid">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" width="1%" style="text-align:center !important">ลำดับ</th>
+                                        <th rowspan="2" width="3%" style="text-align:center !important"></th>
+                                        <th rowspan="2" width="3%" style="text-align:center !important"></th>
+                                        <th rowspan="2" width="3%" style="text-align:center !important"></th>
+                                        <th rowspan="2" width="3%" style="text-align:center !important"></th>
+                                        <th rowspan="2" width="3%" style="text-align:center !important"></th>
+                                        <th rowspan="2" width="3%" style="text-align:center !important"></th>
+
+                                        <th rowspan="2" width="3%" style="text-align:center !important">เล้า</th>
+                                        <th rowspan="2" width="2%" style="text-align:center !important">รุ่น</th>
+                                        <th rowspan="2" width="3%" style="text-align:center !important">อายุเฉลียสุกร</th>
+                                        <th rowspan="2" width="3%" style="text-align:center !important">สัปดาห์การเลี้ยง</th>
+                                        <th colspan="10" style="text-align:center !important">จำนวนสุกร</th>
+                                        <th colspan="12" style="text-align:center !important">สาเหตุการตาย(ตัว)</th>
+                                        <th colspan="12" style="text-align:center !important">สาเหตุการคัดทิ้ง(ตัว)</th>
+                                        <th colspan="5" style="text-align:center !important">สุขภาพในเล้า (ปกติ/ ป่วย)</th>
+                                        <th colspan="3" style="text-align:center !important">อุณหภูมิ (T)</th>
+                                        <th colspan="3" style="text-align:center !important">ความชื้น (H)</th>
+                                    </tr>
+                                    <tr>
+                                        <th width="2%" style="text-align:center !important">ยอดยกมา</th>
+                                        <th width="4%" style="text-align:center !important">รับหย่านม</th>
+                                        <th width="2%" style="text-align:center !important">ย้าย</th>
+                                        <th width="3%" style="text-align:center !important">ไป</th>
+                                        <th width="2%" style="text-align:center !important">รับ</th>
+                                        <th width="5%" style="text-align:center !important">จาก</th>
+                                        <th style="text-align:center !important">ตาย</th>
+                                        <th style="text-align:center !important">คัดทิ้ง</th>
+                                        <th style="text-align:center !important">ขาย</th>
+                                        <th style="text-align:center !important">คงเหลือ</th>
+
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="หายใจด้วยช่องท้อง">1</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ไอ">2</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ถ่ายท้อง">3</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ขาเจ็บข้อบวม">4</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="จุดม่วง">5</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ตามตัว">6</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ชักเกร็ง">7</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ผอมโทรมหลังแหลม">8</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ตัวซีดเหลือง">9</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ตัวแดง/ใข้สูง">10</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ใส้เลื่อน">11</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="อื่นๆ">12</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="หายใจด้วยช่องท้อง">1</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ไอ">2</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ถ่ายท้อง">3</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ขาเจ็บข้อบวม">4</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="จุดม่วง">5</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ตามตัว">6</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ชักเกร็ง">7</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ผอมโทรมหลังแหลม">8</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ตัวซีดเหลือง">9</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ตัวแดง/ใข้สูง">10</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="ใส้เลือน">11</a></th>
+                                        <th width="2%" style="text-align:center !important"><a href="#" style="color:black;" title="อื่นๆ">12</a></th>
+                                        <th style="text-align:center !important">1</th>
+                                        <th style="text-align:center !important">2</th>
+                                        <th style="text-align:center !important">3</th>
+                                        <th style="text-align:center !important">4</th>
+                                        <th style="text-align:center !important">5</th>
+                                        <th style="text-align:center !important">เช้า</th>
+                                        <th style="text-align:center !important">เย็น</th>
+                                        <th style="text-align:center !important">เฉลี่ย</th>
+                                        <th style="text-align:center !important">เช้า</th>
+                                        <th style="text-align:center !important">เย็น</th>
+                                        <th style="text-align:center !important">เฉลี่ย</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="m_modal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-md" style="max-width: 700px!important;padding-top: 80px;" role="document">
+        <div class="modal-content card">
+            <div class="modal-header">
+                <h5 class="card-title">
+                    บันทึกการรับซื้อโอนเข้า
+                </h5>
+
+                <!--<button type="button" class="close" style="justify-content:flex-end !important" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>-->
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">ฟาร์ม</span>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="ฟาร์มบึงตะกู" readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">วันที่</span>
+                                <input type="text"
+                                       id="date"
+                                       class="form-control"
+                                       placeholder="24 Sep 2024" readonly />
+                                <span class="input-group-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <label class="card-title text-primary">ใบส่งสินค้า</label>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text col-lg-5" id="basic-addon1">จำนวนลูกสุกรที่ซื้อ</span>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="120" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <a href="#">ดูใบส่งสินค้า</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text col-lg-5" id="basic-addon1">ราคารวม</span>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="564,340.00" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">เฉลี่ยต่อตัว</span>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="4,702.83" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label class="card-title text-primary">รับเข้า</label>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">เล้า</span>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="G-A01-A" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">จำนวน</span>
+                                    <input id="NEW_ARRV_QTY" type="number" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">รุ่น</span>
+                                    <input type="text" id="GEN" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">ต้นทุนรวม</span>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="94,056.64" readonly />
+                                    </div>
+                                </div>
+                                <input type="hidden" id="id" class="form-control" />
+                                <input type="hidden" id="row" class="form-control" />
+                                <input type="hidden" id="col" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                <button id="add_new_arrv" class="btn btn-primary btn-round">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var MAS_HSG = @Html.Raw(Json.Encode(ViewBag.MAS_HSG));
+    var table = null;
+
+    function reverseFormattedDate(t_sdate) {
+        var date = String(t_sdate).split("-");
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        for (var j = 0; j < months.length; j++) {
+            if (date[1] == months[j]) {
+                date[1] = months.indexOf(months[j]) + 1;
+            }
+        }
+        if (date[1] < 10) {
+            date[1] = '0' + date[1];
+        }
+        var formattedDate = date[2] + "-" + date[1] + "-" + date[0];
+        return formattedDate;
+    }
+
+    function getFormattedDate(t_sdate) {
+
+        var sptdate = String(t_sdate).split("-");
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var myMonth = sptdate[1];
+        var myDay = sptdate[2];
+        var myYear = sptdate[0];
+        var combineDatestr = myDay + "-" + months[myMonth - 1] + "-" + myYear;
+        return combineDatestr;
+    }
+
+    $('#searchSiteid,#searchHsgid').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+        closeOnSelect: false,
+        tags: true
+    });
+    function getWeekNumber(dateStr) {
+        // Parse the date from the string
+        var date = new Date(dateStr);
+        // Set the date to the nearest Thursday: current date + 4 - current day number (with Sunday as 7)
+        date.setDate(date.getDate() + 4 - (date.getDay() || 7));
+        // Get the first day of the year
+        var yearStart = new Date(date.getFullYear(), 0, 1);
+        // Calculate full weeks to nearest Thursday
+        var weekNumber = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+
+        return weekNumber;
+    }
+
+    $(document).ready(function () {
+        if ('@ViewBag.searchSiteid' != '') {
+            $("#searchSiteid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteid))')).trigger("change");
+        }
+        if ('@ViewBag.searchHsgid' != '') {
+            $("#searchHsgid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHsgid))')).trigger("change");
+        }
+
+        let focusedElementId;
+
+        // Detect focus for any focusable element within a specific container
+        $('#tb_detail').on('focusin', 'input, select, textarea', function () {
+            focusedElementId = $(this).attr('id');
+            //console.log("Focused element id:", focusedElementId);
+        });
+
+        function SetTypeInput() {
+            $('.int').inputmask({  /*set format decimal*/
+                'alias': 'currency',
+                'integerDigits': '12',
+                'prefix': '',
+                rightAlign: false
+            });
+        }
+
+        $("#searchDate").datepicker({
+            todayHighlight: true,
+            orientation: 'bottom left',
+            format: 'dd-M-yyyy',
+            todayBtn: 'linked',
+            autoclose: 'true',
+            assumeNearbyYear: true
+        });
+        $("#searchDate").on('change', function () {
+            //console.log(reverseFormattedDate($("#searchDate").val()));
+            $("#WEEK").val(getWeekNumber(reverseFormattedDate($("#searchDate").val())));
+        });
+
+        tableDetail = $("#tb_detail").DataTable({
+            "searching": false,
+            "paging": true,
+            "ordering": true,
+            "info": false,
+            "bAutoWidth": false,
+            "lengthChange": false,
+            "order": [],
+            responsive: !0,
+            pageLength: 10,
+            keys: {
+                blurable: false
+            },
+            "columnDefs": [
+                {
+                    targets: [0],
+                    orderable: false,
+                    className: "text-center",
+                },
+                {
+                    targets: [1, 2, 3, 4, 5 ,6],
+                    orderable: false,
+                    visible: false,
+                    className: "text-left",
+                },
+                {
+                    targets: [11, 12, 13, 14, 15,  17, 18, 19,20],
+                    orderable: false,
+                    className: "text-left",
+                    mRender: function (data, type, full) {
+                        return numeral(data).format('0,0');
+                    }
+                },
+                {
+                    targets: [7, 8, 9, 10, 16, 20, 21, 22, 23, 24, 25,
+                        26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,40,41,42,43,44,50,51,52,53,54,55],
+                    orderable: false,
+                    className: "text-left",
+                },
+                {
+                    targets: [45, 46, 47, 48, 49],
+                    orderable: false,
+                    className: "text-center",
+                }
+            ],
+            "columns": [
+                {
+                    "render": function (data, type, full, meta) {
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                        return (meta.row + 1) + page;
+                    }
+                },
+                { 'data': 'UK_KEY' },
+                { 'data': 'HSG_NRSRY_SK' },
+                { 'data': 'USER_ID' },
+                { 'data': 'TXN_DT', },
+                { 'data': 'RCRD_DT', },
+                { 'data': 'SITE_ID' },
+                { 'data': 'HSG_ID' },
+                { 'data': 'GEN' },
+                { 'data': 'AGE' },
+                { 'data': 'WEEK' },
+                { 'data': 'BALANCE_QTY' },
+                {
+                    'data': 'NEW_ARRV_QTY',
+                    render: function (data, type, row,meta) {
+                        return "<div class='input-group'><input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='NEW_ARRV_QTY--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NEW_ARRV_QTY + "' readonly/><button type='button' id='BT_NEW_ARRV_QTY--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NEW_ARRV_QTY + "' onclick='Added(this)' class='input-group-icon'><i class='bi bi-arrow-return-left'></i></button></div>";
+                    }
+                },
+                {
+                    'data': 'TFR_QTY',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='TFR_QTY--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.TFR_QTY + "' />";
+                    }
+                },
+                {
+                    'data': 'HSG_DST',
+                    render: function (data, type, row,meta) {
+                        var optionList = "";
+                        $.each(MAS_HSG, function (index, item) {
+                            if (row.HSG_ID != item.HSG_ID) {
+                                if (row.HSG_DST !== null && row.HSG_DST == item.HSG_ID) {
+                                    optionList = optionList + ' <option selected="selected" value="' + item.HSG_ID + '">' + item.HSG_CODE + '</option> ';
+                                } else {
+                                    optionList = optionList + ' <option value="' + item.HSG_ID + '">' + item.HSG_CODE + '</option> ';
+                                }
+                            }
+                        });
+                        var select = "<div class='select-group'><select class='form-select form-control dropdown' onchange='ModifyDirectly(this)' id='HSG_DST--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' > <option value=''></option>" + optionList + "</select></div>";
+                        return select;
+                    }
+                },
+                { 'data': 'RECIVE_QTY' },
+                { 'data': 'HSG_FORM' },
+                { 'data': 'DIED_TOT' },
+                { 'data': 'DSCRD_TOT' },
+                { 'data': 'SALE_TOT' },
+                { 'data': 'NET_AMT' },
+                {
+                    'data': 'DIED_1_BRT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_1_BRT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col +"' value='" + row.DIED_1_BRT + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_2_COCH',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_2_COCH--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_2_COCH + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_3_DRRHA',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_3_DRRHA--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_3_DRRHA + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_4_LEG',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_4_LEG--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_4_LEG + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_5_SKIN',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_5_SKIN--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_5_SKIN + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_6_RED',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_6_RED--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_6_RED + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_7_TET',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_7_TET--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_7_TET + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_8_SLIM',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_8_SLIM--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_8_SLIM + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_9_JNDCE',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_9_JNDCE--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_9_JNDCE + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_10_ASCS',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_10_ASCS--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_10_ASCS + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_11_HER',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_11_HER--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_11_HER + "' />";
+                    }
+                },
+                {
+                    'data': 'DIED_12_OTHR',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DIED_12_OTHR--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DIED_12_OTHR + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_1_BRT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_1_BRT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_1_BRT + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_2_COCH',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_2_COCH--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_2_COCH + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_3_DRRHA',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_3_DRRHA--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_3_DRRHA + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_4_LEG',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_4_LEG--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_4_LEG + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_5_SKIN',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_5_SKIN--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_5_SKIN + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_6_RED',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_6_RED--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_6_RED + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_7_TET',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_7_TET--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_7_TET + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_8_SLIM',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_8_SLIM--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_8_SLIM + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_9_JNDCE',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_9_JNDCE--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_9_JNDCE + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_10_ASCS',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_10_ASCS--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_10_ASCS + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_11_HER',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_11_HER--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_11_HER + "' />";
+                    }
+                },
+                {
+                    'data': 'DSCRD_12_OTHR',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='DSCRD_12_OTHR--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSCRD_12_OTHR + "' />";
+                    }
+                },
+                {
+                    'data': 'CAUS_1',
+                    render: function (data, type, row, meta) {
+                        var checked = "";
+                        if (row.CAUS_1 == 1) {
+                            checked = "checked";
+                        }
+                        return "<input type='checkbox' class='form-check-input' onchange='ModifyDirectly(this)' id='CHCAUS_1--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' " + checked + " />";
+                    }
+                },
+                {
+                    'data': 'CAUS_2',
+                    render: function (data, type, row, meta) {
+                        var checked = "";
+                        if (row.CAUS_2 == 1) {
+                            checked = "checked";
+                        }
+                        return "<input type='checkbox' class='form-check-input' onchange='ModifyDirectly(this)' id='CHCAUS_2--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' " + checked + "/>";
+                    }
+                },
+                {
+                    'data': 'CAUS_3',
+                    render: function (data, type, row, meta) {
+                        var checked = "";
+                        if (row.CAUS_3 == 1) {
+                            checked = "checked";
+                        }
+                        return "<input type='checkbox' class='form-check-input' onchange='ModifyDirectly(this)' id='CHCAUS_3--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' " + checked + "/>";
+                    }
+                },
+                {
+                    'data': 'CAUS_4',
+                    render: function (data, type, row, meta) {
+                        var checked = "";
+                        if (row.CAUS_4 == 1) {
+                            checked = "checked";
+                        }
+                        return "<input type='checkbox' class='form-check-input' onchange='ModifyDirectly(this)' id='CHCAUS_4--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' " + checked + "/>";
+                    }
+                },
+                {
+                    'data': 'CAUS_5',
+                    render: function (data, type, row, meta) {
+                        var checked = "";
+                        if (row.CAUS_5 == 1) {
+                            checked = "checked";
+                        }
+                        return "<input type='checkbox' class='form-check-input' onchange='ModifyDirectly(this)' id='CHCAUS_5--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' " + checked + "/>";
+                    }
+                },
+                {
+                    'data': 'TEMP_MNNG',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='TEMP_MNNG--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.TEMP_MNNG + "' />";
+                    }
+                },
+                {
+                    'data': 'TEMP_EVNNG',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='TEMP_EVNNG--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.TEMP_EVNNG + "' />";
+                    }
+                 },
+                {
+                    'data': 'TEMP_AVG',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='TEMP_AVG--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.TEMP_AVG + "' readonly/>";
+                    }
+                 },
+                {
+                    'data': 'HMD_MNNG',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='HMD_MNNG--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.HMD_MNNG + "' />";
+                    }
+                 },
+                {
+                    'data': 'HMD_EVNNG',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='HMD_EVNNG--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.HMD_EVNNG + "' />";
+                    }
+                 },
+                {
+                    'data': 'HMD_AVG',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='HMD_AVG--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.HMD_AVG + "' readonly/>";
+                    }
+                 },
+            ],
+            "drawCallback": function (data, settings) {
+                $(".int").inputmask({
+                    'alias': 'numeric',
+                    'integerDigits': '12',
+                    'digits': 0,
+                    'min': '0',
+                    'prefix': '',
+                    rightAlign: false,
+                    allowMinus: false,
+                    autoGroup: true,
+                    groupSeparator: ','
+                });
+                $('#' + focusedElementId).focus();
+            },
+
+        });
+
+        tableDetail.on('order.dt', function () {
+            tableDetail.column(0, { order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw(false);
+        if ($("#searchDate").val() != "") {
+            SelectTbDetail();
+            $("#WEEK").val(getWeekNumber(reverseFormattedDate($("#searchDate").val())));
+        } else {
+            if ($("#searchDate").val() == "") {
+                $($(searchDate).parent()).addClass('alert-validate-date');
+            }
+        }
+        SetTypeInput();
+    });
+
+    $("#search").click(function () {
+        if ($("#searchDate").val() != "") {
+            SelectTbDetail();
+            $("#WEEK").val(getWeekNumber(reverseFormattedDate($("#searchDate").val())));
+        } else {
+            if ($("#searchDate").val() == "") {
+                $($(searchDate).parent()).addClass('alert-validate-date');
+            }
+        }
+    });
+
+    function SelectTbDetail() {
+        $.ajax({
+            type: "POST",
+            url: pathServer + "/NRS/HSGNRSDT01_SELECT",
+            dataType: "json",
+            cache: false,
+            data: {
+                searchSiteid: $("#searchSiteid").val(), searchDate: $("#searchDate").val(), searchHsgid: $("#searchHsgid").val()
+            },
+            success: function (data) {
+                var TXN_HSG_NRSRY = data.TXN_HSG_NRSRY;
+                tableDetail.clear().draw();
+                tableDetail.rows.add(TXN_HSG_NRSRY).draw();
+            },
+            error: function () {
+            }
+        });
+    }
+
+    function Added(btn) {
+        $('#m_modal').modal('show');
+        var id = $(btn).attr('id');
+        var row = $(btn).attr('row');
+        var col = $(btn).attr('col');
+        $("#id").val(id);
+        $("#row").val(row);
+        $("#col").val(col);
+    }
+
+    $("#add_new_arrv").click(function () {
+
+        var id = $("#id").val();
+        var row = $("#row").val();
+        var col = $("#col").val();
+        var value = $("#" + id).val();
+        var key = id.split('--')[1];
+
+        var indexDetail = tableDetail
+            .rows()
+            .indexes()
+            .filter(function (value, index) {
+                return key === tableDetail.row(value).data().UK_KEY;
+            });
+
+        if (indexDetail !== undefined && tableDetail.row(indexDetail).length > 0) {
+            var page = tableDetail.page.info();
+            tableDetail.page(page.page).cell(row, col).invalidate().data($("#NEW_ARRV_QTY").val()).draw(false);
+            tableDetail.page(page.page).cell(row, 8).invalidate().data($("#GEN").val()).draw(false);
+            ModifyIndirectly(id,row,col);
+        } else {
+            console.log("Invalid row index:", indexDetail);
+        }
+
+        $('#m_modal').modal('hide');
+    });
+
+    function ModifyDirectly(btn) {
+        //Directly user input modify.
+        var id = $(btn).attr('id');
+        var row = $(btn).attr('row');
+        var col = $(btn).attr('col');
+        var values = $("#" + id).val();
+        var key = id.split('--')[1];
+        focus = id;
+
+        if (id.substring(0, 2) == "CH" && $("#" + id).is(":checked")) {
+            values = 1;
+        } else if (id.substring(0, 2) == "CH" && $("#" + id).is(":checked") == false) {
+            values = null;
+        }
+
+        var indexDetail = tableDetail
+            .rows()
+            .indexes()
+            .filter(function (value, index) {
+                //console.log(key +" | "+ tableDetail.row(value).data().UK_KEY);
+                return key === tableDetail.row(value).data().UK_KEY;
+            });
+        var check = true;
+        if (id.substring(0, 2) != "CH" && id.substring(0, 2) != "TE" && id.substring(0, 2) != "HM") {
+            check = BalanceCheck(indexDetail, values);
+        }
+        if (indexDetail !== undefined && tableDetail.row(indexDetail).length > 0) {
+            var page = tableDetail.page.info();
+            if (check == true) {
+                tableDetail.page(page.page).cell(row, col).data(values).draw(false);
+                Calculate(indexDetail);
+            } else {
+                tableDetail.page(page.page).cell(row, col).data(null).draw(false);
+            }
+        } else {
+            console.log("Invalid row index:", indexDetail);
+        }
+        //for (var i = 0; i < tableDetail.data().length; i++) {
+        //    console.log(tableDetail.data()[i].TFR_QTY);
+        //}
+    }
+    function ModifyIndirectly(id,row,col) {
+        //Indirectly modify form function and other process.
+        var values = $("#" + id).val();
+        var key = id.split('--')[1];
+        var indexDetail = tableDetail
+            .rows()
+            .indexes()
+            .filter(function (value, index) {
+                return key === tableDetail.row(value).data().UK_KEY;
+            });
+
+        if (indexDetail !== undefined && tableDetail.row(indexDetail).length > 0) {
+            var page = tableDetail.page.info();
+            tableDetail.page(page.page).cell(row, col).data(values).draw(false);
+            Calculate(indexDetail);
+        } else {
+            console.log("Invalid row index:", indexDetail);
+        }
+        //for (var i = 0; i < tableDetail.data().length; i++) {
+        //    console.log(tableDetail.data()[i].TFR_QTY);
+        //}
+    }
+    function BalanceCheck(indexDetail, values) {
+        if (values > numeral(tableDetail.row(indexDetail).data().NET_AMT)._value) {
+            Swal.fire({
+                icon: "warning",
+                title: 'Do you want to save?',
+                text: "Are you sure to create this data",
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                }
+            });
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function Calculate(indexDetail) {
+        var page = tableDetail.page.info();
+        var current_SITE_ID = tableDetail.row(indexDetail).data().SITE_ID;
+        var current_HSG_ID = tableDetail.row(indexDetail).data().HSG_ID;
+        var current_TXN_DT = tableDetail.row(indexDetail).data().TXN_DT;
+        var current_TFR_QTY = numeral(tableDetail.row(indexDetail).data().TFR_QTY)._value;
+        var current_HSG_DST = String(tableDetail.row(indexDetail).data().HSG_DST).replace(/,/g, '');
+
+        let total_TFR_QTY = 0;
+        var concatHSG_ID = "";
+
+        var DIED_TOT = numeral(tableDetail.row(indexDetail).data().DIED_1_BRT)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_2_COCH)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_3_DRRHA)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_4_LEG)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_5_SKIN)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_6_RED)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_7_TET)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_8_SLIM)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_9_JNDCE)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_10_ASCS)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_11_HER)._value
+            + numeral(tableDetail.row(indexDetail).data().DIED_12_OTHR)._value;
+        var DSCRD_TOT = numeral(tableDetail.row(indexDetail).data().DSCRD_1_BRT)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_2_COCH)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_3_DRRHA)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_4_LEG)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_5_SKIN)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_6_RED)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_7_TET)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_8_SLIM)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_9_JNDCE)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_10_ASCS)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_11_HER)._value
+            + numeral(tableDetail.row(indexDetail).data().DSCRD_12_OTHR)._value;
+        tableDetail.row(indexDetail).data().DIED_TOT = numeral(DIED_TOT)._value;
+        tableDetail.row(indexDetail).data().DSCRD_TOT = numeral(DSCRD_TOT)._value;
+        tableDetail.row(indexDetail).data().NET_AMT = (numeral(tableDetail.row(indexDetail).data().BALANCE_QTY)._value + numeral(tableDetail.row(indexDetail).data().NEW_ARRV_QTY)._value + numeral(tableDetail.row(indexDetail).data().RECIVE_QTY)._value) - (numeral(tableDetail.row(indexDetail).data().TFR_QTY)._value + numeral(tableDetail.row(indexDetail).data().DIED_TOT)._value + numeral(tableDetail.row(indexDetail).data().DSCRD_TOT)._value);
+        if (tableDetail.row(indexDetail).data().TEMP_MNNG > 0 && tableDetail.row(indexDetail).data().TEMP_EVNNG > 0) {
+            tableDetail.row(indexDetail).data().TEMP_AVG = (numeral(tableDetail.row(indexDetail).data().TEMP_MNNG)._value + numeral(tableDetail.row(indexDetail).data().TEMP_EVNNG)._value) / 2;
+        }
+        if (tableDetail.row(indexDetail).data().HMD_MNNG > 0 && tableDetail.row(indexDetail).data().HMD_EVNNG > 0) {
+            tableDetail.row(indexDetail).data().HMD_AVG = (numeral(tableDetail.row(indexDetail).data().HMD_MNNG)._value + numeral(tableDetail.row(indexDetail).data().HMD_EVNNG)._value) / 2;
+        }
+        tableDetail.row(indexDetail).data(tableDetail.row(indexDetail).data()).draw();
+        tableDetail.page(page.page).draw(false);
+
+        for (var i = 0; i < tableDetail.data().length; i++) {
+            if (current_SITE_ID == tableDetail.data()[i].SITE_ID && current_TXN_DT == tableDetail.data()[i].TXN_DT && current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST != tableDetail.data()[i].HSG_ID && current_HSG_DST == tableDetail.data()[i].HSG_DST) {
+                total_TFR_QTY = total_TFR_QTY + numeral(tableDetail.data()[i].TFR_QTY)._value;
+                concatHSG_ID = concatHSG_ID + "," + tableDetail.data()[i].HSG_ID;
+            }
+        };
+
+        //concatHSG_ID = [...new Set(concatHSG_ID.split(","))].join(",")
+
+        tableDetail.rows().data().each(function (value, index) {
+            if (current_SITE_ID == tableDetail.row(index).data().SITE_ID && current_TXN_DT == tableDetail.row(index).data().TXN_DT) {
+                if (current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST == tableDetail.row(index).data().HSG_ID) {
+                    tableDetail.row(index).data().RECIVE_QTY = total_TFR_QTY;
+                    tableDetail.row(index).data().HSG_FORM = concatHSG_ID.substring(1);
+                    tableDetail.row(index).data().DIED_TOT = numeral(tableDetail.row(index).data().DIED_1_BRT)._value;
+                    tableDetail.row(index).data().NET_AMT = (numeral(tableDetail.row(index).data().BALANCE_QTY)._value + numeral(tableDetail.row(index).data().NEW_ARRV_QTY)._value + numeral(tableDetail.row(index).data().RECIVE_QTY)._value) - (numeral(tableDetail.row(index).data().TFR_QTY)._value + numeral(tableDetail.row(index).data().DIED_TOT)._value);
+                    tableDetail.row(index).data(tableDetail.row(index).data()).draw();
+                    tableDetail.page(page.page).draw(false)
+                }
+
+                if (current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST != tableDetail.row(index).data().HSG_ID && tableDetail.row(index).data().HSG_FORM != null && tableDetail.row(index).data().HSG_FORM.includes(current_HSG_ID)) {
+                    if (tableDetail.row(index).data().HSG_FORM.includes(current_HSG_ID)) {
+                        var concatHSG_ID2 = tableDetail.row(index).data().HSG_FORM
+                            .split(",")
+                            .filter(value => value !== current_HSG_ID)
+                            .join(",");
+                    }
+                    tableDetail.row(index).data().RECIVE_QTY = tableDetail.row(index).data().RECIVE_QTY - current_TFR_QTY;
+                    tableDetail.row(index).data().HSG_FORM = concatHSG_ID2;
+                    tableDetail.row(index).data().NET_AMT = tableDetail.row(index).data().NET_AMT - current_TFR_QTY;
+                    tableDetail.row(index).data(tableDetail.row(index).data()).draw();
+                    tableDetail.page(page.page).draw(false)
+                }
+            }
+        });
+
+    }
+
+    $("#SAVE").click(function () {
+        if ($("#searchDate").val() != "") {
+            Swal.fire({
+                icon: "question",
+                title: 'Do you want to save?',
+                text: "Are you sure to create this data",
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    save();
+                }
+            });
+        } else {
+            if ($("#searchDate").val() == "") {
+                $($(searchDate).parent()).addClass('alert-validate-date');
+            }
+        }
+    });
+
+    function save() {
+        var TXN_HSG_NRSRY = new Array();
+        var HSG_ALL_HLT_CHK = new Array();
+        var HSG_TEMP_HMD = new Array();
+        for (var i = 0; i < tableDetail.data().length; i++) {
+            var tb_d = {};
+            var tb_hlt = {};
+            var tb_tmp = {};
+
+            tb_d.SITE_ID = tableDetail.data()[i].SITE_ID;
+            tb_d.HSG_ID = tableDetail.data()[i].HSG_ID;
+            tb_d.TXN_DT = $("#searchDate").val();
+            tb_d.RCRD_DT = tableDetail.data()[i].RCRD_DT;
+            tb_d.GEN = tableDetail.data()[i].GEN;
+            tb_d.NEW_ARRV_QTY = tableDetail.data()[i].NEW_ARRV_QTY;
+            tb_d.TFR_QTY = tableDetail.data()[i].TFR_QTY;
+            tb_d.HSG_DST = tableDetail.data()[i].HSG_DST;
+            tb_d.DIED_TOT = tableDetail.data()[i].DIED_TOT;
+            tb_d.DSCRD_TOT = tableDetail.data()[i].DSCRD_TOT;
+            tb_d.SALE_TOT = tableDetail.data()[i].SALE_TOT;
+            tb_d.NET_AMT = tableDetail.data()[i].NET_AMT;
+            tb_d.DIED_1_BRT = tableDetail.data()[i].DIED_1_BRT;
+            tb_d.DIED_2_COCH = tableDetail.data()[i].DIED_2_COCH;
+            tb_d.DIED_3_DRRHA = tableDetail.data()[i].DIED_3_DRRHA;
+            tb_d.DIED_4_LEG = tableDetail.data()[i].DIED_4_LEG;
+            tb_d.DIED_5_SKIN = tableDetail.data()[i].DIED_5_SKIN;
+            tb_d.DIED_6_RED = tableDetail.data()[i].DIED_6_RED;
+            tb_d.DIED_7_TET = tableDetail.data()[i].DIED_7_TET;
+            tb_d.DIED_8_SLIM = tableDetail.data()[i].DIED_8_SLIM;
+            tb_d.DIED_9_JNDCE = tableDetail.data()[i].DIED_9_JNDCE;
+            tb_d.DIED_10_ASCS = tableDetail.data()[i].DIED_10_ASCS;
+            tb_d.DIED_11_HER = tableDetail.data()[i].DIED_11_HER;
+            tb_d.DIED_12_OTHR = tableDetail.data()[i].DIED_12_OTHR;
+            tb_d.DSCRD_1_BRT = tableDetail.data()[i].DSCRD_1_BRT;
+            tb_d.DSCRD_2_COCH = tableDetail.data()[i].DSCRD_2_COCH;
+            tb_d.DSCRD_3_DRRHA = tableDetail.data()[i].DSCRD_3_DRRHA;
+            tb_d.DSCRD_4_LEG = tableDetail.data()[i].DSCRD_4_LEG;
+            tb_d.DSCRD_5_SKIN = tableDetail.data()[i].DSCRD_5_SKIN;
+            tb_d.DSCRD_6_RED = tableDetail.data()[i].DSCRD_6_RED;
+            tb_d.DSCRD_7_TET = tableDetail.data()[i].DSCRD_7_TET;
+            tb_d.DSCRD_8_SLIM = tableDetail.data()[i].DSCRD_8_SLIM;
+            tb_d.DSCRD_9_JNDCE = tableDetail.data()[i].DSCRD_9_JNDCE;
+            tb_d.DSCRD_10_ASCS = tableDetail.data()[i].DSCRD_10_ASCS;
+            tb_d.DSCRD_11_HER = tableDetail.data()[i].DSCRD_11_HER;
+            tb_d.DSCRD_12_OTHR = tableDetail.data()[i].DSCRD_12_OTHR;
+            TXN_HSG_NRSRY.push(tb_d);
+
+            tb_hlt.SITE_ID = tableDetail.data()[i].SITE_ID;
+            tb_hlt.HSG_ID = tableDetail.data()[i].HSG_ID;
+            tb_hlt.HLT_CHK_DT = $("#searchDate").val();
+            tb_hlt.CAUS_1 = tableDetail.data()[i].CAUS_1;
+            tb_hlt.CAUS_2 = tableDetail.data()[i].CAUS_2;
+            tb_hlt.CAUS_3 = tableDetail.data()[i].CAUS_3;
+            tb_hlt.CAUS_4 = tableDetail.data()[i].CAUS_4;
+            tb_hlt.CAUS_5 = tableDetail.data()[i].CAUS_5;
+            HSG_ALL_HLT_CHK.push(tb_hlt);
+
+            tb_tmp.SITE_ID = tableDetail.data()[i].SITE_ID;
+            tb_tmp.HSG_ID = tableDetail.data()[i].HSG_ID;
+            tb_tmp.TXN_DT = $("#searchDate").val();
+            tb_tmp.TEMP_MNNG = tableDetail.data()[i].TEMP_MNNG;
+            tb_tmp.TEMP_EVNNG = tableDetail.data()[i].TEMP_EVNNG;
+            tb_tmp.TEMP_AVG = tableDetail.data()[i].TEMP_AVG;
+            tb_tmp.HMD_MNNG = tableDetail.data()[i].HMD_MNNG;
+            tb_tmp.HMD_EVNNG = tableDetail.data()[i].HMD_EVNNG;
+            tb_tmp.HMD_AVG = tableDetail.data()[i].HMD_AVG;
+            HSG_TEMP_HMD.push(tb_tmp);
+        }
+
+        //console.log(TXN_HSG_NRSRY);
+        $.ajax({
+        contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+        type: "POST",
+        url: pathServer + "/NRS/HSGNRSDT01_INSERT",
+        dataType: "json",
+            data: JSON.stringify({ TXN_HSG_NRSRY: TXN_HSG_NRSRY, HSG_ALL_HLT_CHK: HSG_ALL_HLT_CHK, HSG_TEMP_HMD: HSG_TEMP_HMD }), //parameter Object,List
+        xhr: function () {
+            var xhr = new window.XMLHttpRequest();
+            let timerInterval;
+            xhr_loading(xhr);
+            clearInterval(timerInterval);
+        return xhr;
+        },
+            success: function (data) {
+
+            clearInterval(interVal);
+            $('#progress').css('width', 100 + "%");
+                //successMessage.init();
+                setTimeout(function () {
+                    //Attach_File();
+                    Swal.fire({
+                        icon: "success",
+                        title: 'Your data has been saved', //"Your data has been saved"
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                }, 1500);
+            },
+            error: function () {
+                errorAlert.init();
+            }
+        });
+    }
+</script>

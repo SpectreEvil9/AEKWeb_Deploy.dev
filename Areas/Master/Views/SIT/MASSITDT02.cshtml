@@ -1,0 +1,289 @@
+﻿@{
+    ViewBag.Title = "MASSITDT02";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">สร้างข้อมูลหลักฟาร์ม</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Site</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Create</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">สร้าง</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุชื่อย่อบริษัท">
+                                        <span class="input-group-text col-lg-3">ชื่อย่อบริษัท</span>
+                                        <input type="text"
+                                               id="SITE_ID"
+                                               class="form-control m-input input-req" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุชือภาษาไทย">
+                                        <span class="input-group-text col-lg-4">ชือภาษาไทย</span>
+                                        <input type="text"
+                                               id="SITE_NM_TH"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุชือภาษาอังกฤษ">
+                                        <span class="input-group-text col-lg-3">ชือภาษาอังกฤษ</span>
+                                        <input type="text"
+                                               id="SITE_NM_EN"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Cost Center</span>
+                                        <select class="form-select form-control" id="CO_CODE">
+                                            <option value="1">CO0001</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">Cost Name</span>
+                                        <input type="text"
+                                               id="CO_NM"
+                                               class="form-control" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ TAX">
+                                        <span class="input-group-text col-lg-4">Tax Branch</span>
+                                        <input type="text"
+                                               id="TAX_BR"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุชือย่อของฟาร์ม">
+                                        <span class="input-group-text col-lg-3">ชือย่อของฟาร์ม</span>
+                                        <input type="text"
+                                               id="SITE_NM_ABR"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">ระดับ</span>
+                                        <select class="form-select form-control" id="SITE_LVL">
+                                            <option value="1">GGP</option>
+                                            <option value="2">GP</option>
+                                            <option value="3">PS</option>
+                                            <option value="4">F</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">ที่อยู่</span>
+                                        <input type="text"
+                                               id="ADR"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="card-title text-primary">รูปแบบ</label><br>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="d-flex" style="justify-content:flex-start !important;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="F_BRDR">
+                                            <label class="form-check-label" for="F_BRDR">
+                                                เลี้ยงสุกรพันธุ์
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="d-flex" style="justify-content:flex-start !important;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="F_PIG">
+                                            <label class="form-check-label" for="F_PIG">
+                                                เลี้ยงสุกรขุน
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        //$('').inputmask({
+        //    'alias': 'currency',
+        //    'integerDigits': '12',
+        //    'prefix': '',
+        //    'digits': '0',
+        //    min: 0,
+        //    autoUnmask: true,
+        //    rightAlign: true
+        //});
+
+        $($(SITE_ID).parent()).removeClass('alert-validate');
+        $($(SITE_NM_TH).parent()).removeClass('alert-validate');
+        $($(SITE_NM_EN).parent()).removeClass('alert-validate');
+        $($(TAX_BR).parent()).removeClass('alert-validate');
+        $($(SITE_NM_ABR).parent()).removeClass('alert-validate');
+        $("#SAVE").click(function () {
+            if ($("#SITE_ID").val() != "" && $("#SITE_NM_TH").val() != "" && $("#SITE_NM_EN").val() != "" && $("#TAX_BR").val() != "" && $("#SITE_NM_ABR").val()) {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to create this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+
+                if ($("#SITE_ID").val() == "") {
+                    $($(SITE_ID).parent()).addClass('alert-validate');
+                }
+                if ($("#SITE_NM_TH").val() == "") {
+                    $($(SITE_NM_TH).parent()).addClass('alert-validate');
+                }
+                if ($("#SITE_NM_EN").val() == "") {
+                    $($(SITE_NM_EN).parent()).addClass('alert-validate');
+                }
+                if ($("#TAX_BR").val() == "") {
+                    $($(TAX_BR).parent()).addClass('alert-validate');
+                }
+                if ($("#SITE_NM_ABR").val() == "") {
+                    $($(SITE_NM_ABR).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            var MAS_SITE = {};
+            MAS_SITE.SITE_ID = $("#SITE_ID").val();
+            MAS_SITE.SITE_NM_TH = $("#SITE_NM_TH").val();
+            MAS_SITE.SITE_NM_EN = $("#SITE_NM_EN").val();
+            MAS_SITE.CO_CODE = $("#CO_CODE").val();
+            MAS_SITE.CO_NM = $("CO_NM").val();
+            MAS_SITE.TAX_BR = $("TAX_BR").val();
+            MAS_SITE.SITE_NM_ABR = $("SITE_NM_ABR").val();
+            MAS_SITE.SITE_LVL = $("SITE_LVL").val();
+            MAS_SITE.ADR = $("ADR").val();
+            MAS_SITE.F_BRDR = $("F_BRDR").val();
+            MAS_SITE.F_PIG = $("F_PIG").val();
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/SIT/MASSITDT02_INSERT",
+                dataType: "json",
+                data: JSON.stringify({ MAS_SITE: MAS_SITE }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved', //"Your data has been saved"
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASSITDT03", "SIT", new {
+                                                     SITE_SK = "SITE_SKRedirect"
+                                                 }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("SITE_SKRedirect", data.SO_H_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+
+
+</script>
