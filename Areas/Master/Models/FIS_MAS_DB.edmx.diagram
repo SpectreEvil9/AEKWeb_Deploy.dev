@@ -7,6 +7,8 @@
       <Diagram DiagramId="475700e829f5401b9c66a071e7e59c1f" Name="Diagram1">
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_SITE" Width="1.5" PointX="0.5" PointY="0.625" />
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_HSG" Width="1.5" PointX="2.5" PointY="0.625" />
+        <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_BRDR_GGP" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_BRDR_PS" Width="1.5" PointX="0.75" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

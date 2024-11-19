@@ -40,7 +40,7 @@
                                         <div class="form-group">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์ม</span>
-                                                <select class="form-select dropdown-multiple" id="searchSiteid" name="searchSiteid" multiple="multiple">
+                                                <select class="form-select form-control dropdown" id="searchSiteid" name="searchSiteid">
                                                     @foreach (var sit in ViewBag.MAS_SITE)
                                                     {
                                                         <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
@@ -54,6 +54,7 @@
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text col-lg-3" id="basic-addon1">เล้า</span>
                                                 <select class="form-select dropdown-multiple" id="searchHsgid" name="searchHsgid" multiple="multiple">
+                                                    <option value="ALL" selected>ทุกเล้า</option>
                                                     @foreach (var hsg in ViewBag.MAS_HSG)
                                                     {
                                                         <option value="@hsg.HSG_ID">@hsg.HSG_CODE</option>
@@ -69,11 +70,7 @@
                                         <div class="form-group">
                                             <div class="input-group mb-3 date validate-input" data-validate="โปรดระบุวันที่">
                                                 <span class="input-group-text" id="basic-addon1">วันที่</span>
-                                                @Html.TextBox("searchDate", ViewBag.searchDate as string, new { @class = "form-control input-req-date", autocomplete = "off", tabindex = "1", placeholder = "Select Date", id = "searchDate" })
-                                                @*<input type="text"
-                                                    id="searchDate"
-                                                    class="form-control input-req-date"
-                                                    placeholder="Select Date" />*@
+                                                @Html.TextBox("searchDate", Convert.ToString(string.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(ViewBag.searchDate))) as string, new { @class = "form-control input-req-date", autocomplete = "off", tabindex = "1", placeholder = "Select Date", id = "searchDate" })
                                                 <span class="input-group-icon">
                                                     <i class="fas fa-calendar-alt"></i>
                                                 </span>
@@ -350,7 +347,7 @@
         return combineDatestr;
     }
 
-    $('#searchSiteid,#searchHsgid').select2({
+    $('#searchHsgid').select2({
         theme: "bootstrap-5",
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
         placeholder: $(this).data('placeholder'),
@@ -782,6 +779,9 @@
     });
 
     function SelectTbDetail() {
+        if ($("#searchHsgid").val() == "ALL") {
+            $("#searchHsgid").val("");
+        }
         $.ajax({
             type: "POST",
             url: pathServer + "/NRS/HSGNRSDT01_SELECT",
@@ -901,11 +901,13 @@
         //}
     }
     function BalanceCheck(indexDetail, values) {
-        if (values > numeral(tableDetail.row(indexDetail).data().NET_AMT)._value) {
+        var net = (tableDetail.row(indexDetail).data().BALANCE_QTY + tableDetail.row(indexDetail).data().NEW_ARRV_QTY + tableDetail.row(indexDetail).data().RECIVE_QTY) -
+            (tableDetail.row(indexDetail).data().TFR_QTY + tableDetail.row(indexDetail).data().DIED_TOT + tableDetail.row(indexDetail).data().DSCRD_TOT + tableDetail.row(indexDetail).data().SALE_TOT);
+        if (values > numeral(net)._value) {
             Swal.fire({
                 icon: "warning",
-                title: 'Do you want to save?',
-                text: "Are you sure to create this data",
+                title: 'Maximum!',
+                text: "จำนวนสุกรไม่เพียงพอสำหรับการโอนย้าย",
                 showCancelButton: false,
                 confirmButtonText: 'OK',
             }).then((result) => {
@@ -971,35 +973,59 @@
                 concatHSG_ID = concatHSG_ID + "," + tableDetail.data()[i].HSG_ID;
             }
         };
-
         //concatHSG_ID = [...new Set(concatHSG_ID.split(","))].join(",")
 
-        tableDetail.rows().data().each(function (value, index) {
-            if (current_SITE_ID == tableDetail.row(index).data().SITE_ID && current_TXN_DT == tableDetail.row(index).data().TXN_DT) {
-                if (current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST == tableDetail.row(index).data().HSG_ID) {
-                    tableDetail.row(index).data().RECIVE_QTY = total_TFR_QTY;
-                    tableDetail.row(index).data().HSG_FORM = concatHSG_ID.substring(1);
-                    tableDetail.row(index).data().DIED_TOT = numeral(tableDetail.row(index).data().DIED_1_BRT)._value;
-                    tableDetail.row(index).data().NET_AMT = (numeral(tableDetail.row(index).data().BALANCE_QTY)._value + numeral(tableDetail.row(index).data().NEW_ARRV_QTY)._value + numeral(tableDetail.row(index).data().RECIVE_QTY)._value) - (numeral(tableDetail.row(index).data().TFR_QTY)._value + numeral(tableDetail.row(index).data().DIED_TOT)._value);
-                    tableDetail.row(index).data(tableDetail.row(index).data()).draw();
-                    tableDetail.page(page.page).draw(false)
+        tableDetail.rows().every(function (index) {
+            var rowData = this.data();
+            if (current_SITE_ID == rowData.SITE_ID && current_TXN_DT == rowData.TXN_DT) {
+                if (current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST == rowData.HSG_ID) {
+                    rowData.RECIVE_QTY = total_TFR_QTY;
+                    rowData.HSG_FORM = concatHSG_ID.substring(1);
+                    rowData.DIED_TOT = numeral(rowData.DIED_1_BRT)._value;
+                    rowData.NET_AMT = (numeral(rowData.BALANCE_QTY)._value + numeral(rowData.NEW_ARRV_QTY)._value + numeral(rowData.RECIVE_QTY)._value) - (numeral(rowData.TFR_QTY)._value + numeral(rowData.DIED_TOT)._value);
                 }
-
-                if (current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST != tableDetail.row(index).data().HSG_ID && tableDetail.row(index).data().HSG_FORM != null && tableDetail.row(index).data().HSG_FORM.includes(current_HSG_ID)) {
-                    if (tableDetail.row(index).data().HSG_FORM.includes(current_HSG_ID)) {
-                        var concatHSG_ID2 = tableDetail.row(index).data().HSG_FORM
+                if (current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST != rowData.HSG_ID && rowData.HSG_FORM != null && rowData.HSG_FORM.includes(current_HSG_ID)) {
+                    if (rowData.HSG_FORM.includes(current_HSG_ID)) {
+                        var concatHSG_ID2 = rowData.HSG_FORM
                             .split(",")
                             .filter(value => value !== current_HSG_ID)
                             .join(",");
                     }
-                    tableDetail.row(index).data().RECIVE_QTY = tableDetail.row(index).data().RECIVE_QTY - current_TFR_QTY;
-                    tableDetail.row(index).data().HSG_FORM = concatHSG_ID2;
-                    tableDetail.row(index).data().NET_AMT = tableDetail.row(index).data().NET_AMT - current_TFR_QTY;
-                    tableDetail.row(index).data(tableDetail.row(index).data()).draw();
-                    tableDetail.page(page.page).draw(false)
+                    rowData.RECIVE_QTY = rowData.RECIVE_QTY - current_TFR_QTY;
+                    rowData.HSG_FORM = concatHSG_ID2;
+                    rowData.NET_AMT = rowData.NET_AMT - current_TFR_QTY;
                 }
             }
+            this.data(rowData);
         });
+        tableDetail.page(page.page).draw(false);
+
+        //tableDetail.rows().data().each(function (value, index) {
+        //    if (current_SITE_ID == tableDetail.row(index).data().SITE_ID && current_TXN_DT == tableDetail.row(index).data().TXN_DT) {
+        //        if (current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST == tableDetail.row(index).data().HSG_ID) {
+        //            tableDetail.row(index).data().RECIVE_QTY = total_TFR_QTY;
+        //            tableDetail.row(index).data().HSG_FORM = concatHSG_ID.substring(1);
+        //            tableDetail.row(index).data().DIED_TOT = numeral(tableDetail.row(index).data().DIED_1_BRT)._value;
+        //            tableDetail.row(index).data().NET_AMT = (numeral(tableDetail.row(index).data().BALANCE_QTY)._value + numeral(tableDetail.row(index).data().NEW_ARRV_QTY)._value + numeral(tableDetail.row(index).data().RECIVE_QTY)._value) - (numeral(tableDetail.row(index).data().TFR_QTY)._value + numeral(tableDetail.row(index).data().DIED_TOT)._value);
+        //            tableDetail.row(index).data(tableDetail.row(index).data()).draw();
+        //            tableDetail.page(page.page).draw(false)
+        //        }
+
+        //        if (current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST != tableDetail.row(index).data().HSG_ID && tableDetail.row(index).data().HSG_FORM != null && tableDetail.row(index).data().HSG_FORM.includes(current_HSG_ID)) {
+        //            if (tableDetail.row(index).data().HSG_FORM.includes(current_HSG_ID)) {
+        //                var concatHSG_ID2 = tableDetail.row(index).data().HSG_FORM
+        //                    .split(",")
+        //                    .filter(value => value !== current_HSG_ID)
+        //                    .join(",");
+        //            }
+        //            tableDetail.row(index).data().RECIVE_QTY = tableDetail.row(index).data().RECIVE_QTY - current_TFR_QTY;
+        //            tableDetail.row(index).data().HSG_FORM = concatHSG_ID2;
+        //            tableDetail.row(index).data().NET_AMT = tableDetail.row(index).data().NET_AMT - current_TFR_QTY;
+        //            tableDetail.row(index).data(tableDetail.row(index).data()).draw();
+        //            tableDetail.page(page.page).draw(false)
+        //        }
+        //    }
+        //});
 
     }
 
