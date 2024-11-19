@@ -869,7 +869,10 @@
                 tableDetail.page(page.page).cell(row, col).data(values).draw(false);
                 Calculate(indexDetail);
             } else {
+                var net = (numeral(tableDetail.row(indexDetail).data().BALANCE_QTY)._value + numeral(tableDetail.row(indexDetail).data().NEW_ARRV_QTY)._value + numeral(tableDetail.row(indexDetail).data().RECIVE_QTY)._value) -
+                    (numeral(tableDetail.row(indexDetail).data().DIED_TOT)._value + numeral(tableDetail.row(indexDetail).data().DSCRD_TOT)._value + numeral(tableDetail.row(indexDetail).data().SALE_TOT)._value);
                 tableDetail.page(page.page).cell(row, col).data(null).draw(false);
+                tableDetail.page(page.page).cell(row, 20).data(net).draw(false);
             }
         } else {
             console.log("Invalid row index:", indexDetail);
@@ -901,8 +904,10 @@
         //}
     }
     function BalanceCheck(indexDetail, values) {
-        var net = (tableDetail.row(indexDetail).data().BALANCE_QTY + tableDetail.row(indexDetail).data().NEW_ARRV_QTY + tableDetail.row(indexDetail).data().RECIVE_QTY) -
-            (tableDetail.row(indexDetail).data().TFR_QTY + tableDetail.row(indexDetail).data().DIED_TOT + tableDetail.row(indexDetail).data().DSCRD_TOT + tableDetail.row(indexDetail).data().SALE_TOT);
+        
+        var net = (numeral(tableDetail.row(indexDetail).data().BALANCE_QTY)._value + numeral(tableDetail.row(indexDetail).data().NEW_ARRV_QTY)._value + numeral(tableDetail.row(indexDetail).data().RECIVE_QTY)._value) -
+            (numeral(tableDetail.row(indexDetail).data().DIED_TOT)._value + numeral(tableDetail.row(indexDetail).data().DSCRD_TOT)._value + numeral(tableDetail.row(indexDetail).data().SALE_TOT)._value);
+        console.log(net);
         if (values > numeral(net)._value) {
             Swal.fire({
                 icon: "warning",
