@@ -10,8 +10,9 @@
         <EntityTypeShape EntityType="FIS_HSG_DBModel.TXN_HSG_NRSRY" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.BRDR_MVMT" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.TXN_HSG_RPLCMT" Width="1.5" PointX="7.375" PointY="5.75" />
-        <EntityTypeShape EntityType="FIS_HSG_DBModel.V_HSGRPLDT01_BRDR_LIST" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.BRDR_LOST" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.V_HSGRPLDT01_BRDR_LIST" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.V_HSGRPLDT01_BRDR_LOST" Width="1.5" PointX="0.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

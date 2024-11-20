@@ -271,9 +271,8 @@
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">เล้า</span>
-                                    <input type="text"
-                                           class="form-control"
-                                           placeholder="G-A01-A" readonly />
+                                    <input type="text" id="HSG_ID"
+                                           class="form-control" readonly />
                                 </div>
                             </div>
                         </div>
@@ -470,8 +469,8 @@
                 { 'data': 'BALANCE_QTY' },
                 {
                     'data': 'NEW_ARRV_QTY',
-                    render: function (data, type, row,meta) {
-                        return "<div class='input-group'><input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='NEW_ARRV_QTY--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NEW_ARRV_QTY + "' readonly/><button type='button' id='BT_NEW_ARRV_QTY--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NEW_ARRV_QTY + "' onclick='Added(this)' class='input-group-icon'><i class='bi bi-arrow-return-left'></i></button></div>";
+                    render: function (data, type, row, meta) {
+                        return "<div class='input-group'><input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectly(this)' id='NEW_ARRV_QTY--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NEW_ARRV_QTY + "' readonly/><button type='button' id='BT_NEW_ARRV_QTY--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NEW_ARRV_QTY + "' hsg='" + row.HSG_ID + "' onclick='Added(this)' class='input-group-icon'><i class='bi bi-arrow-return-left'></i></button></div>";
                     }
                 },
                 {
@@ -805,6 +804,8 @@
         var id = $(btn).attr('id');
         var row = $(btn).attr('row');
         var col = $(btn).attr('col');
+        var hsg = $(btn).attr('hsg');
+        $("#HSG_ID").val(hsg);
         $("#id").val(id);
         $("#row").val(row);
         $("#col").val(col);
@@ -929,6 +930,7 @@
         var page = tableDetail.page.info();
         var current_SITE_ID = tableDetail.row(indexDetail).data().SITE_ID;
         var current_HSG_ID = tableDetail.row(indexDetail).data().HSG_ID;
+        var current_GEN = tableDetail.row(indexDetail).data().GEN;
         var current_TXN_DT = tableDetail.row(indexDetail).data().TXN_DT;
         var current_TFR_QTY = numeral(tableDetail.row(indexDetail).data().TFR_QTY)._value;
         var current_HSG_DST = String(tableDetail.row(indexDetail).data().HSG_DST).replace(/,/g, '');
@@ -982,8 +984,11 @@
 
         tableDetail.rows().every(function (index) {
             var rowData = this.data();
+
             if (current_SITE_ID == rowData.SITE_ID && current_TXN_DT == rowData.TXN_DT) {
+
                 if (current_TFR_QTY > 0 && current_HSG_DST != "null" && current_HSG_DST == rowData.HSG_ID) {
+                    rowData.GEN = current_GEN;
                     rowData.RECIVE_QTY = total_TFR_QTY;
                     rowData.HSG_FORM = concatHSG_ID.substring(1);
                     rowData.DIED_TOT = numeral(rowData.DIED_1_BRT)._value;

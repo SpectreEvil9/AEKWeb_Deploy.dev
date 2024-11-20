@@ -424,7 +424,7 @@
                     'data': 'TFR_QTY',
                     render: function (data, type, row, meta) {
                         var net = (numeral(row.BALANCE_QTY)._value + numeral(row.NEW_ARRV_QTY)._value + numeral(row.RCV_QTY)._value) - (numeral(row.TFR_QTY)._value + numeral(row.DIED_TOT)._value + numeral(row.DSCRD_TOT)._value + numeral(row.BRDR_SALE_TOT)._value);
-                        return "<div class='input-group'><input type='text' class='form-control int' value='" + row.TFR_QTY + "' readonly /><button type='button' class='input-group-icon' onclick='EditMovement(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' mdt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' net='" + net + "' ><i class='fa fa-edit'></i></button></div>"
+                        return "<div class='input-group'><input type='text' class='form-control int' value='" + row.TFR_QTY + "' readonly /><button type='button' class='input-group-icon' onclick='EditMovement(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' mdt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' net='" + net + "' gnd='" + row.GND + "'><i class='fa fa-edit'></i></button></div>"
                     }
                 },
                 { 'data': 'RCV_QTY' },
@@ -432,7 +432,7 @@
                     'data': 'DIED_TOT',
                     render: function (data, type, row, meta) {
                         var net = (numeral(row.BALANCE_QTY)._value + numeral(row.NEW_ARRV_QTY)._value + numeral(row.RCV_QTY)._value) - (numeral(row.TFR_QTY)._value + numeral(row.DIED_TOT)._value + numeral(row.DSCRD_TOT)._value + numeral(row.BRDR_SALE_TOT)._value);
-                        return "<div class='input-group'><input type='text' class='form-control int' value='" + row.DIED_TOT + "' readonly /><button type='button' class='input-group-icon' onclick='EditLost(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' ldt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' net='" + net + "' ><i class='fa fa-edit'></i></button></div>"
+                        return "<div class='input-group'><input type='text' class='form-control int' value='" + row.DIED_TOT + "' readonly /><button type='button' class='input-group-icon' onclick='EditLost(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' ldt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' net='" + net + "' gnd='" + row.GND + "' ><i class='fa fa-edit'></i></button></div>"
                     }
 },
                 { 'data': 'DSCRD_TOT' },
@@ -1063,6 +1063,7 @@
         var hsg = $(btn).attr('hsg');
         var mdt = $(btn).attr('mdt');
         var net = $(btn).attr('net');
+        var gnd = $(btn).attr('gnd');
         var key = id.split('--')[1];
         $("#BT-ADD_MOVE").val(key);
         $("#BT-ADD_MOVE").attr({ 'hsg': hsg, 'sit': sit, 'mdt': mdt,'net':net });
@@ -1071,7 +1072,7 @@
             url: pathServer + "/RPL/HSGRPLDT01_SELECT_BRDR_MVMT",
             dataType: "json",
             cache: false,
-            data: {UK_KEY:key, SITE_ID: sit, HSG_ID: hsg, MVMT_DT: mdt },
+            data: { UK_KEY: key, SITE_ID: sit, HSG_ID: hsg, MVMT_DT: mdt, GND: gnd },
             success: function (data) {
                 HSG_LIST = data.HSG_LIST;
                 BRDR_LIST = data.BRDR_LIST;
@@ -1174,6 +1175,8 @@
         var sit = $(btn).attr('sit');
         var hsg = $(btn).attr('hsg');
         var ldt = $(btn).attr('ldt');
+        var gnd = $(btn).attr('gnd');
+
         var net_qty = $(btn).attr('net');
         var key = id.split('--')[1];
 
@@ -1184,7 +1187,7 @@
             url: pathServer + "/RPL/HSGRPLDT01_SELECT_BRDRLOST",
             dataType: "json",
             cache: false,
-            data: { UK_KEY: key, SITE_ID: sit, HSG_ID: hsg, LOST_DT: ldt },
+            data: { UK_KEY: key, SITE_ID: sit, HSG_ID: hsg, LOST_DT: ldt,GND:gnd },
             success: function (data) {
                 BRDR_LIST = data.BRDR_LIST;
                 var BRDR_LOST = data.BRDR_LOST;
@@ -1578,12 +1581,14 @@
             let tbrpl = {};
 
             for (var n = 0; n < tableMove.data().length; n++) {
+                //console.log(tableMain.data()[i].HSG_ID +"|"+ tableMove.data()[n].DEST_HSG_ID);
                 if (tableMain.data()[i].HSG_ID == tableMove.data()[n].DEST_HSG_ID) {
                     DEST = true;
                     RCV_QTY++;
                     NET_QTY++;
                 }
             }
+
             if (DEST == true) {
                 if (tableMain.data()[n].UK_KEY.indexOf('--') != -1) {
                     tbrpl.DOC_CODE = tableMain.data()[n].UK_KEY.split('--')[0];
