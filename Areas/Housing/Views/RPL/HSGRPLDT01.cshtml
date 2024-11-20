@@ -1583,6 +1583,7 @@
             ORIGIN = tableMove.data()[i].HSG_ID;
             GND = tableMove.data()[i].GND;
         }
+        console.log(BRDR_MVMT);
         for (var i = 0; i < tableMain.data().length; i++) {
             var net = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].NEW_ARRV_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
             if (net > 0) {
