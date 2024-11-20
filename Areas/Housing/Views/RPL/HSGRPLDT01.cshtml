@@ -1654,7 +1654,7 @@
         type: "POST",
             url: pathServer + "/RPL/HSGRPLDT01_MVMT_INSERT",
             dataType: "json",
-            data: JSON.stringify({TXN_HSG_RPLCMT:TXN_HSG_RPLCMT, BRDR_MVMT: BRDR_MVMT, TXN_HSG_RPLCMT_INCREASE: TXN_HSG_RPLCMT_INCREASE, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE }), //parameter Object,List
+            data: JSON.stringify({BRDR_MVMT: BRDR_MVMT, TXN_HSG_RPLCMT_INCREASE: TXN_HSG_RPLCMT_INCREASE, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;
