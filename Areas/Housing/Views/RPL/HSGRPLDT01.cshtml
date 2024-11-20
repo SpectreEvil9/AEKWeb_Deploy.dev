@@ -161,6 +161,7 @@
                                                     <tr style="text-align:center !important">
                                                         <th style="text-align:center !important">ลำดับ</th>
                                                         <th style="text-align:center !important">Key</th>
+                                                        <th style="text-align:center !important">เพศ</th>
                                                         <th style="text-align:center !important">ฟาร์ม</th>
                                                         <th style="text-align:center !important">โรงเรือนต้นทาง</th>
                                                         <th style="text-align:center !important">เบอร์สุกรที่ย้าย</th>
@@ -208,6 +209,7 @@
                                                         <th rowspan="2" style="text-align:center !important">User</th>
                                                         <th rowspan="2" style="text-align:center !important">ฟาร์ม</th>
                                                         <th rowspan="2" style="text-align:center !important">เล้า</th>
+                                                        <th rowspan="2" style="text-align:center !important">เพศ</th>
                                                         <th rowspan="2" style="text-align:center !important">วันที่บันทึก</th>
                                                         <th rowspan="2" style="text-align:center !important">วันที่ตายคัดทั้ง</th>
                                                         <th rowspan="2" style="text-align:center !important">ประเภทตายคัดทั้ง</th>
@@ -424,7 +426,7 @@
                     'data': 'TFR_QTY',
                     render: function (data, type, row, meta) {
                         var net = (numeral(row.BALANCE_QTY)._value + numeral(row.NEW_ARRV_QTY)._value + numeral(row.RCV_QTY)._value) - (numeral(row.TFR_QTY)._value + numeral(row.DIED_TOT)._value + numeral(row.DSCRD_TOT)._value + numeral(row.BRDR_SALE_TOT)._value);
-                        return "<div class='input-group'><input type='text' class='form-control int' value='" + row.TFR_QTY + "' readonly /><button type='button' class='input-group-icon' onclick='EditMovement(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' mdt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' net='" + net + "' gnd='" + row.GND + "'><i class='fa fa-edit'></i></button></div>"
+                        return "<div class='input-group'><input type='text' class='form-control int' value='" + row.TFR_QTY + "' readonly /><button type='button' class='input-group-icon' onclick='EditMovement(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' ndt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' mdt='" + reverseFormattedDate(resJsonToDate(row.TXN_DT)) + "' net='" + net + "' gnd='" + row.GND + "'><i class='fa fa-edit'></i></button></div>"
                     }
                 },
                 { 'data': 'RCV_QTY' },
@@ -432,7 +434,7 @@
                     'data': 'DIED_TOT',
                     render: function (data, type, row, meta) {
                         var net = (numeral(row.BALANCE_QTY)._value + numeral(row.NEW_ARRV_QTY)._value + numeral(row.RCV_QTY)._value) - (numeral(row.TFR_QTY)._value + numeral(row.DIED_TOT)._value + numeral(row.DSCRD_TOT)._value + numeral(row.BRDR_SALE_TOT)._value);
-                        return "<div class='input-group'><input type='text' class='form-control int' value='" + row.DIED_TOT + "' readonly /><button type='button' class='input-group-icon' onclick='EditLost(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' ldt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' net='" + net + "' gnd='" + row.GND + "' ><i class='fa fa-edit'></i></button></div>"
+                        return "<div class='input-group'><input type='text' class='form-control int' value='" + row.DIED_TOT + "' readonly /><button type='button' class='input-group-icon' onclick='EditLost(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' ndt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' ldt='" + reverseFormattedDate(resJsonToDate(row.TXN_DT)) + "' net='" + net + "' gnd='" + row.GND + "' ><i class='fa fa-edit'></i></button></div>"
                     }
 },
                 { 'data': 'DSCRD_TOT' },
@@ -519,13 +521,13 @@
             responsive: !0,
             "columnDefs": [
                 {
-                    targets: [1, 2, 6],
+                    targets: [1, 2, 3, 7],
                     visible: false,
                     orderable: false,
                     className: "text-center",
                 },
                 {
-                    targets: [0, 3, 4, 5,7],
+                    targets: [0, 4, 5,6,8],
                     orderable: false,
                     className: "text-center",
                 },
@@ -539,6 +541,9 @@
                 },
                 {
                     'data': 'UK_KEY'
+                },
+                {
+                    'data': 'GND'
                 },
                 {
                     'data': 'SITE_ID'
@@ -711,13 +716,13 @@
             responsive: !0,
             "columnDefs": [
                 {
-                    targets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                    targets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12],
                     visible: false,
                     orderable: false,
                     className: "text-center",
                 },
                 {
-                    targets: [0,  12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+                    targets: [0,  13,14,15,16,17,18,19,20,21,22,23,24,25,26],
                     orderable: false,
                     className: "text-center",
                 },
@@ -743,6 +748,9 @@
                 },
                 {
                     'data': 'HSG_ID'
+                },
+                {
+                    'data': 'GND'
                 },
                 {
                     'data': 'RCRD_DT',render: function (data, type, row) { return data != "" ? resJsonToDate(data) : ""; }
@@ -784,7 +792,7 @@
                         if (row.LOST_TP == 1) {
                             checked = "checked";
                         }
-                        return "<input class='form-check-input' type='radio' onchange='ModifyDirectlyLost(this)' name='RADIO_LOST_TP--" + row.UK_KEY + "' id='RADIO0_LOST_TP--" + row.UK_KEY + "' row='" + meta.row + "' col='8' " + checked + " value='1'/>"; 
+                        return "<input class='form-check-input' type='radio' onchange='ModifyDirectlyLost(this)' name='RADIO_LOST_TP--" + row.UK_KEY + "' id='RADIO0_LOST_TP--" + row.UK_KEY + "' row='" + meta.row + "' col='9' " + checked + " value='1'/>"; 
                     }
                 },
                 {
@@ -793,7 +801,7 @@
                         if (row.LOST_TP == 2) {
                             checked = "checked";
                         }
-                        return "<input class='form-check-input' type='radio' onchange='ModifyDirectlyLost(this)' name='RADIO_LOST_TP--" + row.UK_KEY + "' id='RADIO1_LOST_TP--" + row.UK_KEY + "' row='" + meta.row + "' col='8' " + checked + " value='2'/>"; 
+                        return "<input class='form-check-input' type='radio' onchange='ModifyDirectlyLost(this)' name='RADIO_LOST_TP--" + row.UK_KEY + "' id='RADIO1_LOST_TP--" + row.UK_KEY + "' row='" + meta.row + "' col='9' " + checked + " value='2'/>"; 
                     }
                 },
                 {
@@ -1061,18 +1069,19 @@
         var id = $(btn).attr('id');
         var sit = $(btn).attr('sit');
         var hsg = $(btn).attr('hsg');
+        var ndt = $(btn).attr('ndt');
         var mdt = $(btn).attr('mdt');
         var net = $(btn).attr('net');
         var gnd = $(btn).attr('gnd');
         var key = id.split('--')[1];
         $("#BT-ADD_MOVE").val(key);
-        $("#BT-ADD_MOVE").attr({ 'hsg': hsg, 'sit': sit, 'mdt': mdt,'net':net });
+        $("#BT-ADD_MOVE").attr({ 'hsg': hsg, 'sit': sit, 'mdt': mdt, 'net': net, 'gnd': gnd });
         $.ajax({
             type: "POST",
             url: pathServer + "/RPL/HSGRPLDT01_SELECT_BRDR_MVMT",
             dataType: "json",
             cache: false,
-            data: { UK_KEY: key, SITE_ID: sit, HSG_ID: hsg, MVMT_DT: mdt, GND: gnd },
+            data: { UK_KEY: key, SITE_ID: sit, HSG_ID: hsg, MVMT_DT: mdt, GND: gnd, NEW_DT:ndt },
             success: function (data) {
                 HSG_LIST = data.HSG_LIST;
                 BRDR_LIST = data.BRDR_LIST;
@@ -1094,6 +1103,7 @@
         var key = $("#BT-ADD_MOVE").val();
         var sit_id = $(btn).attr('sit');
         var hsg_id = $(btn).attr('hsg');
+        var gnd = $(btn).attr('gnd');
         var move_dt = $(btn).attr('mdt');
         var net_qty = $(btn).attr('net');
         var dateObj = new Date(move_dt);
@@ -1102,6 +1112,7 @@
         if (tableMove.data().length < net_qty) {
             tableMove.row.add({
                 "UK_KEY": key,
+                "GND":gnd,
                 "SITE_ID": sit_id,
                 "HSG_ID": hsg_id,
                 "BRDR_ID": "",
@@ -1174,6 +1185,7 @@
         var id = $(btn).attr('id');
         var sit = $(btn).attr('sit');
         var hsg = $(btn).attr('hsg');
+        var ndt = $(btn).attr('ndt');
         var ldt = $(btn).attr('ldt');
         var gnd = $(btn).attr('gnd');
 
@@ -1181,13 +1193,13 @@
         var key = id.split('--')[1];
 
         $("#BT-ADD_LOST").val(key);
-        $("#BT-ADD_LOST").attr({ 'hsg': hsg, 'sit': sit, 'ldt': ldt, 'net': net_qty });
+        $("#BT-ADD_LOST").attr({ 'hsg': hsg, 'sit': sit, 'ldt': ldt, 'net': net_qty,'gnd':gnd });
         $.ajax({
             type: "POST",
             url: pathServer + "/RPL/HSGRPLDT01_SELECT_BRDRLOST",
             dataType: "json",
             cache: false,
-            data: { UK_KEY: key, SITE_ID: sit, HSG_ID: hsg, LOST_DT: ldt,GND:gnd },
+            data: { UK_KEY: key, SITE_ID: sit, HSG_ID: hsg, LOST_DT: ldt,GND:gnd,NEW_DT:ndt },
             success: function (data) {
                 BRDR_LIST = data.BRDR_LIST;
                 var BRDR_LOST = data.BRDR_LOST;
@@ -1209,6 +1221,7 @@
         var sit_id = $(btn).attr('sit');
         var hsg_id = $(btn).attr('hsg');
         var lost_dt = $(btn).attr('ldt');
+        var gnd = $(btn).attr('gnd');
         var dateObj = new Date(lost_dt);
         var unixTimestamp = dateObj.getTime();
         var jsonDate = `/Date(${unixTimestamp})/`;
@@ -1219,6 +1232,7 @@
                 "USR_ID": "",
                 "SITE_ID": sit_id,
                 "HSG_ID": hsg_id,
+                "GND": gnd,
                 "RCRD_DT": "",
                 "LOST_DT": jsonDate,
                 "BRDR_ID": "",
@@ -1315,11 +1329,11 @@
         if (member <= 3) {            
             if ($("#" + id).is(":checked")) {
                 if (tableLost.row(indexLost).data().CAUS_1 == "" || tableLost.row(indexLost).data().CAUS_1 == null) {
-                    col = 9;
-                } else if (tableLost.row(indexLost).data().CAUS_2 == "" || tableLost.row(indexLost).data().CAUS_2 == null) {
                     col = 10;
-                } else if (tableLost.row(indexLost).data().CAUS_3 == "" || tableLost.row(indexLost).data().CAUS_3 == null) {
+                } else if (tableLost.row(indexLost).data().CAUS_2 == "" || tableLost.row(indexLost).data().CAUS_2 == null) {
                     col = 11;
+                } else if (tableLost.row(indexLost).data().CAUS_3 == "" || tableLost.row(indexLost).data().CAUS_3 == null) {
+                    col = 12;
                 }
 
                 if (indexLost !== undefined && tableLost.row(indexLost).length > 0) {
@@ -1331,11 +1345,11 @@
 
             } else {
                 if ($("#" + id).val() == tableLost.row(indexLost).data().CAUS_1) {
-                    col = 9;
-                } else if ($("#" + id).val() == tableLost.row(indexLost).data().CAUS_2) {
                     col = 10;
-                } else if ($("#" + id).val() == tableLost.row(indexLost).data().CAUS_3) {
+                } else if ($("#" + id).val() == tableLost.row(indexLost).data().CAUS_2) {
                     col = 11;
+                } else if ($("#" + id).val() == tableLost.row(indexLost).data().CAUS_3) {
+                    col = 12;
                 }
 
                 if (indexLost !== undefined && tableLost.row(indexLost).length > 0) {
@@ -1440,9 +1454,23 @@
     });
 
     function saveMain() {
+        var TXN_HSG_RPLCMT = new Array();
         var HSG_TEMP_HMD = new Array();
         for (var i = 0; i < tableMain.data().length; i++) {
+            let tbrpl = {};
             var tb_tmp = {};
+            var net = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].NEW_ARRV_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
+            if (net > 0) {
+                tbrpl.DOC_CODE = tableMain.data()[i].UK_KEY;
+                tbrpl.SITE_ID = tableMain.data()[i].SITE_ID;
+                tbrpl.HSG_ID = tableMain.data()[i].HSG_ID;
+                tbrpl.TXN_DT = $("#searchDate").val();
+                tbrpl.GND = tableMain.data()[i].GND;
+                tbrpl.NEW_ARRV_DT = resJsonToDate(tableMain.data()[i].NEW_ARRV_DT);
+                tbrpl.NET_QTY = net;
+                TXN_HSG_RPLCMT.push(tbrpl);
+            }
+
 
             tb_tmp.SITE_ID = tableMain.data()[i].SITE_ID;
             tb_tmp.HSG_ID = tableMain.data()[i].HSG_ID;
@@ -1462,7 +1490,7 @@
             type: "POST",
             url: pathServer + "/RPL/HSGRPLDT01_INSERT",
             dataType: "json",
-            data: JSON.stringify({ HSG_TEMP_HMD: HSG_TEMP_HMD }), //parameter Object,List
+            data: JSON.stringify({ TXN_HSG_RPLCMT: TXN_HSG_RPLCMT, HSG_TEMP_HMD: HSG_TEMP_HMD }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;
@@ -1534,6 +1562,7 @@
         var BRDR_MVMT = new Array();
         var TXN_HSG_RPLCMT_INCREASE = new Array();
         var TXN_HSG_RPLCMT_REDUCE = new Array();
+        var TXN_HSG_RPLCMT = new Array();
         var TFR_QTY = 0;
         var ORIGIN = "";
         var GND = "";
@@ -1552,23 +1581,37 @@
 
             TFR_QTY++;
             ORIGIN = tableMove.data()[i].HSG_ID;
-
+            GND = tableMove.data()[i].GND;
         }
-
         for (var i = 0; i < tableMain.data().length; i++) {
-            if (tableMain.data()[i].HSG_ID == ORIGIN) {
+            var net = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].NEW_ARRV_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
+            if (net > 0) {
+                let tbrpl = {};
+                tbrpl.DOC_CODE = tableMain.data()[i].UK_KEY;
+                tbrpl.SITE_ID = tableMain.data()[i].SITE_ID;
+                tbrpl.HSG_ID = tableMain.data()[i].HSG_ID;
+                tbrpl.TXN_DT = $("#searchDate").val();
+                tbrpl.GND = tableMain.data()[i].GND;
+                tbrpl.NEW_ARRV_DT = resJsonToDate(tableMain.data()[i].NEW_ARRV_DT);
+                tbrpl.NET_QTY = net;
+                TXN_HSG_RPLCMT.push(tbrpl);
+            }
+        }
+        for (var i = 0; i < tableMain.data().length; i++) {
+            //console.log(TFR_QTY);
+            if (tableMain.data()[i].HSG_ID == ORIGIN && tableMain.data()[i].GND == GND) {
                 let tbrpl = {};
                 tbrpl.DOC_CODE = tableMove.data()[0].UK_KEY.split('--')[0];
                 tbrpl.SITE_ID = tableMain.data()[i].SITE_ID;
                 tbrpl.HSG_ID = tableMain.data()[i].HSG_ID;
                 tbrpl.TXN_DT = $("#searchDate").val();
                 tbrpl.GND = tableMain.data()[i].GND;
-                tbrpl.NEW_ARRV_DT = tableMain.data()[i].NEW_ARRV_DT;
+                tbrpl.NEW_ARRV_DT = resJsonToDate(tableMain.data()[i].NEW_ARRV_DT);
                 tbrpl.TFR_QTY = TFR_QTY
-                tbrpl.NET_QTY = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].NEW_ARRV_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
+                tbrpl.NET_QTY = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].NEW_ARRV_QTY + tableMain.data()[i].RCV_QTY) - (TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
                 TXN_HSG_RPLCMT_REDUCE.push(tbrpl);
                 //console.log(resJsonToDate(tableMain.data()[i].NEW_ARRV_DT));
-                GND = tableMain.data()[i].GND;
+                //GND = tableMain.data()[i].GND;
                 NEW_ARRV_DT = resJsonToDate(tableMain.data()[i].NEW_ARRV_DT);
             }
         }
@@ -1611,7 +1654,7 @@
         type: "POST",
             url: pathServer + "/RPL/HSGRPLDT01_MVMT_INSERT",
             dataType: "json",
-            data: JSON.stringify({ BRDR_MVMT: BRDR_MVMT, TXN_HSG_RPLCMT_INCREASE: TXN_HSG_RPLCMT_INCREASE, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE }), //parameter Object,List
+            data: JSON.stringify({TXN_HSG_RPLCMT:TXN_HSG_RPLCMT, BRDR_MVMT: BRDR_MVMT, TXN_HSG_RPLCMT_INCREASE: TXN_HSG_RPLCMT_INCREASE, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;
@@ -1675,8 +1718,10 @@
     });
     function saveLost() {
         var BRDR_LOST = new Array();
+        var TXN_HSG_RPLCMT = new Array();
         var TXN_HSG_RPLCMT_REDUCE = new Array();
         var ORIGIN = "";
+        var GND = "";
         var DIED_TOT = 0;
         var DSCRD_TOT = 0;
 
@@ -1693,15 +1738,30 @@
             BRDR_LOST.push(tblost);
 
             ORIGIN = tableLost.data()[i].HSG_ID;
+            GND = tableLost.data()[i].GND;
             if (tableLost.data()[i].LOST_TP == 1) {
                 DIED_TOT++;
             } else if (tableLost.data()[i].LOST_TP == 2) {
                 DSCRD_TOT++;
             }
         }
-
         for (var i = 0; i < tableMain.data().length; i++) {
-            if (tableMain.data()[i].HSG_ID == ORIGIN) {
+            var net = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].NEW_ARRV_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
+            if (net > 0) {
+                let tbrpl = {};
+                tbrpl.DOC_CODE = tableMain.data()[i].UK_KEY;
+                tbrpl.SITE_ID = tableMain.data()[i].SITE_ID;
+                tbrpl.HSG_ID = tableMain.data()[i].HSG_ID;
+                tbrpl.TXN_DT = $("#searchDate").val();
+                tbrpl.GND = tableMain.data()[i].GND;
+                tbrpl.NEW_ARRV_DT = resJsonToDate(tableMain.data()[i].NEW_ARRV_DT);
+                tbrpl.NET_QTY = net;
+                TXN_HSG_RPLCMT.push(tbrpl);
+            }
+        }
+        for (var i = 0; i < tableMain.data().length; i++) {
+            
+            if (tableMain.data()[i].HSG_ID == ORIGIN && tableMain.data()[i].GND == GND) {
                 let tbrpl = {};
                 tbrpl.DOC_CODE = tableLost.data()[0].UK_KEY.split('--')[0];
                 tbrpl.SITE_ID = tableMain.data()[i].SITE_ID;
@@ -1720,7 +1780,7 @@
             type: "POST",
             url: pathServer + "/RPL/HSGRPLDT01_LOST_INSERT",
             dataType: "json",
-            data: JSON.stringify({ BRDR_LOST: BRDR_LOST, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE }), //parameter Object,List
+            data: JSON.stringify({ TXN_HSG_RPLCMT: TXN_HSG_RPLCMT, BRDR_LOST: BRDR_LOST, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;
