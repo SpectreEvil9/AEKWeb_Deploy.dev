@@ -1649,40 +1649,40 @@
             }
         }
 
-        //$.ajax({
-        //contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
-        //type: "POST",
-        //    url: pathServer + "/RPL/HSGRPLDT01_MVMT_INSERT",
-        //    dataType: "json",
-        //    data: JSON.stringify({BRDR_MVMT: BRDR_MVMT, TXN_HSG_RPLCMT_INCREASE: TXN_HSG_RPLCMT_INCREASE, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE }), //parameter Object,List
-        //    xhr: function () {
-        //        var xhr = new window.XMLHttpRequest();
-        //        let timerInterval;
-        //        xhr_loading(xhr);
-        //        clearInterval(timerInterval);
-        //    return xhr;
-        //},
-        //    success: function (data) {
+        $.ajax({
+        contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+        type: "POST",
+            url: pathServer + "/RPL/HSGRPLDT01_MVMT_INSERT",
+            dataType: "json",
+            data: JSON.stringify({BRDR_MVMT: BRDR_MVMT, TXN_HSG_RPLCMT_INCREASE: TXN_HSG_RPLCMT_INCREASE, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE }), //parameter Object,List
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                let timerInterval;
+                xhr_loading(xhr);
+                clearInterval(timerInterval);
+            return xhr;
+        },
+            success: function (data) {
 
-        //    clearInterval(interVal);
-        //    $('#progress').css('width', 100 + "%");
-        //        //successMessage.init();
-        //        setTimeout(function () {
-        //            //Attach_File();
-        //            Swal.fire({
-        //                icon: "success",
-        //                title: 'Your data has been saved',
-        //                showConfirmButton: true,
-        //                confirmButtonText: 'OK'
-        //            }).then((result) => {
-        //                location.reload();
-        //            });
-        //        }, 1500);
-        //    },
-        //    error: function () {
-        //        errorAlert.init();
-        //    }
-        //});
+            clearInterval(interVal);
+            $('#progress').css('width', 100 + "%");
+                //successMessage.init();
+                setTimeout(function () {
+                    //Attach_File();
+                    Swal.fire({
+                        icon: "success",
+                        title: 'Your data has been saved',
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                }, 1500);
+            },
+            error: function () {
+                errorAlert.init();
+            }
+        });
     }
 
     $("#saveLost").click(function () {
