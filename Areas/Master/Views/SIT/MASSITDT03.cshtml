@@ -15,13 +15,13 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Master</a>
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Site</a>
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASSITDT01", "SIT", new {}).ToString())">Site</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -44,20 +44,20 @@
                                     <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุชื่อย่อบริษัท">
                                         <span class="input-group-text col-lg-3">ชื่อย่อบริษัท</span>
                                         <input type="text"
-                                               value="@Model.SITE_ID"
                                                id="SITE_ID"
-                                               class="form-control m-input input-req" required/>
+                                               value="@Model.SITE_ID"
+                                               class="form-control m-input input-req" required />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุชือภาษาไทย">
-                                        <span class="input-group-text col-lg-4">ชือภาษาไทย</span>
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุชือภาษาไทยของฟาร์ม">
+                                        <span class="input-group-text col-lg-3">ชือภาษาไทย</span>
                                         <input type="text"
-                                               value="@Model.SITE_NM_TH"
                                                id="SITE_NM_TH"
-                                               class="form-control" required/>
+                                               value="@Model.SITE_NM_TH"
+                                               class="form-control" required />
                                     </div>
                                 </div>
                             </div>
@@ -65,21 +65,31 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุชือภาษาอังกฤษ">
+                                    <div class="input-group mb-3">
                                         <span class="input-group-text col-lg-3">ชือภาษาอังกฤษ</span>
                                         <input type="text"
-                                               value="@Model.SITE_NM_EN"
                                                id="SITE_NM_EN"
-                                               class="form-control" required/>
+                                               value="@Model.SITE_NM_EN"
+                                               class="form-control" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text col-lg-4">Cost Center</span>
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ Company Code">
+                                        <span class="input-group-text col-lg-3">Company Code</span>
                                         <select class="form-select form-control" id="CO_CODE">
-                                            <option value="1">CO0001</option>
+                                            @foreach (var cpn in ViewBag.MAS_COMPANY)
+                                            {
+                                                if (cpn.CO_ID == Model.CO_CODE)
+                                                {
+                                                    <option value="@cpn.CO_ID|@cpn.CO_NM_TH" selected="selected">@cpn.CO_ID - @cpn.CO_NM_TH</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@cpn.CO_ID|@cpn.CO_NM_TH">@cpn.CO_ID - @cpn.CO_NM_TH</option>
+                                                }
+                                            }
                                         </select>
                                     </div>
                                 </div>
@@ -88,71 +98,61 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text col-lg-3">Cost Name</span>
-                                        <input type="text"
-                                               id="CO_NM"
-                                               class="form-control" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <div class="form-group">
-                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ TAX">
-                                        <span class="input-group-text col-lg-4">Tax Branch</span>
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ TAX และต้องมี 5 ตัวอักษร">
+                                        <span class="input-group-text col-lg-3">Tax Branch</span>
                                         <input type="text"
                                                id="TAX_BR"
                                                value="@Model.TAX_BR"
-                                               class="form-control" required/>
+                                               maxlength="5"
+                                               class="form-control" required />
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุชือย่อของฟาร์ม">
+                                    <div class="input-group mb-3">
                                         <span class="input-group-text col-lg-3">ชือย่อของฟาร์ม</span>
                                         <input type="text"
-                                               value="@Model.SITE_NM_ABR"
                                                id="SITE_NM_ABR"
-                                               class="form-control" required/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text col-lg-4">ระดับ</span>
-                                        <select class="form-select form-control" id="SITE_LVL">
-                                            <option value="1">GGP</option>
-                                            <option value="2">GP</option>
-                                            <option value="3">PS</option>
-                                            <option value="4">F</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text col-lg-3">ที่อยู่</span>
-                                        <input type="text"
-                                               id="ADR"
+                                               value="@Model.SITE_NM_ABR"
                                                class="form-control" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">ระดับ</span>
+                                        <select class="form-select form-control" id="SITE_LVL">
+                                            <option value="1" @(Model.SITE_LVL == 1 ? "selected" : "")>GGP</option>
+                                            <option value="2" @(Model.SITE_LVL == 2 ? "selected" : "")>GP</option>
+                                            <option value="3" @(Model.SITE_LVL == 3 ? "selected" : "")>PS</option>
+                                            <option value="4" @(Model.SITE_LVL == 4 ? "selected" : "")>F</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-9">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ ที่อยู่">
+                                        <span class="input-group-text col-lg-1">ที่อยู่</span>
+                                        <input type="text"
+                                               id="ADR"
+                                               value="@Model.ADR"
+                                               class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <label class="card-title text-primary">รูปแบบ</label><br>
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-3">
                                 <div class="form-group">
                                     <div class="d-flex" style="justify-content:flex-start !important;">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="F_BRDR">
+                                            <input class="form-check-input pig-type" type="checkbox" id="F_BRDR" value="BRDR" @(Model.F_BRDR == 1 ? "checked" : "")>
                                             <label class="form-check-label" for="F_BRDR">
                                                 เลี้ยงสุกรพันธุ์
                                             </label>
@@ -160,11 +160,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-3">
                                 <div class="form-group">
                                     <div class="d-flex" style="justify-content:flex-start !important;">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="F_PIG">
+                                            <input class="form-check-input pig-type" type="checkbox" id="F_PIG" value="PIG" @(Model.F_PIG == 1 ? "checked" : "")>
                                             <label class="form-check-label" for="F_PIG">
                                                 เลี้ยงสุกรขุน
                                             </label>
@@ -197,11 +197,12 @@
 
         $($(SITE_ID).parent()).removeClass('alert-validate');
         $($(SITE_NM_TH).parent()).removeClass('alert-validate');
-        $($(SITE_NM_EN).parent()).removeClass('alert-validate');
+        $($(CO_CODE).parent()).removeClass('alert-validate');
         $($(TAX_BR).parent()).removeClass('alert-validate');
-        $($(SITE_NM_ABR).parent()).removeClass('alert-validate');
+        $($(ADR).parent()).removeClass('alert-validate');
+
         $("#SAVE").click(function () {
-            if ($("#SITE_ID").val() != "" && $("#SITE_NM_TH").val() != "" && $("#SITE_NM_EN").val() != "" && $("#TAX_BR").val() != "" && $("#SITE_NM_ABR").val()) {
+            if ($("#SITE_ID").val() != "" && $("#SITE_NM_TH").val() != "" && $("#CO_CODE").val() != "" && $("#TAX_BR").val() != "" && $("#ADR").val()) {
                 Swal.fire({
                     icon: "question",
                     title: 'Do you want to save?',
@@ -214,40 +215,45 @@
                     }
                 });
             } else {
-
                 if ($("#SITE_ID").val() == "") {
                     $($(SITE_ID).parent()).addClass('alert-validate');
                 }
                 if ($("#SITE_NM_TH").val() == "") {
                     $($(SITE_NM_TH).parent()).addClass('alert-validate');
                 }
-                if ($("#SITE_NM_EN").val() == "") {
-                    $($(SITE_NM_EN).parent()).addClass('alert-validate');
+                if ($("#CO_CODE").val() == "") {
+                    $($(CO_CODE).parent()).addClass('alert-validate');
                 }
                 if ($("#TAX_BR").val() == "") {
                     $($(TAX_BR).parent()).addClass('alert-validate');
                 }
-                if ($("#SITE_NM_ABR").val() == "") {
-                    $($(SITE_NM_ABR).parent()).addClass('alert-validate');
+                if ($("#ADR").val() == "") {
+                    $($(ADR).parent()).addClass('alert-validate');
                 }
             }
         });
 
         function save() {
-
             var MAS_SITE = {};
             MAS_SITE.SITE_SK = "@Model.SITE_SK";
             MAS_SITE.SITE_ID = $("#SITE_ID").val();
             MAS_SITE.SITE_NM_TH = $("#SITE_NM_TH").val();
             MAS_SITE.SITE_NM_EN = $("#SITE_NM_EN").val();
-            MAS_SITE.CO_CODE = $("#CO_CODE").val();
-            MAS_SITE.CO_NM = $("#CO_NM").val();
+            MAS_SITE.CO_CODE = $('#CO_CODE').val().split('|')[0];
+            MAS_SITE.CO_NM = $('#CO_CODE').val().split('|')[1];
             MAS_SITE.TAX_BR = $("#TAX_BR").val();
             MAS_SITE.SITE_NM_ABR = $("#SITE_NM_ABR").val();
             MAS_SITE.SITE_LVL = $("#SITE_LVL").val();
             MAS_SITE.ADR = $("#ADR").val();
-            MAS_SITE.F_BRDR = "Y";
-            MAS_SITE.F_PIG = "Y";
+            $('.pig-type:checked').each(function (index, element) {
+                if ($(element).val() == "BRDR") {
+                    MAS_SITE.F_BRDR = 1;
+                }
+                if ($(element).val() == "PIG") {
+                    MAS_SITE.F_PIG = 1;
+                }
+            })
+            MAS_SITE.UDT_USR_ID = 999;
 
             $.ajax({
             contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list

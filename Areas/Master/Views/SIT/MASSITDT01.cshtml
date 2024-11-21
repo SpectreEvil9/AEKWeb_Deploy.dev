@@ -17,7 +17,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Master</a>
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -29,52 +29,38 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-10">
-                                <h1 class="card-title text-primary">ค้นหา</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์ม</span>
-                                        <select class="form-select dropdown-multiple" id="searchSiteid" multiple="multiple">
-                                            <option value=""></option>
-                                            @foreach (var sit in ViewBag.MAS_SITE)
-                                            {
-                                                <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
-                                            }
-                                        </select>
-                                    </div>
+                <form class="m-form m-form--fit m-form--label-align-right">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-10">
+                                    <h1 class="card-title text-primary">ค้นหา</h1>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">วันที่</span>
-                                        <input type="text"
-                                               id="date"
-                                               class="form-control"
-                                               placeholder="Select Date"
-                                               aria-label="Username"
-                                               aria-describedby="basic-addon1" />
-                                        <span class="input-group-icon">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์ม</span>
+                                            <select class="form-select dropdown-multiple" id="searchSiteid" name="searchSiteid">
+                                                <option value="ALL">All</option>
+                                                @foreach (var sit in ViewBag.MAS_SITE)
+                                                {
+                                                    <option value="@sit.SITE_ID">@sit.SITE_ID - @sit.SITE_NM_TH</option>
+                                                }
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                            <button type="submit" id="search" class="btn btn-primary btn-round">Search</button>
+                        </div>
                     </div>
-                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
-                        <button id="search" class="btn btn-primary btn-round">Scarch</button>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="col-md-12">
                 <div class="card">
@@ -90,24 +76,24 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive tab-content mt-3 mb-3">
-                            <table id="tb_detail" style="width:100%" border="1"
+                            <table id="tb_detail" style="width:120%" border="1"
                                    class="display table table-striped table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th width="3%" style="text-align:center !important"></th>
                                         <th style="text-align:center !important">SITE_SK</th>
                                         <th style="text-align:center !important">ชื่อย่อบริษัท</th>
-                                        <th style="text-align:center !important">ชือภาษาไทยของฟาร์ม</th>
-                                        <th style="text-align:center !important">ชือภาษาอังกฤษของฟาร์ม</th>
-                                        <th style="text-align:center !important"></th>
-                                        <th style="text-align:center !important"></th>
+                                        <th style="text-align:center !important">ชือภาษาไทย</th>
+                                        <th style="text-align:center !important">ชือภาษาอังกฤษ</th>
+                                        <th style="text-align:center !important">Company Code</th>
+                                        <th style="text-align:center !important">Company Name</th>
                                         <th style="text-align:center !important">Tax Branch</th>
                                         <th style="text-align:center !important">ชือย่อของฟาร์ม</th>
                                         <th style="text-align:center !important">ระดับ</th>
                                         <th style="text-align:center !important">ที่อยู่</th>
                                         <th style="text-align:center !important">เลี้ยงสุกรพันธุ์</th>
                                         <th style="text-align:center !important">เลี้ยงสุกรขุน</th>
-                                        <th style="align-content:center !important">
+                                        <th width="5%" style="align-content:center !important">
                                             <div class="d-flex align-items-center selectgroup-pills">
                                                 <a href="@HttpUtility.UrlDecode(Url.Action("MASSITDT02", "SIT", new {searchSiteid = ViewBag.searchSiteid == null ? null : string.Join("&searchSiteid=", (string[])ViewBag.searchSiteid)}).ToString())"
                                                         class="selectgroup-button selectgroup-button-icon">
@@ -130,22 +116,15 @@
     </div>
 </div>
 <script>
-    $('#searchSiteid').select2({
-        theme: "bootstrap-5",
-        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-        placeholder: $(this).data('placeholder'),
-        closeOnSelect: false,
-        tags: true
-    });
     $(document).ready(function () {
-        ////$("#searchSiteid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteid))')).trigger("change");
-        $("#date").datepicker({
-            todayHighlight: true,
-            orientation: 'bottom left',
-            format: 'dd-M-yyyy',
-            todayBtn: 'linked',
-            autoclose: 'true',
-            assumeNearbyYear: true
+        $("#searchSiteid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteid))')).trigger("change");
+
+        $('#searchSiteid').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: true,
+            tags: true
         });
 
         var table = $("#tb_detail").DataTable({
@@ -166,7 +145,7 @@
             type: "POST",
             datatype: "json",
             data: {
-
+                searchSiteid: $('#searchSiteid').val()
             },
         },
         columnDefs: [

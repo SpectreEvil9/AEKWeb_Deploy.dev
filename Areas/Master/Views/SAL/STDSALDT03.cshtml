@@ -1,0 +1,314 @@
+﻿
+@{
+    ViewBag.Title = "STDSALDT03";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">แก้ไขข้อมูลราคาขายตามประกาศ (Sale Price)</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("STDSALDT01", "SAL", new {}).ToString())">Sale Price</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Edit</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">แก้ไข</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                            <span class="input-group-text col-lg-2" id="basic-addon1">Item NO.</span>
+                                            <select class="form-select dropdown-multiple" id="ITM_NO" name="ITM_NO" required>
+                                                @foreach (var itm in ViewBag.MAS_ITM)
+                                                {
+                                                    <option value="@itm.ITM_NO" @(Model.ITM_NO == itm.ITM_NO ? "selected" : "")>@itm.ITM_NO - @itm.ITM_NM</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                            <span class="input-group-text">Line NO.</span>
+                                            <input type="number"
+                                                   id="LINE_NO"
+                                                   value="@Model.LINE_NO"
+                                                   class="form-control"
+                                                   required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Account</span>
+                                            <input type="text"
+                                                   id="AC_REL"
+                                                   value="@Model.AC_REL"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Size</span>
+                                            <input type="text"
+                                                   id="SIZE"
+                                                   value="@Model.SIZE"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Style</span>
+                                            <input type="text"
+                                                   id="STYLE"
+                                                   value="@Model.STYLE"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                            <span class="input-group-text">From Date</span>
+                                            <input type="text"
+                                                   id="FM_DT"
+                                                   value="@(Model.FM_DT == null ? "" : Convert.ToString(string.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(Model.FM_DT))))"
+                                                   class="form-control"
+                                                   placeholder="Select Date" required />
+                                            <span class="input-group-icon">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                            <span class="input-group-text">To Date</span>
+                                            <input type="text"
+                                                   id="TO_DT"
+                                                   value="@(Model.TO_DT == null ? "" : Convert.ToString(string.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(Model.TO_DT))))"
+                                                   class="form-control"
+                                                   placeholder="Select Date" required />
+                                            <span class="input-group-icon">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                            <span class="input-group-text">Site</span>
+                                            <select class="form-select dropdown-multiple" id="SITE_ID" name="SITE_ID" required>
+                                                @foreach (var itm in ViewBag.MAS_SITE)
+                                                {
+                                                    <option value="@itm.SITE_ID" @(itm.SITE_ID == Model.SITE_ID ? "selected" : "")>@itm.SITE_ID - @itm.SITE_NM_TH</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                            <span class="input-group-text col-lg-4">Amount</span>
+                                            <input type="number"
+                                                   id="AMT"
+                                                   value="@Model.AMT"
+                                                   class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Currency</span>
+                                            <input type="text"
+                                                   id="CRN"
+                                                   placeholder="THB"
+                                                   value="@Model.CRN"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                            <span class="input-group-text col-md-5" id="basic-addon1">Active Status</span>
+                                            <select class="form-select dropdown-multiple" id="ACTV_ST" name="ACTV_ST" required>
+                                                <option value="1" @(Model.ACTV_ST == "1" ? "selected" : "")>Active</option>
+                                                <option value="0" @(Model.ACTV_ST == "0" ? "selected" : "")>InActive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#FM_DT, #TO_DT").datepicker({
+            todayHighlight: true,
+            orientation: 'bottom left',
+            format: 'dd-M-yyyy',
+            todayBtn: 'linked',
+            autoclose: 'true',
+            assumeNearbyYear: true,
+        });
+
+        $('#ITM_NBR').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: true,
+            tags: true
+        });
+
+        $($(ITM_NO).parent()).removeClass('alert-validate');
+        $($(LINE_NO).parent()).removeClass('alert-validate');
+        $($(FM_DT).parent()).removeClass('alert-validate');
+        $($(TO_DT).parent()).removeClass('alert-validate');
+        $($(SITE_ID).parent()).removeClass('alert-validate');
+        $($(AMT).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#ITM_NO").val() != "" && $("#LINE_NO").val() != "" && $("#FM_DT").val() != "" && $("#TO_DT").val() != "" && $("#SITE_ID").val() != "" && $("#AMT").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Edit this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#ITM_NO").val() == "") {
+                    $($(ITM_NO).parent()).addClass('alert-validate');
+                }
+                if ($("#LINE_NO").val() == "") {
+                    $($(LINE_NO).parent()).addClass('alert-validate');
+                }
+                if ($("#FM_DT").val() == "") {
+                    $($(FM_DT).parent()).addClass('alert-validate');
+                }
+                if ($("#TO_DT").val() == "") {
+                    $($(TO_DT).parent()).addClass('alert-validate');
+                }
+                if ($("#SITE_ID").val() == "") {
+                    $($(SITE_ID).parent()).addClass('alert-validate');
+                }
+                if ($("#AMT").val() == "") {
+                    $($(AMT).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            let STD_SALE_PRICE = {};
+            STD_SALE_PRICE.SALE_PRC_SK = "@Model.SALE_PRC_SK";
+            STD_SALE_PRICE.LINE_NO = $("#LINE_NO").val();
+            STD_SALE_PRICE.AC_REL = $("#AC_REL").val();
+            STD_SALE_PRICE.ITM_NO = $("#ITM_NO").val();
+            STD_SALE_PRICE.SIZE = $("#SIZE").val();
+            STD_SALE_PRICE.STYLE = $("#STYLE").val();
+            STD_SALE_PRICE.SITE_ID = $("#SITE_ID").val();
+            STD_SALE_PRICE.FM_DT = $("#FM_DT").val();
+            STD_SALE_PRICE.TO_DT = $("#TO_DT").val();
+            STD_SALE_PRICE.AMT = $("#AMT").val();
+            STD_SALE_PRICE.CRN = $("#CRN").val();
+            STD_SALE_PRICE.ACTV_ST = $("#ACTV_ST").val();
+            STD_SALE_PRICE.UDT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/SAL/STDSALDT03_UPDATE",
+                dataType: "json",
+                data: JSON.stringify({ STD_SALE_PRICE: STD_SALE_PRICE }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();s
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved', //"Your data has been saved"
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("STDSALDT03", "SAL", new {
+                                                     SALE_PRC_SK = "SALE_PRC_SKRedirect"
+                                                 }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("SALE_PRC_SKRedirect", data.SALE_PRC_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>
+

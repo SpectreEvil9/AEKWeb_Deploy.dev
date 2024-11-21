@@ -1,0 +1,318 @@
+﻿
+@{
+    ViewBag.Title = "MASBPSDT02";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">สร้างข้อมูลการคัดพันธุ์เป็นสุกรพันธุ์ PS</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASBPSDT01", "BPS", new {}).ToString())">PS</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Create</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">สร้าง</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">เบอร์หู</span>
+                                        <input type="text"
+                                               id="BRDR_ID"
+                                               class="form-control m-input input-req" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">เบอร์หูที่ได้ครั้งแรก</span>
+                                        <input type="text"
+                                               id="BRDR_ID_ORIG"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">line</span>
+                                        <input type="number"
+                                               id="LINE"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">เพศ</span>
+                                        <select class="form-select dropdown-multiple" id="GND" name="GND">
+                                            <option value="M">Male</option>
+                                            <option value="F">FeMale</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">ระดับเลือด</span>
+                                        <input type="text"
+                                               id="BLOOD_LVL"
+                                               class="form-control m-input input-req" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">เบอร์พ่อ</span>
+                                        <input type="text"
+                                               id="FTHR_BRDR_ID"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">เบอร์แม่</span>
+                                        <input type="text"
+                                               id="MTHR_BRDR_ID"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">วันเกิด</span>
+                                        <input type="text"
+                                               id="DOB"
+                                               class="form-control"
+                                               placeholder="Select Date" />
+                                        <span class="input-group-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">เต้านมซ้าย</span>
+                                        <input type="number"
+                                               id="BRST_LEFT"
+                                               class="form-control m-input input-req" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">เต้านมขวา</span>
+                                        <input type="number"
+                                               id="BRST_RGHT"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">วันที่รับเข้า</span>
+                                        <input type="text"
+                                               id="DT_RCVD"
+                                               class="form-control"
+                                               placeholder="Select Date" />
+                                        <span class="input-group-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">วันที่เริ่มใช้งานได้</span>
+                                        <input type="text"
+                                               id="DT_USED"
+                                               class="form-control"
+                                               placeholder="Select Date" />
+                                        <span class="input-group-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">WEIGHT RECEIVED</span>
+                                        <input type="number"
+                                               id="WGHT_RCVD"
+                                               class="form-control m-input input-req" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">หมายเหตุ</span>
+                                        <input type="text"
+                                               id="REM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">สถานะ</span>
+                                        <input type="text"
+                                               id="ST"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#DOB ,#DT_RCVD, #DT_USED").datepicker({
+            todayHighlight: true,
+            orientation: 'bottom left',
+            format: 'dd-M-yyyy',
+            todayBtn: 'linked',
+            autoclose: 'true',
+            assumeNearbyYear: true,
+        });
+
+        $($(BRDR_ID).parent()).removeClass('alert-validate');
+        $($(BRDR_ID_ORIG).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#BRDR_ID").val() != "" && $("#BRDR_ID_ORIG").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Create this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#BRDR_ID").val() == "") {
+                    $($(BRDR_ID).parent()).addClass('alert-validate');
+                }
+                if ($("#BRDR_ID_ORIG").val() == "") {
+                    $($(BRDR_ID_ORIG).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            var MAS_BRDR_PS = {};
+            MAS_BRDR_PS.BRDR_ID = $("#BRDR_ID").val();
+            MAS_BRDR_PS.BRDR_ID_ORIG = $("#BRDR_ID_ORIG").val();
+            MAS_BRDR_PS.LINE = $("#LINE").val();
+            MAS_BRDR_PS.GND = $("#GND").val();
+            MAS_BRDR_PS.BLOOD_LVL = $("#BLOOD_LVL").val();
+            MAS_BRDR_PS.FTHR_BRDR_ID = $("#FTHR_BRDR_ID").val();
+            MAS_BRDR_PS.MTHR_BRDR_ID = $("#MTHR_BRDR_ID").val();
+            MAS_BRDR_PS.DOB = $("#DOB").val();
+            MAS_BRDR_PS.BRST_LEFT = $("#BRST_LEFT").val();
+            MAS_BRDR_PS.BRST_RGHT = $("#BRST_RGHT").val();
+            MAS_BRDR_PS.DT_RCVD = $("#DT_RCVD").val();
+            MAS_BRDR_PS.DT_USED = $("#DT_USED").val();
+            MAS_BRDR_PS.WGHT_RCVD = $("#WGHT_RCVD").val();
+            MAS_BRDR_PS.REM = $("#REM").val();
+            MAS_BRDR_PS.ST = $("#ST").val();
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/BPS/MASBPSDT02_INSERT",
+                dataType: "json",
+                data: JSON.stringify({ MAS_BRDR_PS: MAS_BRDR_PS }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved',
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASBPSDT03", "BPS", new { BRDR_PS_SK = "BRDR_PS_SKRedirect" }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("BRDR_PS_SKRedirect", data.BRDR_PS_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>
+

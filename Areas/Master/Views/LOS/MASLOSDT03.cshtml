@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "MASLOSDT03";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">ข้อมูลประเภทการตายและคัดทิ้ัง (Lost Type)</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASLOSDT01", "LOS", new {}).ToString())">Lost Type</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Edit</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">แก้ไข</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ และไม่เกิน 2 ตัวอักษร">
+                                        <span class="input-group-text col-lg-3">Lost Type Id</span>
+                                        <input type="text"
+                                               id="LOST_TP_ID"
+                                               value="@Model.LOST_TP_ID"
+                                               maxlength="5"
+                                               class="form-control m-input input-req" required readonly/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">Lost Type Description</span>
+                                        <input type="text"
+                                               id="LOST_TP_DSC"
+                                               value="@Model.LOST_TP_DSC"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">Status</span>
+                                        <select class="form-select dropdown-multiple" id="STATUS" name="STATUS">
+                                            @if (@Model.STATUS == 1)
+                                            {
+                                                <option value="Active" selected="selected">Active</option>
+                                                <option value="InActive">InActive</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="Active">Active</option>
+                                                <option value="InActive" selected="selected">InActive</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Start Date</span>
+                                        <input type="text"
+                                               id="STRT_DT"
+                                               value="@(Model.STRT_DT == null ? "" : Convert.ToString(string.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(Model.STRT_DT))))"
+                                               class="form-control"
+                                               placeholder="Select Date"/>
+                                        <span class="input-group-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">End Date</span>
+                                        <input type="text"
+                                               id="END_DT"
+                                               value="@(Model.END_DT == null ? "" : Convert.ToString(string.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(Model.STRT_DT))))"
+                                               class="form-control"
+                                               placeholder="Select Date"/>
+                                        <span class="input-group-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#STRT_DT, #END_DT").datepicker({
+            todayHighlight: true,
+            orientation: 'bottom left',
+            format: 'dd-M-yyyy',
+            todayBtn: 'linked',
+            autoclose: 'true',
+            assumeNearbyYear: true,
+        });
+
+        $($(LOST_TP_ID).parent()).removeClass('alert-validate');
+        $($(LOST_TP_DSC).parent()).removeClass('alert-validate');
+        $($(STATUS).parent()).removeClass('alert-validate');
+        $($(STRT_DT).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#LOST_TP_ID").val() != "" && $("#LOST_TP_DSC").val() != "" && $("#STATUS").val() != "" && $("#STRT_DT").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Edit this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#LOST_TP_ID").val() == "") {
+                    $($(LOST_TP_ID).parent()).addClass('alert-validate');
+                }
+                if ($("#LOST_TP_DSC").val() == "") {
+                    $($(LOST_TP_DSC).parent()).addClass('alert-validate');
+                }
+                if ($("#STATUS").val() == "") {
+                    $($(STATUS).parent()).addClass('alert-validate');
+                }
+                if ($("#STRT_DT").val() == "") {
+                    $($(STRT_DT).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            let MAS_LOST_TP = {};
+            MAS_LOST_TP.LOST_TP_SK = "@Model.LOST_TP_SK";
+            MAS_LOST_TP.LOST_TP_ID = $("#LOST_TP_ID").val();
+            MAS_LOST_TP.LOST_TP_DSC = $("#LOST_TP_DSC").val();
+            MAS_LOST_TP.STATUS = $("#STATUS").val();
+            MAS_LOST_TP.STRT_DT = $("#STRT_DT").val();
+            MAS_LOST_TP.END_DT = $("#END_DT").val();
+            MAS_LOST_TP.UDT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/LOS/MASLOSDT03_UPDATE",
+                dataType: "json",
+                data: JSON.stringify({ MAS_LOST_TP: MAS_LOST_TP }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();s
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved', //"Your data has been saved"
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASLOSDT03", "LOS", new { LOST_TP_SK = "LOST_TP_SKRedirect" }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("LOST_TP_SKRedirect", data.LOST_TP_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>
+

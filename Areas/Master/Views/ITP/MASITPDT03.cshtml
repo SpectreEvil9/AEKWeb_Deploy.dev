@@ -1,0 +1,247 @@
+﻿
+@{
+    ViewBag.Title = "MASITPDT03";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">แก้ไขข้อมูลหลักผลิตภัณฑ์ (Item /Product)</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASITPDT01", "ITP", new {}).ToString())">Item/Product</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Edit</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">แก้ไข</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8 col-lg-8">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">Item Group </span>
+                                        <select class="form-select dropdown-multiple" id="ITM_GRP_CODE" name="ITM_GRP_CODE">
+                                            @foreach (var itg in ViewBag.MAS_ITM_GRP)
+                                            {
+                                                if (@itg.ITM_GRP_CODE == @Model.ITM_GRP_CODE)
+                                                {
+                                                    <option value="@itg.ITM_GRP_CODE" selected="selected">@itg.ITM_GRP_CODE - @itg.ITM_GRP_DESC</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@itg.ITM_GRP_CODE">@itg.ITM_GRP_CODE - @itg.ITM_GRP_DESC</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Item No.</span>
+                                        <input type="text"
+                                               value="@Model.ITM_NO"
+                                               id="ITM_NO"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-lg-8">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Item Name</span>
+                                        <input type="text"
+                                               value="@Model.ITM_NM"
+                                               id="ITM_NM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Size</span>
+                                        <input type="text"
+                                               value="@Model.SIZE"
+                                               id="SIZE"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Style</span>
+                                        <input type="text"
+                                               value="@Model.STL"
+                                               id="STL"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">Unit</span>
+                                        <input type="text"
+                                               value="@Model.UNIT"
+                                               id="UNIT"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Product Type</span>
+                                        <input type="text"
+                                               value="@Model.PD_TP"
+                                               id="PD_TP"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#ITM_GRP_CODE').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: true,
+            tags: true
+        });
+
+        $($(ITM_NO).parent()).removeClass('alert-validate');
+        $($(ITM_NM).parent()).removeClass('alert-validate');
+        $($(UNIT).parent()).removeClass('alert-validate');
+        $($(PD_TP).parent()).removeClass('alert-validate');
+        $($(ITM_GRP_CODE).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#ITM_NO").val() != "" && $("#ITM_NM").val() != "" && $("#UNIT").val() != "" && $("#PD_TP").val() != "" && $("#ITM_GRP_CODE").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Edit this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#ITM_NO").val() == "") {
+                    $($(ITM_NO).parent()).addClass('alert-validate');
+                }
+                if ($("#ITM_NM").val() == "") {
+                    $($(ITM_NM).parent()).addClass('alert-validate');
+                }
+                if ($("#UNIT").val() == "") {
+                    $($(UNIT).parent()).addClass('alert-validate');
+                }
+                if ($("#PD_TP").val() == "") {
+                    $($(PD_TP).parent()).addClass('alert-validate');
+                }
+                if ($("#ITM_GRP_CODE").val() == "") {
+                    $($(ITM_GRP_CODE).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            let MAS_ITM = {};
+            MAS_ITM.ITM_SK = "@Model.ITM_SK";
+            MAS_ITM.ITM_NO = $("#ITM_NO").val();
+            MAS_ITM.ITM_NM = $("#ITM_NM").val();
+            MAS_ITM.UNIT = $("#UNIT").val();
+            MAS_ITM.PD_TP = $("#PD_TP").val();
+            MAS_ITM.SIZE = $("#SIZE").val();
+            MAS_ITM.STL = $("#STL").val();
+            MAS_ITM.ITM_GRP_CODE = $("#ITM_GRP_CODE").val();
+            MAS_ITM.UDT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/ITP/MASITPDT03_UPDATE",
+                dataType: "json",
+                data: JSON.stringify({ MAS_ITM: MAS_ITM }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();s
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved', //"Your data has been saved"
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASITPDT03", "ITP", new {
+                                                     ITM_SK = "ITM_SKRedirect"
+                                                 }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("ITM_SKRedirect", data.ITM_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>

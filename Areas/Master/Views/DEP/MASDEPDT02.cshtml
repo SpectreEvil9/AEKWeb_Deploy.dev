@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "MASDEPDT02";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">สร้างข้อมูลหลักกลุ่มผลิตภัณฑ์ (Item Group)</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASDEPDT01", "DEP", new {}).ToString())">Department</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Create</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">สร้าง</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ และไม่เกิน 2 ตัวอักษร">
+                                        <span class="input-group-text col-lg-3">Department Code</span>
+                                        <input type="text"
+                                               id="DEPT_CODE"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">Department Description</span>
+                                        <input type="text"
+                                               id="DEPT_DESC"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $($(DEPT_CODE).parent()).removeClass('alert-validate');
+        $($(DEPT_DESC).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if (($("#DEPT_CODE").val() != "" && $("#DEPT_CODE").val().length <= 2) && $("#DEPT_DESC").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Create this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#DEPT_CODE").val() == "" || $("#DEPT_CODE").val().length > 2) {
+                    $($(DEPT_CODE).parent()).addClass('alert-validate');
+                }
+                if ($("#DEPT_DESC").val() == "") {
+                    $($(DEPT_DESC).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            var MAS_DEPT = {};
+            MAS_DEPT.DEPT_CODE = $("#DEPT_CODE").val();
+            MAS_DEPT.DEPT_DESC = $("#DEPT_DESC").val();
+            MAS_DEPT.CRT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/DEP/MASDEPDT02_INSERT",
+                dataType: "json",
+                data: JSON.stringify({ MAS_DEPT: MAS_DEPT }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved',
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASDEPDT03", "DEP", new {DEPT_SK = "DEPT_SKRedirect"}).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("DEPT_SKRedirect", data.DEPT_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>
+

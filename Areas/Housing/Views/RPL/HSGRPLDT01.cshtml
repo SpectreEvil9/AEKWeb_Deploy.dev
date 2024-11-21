@@ -122,7 +122,7 @@
                                                 <th width="10%" style="text-align:center !important">ย้าย</th>
                                                 <th width="5%" style="text-align:center !important">รับ</th>
                                                 <th width="10%" style="text-align:center !important">ตาย</th>
-                                                <th width="5%" style="text-align:center !important">คัดทิ้ง</th>
+                                                <th width="10%" style="text-align:center !important">คัดทิ้ง</th>
                                                 <th width="5%" style="text-align:center !important">ขาย</th>
                                                 <th width="5%" style="text-align:center !important">คงเหลือ</th>
 
@@ -437,7 +437,13 @@
                         return "<div class='input-group'><input type='text' class='form-control int' value='" + row.DIED_TOT + "' readonly /><button type='button' class='input-group-icon' onclick='EditLost(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' ndt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' ldt='" + reverseFormattedDate(resJsonToDate(row.TXN_DT)) + "' net='" + net + "' gnd='" + row.GND + "' ><i class='fa fa-edit'></i></button></div>"
                     }
 },
-                { 'data': 'DSCRD_TOT' },
+                {
+                    'data': 'DSCRD_TOT',
+                    render: function (data, type, row, meta) {
+                        var net = (numeral(row.BALANCE_QTY)._value + numeral(row.NEW_ARRV_QTY)._value + numeral(row.RCV_QTY)._value) - (numeral(row.TFR_QTY)._value + numeral(row.DIED_TOT)._value + numeral(row.DSCRD_TOT)._value + numeral(row.BRDR_SALE_TOT)._value);
+                        return "<div class='input-group'><input type='text' class='form-control int' value='" + row.DSCRD_TOT + "' readonly /><button type='button' class='input-group-icon' onclick='EditLost(this)' id='TFR_QTY--" + row.UK_KEY + "' sit='" + row.SITE_ID + "' hsg='" + row.HSG_ID + "' ndt='" + reverseFormattedDate(resJsonToDate(row.NEW_ARRV_DT)) + "' ldt='" + reverseFormattedDate(resJsonToDate(row.TXN_DT)) + "' net='" + net + "' gnd='" + row.GND + "' ><i class='fa fa-edit'></i></button></div>"
+                    }
+                },
                 { 'data': 'BRDR_SALE_TOT' },
                 { 'data': 'NET_QTY' },
                 {

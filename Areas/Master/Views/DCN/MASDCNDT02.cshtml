@@ -1,0 +1,334 @@
+﻿
+@{
+    ViewBag.Title = "MASDCNDT02";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">สร้างข้อมูลเกณฑ์การพิจารณาส่วนลด กรณีขายสุกร (Discount)</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASDCNDT01", "DCN", new {}).ToString())">Discount</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Create</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">สร้าง</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Discount ID</span>
+                                        <input type="number"
+                                               id="DCN_CUST_ID"
+                                               value="@ViewBag.maxDiscountId"
+                                               readonly
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">Type Pig</span>
+                                        <input type="number"
+                                               id="TP_PIG"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">Type Pig EN</span>
+                                        <input type="text"
+                                               id="TP_PIG_EN"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">Type Pig TH</span>
+                                        <input type="text"
+                                               id="TP_PIG_TH"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Group Discount</span>
+                                        <input type="text"
+                                               id="GRP_DCN"
+                                               class="form-control m-input input-req" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Sub Group No.</span>
+                                        <input type="number"
+                                               id="SUB_GRP_NO"
+                                               class="form-control m-input input-req" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-lg-8">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Case Of Discount</span>
+                                        <input type="text"
+                                               id="CASE_OF_DCN"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Unit</span>
+                                        <input type="text"
+                                               id="DCN_UNIT"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Contract Cust</span>
+                                        <input type="text"
+                                               id="DCN_FOR_CTR_CUST"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">Contract Cust Amount</span>
+                                        <input type="number"
+                                               id="DCN_FOR_CTR_CUST_AMT"
+                                               class="form-control m-input input-req" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Contract Cust Formula</span>
+                                        <input type="text"
+                                               id="DCN_FOR_CTR_CUST_FRML"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Discount For Cust</span>
+                                        <input type="text"
+                                               id="DCN_FOR_CUST"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">Cust Amount</span>
+                                        <input type="number"
+                                               id="DCN_FOR_CUST_AMT"
+                                               class="form-control m-input input-req" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Cust Formula</span>
+                                        <input type="text"
+                                               id="DCN_FOR_CUST_FRML"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Condition</span>
+                                        <input type="text"
+                                               id="DCN_CD"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-lg-8">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-2">Remark</span>
+                                        <input type="text"
+                                               id="DCN_REM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $($(DCN_CUST_ID).parent()).removeClass('alert-validate');
+        $($(TP_PIG).parent()).removeClass('alert-validate');
+        $($(TP_PIG_EN).parent()).removeClass('alert-validate');
+        $($(TP_PIG_TH).parent()).removeClass('alert-validate');
+        $($(GRP_DCN).parent()).removeClass('alert-validate');
+        $($(SUB_GRP_NO).parent()).removeClass('alert-validate');
+        $($(CASE_OF_DCN).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#DCN_CUST_ID").val() != "" && $("#TP_PIG").val() != "" && $("#TP_PIG_EN").val() != "" && $("#TP_PIG_TH").val() != ""
+                && $("#GRP_DCN").val() != "" && $("#DCN_CUST_ID").val() != "" && $("#CASE_OF_DCN").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Create this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#DCN_CUST_ID").val() == "") {
+                    $($(DCN_CUST_ID).parent()).addClass('alert-validate');
+                }
+                if ($("#TP_PIG").val() == "") {
+                    $($(TP_PIG).parent()).addClass('alert-validate');
+                }
+                if ($("#TP_PIG_EN").val() == "") {
+                    $($(TP_PIG_EN).parent()).addClass('alert-validate');
+                }
+                if ($("#TP_PIG_TH").val() == "") {
+                    $($(TP_PIG_TH).parent()).addClass('alert-validate');
+                }
+                if ($("#GRP_DCN").val() == "") {
+                    $($(GRP_DCN).parent()).addClass('alert-validate');
+                }
+                if ($("#SUB_GRP_NO").val() == "") {
+                    $($(SUB_GRP_NO).parent()).addClass('alert-validate');
+                }
+                if ($("#CASE_OF_DCN").val() == "") {
+                    $($(CASE_OF_DCN).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            var MAS_DCN_CUST = {};
+            MAS_DCN_CUST.DCN_CUST_ID = $("#DCN_CUST_ID").val();
+            MAS_DCN_CUST.TP_PIG = $("#TP_PIG").val();
+            MAS_DCN_CUST.TP_PIG_EN = $("#TP_PIG_EN").val();
+            MAS_DCN_CUST.TP_PIG_TH = $("#TP_PIG_TH").val();
+            MAS_DCN_CUST.GRP_DCN = $("#GRP_DCN").val();
+            MAS_DCN_CUST.SUB_GRP_NO = $("#SUB_GRP_NO").val();
+            MAS_DCN_CUST.CASE_OF_DCN = $("#CASE_OF_DCN").val();
+            MAS_DCN_CUST.DCN_UNIT = $("#DCN_UNIT").val();
+            MAS_DCN_CUST.DCN_FOR_CTR_CUST = $("#DCN_FOR_CTR_CUST").val();
+            MAS_DCN_CUST.DCN_FOR_CTR_CUST_AMT = $("#DCN_FOR_CTR_CUST_AMT").val();
+            MAS_DCN_CUST.DCN_FOR_CTR_CUST_FRML = $("#DCN_FOR_CTR_CUST_FRML").val();
+            MAS_DCN_CUST.DCN_FOR_CUST = $("#DCN_FOR_CUST").val();
+            MAS_DCN_CUST.DCN_FOR_CUST_AMT = $("#DCN_FOR_CUST_AMT").val();
+            MAS_DCN_CUST.DCN_FOR_CUST_FRML = $("#DCN_FOR_CUST_FRML").val();
+            MAS_DCN_CUST.DCN_CD = $("#DCN_CD").val();
+            MAS_DCN_CUST.DCN_REM = $("#DCN_REM").val();
+            MAS_DCN_CUST.CRT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/DCN/MASDCNDT02_INSERT",
+                dataType: "json",
+                data: JSON.stringify({ MAS_DCN_CUST: MAS_DCN_CUST }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved',
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASDCNDT03", "DCN", new { DCN_CUST_SK = "DCN_CUST_SKRedirect" }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("DCN_CUST_SKRedirect", data.DCN_CUST_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>

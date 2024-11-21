@@ -41,14 +41,18 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
                         <li class="nav-item active">
-                            <a data-bs-toggle="collapse"
-                               href="#dashboard"
+                            <a href="@Url.Action("Index", "Home", new { Area = "" })">
+                                <i class="fas fa-home"></i>
+                                <p>ระบบข้อมูลฟาร์มสุกร</p>
+                            </a>
+                            @*<a data-bs-toggle="collapse"
+                               href="@Url.Action("Index", "Home", new { Area = "Master" })"
                                class="collapsed"
                                aria-expanded="false">
                                 <i class="fas fa-home"></i>
                                 <p>ระบบข้อมูลฟาร์มสุกร</p>
                                 <span class="caret"></span>
-                            </a>
+                            </a>*@
                             <div class="collapse" id="dashboard">
                                 <ul class="nav nav-collapse">
                                     <li>

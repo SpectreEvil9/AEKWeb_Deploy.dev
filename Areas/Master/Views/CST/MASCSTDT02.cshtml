@@ -1,0 +1,513 @@
+﻿
+@{
+    ViewBag.Title = "MASCSTDT02";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">สร้างข้อมูลหลักลูกค้า (Customer)</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASCSTDT01", "CST", new {}).ToString())">Customer</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Create</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">สร้าง</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Account No.</span>
+                                        <input type="text"
+                                               id="AC_NBR"
+                                               placeholder="C10001"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Your Account No.</span>
+                                        <input type="text"
+                                               id="YOUR_AC_NBR"
+                                               placeholder="1กร-ว001"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">Party Type</span>
+                                        <select class="form-select" id="PTY_TP" name="PTY_TP">
+                                            <option value="Organization">Organization</option>
+                                            <option value="Person">Person</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Name</span>
+                                        <input type="text"
+                                               id="NM"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Name Alias</span>
+                                        <input type="text"
+                                               id="NM_ALS"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Personal Title</span>
+                                        <input type="text"
+                                               id="PSN_TTL"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">First Name</span>
+                                        <input type="text"
+                                               id="FRST_NM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Last Name</span>
+                                        <input type="text"
+                                               id="LAST_NM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Display As</span>
+                                        <input type="text"
+                                               id="DSPL_AS"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Cust Group</span>
+                                        <input type="text"
+                                               id="CS_GRP"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Cust Classification Group</span>
+                                        <input type="text"
+                                               id="CS_CL_GRP"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Language Id</span>
+                                        <input type="text"
+                                               id="LNG_ID"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Phone Name</span>
+                                        <input type="text"
+                                               id="PH_NM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Phone</span>
+                                        <input type="text"
+                                               id="PH"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Tele Fax Name</span>
+                                        <input type="text"
+                                               id="TEL_FAX_NM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Tele Fax</span>
+                                        <input type="text"
+                                               id="TEL_FAX"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Email Name</span>
+                                        <input type="text"
+                                               id="EMAIL_NM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Email</span>
+                                        <input type="text"
+                                               id="EMAIL"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Lineof Business Id</span>
+                                        <input type="text"
+                                               id="LINE_OF_BSN_ID"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Currency</span>
+                                        <input type="text"
+                                               id="CCY"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Credit Max</span>
+                                        <input type="text"
+                                               id="CR_MAX"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Tax Group</span>
+                                        <input type="text"
+                                               id="TAX_GRP"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Price Group</span>
+                                        <input type="text"
+                                               id="PRC_GRP"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Line Disc</span>
+                                        <input type="text"
+                                               id="LINE_DISC"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">VAT Number</span>
+                                        <input type="text"
+                                               id="VAT_NBR"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Payment Term Id</span>
+                                        <input type="text"
+                                               id="PYMT_TERM_ID"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Payment Mode</span>
+                                        <input type="text"
+                                               id="PYMT_MODE"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Bank Account</span>
+                                        <input type="text"
+                                               id="BNK_AC"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Tax Withhold Calculate</span>
+                                        <input type="text"
+                                               id="TAX_WHLD_CLC"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Tax Withhold Group</span>
+                                        <input type="text"
+                                               id="TAX_WHLD_GRP"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Dlv Mode</span>
+                                        <input type="text"
+                                               id="DLV_MODE"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Default Dimension Str</span>
+                                        <input type="text"
+                                               id="DFLT_DIM_STR"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#PTY_TP').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: true,
+            tags: true
+        });
+
+        $($(AC_NBR).parent()).removeClass('alert-validate');
+        $($(YOUR_AC_NBR).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#AC_NBR").val() != "" && $("#YOUR_AC_NBR").val() != "" && $("#PTY_TP").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Create this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#AC_NBR").val() == "") {
+                    $($(AC_NBR).parent()).addClass('alert-validate');
+                }
+                if ($("#YOUR_AC_NBR").val() == "") {
+                    $($(YOUR_AC_NBR).parent()).addClass('alert-validate');
+                }
+                if ($("#PTY_TP").val() == "") {
+                    $($(PTY_TP).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            var MAS_CST = {};
+            MAS_CST.AC_NBR = $("#AC_NBR").val();
+            MAS_CST.YOUR_AC_NBR = $("#YOUR_AC_NBR").val();
+            MAS_CST.PTY_TP = $("#PTY_TP").val();
+            MAS_CST.NM = $("#NM").val();
+            MAS_CST.NM_ALS = $("#NM_ALS").val();
+            MAS_CST.PSN_TTL = $("#PSN_TTL").val();
+            MAS_CST.FRST_NM = $("#FRST_NM").val();
+            MAS_CST.LAST_NM = $("#LAST_NM").val();
+            MAS_CST.DSPL_AS = $("#DSPL_AS").val();
+            MAS_CST.CS_GRP = $("#CS_GRP").val();
+            MAS_CST.CS_CL_GRP = $("#CS_CL_GRP").val();
+            MAS_CST.LNG_ID = $("#LNG_ID").val();
+            MAS_CST.PH_NM = $("#PH_NM").val();
+            MAS_CST.PH = $("#PH").val();
+            MAS_CST.TEL_FAX_NM = $("#TEL_FAX_NM").val();
+            MAS_CST.TEL_FAX = $("#TEL_FAX").val();
+            MAS_CST.EMAIL_NM = $("#EMAIL_NM").val();
+            MAS_CST.EMAIL = $("#EMAIL").val();
+            MAS_CST.LINE_OF_BSN_ID = $("#LINE_OF_BSN_ID").val();
+            MAS_CST.CCY = $("#CCY").val();
+            MAS_CST.CR_MAX = $("#CR_MAX").val();
+            MAS_CST.TAX_GRP = $("#TAX_GRP").val();
+            MAS_CST.PRC_GRP = $("#PRC_GRP").val();
+            MAS_CST.LINE_DISC = $("#LINE_DISC").val();
+            MAS_CST.VAT_NBR = $("#VAT_NBR").val();
+            MAS_CST.PYMT_TERM_ID = $("#PYMT_TERM_ID").val();
+            MAS_CST.PYMT_MODE = $("#PYMT_MODE").val();
+            MAS_CST.BNK_AC = $("#BNK_AC").val();
+            MAS_CST.TAX_WHLD_CLC = $("#TAX_WHLD_CLC").val();
+            MAS_CST.TAX_WHLD_GRP = $("#TAX_WHLD_GRP").val();
+            MAS_CST.DLV_MODE = $("#DLV_MODE").val();
+            MAS_CST.DFLT_DIM_STR = $("#DFLT_DIM_STR").val();
+            MAS_CST.CRT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/CST/MASCSTDT02_INSERT",
+                dataType: "json",
+                data: JSON.stringify({ MAS_CST: MAS_CST }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved',
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASCSTDT03", "CST", new {
+                                                     CST_SK = "CST_SKRedirect"
+                                                 }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("CST_SKRedirect", data.CST_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>

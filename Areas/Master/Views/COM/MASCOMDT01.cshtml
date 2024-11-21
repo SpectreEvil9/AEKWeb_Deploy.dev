@@ -1,11 +1,12 @@
-﻿@{
-    ViewBag.Title = "MASHSGDT01";
+﻿
+@{
+    ViewBag.Title = "MASCOMDT01";
 }
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
             <h3 class="fw-bold mb-3">
-                ข้อมูลเล้า (Storage Dimension)
+                ข้อมูลบริษัท (Company)
             </h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
@@ -23,7 +24,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Housing</a>
+                    <a href="#">Company</a>
                 </li>
             </ul>
         </div>
@@ -40,15 +41,15 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-3 col-lg-3">
+                                <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text col-lg-3" id="basic-addon1">รหัสเล้า</span>
-                                            <select class="form-select dropdown-multiple" id="searchHousingid" name="searchHousingid">
-                                                <option value="ALL" selected="selected">All</option>
-                                                @foreach (var hsg in ViewBag.MAS_HSG)
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">บริษัท</span>
+                                            <select class="form-select dropdown-multiple" id="searchCompanyId" name="searchCompanyId">
+                                                <option value="ALL">All</option>
+                                                @foreach (var com in ViewBag.MAS_COMPANY)
                                                 {
-                                                    <option value="@hsg.HSG_ID">@hsg.HSG_ID</option>
+                                                    <option value="@com.CO_NM_TH">@com.CO_NM_TH</option>
                                                 }
                                             </select>
                                         </div>
@@ -75,24 +76,17 @@
                         <div class="card-body">
                             <div class="table-responsive tab-content mt-3 mb-3">
                                 <table id="tb_detail" style="width:100%" border="1"
-                                        class="display table table-striped table-hover table-bordered">
+                                       class="display table table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th width="3%" style="text-align:center !important"></th>
-                                            <th style="text-align:center !important">ลำดับ</th>
-                                            <th style="text-align:center !important">รหัสเล้า</th>
-                                            <th style="text-align:center !important">รหัสเล้าที่ใช้งาน</th>
-                                            <th style="text-align:center !important">รายละเอียดเล้า</th>
-                                            <th style="text-align:center !important">รหัสโครงสร้างประเภทเล้า</th>
-                                            <th style="text-align:center !important">ชื่อโครงสร้างประเภทเล้า</th>
-                                            <th style="text-align:center !important">โซน</th>
-                                            <th style="text-align:center !important">ลำดับ</th>
-                                            <th style="text-align:center !important">Cost Group</th>
-                                            <th style="text-align:center !important">Cost Group Description</th>
+                                            <th width="3%" style="text-align:center !important">ลำดับ</th>
+                                            <th style="text-align:center !important">รหัสบริษัท</th>
+                                            <th style="text-align:center !important">ชื่อภาษาไทยของบริษัท</th>
+                                            <th style="text-align:center !important">ชื่อภาษาอังกฤษของบริษัท</th>
                                             <th width="5%" style="align-content:center !important">
                                                 <div class="d-flex align-items-center selectgroup-pills">
-                                                    <a href="@HttpUtility.UrlDecode(Url.Action("MASHSGDT02", "HSG", new { searchHousingid = ViewBag.searchHousingid == null ? null : string.Join("&searchHousingid=", (string[])ViewBag.searchHousingid) }).ToString())"
-                                                        class="selectgroup-button selectgroup-button-icon">
+                                                    <a href="@HttpUtility.UrlDecode(Url.Action("MASCOMDT02", "COM", new { searchCompanyId = ViewBag.searchCompanyId == null ? null : string.Join("&searchCompanyId=", (string[])ViewBag.searchCompanyId) }).ToString())"
+                                                       class="selectgroup-button selectgroup-button-icon">
                                                         <i class="fa fa-plus text-success"></i>
                                                     </a>
                                                 </div>
@@ -114,9 +108,9 @@
 </div>
 <script>
     $(document).ready(function () {
-       $("#searchHousingid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingid))')).trigger("change");    
+        $("#searchCompanyId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchCompanyId))')).trigger("change");
 
-    $('#searchHousingid').select2({
+    $('#searchCompanyId').select2({
         theme: "bootstrap-5",
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
         placeholder: $(this).data('placeholder'),
@@ -138,27 +132,21 @@
         bAutoWidth: false,
         order: [[1, "asc"]],
         "ajax": {
-            url: pathServer + "/HSG/MASHSGDT01_SELECT",
+            url: pathServer + "/COM/MASCOMDT01_SELECT",
             type: "POST",
             datatype: "json",
             data: {
-                searchHousingid: $("#searchHousingid").val()
+                searchCompanyId: $("#searchCompanyId").val()
             },
         },
         columnDefs: [
             {
-                targets: [0],
+                targets: [0, 1],
                 orderable: false,
                 className: "text-center",
             },
             {
-                targets: [1],
-                orderable: false,
-                visible: false,
-                className: "text-left",
-            },
-            {
-                targets: [ 2,3, 4, 5, 6, 7, 8, 9, 10, 11],
+                targets: [2, 3, 4],
                 orderable: false,
                 className: "text-left",
             },
@@ -170,21 +158,14 @@
                     return (meta.row + 1) + page;
                 }
             },
-            { 'data':'HSG_SK'},
-            { 'data':'HSG_ID'},
-            { 'data':'HSG_CODE'},
-            { 'data':'HSG_DSC'},
-            { 'data':'HSG_TP_CODE'},
-            { 'data':'HSG_TP_NM'},
-            { 'data':'ZON'},
-            { 'data':'SEQ'},
-            { 'data':'COST_GRP'},
-            { 'data':'COST_GRP_DSC'},
+            { 'data': 'CO_ID'},
+            { 'data': 'CO_NM_TH'},
+            { 'data': 'CO_NM_EN'},
             {
                 mRender: function (data, type, row) {
-                    var link = '@HttpUtility.UrlDecode(Url.Action("MASHSGDT03", "HSG", new {
-                                HSG_SK = "row_HSG_SK"}).ToString())';
-                    link = link.replace("row_HSG_SK", row.HSG_SK);
+                    var link = '@HttpUtility.UrlDecode(Url.Action("MASCOMDT03", "COM", new {
+                                CO_SK = "row_CO_SK"}).ToString())';
+                    link = link.replace("row_CO_SK", row.CO_SK);
                     var All_Botton = "<div class='d-flex align-items-center selectgroup-pills'>";
                         All_Botton = All_Botton + "<a href='" + link + "' class='selectgroup-button selectgroup-button-icon' title='Edit'><i class='fas fa-edit text-primary'></i></a>";
                         All_Botton = All_Botton + "</div>";

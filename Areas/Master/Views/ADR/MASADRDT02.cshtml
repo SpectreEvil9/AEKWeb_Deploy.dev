@@ -1,0 +1,303 @@
+﻿
+@{
+    ViewBag.Title = "MASADRDT02";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">สร้างข้อมูลหลักที่อยู่ลูกค้า (Customer Address)</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASADRDT01", "ADR", new {}).ToString())">Customer Address</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Create</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">สร้าง</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุฟาร์ม">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">Account No.</span>
+                                        <select class="form-select dropdown-multiple" id="CS_AC_NBR" name="CS_AC_NBR">
+                                            @foreach (var cst in ViewBag.MAS_CST)
+                                            {
+                                                if (@cst.PTY_TP == "Organization")
+                                                {
+                                                    <option value="@cst.AC_NBR|@cst.NM">@cst.YOUR_AC_NBR - @cst.NM</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@cst.AC_NBR|@cst.FRST_NM @cst.LAST_NM">@cst.YOUR_AC_NBR - @cst.FRST_NM @cst.LAST_NM</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Address Name</span>
+                                        <input type="text"
+                                               id="ADR_NM"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-md-4">Location Role</span>
+                                        <input type="text"
+                                               id="LO_RL"
+                                               value="Business;Invoice;Remit to"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Country Region Id</span>
+                                        <input type="text"
+                                               id="CTY_RGON"
+                                               value="THA"
+                                               class="form-control m-input input-req col-md-1" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-2">Street</span>
+                                        <input type="text"
+                                               id="STR"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">City</span>
+                                        <input type="text"
+                                               id="CITY"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">County</span>
+                                        <input type="text"
+                                               id="CNTY"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">State</span>
+                                        <input type="text"
+                                               id="STE"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">ZipCode</span>
+                                        <input type="text"
+                                               id="ZIP_CODE"
+                                               class="form-control" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">Building Compliment</span>
+                                        <input type="text"
+                                               id="BLD_CMPM"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4">StreetNumber</span>
+                                        <input type="text"
+                                               id="STR_NBR"
+                                               value="00000"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#CS_AC_NBR').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: true,
+            tags: true
+        });
+
+        $('#CS_AC_NBR').on('change', function () {
+            $('#ADR_NM').val($('#CS_AC_NBR').val().split('|')[1]);
+        });
+
+        $($(CS_AC_NBR).parent()).removeClass('alert-validate');
+        $($(ADR_NM).parent()).removeClass('alert-validate');
+        $($(CTY_RGON).parent()).removeClass('alert-validate');
+        $($(STR).parent()).removeClass('alert-validate');
+        $($(CITY).parent()).removeClass('alert-validate');
+        $($(CNTY).parent()).removeClass('alert-validate');
+        $($(STE).parent()).removeClass('alert-validate');
+        $($(ZIP_CODE).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#CS_AC_NBR").val() != "" && $("#ADR_NM").val() != "" && $("#STR").val() != "" && $("#CITY").val() != "" && $("#CNTY").val() != "" && $("#STE").val() != "" && $("#ZIP_CODE").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Create this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#CS_AC_NBR").val() == "") {
+                    $($(CS_AC_NBR).parent()).addClass('alert-validate');
+                }
+                if ($("#ADR_NM").val() == "") {
+                    $($(ADR_NM).parent()).addClass('alert-validate');
+                }
+                if ($("#CTY_RGON").val() == "") {
+                    $($(CTY_RGON).parent()).addClass('alert-validate');
+                }
+                if ($("#STR").val() == "") {
+                    $($(STR).parent()).addClass('alert-validate');
+                }
+                if ($("#CITY").val() == "") {
+                    $($(CITY).parent()).addClass('alert-validate');
+                }
+                if ($("#CNTY").val() == "") {
+                    $($(CNTY).parent()).addClass('alert-validate');
+                }
+                if ($("#STE").val() == "") {
+                    $($(STE).parent()).addClass('alert-validate');
+                }
+                if ($("#ZIP_CODE").val() == "") {
+                    $($(ZIP_CODE).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            var MAS_CST_ADR = {};
+            MAS_CST_ADR.CS_AC_NBR = $('#CS_AC_NBR').val().split('|')[0];
+            MAS_CST_ADR.ADR_NM = $("#ADR_NM").val();
+            MAS_CST_ADR.LO_RL = $("#LO_RL").val();
+            MAS_CST_ADR.CTY_RGON = $("#CTY_RGON").val();
+            MAS_CST_ADR.STR = $("#STR").val();
+            MAS_CST_ADR.CITY = $("#CITY").val();
+            MAS_CST_ADR.CNTY = $("#CNTY").val();
+            MAS_CST_ADR.STE = $("#STE").val();
+            MAS_CST_ADR.ZIP_CODE = $("#ZIP_CODE").val();
+            MAS_CST_ADR.BLD_CMPM = $("#BLD_CMPM").val();
+            MAS_CST_ADR.STR_NBR = $("#STR_NBR").val();
+            MAS_CST_ADR.CRT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/ADR/MASADRDT02_INSERT",
+                dataType: "json",
+                data: JSON.stringify({ MAS_CST_ADR: MAS_CST_ADR }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved',
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASADRDT03", "ADR", new {
+                                                     CST_ADR_SK = "CST_ADR_SKRedirect"
+                                                 }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("CST_ADR_SKRedirect", data.CST_ADR_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>

@@ -1,11 +1,12 @@
-﻿@{
-    ViewBag.Title = "MASHSGDT01";
+﻿
+@{
+    ViewBag.Title = "MASITMDT01";
 }
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
             <h3 class="fw-bold mb-3">
-                ข้อมูลเล้า (Storage Dimension)
+                ข้อมูล Item Group
             </h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
@@ -23,7 +24,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Housing</a>
+                    <a href="#">Item Group</a>
                 </li>
             </ul>
         </div>
@@ -40,15 +41,15 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-3 col-lg-3">
+                                <div class="col-md-12 col-lg-6">
                                     <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text col-lg-3" id="basic-addon1">รหัสเล้า</span>
-                                            <select class="form-select dropdown-multiple" id="searchHousingid" name="searchHousingid">
-                                                <option value="ALL" selected="selected">All</option>
-                                                @foreach (var hsg in ViewBag.MAS_HSG)
+                                        <div class="input-group col-mb-12">
+                                            <span class="input-group-text col-mb-6" id="basic-addon1">Item Description</span>
+                                            <select class="form-select dropdown-multiple" id="searchItemDesc" name="searchItemDesc">
+                                                <option value="ALL">All</option>
+                                                @foreach (var itm in ViewBag.MAS_ITM_GRP)
                                                 {
-                                                    <option value="@hsg.HSG_ID">@hsg.HSG_ID</option>
+                                                    <option value="@itm.ITM_GRP_DESC">@itm.ITM_GRP_DESC</option>
                                                 }
                                             </select>
                                         </div>
@@ -75,24 +76,17 @@
                         <div class="card-body">
                             <div class="table-responsive tab-content mt-3 mb-3">
                                 <table id="tb_detail" style="width:100%" border="1"
-                                        class="display table table-striped table-hover table-bordered">
+                                       class="display table table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th width="3%" style="text-align:center !important"></th>
-                                            <th style="text-align:center !important">ลำดับ</th>
-                                            <th style="text-align:center !important">รหัสเล้า</th>
-                                            <th style="text-align:center !important">รหัสเล้าที่ใช้งาน</th>
-                                            <th style="text-align:center !important">รายละเอียดเล้า</th>
-                                            <th style="text-align:center !important">รหัสโครงสร้างประเภทเล้า</th>
-                                            <th style="text-align:center !important">ชื่อโครงสร้างประเภทเล้า</th>
-                                            <th style="text-align:center !important">โซน</th>
-                                            <th style="text-align:center !important">ลำดับ</th>
-                                            <th style="text-align:center !important">Cost Group</th>
-                                            <th style="text-align:center !important">Cost Group Description</th>
+                                            <th width="3%" style="text-align:center !important">ลำดับ</th>
+                                            <th></th>
+                                            <th style="text-align:center !important">Item Group Code</th>
+                                            <th style="text-align:center !important">Item Group Description</th>
                                             <th width="5%" style="align-content:center !important">
                                                 <div class="d-flex align-items-center selectgroup-pills">
-                                                    <a href="@HttpUtility.UrlDecode(Url.Action("MASHSGDT02", "HSG", new { searchHousingid = ViewBag.searchHousingid == null ? null : string.Join("&searchHousingid=", (string[])ViewBag.searchHousingid) }).ToString())"
-                                                        class="selectgroup-button selectgroup-button-icon">
+                                                    <a href="@HttpUtility.UrlDecode(Url.Action("MASITMDT02", "ITM", new { searchItemDesc = ViewBag.searchItemDesc == null ? null : string.Join("&searchItemDesc=", (string[])ViewBag.searchItemDesc) }).ToString())"
+                                                       class="selectgroup-button selectgroup-button-icon">
                                                         <i class="fa fa-plus text-success"></i>
                                                     </a>
                                                 </div>
@@ -114,15 +108,7 @@
 </div>
 <script>
     $(document).ready(function () {
-       $("#searchHousingid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingid))')).trigger("change");    
-
-    $('#searchHousingid').select2({
-        theme: "bootstrap-5",
-        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-        placeholder: $(this).data('placeholder'),
-        closeOnSelect: true,
-        tags: true
-    });
+        $("#searchItemDesc").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchItemDesc))')).trigger("change");
 
     const table = $("#tb_detail").DataTable({
         lengthChange: false,
@@ -138,11 +124,11 @@
         bAutoWidth: false,
         order: [[1, "asc"]],
         "ajax": {
-            url: pathServer + "/HSG/MASHSGDT01_SELECT",
+            url: pathServer + "/ITM/MASITMDT01_SELECT",
             type: "POST",
             datatype: "json",
             data: {
-                searchHousingid: $("#searchHousingid").val()
+                searchItemDesc: $("#searchItemDesc").val()
             },
         },
         columnDefs: [
@@ -158,7 +144,7 @@
                 className: "text-left",
             },
             {
-                targets: [ 2,3, 4, 5, 6, 7, 8, 9, 10, 11],
+                targets: [2, 3, 4],
                 orderable: false,
                 className: "text-left",
             },
@@ -170,21 +156,14 @@
                     return (meta.row + 1) + page;
                 }
             },
-            { 'data':'HSG_SK'},
-            { 'data':'HSG_ID'},
-            { 'data':'HSG_CODE'},
-            { 'data':'HSG_DSC'},
-            { 'data':'HSG_TP_CODE'},
-            { 'data':'HSG_TP_NM'},
-            { 'data':'ZON'},
-            { 'data':'SEQ'},
-            { 'data':'COST_GRP'},
-            { 'data':'COST_GRP_DSC'},
+            { 'data': 'ITM_GRP_SK' },
+            { 'data': 'ITM_GRP_CODE'},
+            { 'data': 'ITM_GRP_DESC'},
             {
                 mRender: function (data, type, row) {
-                    var link = '@HttpUtility.UrlDecode(Url.Action("MASHSGDT03", "HSG", new {
-                                HSG_SK = "row_HSG_SK"}).ToString())';
-                    link = link.replace("row_HSG_SK", row.HSG_SK);
+                    var link = '@HttpUtility.UrlDecode(Url.Action("MASITMDT03", "ITM", new {
+                               ITM_GRP_SK = "row_ITM_GRP_SK"}).ToString())';
+                    link = link.replace("row_ITM_GRP_SK", row.ITM_GRP_SK);
                     var All_Botton = "<div class='d-flex align-items-center selectgroup-pills'>";
                         All_Botton = All_Botton + "<a href='" + link + "' class='selectgroup-button selectgroup-button-icon' title='Edit'><i class='fas fa-edit text-primary'></i></a>";
                         All_Botton = All_Botton + "</div>";

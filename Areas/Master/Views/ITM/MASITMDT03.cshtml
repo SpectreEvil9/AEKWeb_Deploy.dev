@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "MASITMDT03";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">แก้ไขข้อมูลหลักกลุ่มผลิตภัณฑ์ (Item Group)</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASITMDT01", "ITM", new {}).ToString())">Item Group</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Edit</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">แก้ไข</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-3">Item Group Code</span>
+                                        <input type="text"
+                                               value="@Model.ITM_GRP_CODE"
+                                               id="ITM_GRP_CODE"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text col-lg-4">Item Group Description</span>
+                                        <input type="text"
+                                               value="@Model.ITM_GRP_DESC"
+                                               id="ITM_GRP_DESC"
+                                               class="form-control m-input input-req" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $($(ITM_GRP_CODE).parent()).removeClass('alert-validate');
+        $($(ITM_GRP_DESC).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#ITM_GRP_CODE").val() != "" && $("#ITM_GRP_DESC").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Edit this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#ITM_GRP_CODE").val() == "") {
+                    $($(ITM_GRP_CODE).parent()).addClass('alert-validate');
+                }
+                if ($("#ITM_GRP_DESC").val() == "") {
+                    $($(ITM_GRP_DESC).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            let MAS_ITM_GRP = {};
+            MAS_ITM_GRP.ITM_GRP_SK = "@Model.ITM_GRP_SK";
+            MAS_ITM_GRP.ITM_GRP_CODE = $("#ITM_GRP_CODE").val();
+            MAS_ITM_GRP.ITM_GRP_DESC = $("#ITM_GRP_DESC").val();
+            MAS_ITM_GRP.UDT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/ITM/MASITMDT03_UPDATE",
+                dataType: "json",
+                data: JSON.stringify({ MAS_ITM_GRP: MAS_ITM_GRP }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();s
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved', //"Your data has been saved"
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASITMDT03", "ITM", new {
+                                                     ITM_GRP_SK = "ITM_GRP_SKRedirect"
+                                                 }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("ITM_GRP_SKRedirect", data.ITM_GRP_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>
+

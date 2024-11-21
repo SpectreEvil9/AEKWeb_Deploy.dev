@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "MASACCDT03";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">แก้ไขข้อมูลผังบัญชี (Account) ในระบบ AX</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("MASACCDT01", "ACC", new {}).ToString())">Account</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Edit</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">แก้ไข</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                            <span class="input-group-text col-lg-3">Account Code</span>
+                                            <input type="text"
+                                                   id="MAIN_AC"
+                                                   value="@Model.MAIN_AC"
+                                                   class="form-control m-input input-req" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                            <span class="input-group-text col-lg-4">Account Name</span>
+                                            <input type="text"
+                                                   id="NM"
+                                                   value="@Model.NM"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 ">
+                                            <span class="input-group-text col-lg-4">Account Type</span>
+                                            <input type="text"
+                                                   id="MAIN_AC_TP"
+                                                   value="@Model.MAIN_AC_TP"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 ">
+                                            <span class="input-group-text col-lg-4">Account Category</span>
+                                            <input type="text"
+                                                   id="MAIN_AC_CGY"
+                                                   value="@Model.MAIN_AC_CGY"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 ">
+                                            <span class="input-group-text col-lg-4">Close</span>
+                                            <input type="text"
+                                                   id="CLS"
+                                                   value="@Model.CLS"
+                                                   class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                        <button id="SAVE" class="btn btn-primary btn-round">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $($(MAIN_AC).parent()).removeClass('alert-validate');
+        $($(NM).parent()).removeClass('alert-validate');
+
+        $("#SAVE").click(function () {
+            if ($("#MAIN_AC").val() != "" && $("#NM").val() != "") {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Edit this data",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        save();
+                    }
+                });
+            } else {
+                if ($("#MAIN_AC").val() == "") {
+                    $($(MAIN_AC).parent()).addClass('alert-validate');
+                }
+                if ($("#NM").val() == "") {
+                    $($(NM).parent()).addClass('alert-validate');
+                }
+            }
+        });
+
+        function save() {
+            let MAS_AC = {};
+            MAS_AC.AC_SK = "@Model.AC_SK";
+            MAS_AC.MAIN_AC = $("#MAIN_AC").val();
+            MAS_AC.NM = $("#NM").val();
+            MAS_AC.MAIN_AC_TP = $("#MAIN_AC_TP").val();
+            MAS_AC.MAIN_AC_CGY = $("#MAIN_AC_CGY").val();
+            MAS_AC.CLS = $("#CLS").val();
+            MAS_AC.UDT_USR_ID = 1;
+
+            $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+                url: pathServer + "/ACC/MASACCDT03_UPDATE",
+                dataType: "json",
+                data: JSON.stringify({ MAS_AC: MAS_AC }), //parameter Object,List
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                return xhr;
+            },
+                success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                    //successMessage.init();
+                    setTimeout(function () {
+                        //Attach_File();s
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved', //"Your data has been saved"
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASACCDT03", "ACC", new {AC_SK = "AC_SKRedirect" }).ToString())");
+                        const parseResult = new DOMParser().parseFromString(url, "text/html");
+                        url = parseResult.documentElement.textContent;
+                            url = url.replace("AC_SKRedirect", data.AC_SK);
+                            window.location.replace(url);
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    });
+</script>
+
