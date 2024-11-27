@@ -414,7 +414,7 @@
             "lengthChange": false,
             "order": [],
             responsive: !0,
-            pageLength: 10,
+            pageLength: 20,
             keys: {
                 blurable: false
             },
@@ -453,7 +453,7 @@
             "columns": [
                 {
                     "render": function (data, type, full, meta) {
-                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 20; // index row
                         return (meta.row + 1) + page;
                     }
                 },
