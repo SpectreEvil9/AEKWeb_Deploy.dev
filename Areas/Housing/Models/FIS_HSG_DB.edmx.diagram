@@ -5,14 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c32ae3f8ec99438aa7e4c89f17848ee6" Name="Diagram1">
-        <EntityTypeShape EntityType="FIS_HSG_DBModel.BRDR_LOST" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FIS_HSG_DBModel.BRDR_MVMT" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.HSG_ALL_HLT_CHK" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.HSG_TEMP_HMD" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.TXN_HSG_NRSRY" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.TXN_HSG_RPLCMT" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.V_HSGRPLDT01_BRDR_LIST" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.V_HSGRPLDT01_BRDR_LOST" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.TXN_HSG_BRDR_M" Width="1.5" PointX="3.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

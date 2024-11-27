@@ -278,17 +278,17 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group">
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 validate-input" data-validate="โปรดระบุจำนวนที่รับ">
                                     <span class="input-group-text" id="basic-addon1">จำนวน</span>
-                                    <input id="NEW_ARRV_QTY" type="number" class="form-control" />
+                                    <input id="NEW_ARRV_QTY" type="number" class="form-control input-req" required/>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group">
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 validate-input" data-validate="โปรดระบุรุ่น">
                                     <span class="input-group-text" id="basic-addon1">รุ่น</span>
-                                    <input type="text" id="GEN" class="form-control" />
+                                    <input type="text" id="GEN" class="form-control input-req" required />
                                 </div>
                             </div>
                         </div>
@@ -367,6 +367,7 @@
     }
 
     $(document).ready(function () {
+        $('#searchSiteid').val('BT').trigger("change");
         if ('@ViewBag.searchSiteid' != '') {
             $("#searchSiteid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteid))')).trigger("change");
         }
@@ -806,6 +807,8 @@
     }
 
     function Added(btn) {
+        $($(NEW_ARRV_QTY).parent()).removeClass('alert-validate');
+        $($(GEN).parent()).removeClass('alert-validate');
         $('#m_modal').modal('show');
         var id = $(btn).attr('id');
         var row = $(btn).attr('row');
@@ -824,24 +827,42 @@
         var col = $("#col").val();
         var value = $("#" + id).val();
         var key = id.split('--')[1];
+        if ($("#NEW_ARRV_QTY").val() > 0 && $("#GEN").val() != "") {
+            var indexDetail = tableDetail
+                .rows()
+                .indexes()
+                .filter(function (value, index) {
+                    return key === tableDetail.row(value).data().UK_KEY;
+                });
 
-        var indexDetail = tableDetail
-            .rows()
-            .indexes()
-            .filter(function (value, index) {
-                return key === tableDetail.row(value).data().UK_KEY;
-            });
-
-        if (indexDetail !== undefined && tableDetail.row(indexDetail).length > 0) {
-            var page = tableDetail.page.info();
-            tableDetail.page(page.page).cell(row, col).invalidate().data($("#NEW_ARRV_QTY").val()).draw(false);
-            tableDetail.page(page.page).cell(row, 8).invalidate().data($("#GEN").val()).draw(false);
-            ModifyIndirectly(id,row,col);
+            if ((tableDetail.row(indexDetail).data().BALANCE_QTY == 0 || tableDetail.row(indexDetail).data().BALANCE_QTY == null) || (tableDetail.row(indexDetail).data().BALANCE_QTY > 0 && tableDetail.row(indexDetail).data().GEN == $("#GEN").val())) {
+                if (indexDetail !== undefined && tableDetail.row(indexDetail).length > 0) {
+                    var page = tableDetail.page.info();
+                    tableDetail.page(page.page).cell(row, col).invalidate().data($("#NEW_ARRV_QTY").val()).draw(false);
+                    tableDetail.page(page.page).cell(row, 8).invalidate().data($("#GEN").val()).draw(false);
+                    ModifyIndirectly(id, row, col);
+                } else {
+                    console.log("Invalid row index:", indexDetail);
+                }
+                $('#m_modal').modal('hide');
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: 'Different!',
+                    text: "รุ่นที่รับเข้าจะต้องเป็นรุ่นเดียวกับสุกรที่มีอยู่ก่อนหน้าเท่านั้น!",
+                    showCancelButton: false,
+                    confirmButtonText: 'OK',
+                });
+            }
         } else {
-            console.log("Invalid row index:", indexDetail);
+            if ($("#NEW_ARRV_QTY").val() < 0 || $("#NEW_ARRV_QTY").val() == "") {
+                $($(NEW_ARRV_QTY).parent()).addClass('alert-validate');
+            }
+            if ($("#GEN").val() == "") {
+                $($(GEN).parent()).addClass('alert-validate');
+            }
         }
 
-        $('#m_modal').modal('hide');
     });
 
     function ModifyDirectly(btn) {

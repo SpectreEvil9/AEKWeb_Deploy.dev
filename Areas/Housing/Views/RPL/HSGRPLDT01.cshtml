@@ -319,6 +319,7 @@
         $("#WEEK").val(getWeekNumber(reverseFormattedDate($("#searchDate").val())));
     });
     $(document).ready(function () {
+        $('#searchSiteId').val('BT').trigger("change");
         if ('@ViewBag.searchSiteId' != '') {
             $("#searchSiteId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteId))')).trigger("change");
         }
