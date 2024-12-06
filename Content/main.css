@@ -54,3 +54,18 @@
     animation-name: ro;
     transform-origin: 50% 50%;
 }
+body {
+    background-image: linear-gradient(to left top, #25c481, #25b7c4, #a8bbe4,#d7e0ee, #bfcee9 );
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+.dataTable thead th {
+    font-size: 13px;
+    background: #f56407ce;
+    color: white; /* Text color */
+    text-align: center; /* Optional: center align text */
+    /*border: 1px solid #ddd;*/ /* Optional: add border */
+    /*border-color: aliceblue;*/
+    border-radius: 5px;
+}

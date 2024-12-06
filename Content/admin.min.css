@@ -88,7 +88,7 @@ danger-color : #f3545d
 .alert, .brand, .btn-simple, .h1, .h2, .h3, .h4, .h5, .h6, .navbar, .td-name, a, body, button.close, h1, h2, h3, h4, h5, h6, p, td {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-family: 'Public Sans',sans-serif
+    font-family: 'IBM Plex Sans Thai', sans-serif;
 }
 
 body, html {
@@ -5525,6 +5525,13 @@ label.error {
     font-weight: 500;
     opacity: 1;
     border-radius: 3px
+}
+.btn-icons {
+    padding: .65rem 1.4rem;
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 1;
+    border-radius: 3px;
 }
 
     .btn:focus, .btn:hover {
