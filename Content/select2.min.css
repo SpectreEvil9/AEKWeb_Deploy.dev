@@ -4,7 +4,7 @@
     margin: 0;
     position: relative;
     vertical-align: middle;
-    max-height:41px;
+    height:41px;
 }
 
     .select2-container .select2-selection--single {

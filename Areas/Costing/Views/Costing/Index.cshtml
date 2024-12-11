@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+            <div>
+                <h3 class="fw-bold mb-3">
+                    รายงานต้นทุน
+                </h3>
+                <h6 class="op-7 mb-2"></h6>
+            </div>
+            <div class="ms-md-auto py-2 py-md-0">
+                <a href="" class="btn btn-label-info btn-round me-2">Manage</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("RPTCOCDT01", "RPT" , new {}).ToString())" class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div class="icon-big text-center icon-success bubble-shadow-small">
+                                    <i class="bi bi-file-earmark-bar-graph"></i>
+                                </div>
+                            </div>
+                            <div class="col col-stats ms-3 ms-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category text-black">รายงานต้นทุนการผลิต เฉลี่ยรายตัว ตาม Cost Center  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("RPTDOLDT01", "RPT" , new {}).ToString())" class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div class="icon-big text-center icon-success bubble-shadow-small">
+                                    <i class="bi bi-file-earmark-bar-graph"></i>
+                                </div>
+                            </div>
+                            <div class="col col-stats ms-3 ms-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category text-black">รายงานการการปันส่วนค่าแรง ค่า OH, ค่าบรรทุก ประจำเดือน</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                    <a href="@HttpUtility.UrlDecode(Url.Action("RPTMONDT01", "RPT" , new {}).ToString())" class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div class="icon-big text-center icon-success bubble-shadow-small">
+                                    <i class="bi bi-file-earmark-bar-graph"></i>
+                                </div>
+                            </div>
+                            <div class="col col-stats ms-3 ms-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category text-black">รายงานต้นทุนการผลิตตามค่าใช้จ่ายจริง </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

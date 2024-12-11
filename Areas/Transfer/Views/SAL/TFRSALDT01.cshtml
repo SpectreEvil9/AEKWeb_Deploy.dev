@@ -36,14 +36,14 @@
                         <h1 class="card-title text-primary">ค้นหา</h1>
                     </div>
                     <div class="card-body">
-                        @using (Html.BeginForm("TFRMVTDT01", "MVT", FormMethod.Get, new { enctype = "multipart/form-data", @class = " bordered-row" }))
+                        @using (Html.BeginForm("TFRSALDT01", "SAL", FormMethod.Get, new { enctype = "multipart/form-data", @class = " bordered-row" }))
                         {
                             <div class="row">
                                 <div class="col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">เลขที่ใบส่งสินค้า</span>
-                                            @Html.TextBox("searchMVtno", ViewBag.searchMVtno as string, new { @class = "form-control", autocomplete = "off", tabindex = "1" })
+                                            @Html.TextBox("searchSALno", ViewBag.searchSALno as string, new { @class = "form-control", autocomplete = "off", tabindex = "1" })
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                                             <div class="d-flex align-items-center selectgroup-pills">
                                                 <a href="@HttpUtility.UrlDecode(Url.Action("TFRSALDT02", "SAL", new {
                                                         searchSiteid = ViewBag.searchSiteid == null ? null : string.Join("&searchSiteid=", (string[])ViewBag.searchSiteid),
-                                                        searchMVtno = ViewBag.searchMVtno,
+                                                        searchSALno = ViewBag.searchSALno,
                                                         searchDateForm = ViewBag.searchDateForm,
                                                         searchDateTo = ViewBag.searchDateTo
                                                     }).ToString())"
@@ -158,7 +158,7 @@
         }
     $(document).ready(function () {
 
-        $("#searchMVtno").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchMVtno))')).trigger("change");
+        $("#searchSALno").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSALno))')).trigger("change");
         $("#searchSiteid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteid))')).trigger("change");
 
         $("#searchDateForm,#searchDateTo").datepicker({
@@ -188,7 +188,7 @@
                 type: "POST",
                 datatype: "json",
             data: {
-                searchSiteid: $("#searchSiteid").val(), searchMVtno: $("#searchMVtno").val(), searchDateForm: $("#searchDateForm").val(), searchDateTo: $("#searchDateTo").val()
+                searchSiteid: $("#searchSiteid").val(), searchSALno: $("#searchSALno").val(), searchDateForm: $("#searchDateForm").val(), searchDateTo: $("#searchDateTo").val()
                 },
         },
         columnDefs: [
@@ -237,7 +237,7 @@
                     var link = '@HttpUtility.UrlDecode(Url.Action("TFRSALDT02", "MVT", new {
                                DOC_CODE = "row_DOC_CODE",
                                searchSiteid = ViewBag.searchSiteid == null ? null : string.Join("&searchSiteid=", (string[])ViewBag.searchSiteid),
-                               searchMVtno = ViewBag.searchMVtno,
+                               searchSALno = ViewBag.searchSALno,
                                searchDateForm = ViewBag.searchDateForm,
                                searchDateTo = ViewBag.searchDateTo
                            }).ToString())';

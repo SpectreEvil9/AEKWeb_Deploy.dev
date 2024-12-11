@@ -1,0 +1,436 @@
+﻿
+@{
+    ViewBag.Title = "RPTCOCDT01";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">
+                รายงานต้นทุนการผลิต เฉลี่ยรายตัว ตาม Cost Center
+            </h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="@Url.Action("Index", "Costing", new { Area = "Costing" })">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Costing", new { Area = "Costing" })">รายงานต้นทุน</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">รายงานต้นทุนการผลิต เฉลี่ยรายตัว ตาม Cost Center</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <form class="m-form m-form--fit m-form--label-align-right">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-10">
+                                    <h1 class="card-title text-primary">ค้นหา</h1>
+                                </div>
+                                <div class="col-md-6 col-lg-2 d-flex" style="justify-content:flex-end !important">
+                                    <button class="btn btn-success btn-round">
+                                        <span class="btn-label"><i class="fas fa-print"></i></span>
+                                        Print
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์ม</span>
+                                            <select class="form-select form-control dropdown-multiple" id="searchSiteId" name="searchSiteId">
+                                                <option value="ALL">All</option>
+                                                @foreach (var acc in ViewBag.MAS_SITE)
+                                                {
+                                                    <option value="@acc.SITE_ID">@acc.SITE_NM_TH</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-4" id="basic-addon1">ประเภทโรงเรือน</span>
+                                            <select class="form-select form-control" id="typeSelect" name="typeSelect">
+                                                <option value="1">โรงเรือนทดแทน</option>
+                                                <option value="2">โรงเรือนพ่อพันธุ์</option>
+                                                <option value="3">โรงเรือนผสม-อุ้มท้อง</option>
+                                                <option value="4">โรงเรือนคลอด</option>
+                                                <option value="5">โรงเรือนรุ่นพันธุ์</option>
+                                                <option value="6">โรงเรือนอนุบาล</option>
+                                                <option value="7">โรงเรือนขุน</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-4" id="basic-addon1">เล้า</span>
+                                            <select class="form-select form-control dropdown-multiple" id="searchHousingCode" name="searchHousingCode">
+                                                <option value="ALL">All</option>
+                                                @foreach (var acc in ViewBag.MAS_HSG)
+                                                {
+                                                    <option value="@acc.HSG_ID">@acc.HSG_CODE</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">กลุ่มต้นทุน</span>
+                                            <select class="form-select form-control dropdown-multiple" id="searchCostGroup" name="searchCostGroup">
+                                                <option value="ALL">All</option>
+                                                @foreach (var acc in ViewBag.MAS_HSG_CG)
+                                                {
+                                                    <option value="@acc.COST_GRP_DSC">@acc.COST_GRP_DSC</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-4" id="basic-addon1">ศูนย์ต้นทุน</span>
+                                            <select class="form-select form-control dropdown-multiple" id="searchHousingDesc" name="searchHousingDesc">
+                                                <option value="ALL">All</option>
+                                                @foreach (var acc in ViewBag.MAS_HSG)
+                                                {
+                                                    <option value="@acc.HSG_DSC">@acc.HSG_DSC</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-4" id="basic-addon1">วันทีเบิก</span>
+                                            <input type="text"
+                                                   id="costDate"
+                                                   name="costDate"
+                                                   class="form-control"
+                                                   placeholder="" />
+                                            <span class="input-group-icon">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                            <button type="submit" id="search" class="btn btn-primary btn-round">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" id="1">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title text-primary">
+                                รายการต้นทุนเฉลี่ยรายตัว
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive tab-content mt-3 mb-3">
+                                <table id="tb_detail" style="width:130%" border="1"
+                                       class="display table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center !important">ลำดับ</th>
+                                            <th></th>
+                                            <th style="text-align:center !important">ฟาร์ม</th>
+                                            <th style="text-align:center !important">วันที่เบิก</th>
+                                            <th style="text-align:center !important">รหัสบริษัท</th>
+                                            <th style="text-align:center !important">รหัสฟาร์ม</th>
+                                            <th style="text-align:center !important">รหัสแผนก</th>
+                                            <th style="text-align:center !important">รหัสกลุ่มต้นทุน</th>
+                                            <th style="text-align:center !important">ชื่อกลุ่มต้นทุน</th>
+                                            <th style="text-align:center !important">ศูนย์ต้นทุน</th>
+                                            <th style="text-align:center !important">ชื่อศูนย์ต้นทุน</th>
+                                            <th style="text-align:center !important">จำนวน(ตัว)</th>
+                                            <th style="text-align:center !important">ค่าอาหาร</th>
+                                            <th style="text-align:center !important">ค่ายาและเวชภัณฑ์</th>
+                                            <th style="text-align:center !important">ค่าแรงทางตรงต่อเล้า</th>
+                                            <th style="text-align:center !important">ค่าโสหุ้ยต่อเล้า</th>
+                                            <th style="text-align:center !important">ค่าบรรทุกต่อเล้า</th>
+                                            <th style="text-align:center !important">รวมค่าใช้จ่าย</th>
+                                            <th style="text-align:center !important">ต้นทุนเฉลี่ยต่อตัว</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="11" style="text-align:right !important">รวม</th>
+                                            <th style="padding-right: 3px !important;"></th>
+                                            <th style="padding-right: 3px !important;"></th>
+                                            <th style="padding-right: 3px !important;"></th>
+                                            <th style="padding-right: 3px !important;"></th>
+                                            <th style="padding-right: 3px !important;"></th>
+                                            <th style="padding-right: 3px !important;"></th>
+                                            <th style="padding-right: 3px !important;"></th>
+                                            <th style="padding-right: 3px !important;"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#searchSiteId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteId))')).trigger("change");
+        $("#typeSelect").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.typeSelect))')).trigger("change");
+        $("#searchHousingCode").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingCode))')).trigger("change");
+        $("#searchCostGroup").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchCostGroup))')).trigger("change");
+        $("#searchHousingDesc").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingDesc))')).trigger("change");
+        $("#costDate").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.costDate))')).trigger("change");
+
+        $('#searchSiteId, #typeSelect, #searchHousingCode, #searchCostGroup, #searchHousingDesc').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: true,
+            tags: true
+        });
+
+        if ($("#costDate").val() == null || $("#costDate").val() == '') {
+            $("#costDate").datepicker({
+                todayHighlight: true,
+                orientation: 'bottom left',
+                format: 'dd-M-yyyy',
+                todayBtn: 'linked',
+                autoclose: 'true',
+                assumeNearbyYear: true,
+            }).datepicker("setDate", 'now');
+        } else {
+            $("#costDate").datepicker({
+                todayHighlight: true,
+                orientation: 'bottom left',
+                format: 'dd-M-yyyy',
+                todayBtn: 'linked',
+                autoclose: 'true',
+                assumeNearbyYear: true,
+            });
+        }
+
+        const table = $("#tb_detail").DataTable({
+            lengthChange: false,
+            "processing": true, // for show progress bar
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 20,
+            scrollCollapse: true,
+            paging: true,
+            searching: false,
+            responsive: !0,
+            ordering: true,
+            info: true,
+            bAutoWidth: false,
+            order: [[1, "asc"]],
+            "ajax": {
+                url: pathServer + "/RPT/RPTCOCDT01_SELECT",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    searchSiteId: $("#searchSiteId").val(),
+                    typeSelect: $("#typeSelect").val(),
+                    searchHousingCode: $("#searchHousingCode").val(),
+                    searchCostGroup: $("#searchCostGroup").val(),
+                    searchHousingDesc: $("#searchHousingDesc").val(),
+                    costDate: $("#costDate").val()
+                },
+            },
+            columnDefs: [
+                {
+                    targets: [0],
+                    orderable: false,
+                    className: "text-center",
+                },
+                {
+                    targets: [1],
+                    visible: false,
+                    className: "text-center",
+                },
+                {
+                    targets: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+                    orderable: false,
+                    className: "text-left",
+                },
+            ],
+            "columns": [
+                {
+                    "render": function (data, type, full, meta) {
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                        return (meta.row + 1) + page;
+                    }
+                },
+                { 'data': 'ROW_NO' },
+                { 'data': 'SITE_NM' },
+                {
+                    'data': 'COST_DT',
+                    render: function (data, type, row) {
+                        return resJsonToDate(data);
+                    }
+                },
+                { 'data': 'CO_CODE' },
+                { 'data': 'SITE_ID' },
+                { 'data': 'DEPT_CODE' },
+                { 'data': 'COST_GRP' },
+                { 'data': 'COST_GRP_DSC' },
+                { 'data': 'HSG_ID' },
+                { 'data': 'HSG_DSC' },
+                { 'data': 'NO_PIG' },
+                {
+                    'data': 'COST_FEED_SM',
+                    render: function (data, type, row) {
+                        return numeral(data).format('0,0.00');
+                    }
+                },
+                {
+                    'data': 'COST_VCCNE_SM',
+                    render: function (data, type, row) {
+                        return numeral(data).format('0,0.00');
+                    }
+                },
+                {
+                    'data': 'DIRECTLABOR',
+                    render: function (data, type, row) {
+                        return numeral(data).format('0,0.00');
+                    }
+                },
+                {
+                    'data': 'OVERHEAD',
+                    render: function (data, type, row) {
+                        return numeral(data).format('0,0.00');
+                    }
+                },
+                {
+                    'data': 'LOGISTIC',
+                    render: function (data, type, row) {
+                        return numeral(data).format('0,0.00');
+                    }
+                },
+                {
+                    render: function (data, type, row) {
+                        return numeral(row.COST_FEED_SM + row.COST_VCCNE_SM + row.DIRECTLABOR + row.OVERHEAD + row.LOGISTIC).format('0,0.00');
+                    }
+                },
+                {
+                    render: function (data, type, row) {
+                        return numeral((row.COST_FEED_SM + row.COST_VCCNE_SM + row.DIRECTLABOR + row.OVERHEAD + row.LOGISTIC) / row.NO_PIG).format('0,0.00');
+                    }
+                },
+            ],
+
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api();
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+
+                totalPig = api
+                    .column(11)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(11).footer()).html(
+                    numeral(totalPig).format('0,0.00')
+                );
+
+                totalFeed = api
+                    .column(12)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(12).footer()).html(
+                    numeral(totalFeed).format('0,0.00')
+                );
+
+                totalMed = api
+                    .column(13)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(13).footer()).html(
+                    numeral(totalMed).format('0,0.00')
+                );
+
+                totalDirectlabor = api
+                    .column(14)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(14).footer()).html(
+                    numeral(totalDirectlabor).format('0,0.00')
+                );
+
+                totalOverhead = api
+                    .column(15)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(15).footer()).html(
+                    numeral(totalOverhead).format('0,0.00')
+                );
+
+                totalLogistic = api
+                    .column(16)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(16).footer()).html(
+                    numeral(totalLogistic).format('0,0.00')
+                );
+
+                $(api.column(17).footer()).html(
+                    numeral(totalFeed + totalMed + totalDirectlabor + totalOverhead + totalLogistic).format('0,0.00')
+                );
+            }
+        });
+
+        table.on('order.dt', function () {
+            table.column(0, { order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw(false);
+
+    });
+</script>

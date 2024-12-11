@@ -54,6 +54,16 @@
     animation-name: ro;
     transform-origin: 50% 50%;
 }
+/*----------ค่าเสื่อมพันธุ์---------*/
+.bg-new-green {
+    background-color: #8bf180 !important;
+    color: rgba(12, 63, 245) !important;
+    font-weight: bolder;
+}
+.bg-disabled-gray {
+    background-color: #ccc !important;
+}
+
 body {
     background-image: linear-gradient(to left top, #25c481, #25b7c4, #a8bbe4,#d7e0ee, #bfcee9 );
     background-size: cover;

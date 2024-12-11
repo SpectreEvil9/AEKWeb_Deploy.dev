@@ -1002,7 +1002,7 @@
     }
     function Calculate(indexMain) {
         var page = tableMain.page.info();
-        if (tableMain.row(indexMain).data().TEMP_MNNG > 0 && tableMain.row(indexMain).data().TEMP_EVNNG > 0) {
+        if (numeral(tableMain.row(indexMain).data().TEMP_MNNG)._value > 0 && numeral(tableMain.row(indexMain).data().TEMP_EVNNG)._value > 0) {
             tableMain.row(indexMain).data().TEMP_AVG = (numeral(tableMain.row(indexMain).data().TEMP_MNNG)._value + numeral(tableMain.row(indexMain).data().TEMP_EVNNG)._value) / 2;
         }
         if (tableMain.row(indexMain).data().HMD_MNNG > 0 && tableMain.row(indexMain).data().HMD_EVNNG > 0) {
