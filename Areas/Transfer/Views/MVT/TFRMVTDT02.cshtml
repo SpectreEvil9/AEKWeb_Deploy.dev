@@ -685,7 +685,13 @@
                         showConfirmButton: true,
                         confirmButtonText: 'OK'
                     }).then((result) => {
-                        location.reload();
+                    var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("TFRMVTDT03", "MVT", new {
+                                                 DOC_CODE = "DOC_CODERedirect",
+                    }).ToString())");
+                    const parseResult = new DOMParser().parseFromString(url, "text/html");
+                    url = parseResult.documentElement.textContent;
+                        url = url.replace("DOC_CODERedirect", data);
+                        window.location.replace(url);
                     });
                 }, 1500);
             },

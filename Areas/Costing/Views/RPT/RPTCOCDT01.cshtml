@@ -6,11 +6,11 @@
     <div class="page-inner">
         <div class="page-header">
             <h3 class="fw-bold mb-3">
-                รายงานต้นทุนการผลิต เฉลี่ยรายตัว ตาม Cost Center
+                ต้นทุนการผลิตสุกร
             </h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                    <a href="@Url.Action("Index", "Costing", new { Area = "Costing" })">
+                    <a href="#">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -18,13 +18,13 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="@Url.Action("Index", "Costing", new { Area = "Costing" })">รายงานต้นทุน</a>
+                    <a href="@Url.Action("Index", "Home", new { Area = "Costing" })">การคำนวณต้นทุนการเลี้ยงสุกร</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">รายงานต้นทุนการผลิต เฉลี่ยรายตัว ตาม Cost Center</a>
+                    <a href="#">ต้นทุนการผลิตสุกร</a>
                 </li>
             </ul>
         </div>
@@ -66,6 +66,7 @@
                                         <div class="input-group mb-3">
                                             <span class="input-group-text col-lg-4" id="basic-addon1">ประเภทโรงเรือน</span>
                                             <select class="form-select form-control" id="typeSelect" name="typeSelect">
+                                                <option value="ALL" selected="selected">All</option>
                                                 <option value="1">โรงเรือนทดแทน</option>
                                                 <option value="2">โรงเรือนพ่อพันธุ์</option>
                                                 <option value="3">โรงเรือนผสม-อุ้มท้อง</option>
@@ -202,12 +203,24 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#searchSiteId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteId))')).trigger("change");
-        $("#typeSelect").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.typeSelect))')).trigger("change");
-        $("#searchHousingCode").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingCode))')).trigger("change");
-        $("#searchCostGroup").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchCostGroup))')).trigger("change");
-        $("#searchHousingDesc").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingDesc))')).trigger("change");
-        $("#costDate").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.costDate))')).trigger("change");
+        if ('@ViewBag.searchSiteId' != '') {
+            $("#searchSiteId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteId))')).trigger("change");
+        }
+        if ('@ViewBag.typeSelect' != '') {
+            $("#typeSelect").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.typeSelect))')).trigger("change");
+        }
+        if ('@ViewBag.searchHousingCode' != '') {
+            $("#searchHousingCode").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingCode))')).trigger("change");
+        }
+        if ('@ViewBag.searchCostGroup' != '') {
+            $("#searchCostGroup").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchCostGroup))')).trigger("change");
+        }
+        if ('@ViewBag.searchHousingDesc' != '') {
+            $("#searchHousingDesc").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingDesc))')).trigger("change");
+        }
+        if ('@ViewBag.costDate' != '') {
+            $("#costDate").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.costDate))')).trigger("change");
+        }
 
         $('#searchSiteId, #typeSelect, #searchHousingCode, #searchCostGroup, #searchHousingDesc').select2({
             theme: "bootstrap-5",
@@ -237,7 +250,21 @@
             });
         }
 
-        const table = $("#tb_detail").DataTable({
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        const tb_detail = $("#tb_detail").DataTable({
             lengthChange: false,
             "processing": true, // for show progress bar
             "orderMulti": false, // for disable multiple column at once
@@ -260,7 +287,7 @@
                     searchHousingCode: $("#searchHousingCode").val(),
                     searchCostGroup: $("#searchCostGroup").val(),
                     searchHousingDesc: $("#searchHousingDesc").val(),
-                    costDate: $("#costDate").val()
+                    costDate: formatDate($("#costDate").val())
                 },
             },
             columnDefs: [
@@ -283,11 +310,11 @@
             "columns": [
                 {
                     "render": function (data, type, full, meta) {
-                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)); // index row
                         return (meta.row + 1) + page;
                     }
                 },
-                { 'data': 'ROW_NO' },
+                { 'data': 'UK_KEY' },
                 { 'data': 'SITE_NM' },
                 {
                     'data': 'COST_DT',
@@ -424,10 +451,10 @@
                     numeral(totalFeed + totalMed + totalDirectlabor + totalOverhead + totalLogistic).format('0,0.00')
                 );
             }
-        });
+        });        
 
-        table.on('order.dt', function () {
-            table.column(0, { order: 'applied' }).nodes().each(function (cell, i) {
+        tb_detail.on('order.dt', function () {
+            tb_detail.column(0, { order: 'applied' }).nodes().each(function (cell, i) {
                 cell.innerHTML = i + 1;
             });
         }).draw(false);

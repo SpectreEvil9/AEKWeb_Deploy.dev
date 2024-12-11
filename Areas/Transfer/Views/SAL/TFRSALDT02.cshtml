@@ -55,9 +55,9 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="form-group">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกวันที่">
                                         <span class="input-group-text col-lg-3" id="basic-addon1">วันที่</span>
-                                        <input type="text" id="SALE_DT" class="form-control" />
+                                        <input type="text" id="SALE_DT" class="form-control input-req-date" required/>
                                         <span class="input-group-icon">
                                             <i class="fas fa-calendar-alt"></i>
                                         </span>
@@ -90,9 +90,9 @@
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกพนักงาน">
                                         <span class="input-group-text col-lg-4" id="basic-addon1">พนักงาน</span>
-                                        <select class="form-select form-control dropdown" id="EMP_USR_ID" name="EMP_USR_ID">
+                                        <select class="form-select form-control dropdown input-req-date" id="EMP_USR_ID" name="EMP_USR_ID">
                                             <option></option>
                                             @foreach (var usr in ViewBag.MAS_USR)
                                             {
@@ -119,19 +119,20 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="form-group">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดระบุเลขที่ใบชั่ง">
                                         <span class="input-group-text col-lg-4">เลขที่ใบชั่ง</span>
                                         <input type="text" id="WGHT_PPR_ID"
-                                               class="form-control"
+                                               class="form-control input-req"
                                                placeholder="Input Document No." />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="form-group">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกประเภทค้า">
                                         <span class="input-group-text col-lg-4" id="basic-addon1">ประเภท</span>
-                                        <select class="form-select form-control" id="DOC_TYPE">
+                                        <select class="form-select form-control input-req-date" id="PD_TP">
+                                            <option value=""></option>
                                             <option value="1">สุกรขุน</option>
                                             <option value="2">ลูกสุกรหย่านม</option>
                                             <option value="3">สุกรอนุบาล</option>
@@ -145,9 +146,9 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกลูกค้า">
                                         <span class="input-group-text col-lg-3" id="basic-addon1">ลูกค้า</span>
-                                        <select class="form-select form-control dropdown" id="AC_NBR" name="AC_NBR">
+                                        <select class="form-select form-control dropdown input-req-date" id="AC_NBR" name="AC_NBR">
                                             <option></option>
                                             @foreach (var cst in ViewBag.MAS_CST)
                                             {
@@ -2226,24 +2227,24 @@
             tags: true
         });
         hidedefault();
-        $("#DOC_TYPE").change(function () {
+        $("#PD_TP").change(function () {
             hideaffterselect();
-            if ($("#DOC_TYPE").val() == 1) {
+            if ($("#PD_TP").val() == 1) {
                 $("#tab1").show();
-            } else if ($("#DOC_TYPE").val() == 2) {
+            } else if ($("#PD_TP").val() == 2) {
                 $("#tab2").show();
-            } else if ($("#DOC_TYPE").val() == 3) {
+            } else if ($("#PD_TP").val() == 3) {
                 $("#tab3").show();
-            } else if ($("#DOC_TYPE").val() == 4) {
+            } else if ($("#PD_TP").val() == 4) {
                 $("#tab4").show();
-            } else if ($("#DOC_TYPE").val() == 5) {
+            } else if ($("#PD_TP").val() == 5) {
                 $("#tab5").show();
             } else {
                 hidedefault();
             }
         });
         function hidedefault() {
-            $("#tab1").show();
+            $("#tab1").hide();
             $("#tab2").hide();
             $("#tab3").hide();
             $("#tab4").hide();
@@ -2272,6 +2273,12 @@
                     className: "text-center",
                 },
                 {
+                    targets: [1],
+                    orderable: false,
+                    visible: false,
+                    className: "text-center",
+                },
+                {
                     targets: [2, 4, 5],
                     orderable: false,
                     className: "text-right",
@@ -2280,7 +2287,7 @@
                     }
                 },
                 {
-                    targets: [1, 3, 6],
+                    targets: [ 3, 6],
                     orderable: false,
                     className: "text-center",
                 },
@@ -2324,15 +2331,7 @@
                 {
                     mRender: function (data, type, row, meta) {
                         var pageInfo = tableWnng.page.info();
-                        var row_index = 0;
-                        var combines = "";
-                        if (row.UK_KEY.split('--').length == 1) {
-                            row_index = (numeral(meta.row)._value + 1) + numeral(pageInfo.page)._value * numeral(pageInfo.length)._value;
-                        }
-                        if (row_index > 0) {
-                            combines = "--" + row_index.toString();
-                        }
-                        return "<div class='d-flex align-items-center selectgroup-pills'><button type='button' onclick='DelMovement(this)' id='BT-DEL_MOVE--" + row.UK_KEY + "' class='selectgroup-button selectgroup-button-icon move_bt' ><i class='fas fa-trash text-danger'></i></button></div>";
+                        return "<div class='d-flex align-items-center selectgroup-pills'><button type='button' onclick='DelWnng(this)' id='BT-DEL_WNNG--" + row.UK_KEY + "' class='selectgroup-button selectgroup-button-icon wnng_bt' ><i class='fas fa-trash text-danger'></i></button></div>";
                     }
                 }
             ],
@@ -2459,12 +2458,38 @@
         tableWnng.row(indexWnng).data(tableWnng.row(indexWnng).data()).draw();
         tableWnng.page(page.page).draw(false);
     }
+    function DelWnng(btn) {
+        var id = $(btn).attr('id');
+        var idx = $(btn).attr('idx');
+        var key = id.split('--')[1] + "--" + id.split('--')[2];
 
+        var indexHead = tableWnng
+            .rows()
+            .indexes()
+            .filter(function (value, index) {
+                //console.log(key + "|" + tableWnng.row(value).data().UK_KEY);
+                return key === tableWnng.row(value).data().UK_KEY;
+            }); // หา row ที่ต้องการจะลบ
+        Swal.fire({
+            icon: "warning",
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                tableWnng.rows(indexHead).remove().draw(); // ลบ row ที่ค้นหา
+                WnngReGenerate();
+
+            }
+        });
+    }
     $("#saveWnng").click(function () {
         var HSG_ID = true;
         var PD_WGHT = true;
         var PD_AMT = true;
-        if ($("#SALE_DT").val() != "") {
+        if ($("#SALE_DT").val() != "" && $("#WGHT_PPR_ID").val() != "" && $("#PD_TP").val() != "" && $("#AC_NBR").val() != "") {
             tableWnng.rows().every(function (index) {
                 var rowData = this.data();
                 if ($("#HSG_ID--" + rowData.UK_KEY).val() == "") {
@@ -2504,21 +2529,32 @@
                 $($(SALE_DT).parent()).addClass('alert-validate-date');
                 $("#SALE_DT").focus();
             }
+            //if ($("#EMP_USR_ID").val() == "") {
+            //    $($(EMP_USR_ID).parent()).addClass('alert-validate-date');
+            //}
+            if ($("#WGHT_PPR_ID").val() == "") {
+                $($(WGHT_PPR_ID).parent()).addClass('alert-validate');
+            }
+            if ($("#PD_TP").val() == "") {
+                $($(PD_TP).parent()).addClass('alert-validate-date');
+            }
+            if ($("#AC_NBR").val() == "") {
+                $($(AC_NBR).parent()).addClass('alert-validate-date');
+            }
         }
 
     });
 
     function saveWnng() {
-        var AVY_SALES_HDR = new Array();
+        var AVY_SALES_HDR = {};
         var AVY_SALES_DTL = new Array();
 
-        let tbwnng_h = {};
-        tbwnng_h.SALE_DOC_ID = $("#SALE_DOC_ID").val();
-        tbwnng_h.SALE_DT = $("#SALE_DT").val();
-        tbwnng_h.SITE_ID = $("#SITE_ID").val();
-        tbwnng_h.CST_ID = $("#AC_NBR").val();
-        tbwnng_h.WGHT_PPR_ID = $("#WGHT_PPR_ID").val().toString();
-        AVY_SALES_HDR.push(tbwnng_h);
+        AVY_SALES_HDR.PD_TP = $("#PD_TP").val();
+        AVY_SALES_HDR.SALE_DOC_ID = $("#SALE_DOC_ID").val();
+        AVY_SALES_HDR.SALE_DT = $("#SALE_DT").val();
+        AVY_SALES_HDR.SITE_ID = $("#SITE_ID").val();
+        AVY_SALES_HDR.CST_ID = $("#AC_NBR").val();
+        AVY_SALES_HDR.WGHT_PPR_ID = $("#WGHT_PPR_ID").val().toString();
 
         for (var i = 0; i < tableWnng.data().length; i++) {
             let tbwnng_d = {};
@@ -2557,7 +2593,14 @@
                         showConfirmButton: true,
                         confirmButtonText: 'OK'
                     }).then((result) => {
-                        location.reload();
+                    var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("TFRSALDT03", "SAL", new {
+                                                 SALE_DOC_ID = "DOC_IDRedirect",
+                    }).ToString())");
+                    const parseResult = new DOMParser().parseFromString(url, "text/html");
+                    url = parseResult.documentElement.textContent;
+                        url = url.replace("DOC_IDRedirect", data.SALE_DOC_ID);
+                        window.location.replace(url);
+                        //location.reload();
                     });
                 }, 1500);
             },

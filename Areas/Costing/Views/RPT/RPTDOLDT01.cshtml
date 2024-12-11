@@ -104,7 +104,9 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#searchSiteId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteId))')).trigger("change");
+        if ('@ViewBag.searchSiteId' != '') {
+            $("#searchSiteId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteId))')).trigger("change");
+        }
 
         $('#searchSiteId').select2({
             theme: "bootstrap-5",
@@ -155,11 +157,11 @@
             "columns": [
                 {
                     "render": function (data, type, full, meta) {
-                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)); // index row
                         return (meta.row + 1) + page;
                     }
                 },
-                { 'data': 'ROW_NO'},
+                { 'data': 'UK_KEY'},
                 { 'data': 'HSG_TP_NM' },
                 { 'data': 'HSG_ID' },
                 { 'data': 'NO_LABOR' },

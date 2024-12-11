@@ -25,7 +25,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Movement</a>
+                    <a href="#">Sales and Delivery</a>
                 </li>
             </ul>
         </div>
@@ -85,6 +85,23 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-4" id="basic-addon1">ประเภทสินค้า</span>
+                                            <select class="form-select form-control dropdown" id="searchProductType" name="searchProductType">
+                                                <option value=""></option>
+                                                <option value="1">สุกรขุน</option>
+                                                <option value="2">ลูกสุกรหย่านม</option>
+                                                <option value="3">สุกรอนุบาล</option>
+                                                <option value="4">สุกรพ่อแม่พันธุ์คัดทิ้ง</option>
+                                                <option value="5">สุกรพันธุ์</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6 col-lg-12 d-flex" style="justify-content:flex-end !important">
                                     <button type="submit" class="btn btn-primary btn-round">Search</button>
                                 </div>
@@ -111,19 +128,21 @@
                                 <thead>
                                     <tr>
                                         <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                        <th width="10%" style="text-align:center !important">เล้า</th>
+                                        <th width="10%" style="text-align:center !important">KEY</th>
                                         <th width="10%" style="text-align:center !important">รหัสฟาร์ม</th>
                                         <th style="text-align:center !important">ชื่อฟาร์ม</th>
+                                        <th style="text-align:center !important">ประเภทสินค้า</th>
                                         <th style="text-align:center !important">เลขที่เอกสาร</th>
                                         <th style="text-align:center !important">วันที่</th>
-                                        <th style="text-align:center !important">จำนวน</th>
+                                        <th style="text-align:center !important">มูลค่ารวม</th>
                                         <th width="5%" style="align-content:center !important">
                                             <div class="d-flex align-items-center selectgroup-pills">
                                                 <a href="@HttpUtility.UrlDecode(Url.Action("TFRSALDT02", "SAL", new {
                                                         searchSiteid = ViewBag.searchSiteid == null ? null : string.Join("&searchSiteid=", (string[])ViewBag.searchSiteid),
                                                         searchSALno = ViewBag.searchSALno,
                                                         searchDateForm = ViewBag.searchDateForm,
-                                                        searchDateTo = ViewBag.searchDateTo
+                                                        searchDateTo = ViewBag.searchDateTo,
+                                                        searchProductType = ViewBag.searchProductType
                                                     }).ToString())"
                                                    class="selectgroup-button selectgroup-button-icon">
                                                     <i class="fa fa-plus text-success"></i>
@@ -184,11 +203,11 @@
         bAutoWidth: false,
         order: [[1, "asc"]],
         "ajax": {
-            url: pathServer + "/MVT/TFRMVTDT01_SELECT",
+            url: pathServer + "/SAL/TFRSALDT01_SELECT",
                 type: "POST",
                 datatype: "json",
             data: {
-                searchSiteid: $("#searchSiteid").val(), searchSALno: $("#searchSALno").val(), searchDateForm: $("#searchDateForm").val(), searchDateTo: $("#searchDateTo").val()
+                searchSiteid: $("#searchSiteid").val(), searchSALno: $("#searchSALno").val(), searchDateForm: $("#searchDateForm").val(), searchDateTo: $("#searchDateTo").val(), searchProductType: $("#searchProductType").val()
                 },
         },
         columnDefs: [
@@ -198,23 +217,23 @@
                 className: "text-center",
             },
             {
-                targets: [1],
+                targets: [1,2],
                 orderable: false,
                 visible: false,
                 className: "text-left",
             },
             {
-                targets: [ 2, 3, 4],
+                targets: [ 3, 4, 5],
                 orderable: false,
                 className: "text-right",
             },
             {
-                targets: [6],
+                targets: [7],
                 orderable: false,
                 className: "text-left",
             },
             {
-                targets: [ 5, 7],
+                targets: [ 6, 8],
                 orderable: false,
                 className: "text-center",
             },
@@ -229,19 +248,33 @@
             { 'data':'UK_KEY'},
             { 'data':'SITE_ID'},
             { 'data':'SITE_NM_TH'},
-            { 'data':'DOC_CODE'},
-            { 'data': 'MVMT_DT', render: function (data, type, row) { return data != "" ? resJsonToDate(data) : ""; } },
-            { 'data':'TOTAL_QTY'},
+            {
+                'data': 'PD_TP',
+                render: function (e, a, t, n) {
+                    var s = {
+                        1: { title: "สุกรขุน", state: "primary" },
+                        2: { title: "ลูกสุกรหย่านม", state: "primary" },
+                        3: { title: "สุกรอนุบาล", state: "primary" },
+                        4: { title: "สุกรพ่อแม่พันธุ์คัดทิ้ง", state: "primary" },
+                        5: { title: "สุกรพันธุ์", state: "primary" },
+                    };
+                    return void 0 === s[e] ? e : "<div class='input-group'><ul class='0-legend html-legend'><li><span class='btn-" + s[e].state + "'></span>" + s[e].title + "</li></ul></div>";
+                }
+            },
+            { 'data':'SALE_DOC_ID'},
+            { 'data':'SALE_DT', render: function (data, type, row) { return data != "" ? resJsonToDate(data) : ""; } },
+            { 'data':'NET_PRC_AMT'},
             {
                 mRender: function (data, type, row) {
-                    var link = '@HttpUtility.UrlDecode(Url.Action("TFRSALDT02", "MVT", new {
-                               DOC_CODE = "row_DOC_CODE",
+                    var link = '@HttpUtility.UrlDecode(Url.Action("TFRSALDT03", "SAL", new {
+                               SALE_DOC_ID = "row_SALE_DOC_ID",
                                searchSiteid = ViewBag.searchSiteid == null ? null : string.Join("&searchSiteid=", (string[])ViewBag.searchSiteid),
                                searchSALno = ViewBag.searchSALno,
                                searchDateForm = ViewBag.searchDateForm,
-                               searchDateTo = ViewBag.searchDateTo
+                               searchDateTo = ViewBag.searchDateTo,
+                               searchProductType = ViewBag.searchProductType
                            }).ToString())';
-                    link = link.replace("row_DOC_CODE", row.DOC_CODE);
+                    link = link.replace("row_SALE_DOC_ID", row.SALE_DOC_ID);
                     var All_Botton = "<div class='d-flex align-items-center selectgroup-pills'>";
                         All_Botton = All_Botton + "<a href='" + link + "' class='selectgroup-button selectgroup-button-icon' title='Edit'><i class='fas fa-edit text-primary'></i></a>";
                         All_Botton = All_Botton + "</div>";

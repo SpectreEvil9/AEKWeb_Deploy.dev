@@ -1,0 +1,823 @@
+﻿
+@{
+    ViewBag.Title = "TFRSALDT03";
+}
+
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">การสร้างใบส่งสินค้า</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Tables</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Datatables</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-10">
+                                <h3 class="card-title text-primary">สร้างใบส่งสินค้า</h3>
+                            </div>
+                            <div class="col-md-6 col-lg-2 d-flex" style="justify-content:flex-end !important">
+                                <button class="btn btn-success btn-round">
+                                    <span class="btn-label"><i class="fas fa-print"></i></span>
+                                    Print
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">เลชที่เอกสาร</span>
+                                        <input type="text" id="SALE_DOC_ID" class="form-control" value="@Model.SALE_DOC_ID" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกวันที่">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">วันที่</span>
+                                        <input type="text" id="SALE_DT" class="form-control input-req-date" value="@(Model.SALE_DT == null ? "" : Convert.ToString(string.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(Model.SALE_DT))))" required />
+                                        <span class="input-group-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">สถานะ</span>
+                                        <input type="text" id="DOC_STATUS" value="Draft" class="form-control" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">บริษัท</span>
+                                        <select class="form-select form-control dropdown" id="CO_ID" name="CO_ID" disabled>
+                                            <option value="" selected="selected"></option>
+                                            @foreach (var sit in ViewBag.MAS_COMPANY)
+                                            {
+                                                <option value="@sit.CO_ID">@sit.CO_NM_TH</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกพนักงาน">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">พนักงาน</span>
+                                        <select class="form-select form-control dropdown input-req-date" id="EMP_USR_ID" name="EMP_USR_ID">
+                                            <option></option>
+                                            @foreach (var usr in ViewBag.MAS_USR)
+                                            {
+                                                <option value="@usr.USR_ID">@usr.PR_NAME @usr.F_NAME @usr.L_NAME</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์ม</span>
+                                        <select class="form-select form-control dropdown" id="SITE_ID" name="SITE_ID" disabled>
+                                            @foreach (var sit in ViewBag.MAS_SITE)
+                                            {
+                                                <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดระบุเลขที่ใบชั่ง">
+                                        <span class="input-group-text col-lg-4">เลขที่ใบชั่ง</span>
+                                        <input type="text" id="WGHT_PPR_ID"
+                                               value="@Model.WGHT_PPR_ID"
+                                               class="form-control input-req"
+                                               placeholder="Input Document No." />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกประเภทค้า">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">ประเภท</span>
+                                        <select class="form-select form-control input-req-date" id="PD_TP">
+                                            <option value=""></option>
+                                            <option value="1">สุกรขุน</option>
+                                            <option value="2">ลูกสุกรหย่านม</option>
+                                            <option value="3">สุกรอนุบาล</option>
+                                            <option value="4">สุกรพ่อแม่พันธุ์คัดทิ้ง</option>
+                                            <option value="5">สุกรพันธุ์</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกลูกค้า">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">ลูกค้า</span>
+                                        <select class="form-select form-control dropdown input-req-date" id="AC_NBR" name="AC_NBR">
+                                            <option></option>
+                                            @foreach (var cst in ViewBag.MAS_CST)
+                                            {
+                                                <option value="@cst.AC_NBR">@cst.YOUR_AC_NBR @cst.NM @cst.FRST_NM @cst.LAST_NM</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-8">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">ที่อยู่</span>
+                                        <select class="form-select form-control dropdown" id="CS_AC_NBR" name="CS_AC_NBR">
+                                            <option value="">Please select Customer address</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">ผู้รับสินค้า</span>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder=""
+                                               aria-label="Username"
+                                               aria-describedby="basic-addon1" />
+                                        <button class="btn btn-primary btn-border dropdown-toggle"
+                                                type="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">ผู้ส่งสินค้า</span>
+                                        <select class="form-select form-control dropdown" id="SHIP_USR_ID" name="SHIP_USR_ID">
+                                            <option></option>
+                                            @foreach (var usr in ViewBag.MAS_USR)
+                                            {
+                                                <option value="@usr.USR_ID">@usr.PR_NAME @usr.F_NAME @usr.L_NAME</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">ผู้ตรวจสอบ</span>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder=""
+                                               aria-label="Username"
+                                               aria-describedby="basic-addon1" />
+                                        <button class="btn btn-primary btn-border dropdown-toggle"
+                                                type="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-right">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">ผู้มีอำนาจลงนาม</span>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder=""
+                                               aria-label="Username"
+                                               aria-describedby="basic-addon1" />
+                                        <button class="btn btn-primary btn-border dropdown-toggle"
+                                                type="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                                <li class="nav-item submenu" role="presentation">
+                                    <a class="nav-link active" id="line-tab1" data-bs-toggle="pill" href="#line-tab1" role="tab" aria-controls="pills-tab1" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                            </ul>
+                            <div class="table-responsive tab-content mt-3 mb-3" id="tab1">
+                                <table id="basic-datatables" style="width:100%" border="1"
+                                       class="display table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                            <th width="20%" style="text-align:center !important">น้ำหนัก</th>
+                                            <th width="20%" style="text-align:center !important">Note.</th>
+                                            <th width="20%" style="text-align:center !important">เล้า</th>
+                                            <th width="8%" style="align-content:center">
+                                                <div class="d-flex align-items-center selectgroup-pills">
+                                                    <button type="button"
+                                                            class="selectgroup-button selectgroup-button-icon">
+                                                        <i class="fa fa-plus text-success"></i>
+                                                    </button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2">รวม</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="table-responsive tab-content mt-3 mb-3" id="tab2">
+                                <table id="tb_wnng" style="width:100%" border="1"
+                                       class="display table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                            <th width="5%" style="text-align:center !important">KEY</th>
+                                            <th width="15%" style="text-align:center !important">จำนวน</th>
+                                            <th width="10%" style="text-align:center !important">เล้า</th>
+                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                            <th width="15%" style="text-align:center !important">เฉลี่ย</th>
+                                            <th width="8%" style="align-content:center">
+                                                <div class="d-flex align-items-center selectgroup-pills">
+                                                    <button type="button"
+                                                            id="BT-ADD_WNNG"
+                                                            onclick="AddWnng(this)"
+                                                            value="@Model.SALE_DOC_ID"
+                                                            class="selectgroup-button selectgroup-button-icon">
+                                                        <i class="fa fa-plus text-success"></i>
+                                                    </button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive tab-content mt-3 mb-3" id="tab3">
+                                <table id="tb_nrs" style="width:100%" border="1"
+                                       class="display table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                            <th width="5%" style="text-align:center !important">KEY</th>
+                                            <th width="15%" style="text-align:center !important">จำนวน</th>
+                                            <th width="10%" style="text-align:center !important">เล้า</th>
+                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                            <th width="15%" style="text-align:center !important">เฉลี่ย</th>
+                                            <th width="8%" style="align-content:center">
+                                                <div class="d-flex align-items-center selectgroup-pills">
+                                                    <button type="button"
+                                                            class="selectgroup-button selectgroup-button-icon">
+                                                        <i class="fa fa-plus text-success"></i>
+                                                    </button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="table-responsive tab-content mt-3 mb-3" id="tab4">
+                                <table id="basic-datatables2" style="width:100%" border="1"
+                                       class="display table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                            <th width="15%" style="text-align:center !important">เบอร์หู</th>
+                                            <th width="15%" style="text-align:center !important">เพศ</th>
+                                            <th width="15%" style="text-align:center !important">จำนวน</th>
+                                            <th width="10%" style="text-align:center !important">เล้า</th>
+                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                            <th width="8%" style="align-content:center">
+                                                <div class="d-flex align-items-center selectgroup-pills">
+                                                    <button type="button"
+                                                            class="selectgroup-button selectgroup-button-icon">
+                                                        <i class="fa fa-plus text-success"></i>
+                                                    </button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive tab-content mt-3 mb-3" id="tab5">
+                                <table id="basic-datatables2" style="width:100%" border="1"
+                                       class="display table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                            <th width="15%" style="text-align:center !important">เบอร์หู</th>
+                                            <th width="15%" style="text-align:center !important">เพศ</th>
+                                            <th width="15%" style="text-align:center !important">จำนวน</th>
+                                            <th width="10%" style="text-align:center !important">เล้า</th>
+                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                            <th width="8%" style="align-content:center">
+                                                <div class="d-flex align-items-center selectgroup-pills">
+                                                    <button type="button"
+                                                            class="selectgroup-button selectgroup-button-icon">
+                                                        <i class="fa fa-plus text-success"></i>
+                                                    </button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button id="saveWnng" class="btn btn-primary btn-round fix btn-fixed-position">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+    </footer>
+</div>
+<script>
+    var MAS_HSG = @Html.Raw(Json.Encode(ViewBag.MAS_HSG));
+    var tableWnng = null;
+    $(document).ready(function () {
+        hidedefault();
+        $('#CO_ID').val('1').trigger("change");
+        $('#SITE_ID').val('BT').trigger("change");
+        $('#PD_TP').val('@Model.PD_TP').trigger("change")
+        $('#AC_NBR').val('@Model.CST_ID').trigger("change")
+        $("#SALE_DT").datepicker({
+            todayHighlight: true,
+            orientation: 'bottom left',
+            format: 'dd-M-yyyy',
+            todayBtn: 'linked',
+            autoclose: 'true',
+            assumeNearbyYear: true
+        });
+        $('#CO_ID,#SITE_ID,#AC_NBR,#EMP_USR_ID,#CS_AC_NBR,#SHIP_USR_ID').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: false,
+            tags: true
+        });
+
+        tableWnng = $("#tb_wnng").DataTable({
+            "searching": false,
+            "paging": true,
+            "ordering": true,
+            "info": false,
+            "bAutoWidth": false,
+            "lengthChange": false,
+            "order": [],
+            responsive: !0,
+            "columnDefs": [
+                {
+                    targets: [0],
+                    orderable: false,
+                    className: "text-center",
+                },
+                {
+                    targets: [1],
+                    orderable: false,
+                    visible:false,
+                    className: "text-center",
+                },
+                {
+                    targets: [2, 4, 5],
+                    orderable: false,
+                    className: "text-right",
+                    mRender: function (data, type, full) {
+                        return numeral(data).format('0,0');
+                    }
+                },
+                {
+                    targets: [1, 3, 6],
+                    orderable: false,
+                    className: "text-center",
+                },
+            ],
+            "columns": [
+                {
+                    "render": function (data, type, full, meta) {
+                        var pageInfo = tableWnng.page.info();
+                        return (meta.row + 1) + numeral(pageInfo.page)._value * numeral(pageInfo.length)._value;
+                    }
+                },
+                { 'data': 'UK_KEY' },
+                {
+                    'data': 'PD_AMT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectlyWnng(this)' id='PD_AMT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_AMT + "' style='text-align: right;'/>";
+                    }
+                },
+                {
+                    'data': 'HSG_ID',
+                    render: function (data, type, row, meta) {
+                        var optionList = "";
+                        $.each(MAS_HSG, function (index, item) {
+                            if (row.HSG_ID !== null && row.HSG_ID == item.HSG_ID) {
+                                optionList = optionList + ' <option selected="selected" value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
+                            } else {
+                                optionList = optionList + ' <option value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
+                            }
+                        });
+                        var select = "<div class='input-group'><select class='form-select dropdown wnng_select' onchange='ModifyDirectlyWnng(this)' id='HSG_ID--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "'> <option value=''></option>" + optionList + "</select></div>";
+                        return select;
+                    }
+                },
+                {
+                    'data': 'PD_WGHT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectlyWnng(this)' id='PD_WGHT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_WGHT + "' style='text-align: right;'/>";
+                    }
+                },
+                { 'data': 'PD_WGHT_AV' },
+                {
+                    mRender: function (data, type, row, meta) {
+                        var pageInfo = tableWnng.page.info();
+                        return "<div class='d-flex align-items-center selectgroup-pills'><button type='button' onclick='DelWnng(this)' id='BT-DEL_MOVE--" + row.UK_KEY + "' class='selectgroup-button selectgroup-button-icon move_bt' ><i class='fas fa-trash text-danger'></i></button></div>";
+                    }
+                }
+            ],
+            "rowCallback": function (row, data, index) {
+                var pageInfo = this.api().page.info();
+                var row_index = (index + 1) + pageInfo.page * pageInfo.length;
+                $('td:eq(0)', row).html(row_index);
+                if (data.UK_KEY.split('--').length == 1) {
+                    data.UK_KEY = data.UK_KEY + "--" + row_index;
+                }
+
+            },
+            "drawCallback": function (settings, row, data, index) {
+                var api = this.api();
+
+                // Recalculate and update the index numbers after each draw
+                api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+                    var pageInfo = api.page.info();
+                    var rowIndex = (i + 1) + pageInfo.page * pageInfo.length;
+                    // Update the cell's content with the new row index
+                    $(cell).html(rowIndex);
+                });
+
+                $(".int").inputmask({
+                    'alias': 'currency',
+                    'integerDigits': '12',
+                    'digits': 0,
+                    'prefix': '',
+                    rightAlign: false
+                });
+                $(".wnng_select").each(function () {
+
+                    $(this).select2({
+                        theme: "bootstrap-5",
+                        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                        placeholder: $(this).data('placeholder'),
+                        closeOnSelect: false,
+                        tags: true
+                    });
+                });
+            }
+
+        });
+        SelectWnng();
+    });
+    $("#PD_TP").change(function () {
+        //hideaffterselect();
+        if ($("#PD_TP").val() == 1) {
+            $("#tab1").show();
+        } else if ($("#PD_TP").val() == 2) {
+            $("#tab2").show();
+        } else if ($("#PD_TP").val() == 3) {
+            $("#tab3").show();
+        } else if ($("#PD_TP").val() == 4) {
+            $("#tab4").show();
+        } else if ($("#PD_TP").val() == 5) {
+            $("#tab5").show();
+        } else {
+            hidedefault();
+        }
+    });
+    function hidedefault() {
+        $("#tab1").hide();
+        $("#tab2").hide();
+        $("#tab3").hide();
+        $("#tab4").hide();
+        $("#tab5").hide();
+    }
+    function hideaffterselect() {
+        $("#tab1").hide();
+        $("#tab2").hide();
+        $("#tab3").hide();
+        $("#tab4").hide();
+        $("#tab5").hide();
+    }
+    function SelectWnng() {
+        var doc = $("#SALE_DOC_ID").val();
+        $.ajax({
+            type: "POST",
+            url: pathServer + "/SAL/TFRSALDT03_SELECT_AVY_SALES_DTL",
+            dataType: "json",
+            cache: false,
+            data: { SALE_DOC_ID: doc },
+            success: function (data) {
+                var AVY_SALES_DTL = data.AVY_SALES_DTL;
+                AVY_SALES_DTL = data.AVY_SALES_DTL;
+                tableWnng.clear().draw();
+                tableWnng.rows.add(AVY_SALES_DTL).draw();
+                WnngReGenerate();
+            },
+            error: function () {
+                errorAlert.init();
+            }
+        });
+    }
+    $('#AC_NBR').change(function () {
+        if ($("#AC_NBR").val() != "") {
+            var selectID = $("#AC_NBR").val();
+            $.ajax({
+                type: "GET",
+                url: pathServer + "/SAL/Get_Address",
+                data: {
+                    selectID: selectID,
+                },
+                success: function (response) {
+                    $('#CS_AC_NBR').empty()
+                    $.each(response, function (index, value) {
+                        $('#CS_AC_NBR').append($('<option/>', {
+                            value: response[index].CS_AC_NBR,
+                            text: response[index].STR + response[index].CITY + ' ' + response[index].CNTY + ' ' + response[index].STE + ' ' +  response[index].ZIP_CODE
+                        }));
+                    });
+                    if ($("#CS_AC_NBR").val() != "") {
+                        $($(CS_AC_NBR).parent()).removeClass('alert-validate-date');
+                    }
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+        }
+    });
+    function AddWnng(btn) {
+        var key = $("#BT-ADD_WNNG").val();
+
+            tableWnng.row.add({
+                "UK_KEY": key,
+                "PD_AMT": 0,
+                "HSG_ID": "",
+                "PD_WGHT": 0,
+                "PD_WGHT_AV":0
+            }).draw(false);
+            WnngReGenerate();
+    }
+    function WnngReGenerate() {
+        var pageInfo = tableWnng.page.info();
+        tableWnng.rows().every(function (index) {
+            var rowData = this.data();
+            var newUK_KEY = String(rowData.UK_KEY).split('--')[0] + "--" + (index + 1);
+            rowData.UK_KEY = newUK_KEY; // Update UK_KEY in row data
+            this.data(rowData);
+        });
+        tableWnng.page(pageInfo.page).draw(false);
+    }
+    function ModifyDirectlyWnng(btn) {
+        var id = $(btn).attr('id');
+        var row = $(btn).attr('row');
+        var col = $(btn).attr('col');
+        var new_values = $("#" + id).val();
+        var key = id.split('--')[1] + '--' + id.split('--')[2];
+
+        console.log("New: " + key);
+        var indexWnng = tableWnng
+            .rows()
+            .indexes()
+            .filter(function (value, index) {
+                return key === tableWnng.row(value).data().UK_KEY;
+            });
+
+        if (indexWnng !== undefined && tableWnng.row(indexWnng).length > 0) {
+            var page = tableWnng.page.info();
+            tableWnng.page(page.page).cell(row, col).data(new_values).draw(false);
+            CalculateWnng(indexWnng);
+        } else {
+            console.log("Invalid row index:", indexWnng);
+        }
+    }
+
+    function CalculateWnng(indexWnng) {
+        var page = tableWnng.page.info();
+        if (numeral(tableWnng.row(indexWnng).data().PD_AMT)._value > 0 && numeral(tableWnng.row(indexWnng).data().PD_WGHT)._value > 0) {
+            tableWnng.row(indexWnng).data().PD_WGHT_AV = (numeral(tableWnng.row(indexWnng).data().PD_WGHT)._value / numeral(tableWnng.row(indexWnng).data().PD_AMT)._value);
+        }
+        tableWnng.row(indexWnng).data(tableWnng.row(indexWnng).data()).draw();
+        tableWnng.page(page.page).draw(false);
+    }
+    function DelWnng(btn) {
+        var id = $(btn).attr('id');
+        var idx = $(btn).attr('idx');
+        var key = id.split('--')[1] + "--" + id.split('--')[2];
+
+        var indexHead = tableWnng
+            .rows()
+            .indexes()
+            .filter(function (value, index) {
+                //console.log(key + "|" + tableWnng.row(value).data().UK_KEY);
+                return key === tableWnng.row(value).data().UK_KEY;
+            }); // หา row ที่ต้องการจะลบ
+        Swal.fire({
+            icon: "warning",
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                tableWnng.rows(indexHead).remove().draw(); // ลบ row ที่ค้นหา
+                WnngReGenerate();
+
+            }
+        });
+    }
+    $("#saveWnng").click(function () {
+        var HSG_ID = true;
+        var PD_WGHT = true;
+        var PD_AMT = true;
+        if ($("#SALE_DT").val() != "" && $("#WGHT_PPR_ID").val() != "" && $("#PD_TP").val() != "" && $("#AC_NBR").val() != "") {
+            tableWnng.rows().every(function (index) {
+                var rowData = this.data();
+                if ($("#HSG_ID--" + rowData.UK_KEY).val() == "") {
+                    HSG_ID = false;
+                }
+                if (numeral($("#PD_WGHT--" + rowData.UK_KEY).val())._value == 0) {
+                    PD_WGHT = false;
+                }
+                if (numeral($("#PD_AMT--" + rowData.UK_KEY).val())._value == 0) {
+                    PD_AMT = false;
+                }
+            });
+
+            if (HSG_ID == true && PD_WGHT == true && PD_AMT == true && tableWnng.rows().count() > 0) {
+                Swal.fire({
+                    icon: "question",
+                    title: 'Do you want to save?',
+                    text: "Are you sure to Add movement",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        saveWnng();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: 'Empty!',
+                    text: "กรุณาเลือกข้อมูลการขายให้ครบถ้วนหรือลบออก",
+                    showCancelButton: false,
+                    confirmButtonText: 'OK',
+                });
+            }
+        } else {
+            if ($("#SALE_DT").val() == "") {
+                $($(SALE_DT).parent()).addClass('alert-validate-date');
+                $("#SALE_DT").focus();
+            }
+            //if ($("#EMP_USR_ID").val() == "") {
+            //    $($(EMP_USR_ID).parent()).addClass('alert-validate-date');
+            //}
+            if ($("#WGHT_PPR_ID").val() == "") {
+                $($(WGHT_PPR_ID).parent()).addClass('alert-validate');
+            }
+            if ($("#PD_TP").val() == "") {
+                $($(PD_TP).parent()).addClass('alert-validate-date');
+            }
+            if ($("#AC_NBR").val() == "") {
+                $($(AC_NBR).parent()).addClass('alert-validate-date');
+            }
+        }
+
+    });
+
+    function saveWnng() {
+        var AVY_SALES_HDR ={};
+        var AVY_SALES_DTL = new Array();
+
+        AVY_SALES_HDR.PD_TP = $("#PD_TP").val();
+        AVY_SALES_HDR.SALE_DOC_ID = $("#SALE_DOC_ID").val();
+        AVY_SALES_HDR.SALE_DT = $("#SALE_DT").val();
+        AVY_SALES_HDR.SITE_ID = $("#SITE_ID").val();
+        AVY_SALES_HDR.CST_ID = $("#AC_NBR").val();
+        AVY_SALES_HDR.WGHT_PPR_ID = $("#WGHT_PPR_ID").val().toString();
+
+        for (var i = 0; i < tableWnng.data().length; i++) {
+            let tbwnng_d = {};
+            tbwnng_d.SALE_DOC_ID = $("#SALE_DOC_ID").val();
+            tbwnng_d.HSG_ID = tableWnng.data()[i].HSG_ID;
+            tbwnng_d.BRDR_F = 0;
+            tbwnng_d.PD_AMT = numeral(tableWnng.data()[i].PD_AMT)._value;
+            tbwnng_d.PD_WGHT = numeral(tableWnng.data()[i].PD_WGHT)._value;
+            tbwnng_d.PD_WGHT_AV = numeral(tableWnng.data()[i].PD_WGHT_AV)._value;
+            AVY_SALES_DTL.push(tbwnng_d);
+        }
+
+        $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+            url: pathServer + "/SAL/TFRSALDT03_WNNG_UPDATE",
+            dataType: "json",
+            data: JSON.stringify({ AVY_SALES_HDR: AVY_SALES_HDR, AVY_SALES_DTL: AVY_SALES_DTL }), //parameter Object,List
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                let timerInterval;
+                xhr_loading(xhr);
+                clearInterval(timerInterval);
+                return xhr;
+            },
+            success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                //successMessage.init();
+                setTimeout(function () {
+                    //Attach_File();
+                    Swal.fire({
+                        icon: "success",
+                        title: 'Your data has been saved',
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                }, 1500);
+            },
+            error: function () {
+                errorAlert.init();
+            }
+        });
+    }
+</script>

@@ -66,6 +66,7 @@
                                         <div class="input-group mb-3">
                                             <span class="input-group-text col-lg-4" id="basic-addon1">ประเภทโรงเรือน</span>
                                             <select class="form-select form-control" id="typeSelect" name="typeSelect">
+                                                <option value="ALL">All</option>
                                                 <option value="1">โรงเรือนทดแทน</option>
                                                 <option value="2">โรงเรือนพ่อพันธุ์</option>
                                                 <option value="3">โรงเรือนผสม-อุ้มท้อง</option>
@@ -201,33 +202,23 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#searchSiteId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteId))')).trigger("change");
-        $("#typeSelect").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.typeSelect))')).trigger("change");
-        $("#searchHousingCode").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingCode))')).trigger("change");
-        $("#searchCostGroup").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchCostGroup))')).trigger("change");
-        $("#searchHousingDesc").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingDesc))')).trigger("change");
-        $("#costDate").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.costDate))')).trigger("change");
-
-        $('#searchSiteId, #typeSelect, #searchHousingCode, #searchCostGroup, #searchHousingDesc').select2({
-            theme: "bootstrap-5",
-            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-            placeholder: $(this).data('placeholder'),
-            closeOnSelect: true,
-            tags: true
-        });
-
-        if ($("#costDate").val() == null || $("#costDate").val() == '') {
-            $("#costDate").datepicker({
-                todayHighlight: true,
-                orientation: 'bottom left',
-                format: 'M-yyyy',
-                todayBtn: 'linked',
-                autoclose: 'true',
-                assumeNearbyYear: true,
-                startView: "months",
-                minViewMode: "months"
-            }).datepicker("setDate", 'now');
-        } else {
+        if ('@ViewBag.searchSiteId' != '') {
+            $("#searchSiteId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteId))')).trigger("change");
+        }
+        if ('@ViewBag.typeSelect' != '') {
+            $("#typeSelect").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.typeSelect))')).trigger("change");
+        }
+        if ('@ViewBag.searchHousingCode' != '') {
+            $("#searchHousingCode").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingCode))')).trigger("change");
+        }
+        if ('@ViewBag.searchCostGroup' != '') {
+            $("#searchCostGroup").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchCostGroup))')).trigger("change");
+        }
+        if ('@ViewBag.searchHousingDesc' != '') {
+            $("#searchHousingDesc").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchHousingDesc))')).trigger("change");
+        }
+        if ('@ViewBag.costDate' != '') {
+            $("#costDate").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.costDate))')).trigger("change");
             $("#costDate").datepicker({
                 todayHighlight: true,
                 orientation: 'bottom left',
@@ -238,7 +229,26 @@
                 startView: "months",
                 minViewMode: "months"
             });
+        }else{
+            $("#costDate").datepicker({
+                todayHighlight: true,
+                orientation: 'bottom left',
+                format: 'M-yyyy',
+                todayBtn: 'linked',
+                autoclose: 'true',
+                assumeNearbyYear: true,
+                startView: "months",
+                minViewMode: "months"
+            }).datepicker("setDate", 'now');
         }
+
+        $('#searchSiteId, #typeSelect, #searchHousingCode, #searchCostGroup, #searchHousingDesc').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: true,
+            tags: true
+        });
 
         function formatDate(date) {
             var d = new Date(date),
