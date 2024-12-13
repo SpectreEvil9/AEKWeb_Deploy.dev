@@ -121,10 +121,7 @@
                                 <div class="form-group">
                                     <div class="input-group mb-3 validate-input" data-validate="โปรดระบุเลขที่ใบชั่ง">
                                         <span class="input-group-text col-lg-4">เลขที่ใบชั่ง</span>
-                                        <input type="text" id="WGHT_PPR_ID"
-                                               value="@Model.WGHT_PPR_ID"
-                                               class="form-control input-req"
-                                               placeholder="Input Document No." />
+                                        <input type="text" id="WGHT_PPR_ID" value="@Model.WGHT_PPR_ID" class="form-control input-req" placeholder="Input Document No." style="color:blue" />
                                     </div>
                                 </div>
                             </div>
@@ -239,154 +236,455 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card-footer">
-                        </div>
-                        <div class="card-body">
+                        <div class="card-body" id="body1">
                             <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
-                                <li class="nav-item submenu" role="presentation">
-                                    <a class="nav-link active" id="line-tab1" data-bs-toggle="pill" href="#line-tab1" role="tab" aria-controls="pills-tab1" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab11-tab" data-bs-toggle="pill" href="#line-tab11" role="tab" aria-controls="pills-tab11" aria-selected="true">I.รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab12-tab" data-bs-toggle="pill" href="#line-tab12" role="tab" aria-controls="pills-tab12" aria-selected="false">II.จำนวนเงินที่ต้องชำระ</a>
                                 </li>
                             </ul>
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab1">
-                                <table id="basic-datatables" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="20%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="20%" style="text-align:center !important">Note.</th>
-                                            <th width="20%" style="text-align:center !important">เล้า</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="2">รวม</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab11" role="tabpanel" aria-labelledby="line-tab11-tab">
+                                    <table id="basic-datatables" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="20%" style="text-align:center !important">น้ำหนัก</th>
+                                                <th width="20%" style="text-align:center !important">Note.</th>
+                                                <th width="20%" style="text-align:center !important">เล้า</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
+                                                        <button type="button"
+                                                                class="selectgroup-button selectgroup-button-icon">
+                                                            <i class="fa fa-plus text-success"></i>
+                                                        </button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="2">รวม</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab2">
-                                <table id="tb_wnng" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="5%" style="text-align:center !important">KEY</th>
-                                            <th width="15%" style="text-align:center !important">จำนวน</th>
-                                            <th width="10%" style="text-align:center !important">เล้า</th>
-                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="15%" style="text-align:center !important">เฉลี่ย</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            id="BT-ADD_WNNG"
-                                                            onclick="AddWnng(this)"
-                                                            value="@Model.SALE_DOC_ID"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
+                        </div>
+                        <div class="card-body" id="body2">
+                            <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab21-tab" data-bs-toggle="pill" href="#line-tab21" role="tab" aria-controls="pills-tab21" aria-selected="true">I.รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab22-tab" data-bs-toggle="pill" href="#line-tab22" role="tab" aria-controls="pills-tab22" aria-selected="false">II.จำนวนเงินที่ต้องชำระ</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab21" role="tabpanel" aria-labelledby="line-tab21-tab">
+                                    <table id="tb_wnng" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="5%" style="text-align:center !important">KEY</th>
+                                                <th width="15%" style="text-align:center !important">จำนวน(ตัว)</th>
+                                                <th width="15%" style="text-align:center !important">น้ำหนัก(กก.)</th>
+                                                <th width="15%" style="text-align:center !important">เฉลี่ย(กก.)</th>
+                                                <th width="10%" style="text-align:center !important">เล้า</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
+                                                        <button type="button"
+                                                                id="BT-ADD_WNNG"
+                                                                onclick="AddWnng(this)"
+                                                                value="@Model.SALE_DOC_ID"
+                                                                class="selectgroup-button selectgroup-button-icon">
+                                                            <i class="fa fa-plus text-success"></i>
+                                                        </button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade tab-content mt-3 mb-3" id="line-tab22" role="tabpanel" aria-labelledby="line-tab22-tab">
+                                    <label class="card-title text-primary">สุกร</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">สุกรหย่านม ช่วงอายุ</span>
+                                                    <input type="text" id="PD_DESC" class="form-control" style="color:blue"/>
                                                 </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab3">
-                                <table id="tb_nrs" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="5%" style="text-align:center !important">KEY</th>
-                                            <th width="15%" style="text-align:center !important">จำนวน</th>
-                                            <th width="10%" style="text-align:center !important">เล้า</th>
-                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="15%" style="text-align:center !important">เฉลี่ย</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวน</span>
+                                                    <input type="text" id="PD_TOT_QTY"
+                                                           class="form-control int" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        ตัว
+                                                    </span>
                                                 </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ราคา/หน่วย</span>
+                                                    <input type="text" id="PD_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right;color:blue;" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวนเงิน</span>
+                                                    <input type="text" id="PD_AMT"
+                                                           class="form-control decimal" style="text-align: right;" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ค่าทำวัคซีน โปรแกรม</span>
+                                                    <input type="text" id="VCNE_DESC" class="form-control" style="color:blue"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ราคา/หน่วย</span>
+                                                    <input type="text" id="VCNE_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวนเงิน</span>
+                                                    <input type="text" id="VCNE_AMT"
+                                                           class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="card-title text-primary">บวก</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ค่าขนส่ง(ถ้ามี)</span>
+                                                    <input type="text" id="LGST_DESC" class="form-control" style="color:blue"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ราคา/หน่วย</span>
+                                                    <input type="text" id="LGST_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="LGST_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">อื่นๆ(ระบุ)</span>
+                                                    <input type="text" id="OTHR_PLS_DESC" class="form-control" style="color:blue"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ราคา/หน่วย</span>
+                                                    <input type="text" id="OTHR_PLS_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="OTHR_PLS_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                        </div>
+                                    </div>
+                                    <label class="card-title text-primary">หัก</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">อื่นๆ(ระบุ)</span>
+                                                    <input type="text" id="OTHR_MNS_1_DESC" class="form-control" style="color:blue"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ราคา/หน่วย</span>
+                                                    <input type="text" id="OTHR_MNS_1_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="OTHR_MNS_1_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">อื่นๆ(ระบุ)</span>
+                                                    <input type="text" id="OTHR_MNS_2_DESC" class="form-control" style="color:blue"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ราคา/หน่วย</span>
+                                                    <input type="text" id="OTHR_MNS_2_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="OTHR_MNS_2_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">น้ำหนักเฉลียต่อตัว</span>
+                                                    <input type="text" id="AV_WGHT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        กก.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">รวมเงิน</span>
+                                                    <input type="text" id="TOT_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">น้ำหนักรวม</span>
+                                                    <input type="text" id="NET_WGHT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        กก.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ส่วนลด</span>
+                                                    <input type="text" id="DIS_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-9"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ยอดเงินสุทธิ</span>
+                                                    <input type="text" id="NET_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="card-body" id="body3">
+                            <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab31-tab" data-bs-toggle="pill" href="#line-tab31" role="tab" aria-controls="pills-tab31" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab32-tab" data-bs-toggle="pill" href="#line-tab32" role="tab" aria-controls="pills-tab32" aria-selected="false">จำนวนเงินที่ต้องชำระ</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab31">
+                                    <table id="tb_nrs" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="5%" style="text-align:center !important">KEY</th>
+                                                <th width="15%" style="text-align:center !important">จำนวน</th>
+                                                <th width="10%" style="text-align:center !important">เล้า</th>
+                                                <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                                <th width="15%" style="text-align:center !important">เฉลี่ย</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
+                                                        <button type="button"
+                                                                class="selectgroup-button selectgroup-button-icon">
+                                                            <i class="fa fa-plus text-success"></i>
+                                                        </button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" id="body4">
+                            <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab41-tab" data-bs-toggle="pill" href="#line-tab41" role="tab" aria-controls="pills-tab41" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab42-tab" data-bs-toggle="pill" href="#line-tab42" role="tab" aria-controls="pills-tab42" aria-selected="false">จำนวนเงินที่ต้องชำระ</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab41">
+                                    <table id="basic-datatables2" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="15%" style="text-align:center !important">เบอร์หู</th>
+                                                <th width="15%" style="text-align:center !important">เพศ</th>
+                                                <th width="15%" style="text-align:center !important">จำนวน</th>
+                                                <th width="10%" style="text-align:center !important">เล้า</th>
+                                                <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
+                                                        <button type="button"
+                                                                class="selectgroup-button selectgroup-button-icon">
+                                                            <i class="fa fa-plus text-success"></i>
+                                                        </button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" id="body5">
+                            <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab51-tab" data-bs-toggle="pill" href="#line-tab51" role="tab" aria-controls="pills-tab51" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab52-tab" data-bs-toggle="pill" href="#line-tab52" role="tab" aria-controls="pills-tab52" aria-selected="false">จำนวนเงินที่ต้องชำระ</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab51">
+                                    <table id="basic-datatables2" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="15%" style="text-align:center !important">เบอร์หู</th>
+                                                <th width="15%" style="text-align:center !important">เพศ</th>
+                                                <th width="15%" style="text-align:center !important">จำนวน</th>
+                                                <th width="10%" style="text-align:center !important">เล้า</th>
+                                                <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
+                                                        <button type="button"
+                                                                class="selectgroup-button selectgroup-button-icon">
+                                                            <i class="fa fa-plus text-success"></i>
+                                                        </button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab4">
-                                <table id="basic-datatables2" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="15%" style="text-align:center !important">เบอร์หู</th>
-                                            <th width="15%" style="text-align:center !important">เพศ</th>
-                                            <th width="15%" style="text-align:center !important">จำนวน</th>
-                                            <th width="10%" style="text-align:center !important">เล้า</th>
-                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab5">
-                                <table id="basic-datatables2" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="15%" style="text-align:center !important">เบอร์หู</th>
-                                            <th width="15%" style="text-align:center !important">เพศ</th>
-                                            <th width="15%" style="text-align:center !important">จำนวน</th>
-                                            <th width="10%" style="text-align:center !important">เล้า</th>
-                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card-action">
-                            <button id="saveWnng" class="btn btn-primary btn-round fix btn-fixed-position">Save</button>
-                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button id="saveWnng" class="btn btn-primary btn-round fix btn-fixed-position">Save</button>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -404,8 +702,22 @@
     var MAS_HSG = @Html.Raw(Json.Encode(ViewBag.MAS_HSG));
     var tableWnng = null;
     $(document).ready(function () {
+        $(".int").inputmask({
+            'alias': 'currency',
+            'integerDigits': '12',
+            'digits': 0,
+            'prefix': '',
+            rightAlign: false
+        });
+        $(".decimal").inputmask({
+            'alias': 'currency',
+            'integerDigits': '12',
+            'digits': 2,
+            'prefix': '',
+            rightAlign: false,
+        });
         hidedefault();
-        $('#CO_ID').val('1').trigger("change");
+        $('#CO_ID').val('MJG').trigger("change");
         $('#SITE_ID').val('BT').trigger("change");
         $('#PD_TP').val('@Model.PD_TP').trigger("change")
         $('#AC_NBR').val('@Model.CST_ID').trigger("change")
@@ -447,7 +759,7 @@
                     className: "text-center",
                 },
                 {
-                    targets: [2, 4, 5],
+                    targets: [2, 3, 4],
                     orderable: false,
                     className: "text-right",
                     mRender: function (data, type, full) {
@@ -455,7 +767,7 @@
                     }
                 },
                 {
-                    targets: [1, 3, 6],
+                    targets: [1, 5, 6],
                     orderable: false,
                     className: "text-center",
                 },
@@ -471,16 +783,23 @@
                 {
                     'data': 'PD_AMT',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectlyWnng(this)' id='PD_AMT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_AMT + "' style='text-align: right;'/>";
+                        return "<input type='text' class='form-control int' autocomplete='off' style='color:blue' onchange='ModifyDirectlyWnng(this)' id='PD_AMT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_AMT + "' style='text-align: right;'/>";
                     }
                 },
+                {
+                    'data': 'PD_WGHT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' style='color:blue' onchange='ModifyDirectlyWnng(this)' id='PD_WGHT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_WGHT + "' style='text-align: right;'/>";
+                    }
+                },
+                { 'data': 'PD_WGHT_AV' },
                 {
                     'data': 'HSG_ID',
                     render: function (data, type, row, meta) {
                         var optionList = "";
                         $.each(MAS_HSG, function (index, item) {
                             if (row.HSG_ID !== null && row.HSG_ID == item.HSG_ID) {
-                                optionList = optionList + ' <option selected="selected" value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
+                                optionList = optionList + ' <option selected="selected" style="color:blue" value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
                             } else {
                                 optionList = optionList + ' <option value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
                             }
@@ -489,13 +808,6 @@
                         return select;
                     }
                 },
-                {
-                    'data': 'PD_WGHT',
-                    render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectlyWnng(this)' id='PD_WGHT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_WGHT + "' style='text-align: right;'/>";
-                    }
-                },
-                { 'data': 'PD_WGHT_AV' },
                 {
                     mRender: function (data, type, row, meta) {
                         var pageInfo = tableWnng.page.info();
@@ -543,43 +855,43 @@
             }
 
         });
-        SelectWnng();
+        SelectWnngD();               
     });
     $("#PD_TP").change(function () {
-        //hideaffterselect();
+        hideaffterselect();
         if ($("#PD_TP").val() == 1) {
-            $("#tab1").show();
+            $("#body1").show();
         } else if ($("#PD_TP").val() == 2) {
-            $("#tab2").show();
+            $("#body2").show();
         } else if ($("#PD_TP").val() == 3) {
-            $("#tab3").show();
+            $("#body3").show();
         } else if ($("#PD_TP").val() == 4) {
-            $("#tab4").show();
+            $("#body4").show();
         } else if ($("#PD_TP").val() == 5) {
-            $("#tab5").show();
+            $("#body5").show();
         } else {
             hidedefault();
         }
     });
     function hidedefault() {
-        $("#tab1").hide();
-        $("#tab2").hide();
-        $("#tab3").hide();
-        $("#tab4").hide();
-        $("#tab5").hide();
+        $("#body1").hide();
+        $("#body2").hide();
+        $("#body3").hide();
+        $("#body4").hide();
+        $("#body5").hide();
     }
     function hideaffterselect() {
-        $("#tab1").hide();
-        $("#tab2").hide();
-        $("#tab3").hide();
-        $("#tab4").hide();
-        $("#tab5").hide();
+        $("#body1").hide();
+        $("#body2").hide();
+        $("#body3").hide();
+        $("#body4").hide();
+        $("#body5").hide();
     }
-    function SelectWnng() {
+    function SelectWnngD() {
         var doc = $("#SALE_DOC_ID").val();
         $.ajax({
             type: "POST",
-            url: pathServer + "/SAL/TFRSALDT03_SELECT_AVY_SALES_DTL",
+            url: pathServer + "/SAL/TFRSALDT03_SELECT_WNNG_D",
             dataType: "json",
             cache: false,
             data: { SALE_DOC_ID: doc },
@@ -588,12 +900,51 @@
                 AVY_SALES_DTL = data.AVY_SALES_DTL;
                 tableWnng.clear().draw();
                 tableWnng.rows.add(AVY_SALES_DTL).draw();
+                console.log("Row Detail first : " + tableWnng.data().length);
                 WnngReGenerate();
+                SelectWnngF();
+                
             },
             error: function () {
                 errorAlert.init();
             }
         });
+    }
+    function SelectWnngF() {
+        var doc = $("#SALE_DOC_ID").val();
+        $.ajax({
+            type: "POST",
+            url: pathServer + "/SAL/TFRSALDT03_SELECT_WNNG_F",
+            dataType: "json",
+            cache: false,
+            data: { SALE_DOC_ID: doc },
+            success: function (data) {
+                var AVY_SALES_FOTR_WNNG = data.AVY_SALES_FOTR_WNNG;
+                $("#PD_DESC").val(AVY_SALES_FOTR_WNNG.PD_DESC);
+                $("#PD_TOT_QTY").val(AVY_SALES_FOTR_WNNG.PD_TOT_QTY);
+                $("#PD_PER_UNIT").val(AVY_SALES_FOTR_WNNG.PD_PER_UNIT);
+                $("#VCNE_DESC").val(AVY_SALES_FOTR_WNNG.VCNE_DESC);
+                $("#VCNE_PER_UNIT").val(AVY_SALES_FOTR_WNNG.VCNE_PER_UNIT);
+                $("#LGST_DESC").val(AVY_SALES_FOTR_WNNG.LGST_DESC);
+                $("#LGST_PER_UNIT").val(AVY_SALES_FOTR_WNNG.LGST_PER_UNIT);
+                $("#OTHR_PLS_DESC").val(AVY_SALES_FOTR_WNNG.OTHR_PLS_DESC);
+                $("#OTHR_PLS_PER_UNIT").val(AVY_SALES_FOTR_WNNG.OTHR_PLS_PER_UNIT);
+                $("#OTHR_MNS_1_DESC").val(AVY_SALES_FOTR_WNNG.OTHR_MNS_1_DESC);
+                $("#OTHR_MNS_1_PER_UNIT").val(AVY_SALES_FOTR_WNNG.OTHR_MNS_1_PER_UNIT);
+                $("#OTHR_MNS_2_DESC").val(AVY_SALES_FOTR_WNNG.OTHR_MNS_2_DESC);
+                $("#OTHR_MNS_2_PER_UNIT").val(AVY_SALES_FOTR_WNNG.OTHR_MNS_2_PER_UNIT);
+                $("#AV_WGHT").val(AVY_SALES_FOTR_WNNG.AV_WGHT);
+                $("#NET_WGHT").val(AVY_SALES_FOTR_WNNG.NET_WGHT);
+                $("#TOT_AMT").val(AVY_SALES_FOTR_WNNG.TOT_AMT);
+                $("#DIS_AMT").val(AVY_SALES_FOTR_WNNG.DIS_AMT);
+                $("#NET_AMT").val(AVY_SALES_FOTR_WNNG.NET_AMT);
+                CalculateWnngFoot();
+            },
+            error: function () {
+                errorAlert.init();
+            }
+        });
+
     }
     $('#AC_NBR').change(function () {
         if ($("#AC_NBR").val() != "") {
@@ -623,16 +974,33 @@
         }
     });
     function AddWnng(btn) {
-        var key = $("#BT-ADD_WNNG").val();
+        Swal.fire({
+            title: "Are you sure?",
+            text: "คุณแน่ใจที่จะเพิ่ม 20 รายการใช่หรือไม่!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, add it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var key = $("#BT-ADD_WNNG").val();
+                var i = 0;
+                while (i < 20) {
+                    tableWnng.row.add({
+                        "UK_KEY": key,
+                        "PD_AMT": 0,
+                        "HSG_ID": "",
+                        "PD_WGHT": 0,
+                        "PD_WGHT_AV": 0
+                    }).draw(false);
+                    i++;
+                }
 
-            tableWnng.row.add({
-                "UK_KEY": key,
-                "PD_AMT": 0,
-                "HSG_ID": "",
-                "PD_WGHT": 0,
-                "PD_WGHT_AV":0
-            }).draw(false);
-            WnngReGenerate();
+                WnngReGenerate();
+            }
+        });
+
     }
     function WnngReGenerate() {
         var pageInfo = tableWnng.page.info();
@@ -663,6 +1031,7 @@
             var page = tableWnng.page.info();
             tableWnng.page(page.page).cell(row, col).data(new_values).draw(false);
             CalculateWnng(indexWnng);
+            CalculateWnngFoot();
         } else {
             console.log("Invalid row index:", indexWnng);
         }
@@ -676,6 +1045,30 @@
         tableWnng.row(indexWnng).data(tableWnng.row(indexWnng).data()).draw();
         tableWnng.page(page.page).draw(false);
     }
+
+    function CalculateWnngFoot() {
+        var sum_PD_TOT_QTY = 0;
+        var sum_PD_WGHT = 0;
+        for (var i = 0; i < tableWnng.data().length; i++) {
+            sum_PD_TOT_QTY = numeral(sum_PD_TOT_QTY)._value + numeral(tableWnng.data()[i].PD_AMT)._value;
+            sum_PD_WGHT = numeral(sum_PD_WGHT)._value + numeral(tableWnng.data()[i].PD_WGHT)._value;
+        }
+        console.log("Row Detail last: " + tableWnng.data().length + "|" + $("#PD_PER_UNIT").val());
+        $("#PD_TOT_QTY").val(numeral(sum_PD_TOT_QTY)._value);
+        $("#PD_AMT").val(numeral(sum_PD_TOT_QTY)._value * numeral($("#PD_PER_UNIT").val())._value);
+        $("#VCNE_AMT").val(numeral(sum_PD_TOT_QTY)._value * numeral($("#VCNE_PER_UNIT").val())._value);
+        $("#LGST_AMT").val(numeral($("#LGST_PER_UNIT").val())._value);
+        $("#OTHR_PLS_AMT").val(numeral($("#OTHR_PLS_PER_UNIT").val())._value);
+        $("#OTHR_MNS_1_AMT").val(numeral($("#OTHR_MNS_1_PER_UNIT").val())._value);
+        $("#OTHR_MNS_2_AMT").val(numeral($("#OTHR_MNS_2_PER_UNIT").val())._value);
+        $("#NET_WGHT").val(numeral(sum_PD_WGHT)._value);
+        $("#AV_WGHT").val(sum_PD_WGHT / sum_PD_TOT_QTY);
+        $("#TOT_AMT").val(numeral($("#PD_AMT").val())._value + numeral($("#VCNE_AMT").val())._value + numeral($("#LGST_AMT").val())._value +
+            numeral($("#OTHR_PLS_AMT").val())._value - (numeral($("#OTHR_MNS_1_AMT").val())._value + numeral($("#OTHR_MNS_2_AMT").val())._value));
+        $("#NET_AMT").val(numeral($("#TOT_AMT").val())._value - numeral($("#DIS_AMT").val())._value);
+
+    }
+
     function DelWnng(btn) {
         var id = $(btn).attr('id');
         var idx = $(btn).attr('idx');
@@ -696,52 +1089,68 @@
             confirmButtonText: 'Yes',
         }).then((result) => {
             if (result.isConfirmed) {
-
-                tableWnng.rows(indexHead).remove().draw(); // ลบ row ที่ค้นหา
+                var page = tableWnng.page.info();
+                tableWnng.rows(indexHead).remove().page(page.page).draw(); // ลบ row ที่ค้นหา
                 WnngReGenerate();
-
+                CalculateWnngFoot();
             }
         });
     }
     $("#saveWnng").click(function () {
-        var HSG_ID = true;
-        var PD_WGHT = true;
-        var PD_AMT = true;
+        var minimum_row = false;
+        var fully_row = true;
+        var row_index = 0;
         if ($("#SALE_DT").val() != "" && $("#WGHT_PPR_ID").val() != "" && $("#PD_TP").val() != "" && $("#AC_NBR").val() != "") {
-            tableWnng.rows().every(function (index) {
-                var rowData = this.data();
-                if ($("#HSG_ID--" + rowData.UK_KEY).val() == "") {
-                    HSG_ID = false;
+            //tableWnng.rows().every(function (index) {
+            //    var rowData = this.data();
+            //    if (($("#HSG_ID--" + rowData.UK_KEY).val() == "" || numeral($("#PD_WGHT--" + rowData.UK_KEY).val())._value == 0 || numeral($("#PD_AMT--" + rowData.UK_KEY).val())._value == 0) &&
+            //        !($("#HSG_ID--" + rowData.UK_KEY).val() == "" && numeral($("#PD_WGHT--" + rowData.UK_KEY).val())._value == 0 && numeral($("#PD_AMT--" + rowData.UK_KEY).val())._value == 0)) {
+            //        fully_row = false;
+                   
+            //    }
+            //});
+            for (var i = 0; i < tableWnng.data().length; i++) {
+                if (tableWnng.data()[i].HSG_ID != "" && numeral(tableWnng.data()[i].PD_WGHT)._value != 0 && numeral(tableWnng.data()[i].PD_AMT)._value != 0) {
+                    minimum_row = true;
                 }
-                if (numeral($("#PD_WGHT--" + rowData.UK_KEY).val())._value == 0) {
-                    PD_WGHT = false;
+                if ((tableWnng.data()[i].HSG_ID == "" || numeral(tableWnng.data()[i].PD_WGHT)._value == 0 || numeral(tableWnng.data()[i].PD_AMT)._value == 0) &&
+                    !(tableWnng.data()[i].HSG_ID == "" && numeral(tableWnng.data()[i].PD_WGHT)._value == 0 && numeral(tableWnng.data()[i].PD_AMT)._value == 0)) {
+                    fully_row = false;
+                    row_index = tableWnng.data()[i].UK_KEY.split('--')[1];
                 }
-                if (numeral($("#PD_AMT--" + rowData.UK_KEY).val())._value == 0) {
-                    PD_AMT = false;
+            }
+            if (minimum_row == true) {
+                if (fully_row == true && tableWnng.rows().count() > 0) {
+                    Swal.fire({
+                        icon: "question",
+                        title: 'Do you want to save?',
+                        text: "Are you sure to Add Sale",
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            saveWnng();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: 'Empty!',
+                        text: "กรุณาระบุข้อมูลรายการที่ " + row_index + " ให้ครบถ้วน",
+                        showCancelButton: false,
+                        confirmButtonText: 'OK',
+                    });
                 }
-            });
-
-            if (HSG_ID == true && PD_WGHT == true && PD_AMT == true && tableWnng.rows().count() > 0) {
-                Swal.fire({
-                    icon: "question",
-                    title: 'Do you want to save?',
-                    text: "Are you sure to Add movement",
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        saveWnng();
-                    }
-                });
             } else {
                 Swal.fire({
                     icon: "error",
                     title: 'Empty!',
-                    text: "กรุณาเลือกข้อมูลการขายให้ครบถ้วนหรือลบออก",
+                    text: "ต้องมีข้อมูลครบถ้วนอย่างน้อย 1 รายการ",
                     showCancelButton: false,
                     confirmButtonText: 'OK',
                 });
             }
+
         } else {
             if ($("#SALE_DT").val() == "") {
                 $($(SALE_DT).parent()).addClass('alert-validate-date');
@@ -766,6 +1175,7 @@
     function saveWnng() {
         var AVY_SALES_HDR ={};
         var AVY_SALES_DTL = new Array();
+        var AVY_SALES_FOTR_WNNG = {};
 
         AVY_SALES_HDR.PD_TP = $("#PD_TP").val();
         AVY_SALES_HDR.SALE_DOC_ID = $("#SALE_DOC_ID").val();
@@ -777,6 +1187,7 @@
         for (var i = 0; i < tableWnng.data().length; i++) {
             let tbwnng_d = {};
             tbwnng_d.SALE_DOC_ID = $("#SALE_DOC_ID").val();
+            tbwnng_d.SEQ = tableWnng.data()[i].UK_KEY.split('--')[1];
             tbwnng_d.HSG_ID = tableWnng.data()[i].HSG_ID;
             tbwnng_d.BRDR_F = 0;
             tbwnng_d.PD_AMT = numeral(tableWnng.data()[i].PD_AMT)._value;
@@ -785,12 +1196,33 @@
             AVY_SALES_DTL.push(tbwnng_d);
         }
 
+        AVY_SALES_FOTR_WNNG.SALE_DOC_ID = $("#SALE_DOC_ID").val();
+        AVY_SALES_FOTR_WNNG.PD_TP = $("#PD_TP").val();
+        AVY_SALES_FOTR_WNNG.PD_DESC = $("#PD_DESC").val();
+        AVY_SALES_FOTR_WNNG.PD_TOT_QTY = numeral($("#PD_TOT_QTY").val())._value;
+        AVY_SALES_FOTR_WNNG.PD_PER_UNIT = numeral($("#PD_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.VCNE_DESC = $("#VCNE_DESC").val();
+        AVY_SALES_FOTR_WNNG.VCNE_PER_UNIT = numeral($("#VCNE_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.LGST_DESC = $("#LGST_DESC").val();
+        AVY_SALES_FOTR_WNNG.LGST_PER_UNIT = numeral($("#LGST_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.OTHR_PLS_DESC = $("#OTHR_PLS_DESC").val();
+        AVY_SALES_FOTR_WNNG.OTHR_PLS_PER_UNIT = numeral($("#OTHR_PLS_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.OTHR_MNS_1_DESC = $("#OTHR_MNS_1_DESC").val();
+        AVY_SALES_FOTR_WNNG.OTHR_MNS_1_PER_UNIT = numeral($("#OTHR_MNS_1_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.OTHR_MNS_2_DESC = $("#OTHR_MNS_2_DESC").val();
+        AVY_SALES_FOTR_WNNG.OTHR_MNS_2_PER_UNIT = numeral($("#OTHR_MNS_2_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.AV_WGHT = numeral($("#AV_WGHT").val())._value;
+        AVY_SALES_FOTR_WNNG.NET_WGHT = numeral($("#NET_WGHT").val())._value;
+        AVY_SALES_FOTR_WNNG.TOT_AMT = numeral($("#TOT_AMT").val())._value;
+        AVY_SALES_FOTR_WNNG.DIS_AMT = numeral($("#DIS_AMT").val())._value;
+        AVY_SALES_FOTR_WNNG.NET_AMT = numeral($("#NET_AMT").val())._value;
+
         $.ajax({
             contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
             type: "POST",
-            url: pathServer + "/SAL/TFRSALDT03_WNNG_UPDATE",
+            url: pathServer + "/SAL/TFRSALDT03_UPDATE_WNNG",
             dataType: "json",
-            data: JSON.stringify({ AVY_SALES_HDR: AVY_SALES_HDR, AVY_SALES_DTL: AVY_SALES_DTL }), //parameter Object,List
+            data: JSON.stringify({ AVY_SALES_HDR: AVY_SALES_HDR, AVY_SALES_DTL: AVY_SALES_DTL, AVY_SALES_FOTR_WNNG: AVY_SALES_FOTR_WNNG }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;

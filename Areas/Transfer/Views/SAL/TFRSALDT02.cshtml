@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกวันที่">
                                         <span class="input-group-text col-lg-3" id="basic-addon1">วันที่</span>
-                                        <input type="text" id="SALE_DT" class="form-control input-req-date" required/>
+                                        <input type="text" id="SALE_DT" class="form-control input-req-date" required />
                                         <span class="input-group-icon">
                                             <i class="fas fa-calendar-alt"></i>
                                         </span>
@@ -123,7 +123,7 @@
                                         <span class="input-group-text col-lg-4">เลขที่ใบชั่ง</span>
                                         <input type="text" id="WGHT_PPR_ID"
                                                class="form-control input-req"
-                                               placeholder="Input Document No." />
+                                               placeholder="Input Document No." style="color:blue"/>
                                     </div>
                                 </div>
                             </div>
@@ -238,1121 +238,446 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card-footer">
-                        </div>
-                        <div class="card-body">
+                        <div class="card-body" id="body1">
                             <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
-                                <li class="nav-item submenu" role="presentation">
-                                    <a class="nav-link active" id="line-tab1" data-bs-toggle="pill" href="#line-tab1" role="tab" aria-controls="pills-tab1" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab11-tab" data-bs-toggle="pill" href="#line-tab11" role="tab" aria-controls="pills-tab11" aria-selected="true">I.รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab12-tab" data-bs-toggle="pill" href="#line-tab12" role="tab" aria-controls="pills-tab12" aria-selected="false">II.จำนวนเงินที่ต้องชำระ</a>
                                 </li>
                             </ul>
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab1">
-                                <table id="basic-datatables" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="20%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="20%" style="text-align:center !important">Note.</th>
-                                            <th width="20%" style="text-align:center !important">เล้า</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="text-align:center !important">1</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab11" role="tabpanel" aria-labelledby="line-tab11-tab">
+                                    <table id="basic-datatables" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="20%" style="text-align:center !important">น้ำหนัก</th>
+                                                <th width="20%" style="text-align:center !important">Note.</th>
+                                                <th width="20%" style="text-align:center !important">เล้า</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
                                                         <button type="button"
                                                                 class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
+                                                            <i class="fa fa-plus text-success"></i>
                                                         </button>
                                                     </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">2</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>ใส้เลือน</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">3</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>ขาหัก</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">4</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">5</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">6</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">7</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">8</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">9</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">10</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">11</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">12</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">13</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">14</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">15</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">16</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">17</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">18</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">19</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">20</td>
-
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option></option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>GA01B-42</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="2">รวม</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="2">รวม</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab2">
-                                <table id="tb_wnng" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="5%" style="text-align:center !important">KEY</th>
-                                            <th width="15%" style="text-align:center !important">จำนวน</th>
-                                            <th width="10%" style="text-align:center !important">เล้า</th>
-                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="15%" style="text-align:center !important">เฉลี่ย</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            id="BT-ADD_WNNG"
-                                                            onclick="AddWnng(this)"
-                                                            value="@ViewBag.SALE_DOC_ID"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
+                        </div>
+                        <div class="card-body" id="body2">
+                            <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab21-tab" data-bs-toggle="pill" href="#line-tab21" role="tab" aria-controls="pills-tab21" aria-selected="true">I.รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab22-tab" data-bs-toggle="pill" href="#line-tab22" role="tab" aria-controls="pills-tab22" aria-selected="false">II.จำนวนเงินที่ต้องชำระ</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab21" role="tabpanel" aria-labelledby="line-tab21-tab">
+                                    <table id="tb_wnng" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="5%" style="text-align:center !important">KEY</th>
+                                                <th width="15%" style="text-align:center !important">จำนวน(ตัว)</th>
+                                                <th width="15%" style="text-align:center !important">น้ำหนัก(กก.)</th>
+                                                <th width="15%" style="text-align:center !important">เฉลี่ย(กก.)</th>
+                                                <th width="10%" style="text-align:center !important">เล้า</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
+                                                        <button type="button"
+                                                                id="BT-ADD_WNNG"
+                                                                onclick="AddWnng(this)"
+                                                                value="@ViewBag.SALE_DOC_ID"
+                                                                class="selectgroup-button selectgroup-button-icon">
+                                                            <i class="fa fa-plus text-success"></i>
+                                                        </button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade tab-content mt-3 mb-3" id="line-tab22" role="tabpanel" aria-labelledby="line-tab22-tab">
+                                    <label class="card-title text-primary">สุกร</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">สุกรหย่านม ช่วงอายุ</span>
+                                                    <input type="text" id="PD_DESC"
+                                                           class="form-control" style="color:blue" />
                                                 </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวน</span>
+                                                    <input type="text" id="PD_TOT_QTY"
+                                                           class="form-control int" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        ตัว
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ราคา/หน่วย</span>
+                                                    <input type="text" id="PD_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวนเงิน</span>
+                                                    <input type="text" id="PD_AMT"
+                                                           class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ค่าทำวัคซีน โปรแกรม</span>
+                                                    <input type="text" id="VCNE_DESC" class="form-control" style="color:blue" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ราคา/หน่วย</span>
+                                                    <input type="text" id="VCNE_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวนเงิน</span>
+                                                    <input type="text" id="VCNE_AMT"
+                                                           class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="card-title text-primary">บวก</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ค่าขนส่ง(ถ้ามี)</span>
+                                                    <input type="text" id="LGST_DESC" class="form-control" style="color:blue" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวนเงิน</span>
+                                                    <input type="text" id="LGST_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="LGST_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">อื่นๆ(ระบุ)</span>
+                                                    <input type="text" id="OTHR_PLS_DESC" class="form-control" style="color:blue" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวนเงิน</span>
+                                                    <input type="text" id="OTHR_PLS_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="OTHR_PLS_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                        </div>
+                                    </div>
+                                    <label class="card-title text-primary">หัก</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">อื่นๆ(ระบุ)</span>
+                                                    <input type="text" id="OTHR_MNS_1_DESC" class="form-control" style="color:blue" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวนเงิน</span>
+                                                    <input type="text" id="OTHR_MNS_1_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="OTHR_MNS_1_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">อื่นๆ(ระบุ)</span>
+                                                    <input type="text" id="OTHR_MNS_2_DESC" class="form-control" style="color:blue" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">จำนวนเงิน</span>
+                                                    <input type="text" id="OTHR_MNS_2_PER_UNIT" onchange="CalculateWnngFoot()"
+                                                           class="form-control decimal" style="text-align: right; color: blue" />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="OTHR_MNS_2_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">น้ำหนักเฉลียต่อตัว</span>
+                                                    <input type="text" id="AV_WGHT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        กก.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">รวมเงิน</span>
+                                                    <input type="text" id="TOT_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">น้ำหนักรวม</span>
+                                                    <input type="text" id="NET_WGHT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        กก.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ส่วนลด</span>
+                                                    <input type="text" id="DIS_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-9"></div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text col-lg-5">ยอดเงินสุทธิ</span>
+                                                    <input type="text" id="NET_AMT" class="form-control decimal" style="text-align: right" readonly />
+                                                    <span class="input-group-icon">
+                                                        บาท
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab3">
-                                <table id="tb_nrs" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="5%" style="text-align:center !important">KEY</th>
-                                            <th width="15%" style="text-align:center !important">จำนวน</th>
-                                            <th width="10%" style="text-align:center !important">เล้า</th>
-                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="15%" style="text-align:center !important">เฉลี่ย</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                        </div>
+                        <div class="card-body" id="body3">
+                            <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab31-tab" data-bs-toggle="pill" href="#line-tab31" role="tab" aria-controls="pills-tab31" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab32-tab" data-bs-toggle="pill" href="#line-tab32" role="tab" aria-controls="pills-tab32" aria-selected="false">จำนวนเงินที่ต้องชำระ</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab31">
+                                    <table id="tb_nrs" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="5%" style="text-align:center !important">KEY</th>
+                                                <th width="15%" style="text-align:center !important">จำนวน</th>
+                                                <th width="10%" style="text-align:center !important">เล้า</th>
+                                                <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                                <th width="15%" style="text-align:center !important">เฉลี่ย</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
+                                                        <button type="button"
+                                                                class="selectgroup-button selectgroup-button-icon">
+                                                            <i class="fa fa-plus text-success"></i>
+                                                        </button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab4">
-                                <table id="basic-datatables2" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="15%" style="text-align:center !important">เบอร์หู</th>
-                                            <th width="15%" style="text-align:center !important">เพศ</th>
-                                            <th width="15%" style="text-align:center !important">จำนวน</th>
-                                            <th width="10%" style="text-align:center !important">เล้า</th>
-                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="text-align:center !important">1</td>
-                                            <td style="text-align:center !important">
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>3703558241</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>แม่</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" value="1" readonly /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>RB01/1</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
+                        </div>
+                        <div class="card-body" id="body4">
+                            <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab41-tab" data-bs-toggle="pill" href="#line-tab41" role="tab" aria-controls="pills-tab41" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab42-tab" data-bs-toggle="pill" href="#line-tab42" role="tab" aria-controls="pills-tab42" aria-selected="false">จำนวนเงินที่ต้องชำระ</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab41">
+                                    <table id="basic-datatables2" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="15%" style="text-align:center !important">เบอร์หู</th>
+                                                <th width="15%" style="text-align:center !important">เพศ</th>
+                                                <th width="15%" style="text-align:center !important">จำนวน</th>
+                                                <th width="10%" style="text-align:center !important">เล้า</th>
+                                                <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
                                                         <button type="button"
                                                                 class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
+                                                            <i class="fa fa-plus text-success"></i>
                                                         </button>
                                                     </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">2</td>
-                                            <td style="text-align:center !important">
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>3703558242</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>แม่</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" value="1" readonly /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>RB01/1</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">3</td>
-                                            <td style="text-align:center !important">
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>3703558243</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>แม่</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" value="1" readonly /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>RB01/1</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">4</td>
-                                            <td style="text-align:center !important">
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>3703558244</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>แม่</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" value="1" readonly /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>RB01/1</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="table-responsive tab-content mt-3 mb-3" id="tab5">
-                                <table id="basic-datatables2" style="width:100%" border="1"
-                                       class="display table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" style="text-align:center !important">ลำดับ</th>
-                                            <th width="15%" style="text-align:center !important">เบอร์หู</th>
-                                            <th width="15%" style="text-align:center !important">เพศ</th>
-                                            <th width="15%" style="text-align:center !important">จำนวน</th>
-                                            <th width="10%" style="text-align:center !important">เล้า</th>
-                                            <th width="15%" style="text-align:center !important">น้ำหนัก</th>
-                                            <th width="8%" style="align-content:center">
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <button type="button"
-                                                            class="selectgroup-button selectgroup-button-icon">
-                                                        <i class="fa fa-plus text-success"></i>
-                                                    </button>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="text-align:center !important">1</td>
-                                            <td style="text-align:center !important">
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>3703558241</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>แม่</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" value="1" readonly /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>AI01</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
+                        </div>
+                        <div class="card-body" id="body5">
+                            <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="line-tab51-tab" data-bs-toggle="pill" href="#line-tab51" role="tab" aria-controls="pills-tab51" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-tab52-tab" data-bs-toggle="pill" href="#line-tab52" role="tab" aria-controls="pills-tab52" aria-selected="false">จำนวนเงินที่ต้องชำระ</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                                <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab51">
+                                    <table id="basic-datatables2" style="width:100%" border="1"
+                                           class="display table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="15%" style="text-align:center !important">เบอร์หู</th>
+                                                <th width="15%" style="text-align:center !important">เพศ</th>
+                                                <th width="15%" style="text-align:center !important">จำนวน</th>
+                                                <th width="10%" style="text-align:center !important">เล้า</th>
+                                                <th width="15%" style="text-align:center !important">น้ำหนัก</th>
+                                                <th width="8%" style="align-content:center">
+                                                    <div class="d-flex align-items-center selectgroup-pills">
                                                         <button type="button"
                                                                 class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
+                                                            <i class="fa fa-plus text-success"></i>
                                                         </button>
                                                     </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">2</td>
-                                            <td style="text-align:center !important">
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>3703558242</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>แม่</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" value="1" readonly /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>AI01</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">3</td>
-                                            <td style="text-align:center !important">
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>3703558243</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>แม่</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" value="1" readonly /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>AI01</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important">4</td>
-                                            <td style="text-align:center !important">
-                                                <select class="form-select form-control"
-                                                        id="smallSelect">
-                                                    <option>3703558244</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>แม่</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" value="1" readonly /></td>
-                                            <td>
-                                                <select class="form-select form-control"
-                                                        id="smallSelect" disabled>
-                                                    <option>AI01</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="far fa-images text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="fas fa-trash text-danger"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="card-action">
@@ -1360,844 +685,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="card">
-                    </div>
-                </div>
-                <div class="col-md-12" style="display:none">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Multi Filter Select</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="multi-filter-select"
-                                       class="display table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2012/12/02</td>
-                                            <td>$372,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Herrod Chandler</td>
-                                            <td>Sales Assistant</td>
-                                            <td>San Francisco</td>
-                                            <td>59</td>
-                                            <td>2012/08/06</td>
-                                            <td>$137,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Tokyo</td>
-                                            <td>55</td>
-                                            <td>2010/10/14</td>
-                                            <td>$327,900</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>39</td>
-                                            <td>2009/09/15</td>
-                                            <td>$205,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sonya Frost</td>
-                                            <td>Software Engineer</td>
-                                            <td>Edinburgh</td>
-                                            <td>23</td>
-                                            <td>2008/12/13</td>
-                                            <td>$103,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jena Gaines</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>30</td>
-                                            <td>2008/12/19</td>
-                                            <td>$90,560</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Quinn Flynn</td>
-                                            <td>Support Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2013/03/03</td>
-                                            <td>$342,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Charde Marshall</td>
-                                            <td>Regional Director</td>
-                                            <td>San Francisco</td>
-                                            <td>36</td>
-                                            <td>2008/10/16</td>
-                                            <td>$470,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Haley Kennedy</td>
-                                            <td>Senior Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>43</td>
-                                            <td>2012/12/18</td>
-                                            <td>$313,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tatyana Fitzpatrick</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>19</td>
-                                            <td>2010/03/17</td>
-                                            <td>$385,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Silva</td>
-                                            <td>Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>66</td>
-                                            <td>2012/11/27</td>
-                                            <td>$198,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Paul Byrd</td>
-                                            <td>Chief Financial Officer (CFO)</td>
-                                            <td>New York</td>
-                                            <td>64</td>
-                                            <td>2010/06/09</td>
-                                            <td>$725,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gloria Little</td>
-                                            <td>Systems Administrator</td>
-                                            <td>New York</td>
-                                            <td>59</td>
-                                            <td>2009/04/10</td>
-                                            <td>$237,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bradley Greer</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>41</td>
-                                            <td>2012/10/13</td>
-                                            <td>$132,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dai Rios</td>
-                                            <td>Personnel Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>35</td>
-                                            <td>2012/09/26</td>
-                                            <td>$217,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jenette Caldwell</td>
-                                            <td>Development Lead</td>
-                                            <td>New York</td>
-                                            <td>30</td>
-                                            <td>2011/09/03</td>
-                                            <td>$345,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Yuri Berry</td>
-                                            <td>Chief Marketing Officer (CMO)</td>
-                                            <td>New York</td>
-                                            <td>40</td>
-                                            <td>2009/06/25</td>
-                                            <td>$675,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Caesar Vance</td>
-                                            <td>Pre-Sales Support</td>
-                                            <td>New York</td>
-                                            <td>21</td>
-                                            <td>2011/12/12</td>
-                                            <td>$106,450</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Doris Wilder</td>
-                                            <td>Sales Assistant</td>
-                                            <td>Sidney</td>
-                                            <td>23</td>
-                                            <td>2010/09/20</td>
-                                            <td>$85,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Angelica Ramos</td>
-                                            <td>Chief Executive Officer (CEO)</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2009/10/09</td>
-                                            <td>$1,200,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Joyce</td>
-                                            <td>Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>42</td>
-                                            <td>2010/12/22</td>
-                                            <td>$92,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Chang</td>
-                                            <td>Regional Director</td>
-                                            <td>Singapore</td>
-                                            <td>28</td>
-                                            <td>2010/11/14</td>
-                                            <td>$357,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brenden Wagner</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>28</td>
-                                            <td>2011/06/07</td>
-                                            <td>$206,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fiona Green</td>
-                                            <td>Chief Operating Officer (COO)</td>
-                                            <td>San Francisco</td>
-                                            <td>48</td>
-                                            <td>2010/03/11</td>
-                                            <td>$850,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shou Itou</td>
-                                            <td>Regional Marketing</td>
-                                            <td>Tokyo</td>
-                                            <td>20</td>
-                                            <td>2011/08/14</td>
-                                            <td>$163,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michelle House</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Sidney</td>
-                                            <td>37</td>
-                                            <td>2011/06/02</td>
-                                            <td>$95,400</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suki Burks</td>
-                                            <td>Developer</td>
-                                            <td>London</td>
-                                            <td>53</td>
-                                            <td>2009/10/22</td>
-                                            <td>$114,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Prescott Bartlett</td>
-                                            <td>Technical Author</td>
-                                            <td>London</td>
-                                            <td>27</td>
-                                            <td>2011/05/07</td>
-                                            <td>$145,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Cortez</td>
-                                            <td>Team Leader</td>
-                                            <td>San Francisco</td>
-                                            <td>22</td>
-                                            <td>2008/10/26</td>
-                                            <td>$235,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Martena Mccray</td>
-                                            <td>Post-Sales support</td>
-                                            <td>Edinburgh</td>
-                                            <td>46</td>
-                                            <td>2011/03/09</td>
-                                            <td>$324,050</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Unity Butler</td>
-                                            <td>Marketing Designer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/12/09</td>
-                                            <td>$85,675</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Howard Hatfield</td>
-                                            <td>Office Manager</td>
-                                            <td>San Francisco</td>
-                                            <td>51</td>
-                                            <td>2008/12/16</td>
-                                            <td>$164,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hope Fuentes</td>
-                                            <td>Secretary</td>
-                                            <td>San Francisco</td>
-                                            <td>41</td>
-                                            <td>2010/02/12</td>
-                                            <td>$109,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vivian Harrell</td>
-                                            <td>Financial Controller</td>
-                                            <td>San Francisco</td>
-                                            <td>62</td>
-                                            <td>2009/02/14</td>
-                                            <td>$452,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Timothy Mooney</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>37</td>
-                                            <td>2008/12/11</td>
-                                            <td>$136,200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jackson Bradshaw</td>
-                                            <td>Director</td>
-                                            <td>New York</td>
-                                            <td>65</td>
-                                            <td>2008/09/26</td>
-                                            <td>$645,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Olivia Liang</td>
-                                            <td>Support Engineer</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2011/02/03</td>
-                                            <td>$234,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bruno Nash</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>38</td>
-                                            <td>2011/05/03</td>
-                                            <td>$163,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sakura Yamamoto</td>
-                                            <td>Support Engineer</td>
-                                            <td>Tokyo</td>
-                                            <td>37</td>
-                                            <td>2009/08/19</td>
-                                            <td>$139,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thor Walton</td>
-                                            <td>Developer</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2013/08/11</td>
-                                            <td>$98,540</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finn Camacho</td>
-                                            <td>Support Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/07/07</td>
-                                            <td>$87,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Serge Baldwin</td>
-                                            <td>Data Coordinator</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2012/04/09</td>
-                                            <td>$138,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zenaida Frank</td>
-                                            <td>Software Engineer</td>
-                                            <td>New York</td>
-                                            <td>63</td>
-                                            <td>2010/01/04</td>
-                                            <td>$125,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zorita Serrano</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>56</td>
-                                            <td>2012/06/01</td>
-                                            <td>$115,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>$75,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>$145,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hermione Butler</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2011/03/21</td>
-                                            <td>$356,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lael Greer</td>
-                                            <td>Systems Administrator</td>
-                                            <td>London</td>
-                                            <td>21</td>
-                                            <td>2009/02/27</td>
-                                            <td>$103,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jonas Alexander</td>
-                                            <td>Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>30</td>
-                                            <td>2010/07/14</td>
-                                            <td>$86,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shad Decker</td>
-                                            <td>Regional Director</td>
-                                            <td>Edinburgh</td>
-                                            <td>51</td>
-                                            <td>2008/11/13</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>29</td>
-                                            <td>2011/06/27</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>27</td>
-                                            <td>2011/01/25</td>
-                                            <td>$112,000</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12" style="display:none">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex align-items-center">
-                                <h4 class="card-title">Add Row</h4>
-                                <button class="btn btn-primary btn-round ms-auto"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#addRowModal">
-                                    <i class="fa fa-plus"></i>
-                                    Add Row
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <!-- Modal -->
-                            <div class="modal fade"
-                                 id="addRowModal"
-                                 tabindex="-1"
-                                 role="dialog"
-                                 aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header border-0">
-                                            <h5 class="modal-title">
-                                                <span class="fw-mediumbold"> New</span>
-                                                <span class="fw-light"> Row </span>
-                                            </h5>
-                                            <button type="button"
-                                                    class="close"
-                                                    data-dismiss="modal"
-                                                    aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="small">
-                                                Create a new row using this form, make sure you
-                                                fill them all
-                                            </p>
-                                            <form>
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group form-group-default">
-                                                            <label>Name</label>
-                                                            <input id="addName"
-                                                                   type="text"
-                                                                   class="form-control"
-                                                                   placeholder="fill name" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 pe-0">
-                                                        <div class="form-group form-group-default">
-                                                            <label>Position</label>
-                                                            <input id="addPosition"
-                                                                   type="text"
-                                                                   class="form-control"
-                                                                   placeholder="fill position" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group form-group-default">
-                                                            <label>Office</label>
-                                                            <input id="addOffice"
-                                                                   type="text"
-                                                                   class="form-control"
-                                                                   placeholder="fill office" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer border-0">
-                                            <button type="button"
-                                                    id="addRowButton"
-                                                    class="btn btn-primary">
-                                                Add
-                                            </button>
-                                            <button type="button"
-                                                    class="btn btn-danger"
-                                                    data-dismiss="modal">
-                                                Close
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table id="add-row"
-                                       class="display table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th style="width: 10%">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Herrod Chandler</td>
-                                            <td>Sales Assistant</td>
-                                            <td>San Francisco</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Tokyo</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sonya Frost</td>
-                                            <td>Software Engineer</td>
-                                            <td>Edinburgh</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                            data-bs-toggle="tooltip"
-                                                            title=""
-                                                            class="btn btn-link btn-danger"
-                                                            data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -2208,7 +696,7 @@
     var MAS_HSG = @Html.Raw(Json.Encode(ViewBag.MAS_HSG));
     var tableWnng = null;
     $(document).ready(function () {
-        $('#CO_ID').val('1').trigger("change");
+        $('#CO_ID').val('MJG').trigger("change");
         $('#SITE_ID').val('BT').trigger("change");
         $("#SALE_DT").datepicker({
             todayHighlight: true,
@@ -2226,36 +714,51 @@
             closeOnSelect: false,
             tags: true
         });
+        $(".int").inputmask({
+            'alias': 'currency',
+            'integerDigits': '12',
+            'digits': 0,
+            'prefix': '',
+            rightAlign: false
+        });
+        $(".decimal").inputmask({
+            'alias': 'currency',
+            'integerDigits': '12',
+            'digits': 2,
+            'prefix': '',
+            rightAlign: false,
+        });
+
         hidedefault();
         $("#PD_TP").change(function () {
             hideaffterselect();
             if ($("#PD_TP").val() == 1) {
-                $("#tab1").show();
+                $("#body1").show();
             } else if ($("#PD_TP").val() == 2) {
-                $("#tab2").show();
+                $("#body2").show();
             } else if ($("#PD_TP").val() == 3) {
-                $("#tab3").show();
+                $("#body3").show();
             } else if ($("#PD_TP").val() == 4) {
-                $("#tab4").show();
+                $("#body4").show();
             } else if ($("#PD_TP").val() == 5) {
-                $("#tab5").show();
+                $("#body5").show();
             } else {
                 hidedefault();
             }
         });
         function hidedefault() {
-            $("#tab1").hide();
-            $("#tab2").hide();
-            $("#tab3").hide();
-            $("#tab4").hide();
-            $("#tab5").hide();
+            $("#body1").hide();
+            $("#body2").hide();
+            $("#body3").hide();
+            $("#body4").hide();
+            $("#body5").hide();
         }
         function hideaffterselect() {
-            $("#tab1").hide();
-            $("#tab2").hide();
-            $("#tab3").hide();
-            $("#tab4").hide();
-            $("#tab5").hide();
+            $("#body1").hide();
+            $("#body2").hide();
+            $("#body3").hide();
+            $("#body4").hide();
+            $("#body5").hide();
         }
         tableWnng = $("#tb_wnng").DataTable({
             "searching": false,
@@ -2279,7 +782,7 @@
                     className: "text-center",
                 },
                 {
-                    targets: [2, 4, 5],
+                    targets: [2, 3, 4],
                     orderable: false,
                     className: "text-right",
                     mRender: function (data, type, full) {
@@ -2287,7 +790,7 @@
                     }
                 },
                 {
-                    targets: [ 3, 6],
+                    targets: [ 5, 6],
                     orderable: false,
                     className: "text-center",
                 },
@@ -2303,9 +806,16 @@
                 {
                     'data': 'PD_AMT',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectlyWnng(this)' id='PD_AMT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_AMT + "' style='text-align: right;'/>";
+                        return "<input type='text' class='form-control int' autocomplete='off' style='color:blue' onchange='ModifyDirectlyWnng(this)' id='PD_AMT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_AMT + "' style='text-align: right;'/>";
                     }
                 },
+                {
+                    'data': 'PD_WGHT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' style='color:blue' onchange='ModifyDirectlyWnng(this)' id='PD_WGHT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_WGHT + "' style='text-align: right;'/>";
+                    }
+                },
+                { 'data': 'PD_WGHT_AV' },
                 {
                     'data': 'HSG_ID',
                     render: function (data, type, row, meta) {
@@ -2321,13 +831,6 @@
                         return select;
                     }
                 },
-                {
-                    'data': 'PD_WGHT',
-                    render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectlyWnng(this)' id='PD_WGHT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_WGHT + "' style='text-align: right;'/>";
-                    }
-                },
-                { 'data': 'PD_WGHT_AV' },
                 {
                     mRender: function (data, type, row, meta) {
                         var pageInfo = tableWnng.page.info();
@@ -2404,18 +907,36 @@
             });
         }
     });
-    function AddWnng(btn) {
-        var key = $("#BT-ADD_WNNG").val();
 
-            tableWnng.row.add({
-                "UK_KEY": key,
-                "PD_AMT": 0,
-                "HSG_ID": "",
-                "PD_WGHT": 0,
-                "PD_WGHT_AV":0
-            }).draw(false);
-            WnngReGenerate();
+    function AddWnng(btn) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "คุณแน่ใจที่จะเพิ่ม 20 รายการใช่หรือไม่!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, add it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var key = $("#BT-ADD_WNNG").val();
+                var i = 0;
+                while (i < 20) {
+                    tableWnng.row.add({
+                        "UK_KEY": key,
+                        "PD_AMT": 0,
+                        "HSG_ID": "",
+                        "PD_WGHT": 0,
+                        "PD_WGHT_AV": 0
+                    }).draw(false);
+                    i++;
+                }
+
+                WnngReGenerate();
+            }
+        });
     }
+
     function WnngReGenerate() {
         var pageInfo = tableWnng.page.info();
         tableWnng.rows().every(function (index) {
@@ -2426,6 +947,7 @@
         });
         tableWnng.page(pageInfo.page).draw(false);
     }
+
     function ModifyDirectlyWnng(btn) {
         var id = $(btn).attr('id');
         var row = $(btn).attr('row');
@@ -2445,6 +967,7 @@
             var page = tableWnng.page.info();
             tableWnng.page(page.page).cell(row, col).data(new_values).draw(false);
             CalculateWnng(indexWnng);
+            CalculateWnngFoot();
         } else {
             console.log("Invalid row index:", indexWnng);
         }
@@ -2458,6 +981,28 @@
         tableWnng.row(indexWnng).data(tableWnng.row(indexWnng).data()).draw();
         tableWnng.page(page.page).draw(false);
     }
+
+    function CalculateWnngFoot() {
+        var sum_PD_TOT_QTY = 0;
+        var sum_PD_WGHT = 0;
+        for (var i = 0; i < tableWnng.data().length; i++) {
+            sum_PD_TOT_QTY = numeral(sum_PD_TOT_QTY)._value + numeral(tableWnng.data()[i].PD_AMT)._value;
+            sum_PD_WGHT = numeral(sum_PD_WGHT)._value + numeral(tableWnng.data()[i].PD_WGHT)._value;
+        }
+        $("#PD_TOT_QTY").val(numeral(sum_PD_TOT_QTY)._value);
+        $("#PD_AMT").val(numeral(sum_PD_TOT_QTY)._value * numeral($("#PD_PER_UNIT").val())._value);
+        $("#VCNE_AMT").val(numeral(sum_PD_TOT_QTY)._value * numeral($("#VCNE_PER_UNIT").val())._value);
+        $("#LGST_AMT").val(numeral($("#LGST_PER_UNIT").val())._value);
+        $("#OTHR_PLS_AMT").val(numeral($("#OTHR_PLS_PER_UNIT").val())._value);
+        $("#OTHR_MNS_1_AMT").val(numeral($("#OTHR_MNS_1_PER_UNIT").val())._value);
+        $("#OTHR_MNS_2_AMT").val(numeral($("#OTHR_MNS_2_PER_UNIT").val())._value);
+        $("#NET_WGHT").val(numeral(sum_PD_WGHT)._value);
+        $("#AV_WGHT").val(sum_PD_WGHT / sum_PD_TOT_QTY);
+        $("#TOT_AMT").val(numeral($("#PD_AMT").val())._value + numeral($("#VCNE_AMT").val())._value + numeral($("#LGST_AMT").val())._value +
+            numeral($("#OTHR_PLS_AMT").val())._value - (numeral($("#OTHR_MNS_1_AMT").val())._value + numeral($("#OTHR_MNS_2_AMT").val())._value));
+        $("#NET_AMT").val(numeral($("#TOT_AMT").val())._value - numeral($("#DIS_AMT").val())._value);
+    }
+
     function DelWnng(btn) {
         var id = $(btn).attr('id');
         var idx = $(btn).attr('idx');
@@ -2481,45 +1026,53 @@
 
                 tableWnng.rows(indexHead).remove().draw(); // ลบ row ที่ค้นหา
                 WnngReGenerate();
-
+                CalculateWnngFoot();
             }
         });
     }
     $("#saveWnng").click(function () {
-        var HSG_ID = true;
-        var PD_WGHT = true;
-        var PD_AMT = true;
+        var minimum_row = false;
+        var fully_row = true;
+        var row_index = 0;
         if ($("#SALE_DT").val() != "" && $("#WGHT_PPR_ID").val() != "" && $("#PD_TP").val() != "" && $("#AC_NBR").val() != "") {
             tableWnng.rows().every(function (index) {
                 var rowData = this.data();
-                if ($("#HSG_ID--" + rowData.UK_KEY).val() == "") {
-                    HSG_ID = false;
+                if (rowData.HSG_ID != "" && numeral(rowData.PD_WGHT)._value != 0 && numeral(rowData.PD_AMT)._value != 0) {
+                    minimum_row = true;
                 }
-                if (numeral($("#PD_WGHT--" + rowData.UK_KEY).val())._value == 0) {
-                    PD_WGHT = false;
-                }
-                if (numeral($("#PD_AMT--" + rowData.UK_KEY).val())._value == 0) {
-                    PD_AMT = false;
+                if ((rowData.HSG_ID == "" || numeral(rowData.PD_WGHT)._value == 0 || numeral(rowData.PD_AMT)._value == 0) &&
+                    !(rowData.HSG_ID == "" && numeral(rowData.PD_WGHT)._value == 0 && numeral(rowData.PD_AMT)._value == 0)) {
+                    fully_row = false;
+                    row_index = index + 1;
                 }
             });
-
-            if (HSG_ID == true && PD_WGHT == true && PD_AMT == true && tableWnng.rows().count() > 0) {
-                Swal.fire({
-                    icon: "question",
-                    title: 'Do you want to save?',
-                    text: "Are you sure to Add movement",
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        saveWnng();
-                    }
-                });
+            if (minimum_row == true) {
+                if (fully_row == true && tableWnng.rows().count() > 0) {
+                    Swal.fire({
+                        icon: "question",
+                        title: 'Do you want to save?',
+                        text: "Are you sure to Add Sale",
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            saveWnng();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: 'Empty!',
+                        text: "กรุณาระบุข้อมูลรายการที่ " + row_index + " ให้ครบถ้วน",
+                        showCancelButton: false,
+                        confirmButtonText: 'OK',
+                    });
+                }
             } else {
                 Swal.fire({
                     icon: "error",
                     title: 'Empty!',
-                    text: "กรุณาเลือกข้อมูลการขายให้ครบถ้วนหรือลบออก",
+                    text: "ต้องมีข้อมูลครบถ้วนอย่างน้อย 1 รายการ",
                     showCancelButton: false,
                     confirmButtonText: 'OK',
                 });
@@ -2548,6 +1101,7 @@
     function saveWnng() {
         var AVY_SALES_HDR = {};
         var AVY_SALES_DTL = new Array();
+        var AVY_SALES_FOTR_WNNG = {};
 
         AVY_SALES_HDR.PD_TP = $("#PD_TP").val();
         AVY_SALES_HDR.SALE_DOC_ID = $("#SALE_DOC_ID").val();
@@ -2559,6 +1113,7 @@
         for (var i = 0; i < tableWnng.data().length; i++) {
             let tbwnng_d = {};
             tbwnng_d.SALE_DOC_ID = $("#SALE_DOC_ID").val();
+            tbwnng_d.SEQ = tableWnng.data()[i].UK_KEY.split('--')[1];
             tbwnng_d.HSG_ID = tableWnng.data()[i].HSG_ID;
             tbwnng_d.BRDR_F = 0;
             tbwnng_d.PD_AMT = numeral(tableWnng.data()[i].PD_AMT)._value;
@@ -2567,12 +1122,33 @@
             AVY_SALES_DTL.push(tbwnng_d);
         }
 
+        AVY_SALES_FOTR_WNNG.SALE_DOC_ID = $("#SALE_DOC_ID").val();
+        AVY_SALES_FOTR_WNNG.PD_TP = $("#PD_TP").val();
+        AVY_SALES_FOTR_WNNG.PD_DESC = $("#PD_DESC").val();
+        AVY_SALES_FOTR_WNNG.PD_TOT_QTY = numeral($("#PD_TOT_QTY").val())._value;
+        AVY_SALES_FOTR_WNNG.PD_PER_UNIT = numeral($("#PD_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.VCNE_DESC = $("#VCNE_DESC").val();
+        AVY_SALES_FOTR_WNNG.VCNE_PER_UNIT = numeral($("#VCNE_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.LGST_DESC = $("#LGST_DESC").val();
+        AVY_SALES_FOTR_WNNG.LGST_PER_UNIT = numeral($("#LGST_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.OTHR_PLS_DESC = $("#OTHR_PLS_DESC").val();
+        AVY_SALES_FOTR_WNNG.OTHR_PLS_PER_UNIT = numeral($("#OTHR_PLS_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.OTHR_MNS_1_DESC = $("#OTHR_MNS_1_DESC").val();
+        AVY_SALES_FOTR_WNNG.OTHR_MNS_1_PER_UNIT = numeral($("#OTHR_MNS_1_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.OTHR_MNS_2_DESC = $("#OTHR_MNS_2_DESC").val();
+        AVY_SALES_FOTR_WNNG.OTHR_MNS_2_PER_UNIT = numeral($("#OTHR_MNS_2_PER_UNIT").val())._value;
+        AVY_SALES_FOTR_WNNG.AV_WGHT = numeral($("#AV_WGHT").val())._value;
+        AVY_SALES_FOTR_WNNG.NET_WGHT = numeral($("#NET_WGHT").val())._value;
+        AVY_SALES_FOTR_WNNG.TOT_AMT = numeral($("#TOT_AMT").val())._value;
+        AVY_SALES_FOTR_WNNG.DIS_AMT = numeral($("#DIS_AMT").val())._value;
+        AVY_SALES_FOTR_WNNG.NET_AMT = numeral($("#NET_AMT").val())._value;
+
         $.ajax({
             contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
             type: "POST",
-            url: pathServer + "/SAL/TFRSALDT02_WNNG_INSERT",
+            url: pathServer + "/SAL/TFRSALDT02_INSERT_WNNG",
             dataType: "json",
-            data: JSON.stringify({ AVY_SALES_HDR: AVY_SALES_HDR, AVY_SALES_DTL: AVY_SALES_DTL }), //parameter Object,List
+            data: JSON.stringify({ AVY_SALES_HDR: AVY_SALES_HDR, AVY_SALES_DTL: AVY_SALES_DTL, AVY_SALES_FOTR_WNNG: AVY_SALES_FOTR_WNNG }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;
