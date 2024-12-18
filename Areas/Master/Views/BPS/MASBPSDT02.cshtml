@@ -53,7 +53,7 @@
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
-                                        <span class="input-group-text col-lg-4">เบอร์หูที่ได้ครั้งแรก</span>
+                                        <span class="input-group-text col-lg-5">เบอร์หูที่ได้ครั้งแรก</span>
                                         <input type="text"
                                                id="BRDR_ID_ORIG"
                                                class="form-control" required/>
@@ -74,7 +74,7 @@
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text col-lg-3" id="basic-addon1">เพศ</span>
-                                        <select class="form-select dropdown-multiple" id="GND" name="GND">
+                                        <select class="form-select form-control dropdown-multiple" id="GND" name="GND">
                                             <option value="M">Male</option>
                                             <option value="F">FeMale</option>
                                         </select>
@@ -97,9 +97,13 @@
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text col-lg-4">เบอร์พ่อ</span>
-                                        <input type="text"
-                                               id="FTHR_BRDR_ID"
-                                               class="form-control" />
+                                        <select class="form-select form-control dropdown input-req-date" id="FTHR_BRDR_ID" name="FTHR_BRDR_ID">
+                                            <option value="" selected></option>
+                                            @foreach (var brdr in ViewBag.FTHR_BRDR_ID)
+                                            {
+                                                <option value="@brdr.BRDR_ID">@brdr.BRDR_ID_USED</option>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -107,9 +111,13 @@
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text col-lg-4">เบอร์แม่</span>
-                                        <input type="text"
-                                               id="MTHR_BRDR_ID"
-                                               class="form-control" />
+                                        <select class="form-select form-control dropdown input-req-date" id="MTHR_BRDR_ID" name="MTHR_BRDR_ID">
+                                            <option value="" selected></option>
+                                            @foreach (var brdr in ViewBag.MTHR_BRDR_ID)
+                                            {
+                                                <option value="@brdr.BRDR_ID">@brdr.BRDR_ID_USED</option>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +190,7 @@
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text col-lg-3">WEIGHT RECEIVED</span>
+                                        <span class="input-group-text col-lg-5">WEIGHT RECEIVED</span>
                                         <input type="number"
                                                id="WGHT_RCVD"
                                                class="form-control m-input input-req" />
@@ -221,6 +229,13 @@
 </div>
 <script>
     $(document).ready(function () {
+        $("#FTHR_BRDR_ID,#MTHR_BRDR_ID").select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: false,
+            tags: true
+        });
         $("#DOB ,#DT_RCVD, #DT_USED").datepicker({
             todayHighlight: true,
             orientation: 'bottom left',
@@ -257,29 +272,29 @@
         });
 
         function save() {
-            var MAS_BRDR_PS = {};
-            MAS_BRDR_PS.BRDR_ID = $("#BRDR_ID").val();
-            MAS_BRDR_PS.BRDR_ID_ORIG = $("#BRDR_ID_ORIG").val();
-            MAS_BRDR_PS.LINE = $("#LINE").val();
-            MAS_BRDR_PS.GND = $("#GND").val();
-            MAS_BRDR_PS.BLOOD_LVL = $("#BLOOD_LVL").val();
-            MAS_BRDR_PS.FTHR_BRDR_ID = $("#FTHR_BRDR_ID").val();
-            MAS_BRDR_PS.MTHR_BRDR_ID = $("#MTHR_BRDR_ID").val();
-            MAS_BRDR_PS.DOB = $("#DOB").val();
-            MAS_BRDR_PS.BRST_LEFT = $("#BRST_LEFT").val();
-            MAS_BRDR_PS.BRST_RGHT = $("#BRST_RGHT").val();
-            MAS_BRDR_PS.DT_RCVD = $("#DT_RCVD").val();
-            MAS_BRDR_PS.DT_USED = $("#DT_USED").val();
-            MAS_BRDR_PS.WGHT_RCVD = $("#WGHT_RCVD").val();
-            MAS_BRDR_PS.REM = $("#REM").val();
-            MAS_BRDR_PS.ST = $("#ST").val();
+            var MAS_BRDR_ALL = {};
+            MAS_BRDR_ALL.BRDR_ID = $("#BRDR_ID").val();
+            MAS_BRDR_ALL.BRDR_ID_ORIG = $("#BRDR_ID_ORIG").val();
+            MAS_BRDR_ALL.LINE = $("#LINE").val();
+            MAS_BRDR_ALL.GND = $("#GND").val();
+            MAS_BRDR_ALL.BLOOD_LVL = $("#BLOOD_LVL").val();
+            MAS_BRDR_ALL.FTHR_BRDR_ID = $("#FTHR_BRDR_ID").val();
+            MAS_BRDR_ALL.MTHR_BRDR_ID = $("#MTHR_BRDR_ID").val();
+            MAS_BRDR_ALL.DOB = $("#DOB").val();
+            MAS_BRDR_ALL.BRST_LEFT = $("#BRST_LEFT").val();
+            MAS_BRDR_ALL.BRST_RGHT = $("#BRST_RGHT").val();
+            MAS_BRDR_ALL.DT_RCVD = $("#DT_RCVD").val();
+            MAS_BRDR_ALL.DT_USED = $("#DT_USED").val();
+            MAS_BRDR_ALL.WGHT_RCVD = $("#WGHT_RCVD").val();
+            MAS_BRDR_ALL.REM = $("#REM").val();
+            MAS_BRDR_ALL.ST = $("#ST").val();
 
             $.ajax({
             contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
             type: "POST",
                 url: pathServer + "/BPS/MASBPSDT02_INSERT",
                 dataType: "json",
-                data: JSON.stringify({ MAS_BRDR_PS: MAS_BRDR_PS }), //parameter Object,List
+                data: JSON.stringify({ MAS_BRDR_ALL: MAS_BRDR_ALL }), //parameter Object,List
                 xhr: function () {
                     var xhr = new window.XMLHttpRequest();
                     let timerInterval;
@@ -300,10 +315,10 @@
                             showConfirmButton: true,
                             confirmButtonText: 'OK'
                         }).then((result) => {
-                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASBPSDT03", "BPS", new { BRDR_PS_SK = "BRDR_PS_SKRedirect" }).ToString())");
+                        var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("MASBPSDT03", "BPS", new { BRDR_ALL_SK = "BRDR_ALL_SKRedirect" }).ToString())");
                         const parseResult = new DOMParser().parseFromString(url, "text/html");
                         url = parseResult.documentElement.textContent;
-                            url = url.replace("BRDR_PS_SKRedirect", data.BRDR_PS_SK);
+                            url = url.replace("BRDR_ALL_SKRedirect", data.BRDR_ALL_SK);
                             window.location.replace(url);
                         });
                     }, 1500);

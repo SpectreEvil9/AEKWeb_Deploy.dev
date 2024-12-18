@@ -47,7 +47,7 @@
                                             <span class="input-group-text col-lg-3" id="basic-addon1">เบอร์หู</span>
                                             <select class="form-select dropdown-multiple" id="searchBreederId" name="searchBreederId">
                                                 <option value="ALL">All</option>
-                                                @foreach (var ggp in ViewBag.MAS_BRDR_PS)
+                                                @foreach (var ggp in ViewBag.MAS_BRDR_ALL)
                                                 {
                                                     <option value="@ggp.BRDR_ID">@ggp.BRDR_ID</option>
                                                 }
@@ -207,7 +207,7 @@
                         return (meta.row + 1) + page;
                     }
                 },
-                { 'data': 'BRDR_PS_SK' },
+                { 'data': 'BRDR_ALL_SK' },
                 { 'data': 'BRDR_ID' },
                 { 'data': 'BRDR_ID_ORIG' },
                 { 'data': 'LINE' },
@@ -240,8 +240,8 @@
                 { 'data': 'ST' },
                 {
                     mRender: function (data, type, row) {
-                    var link = '@HttpUtility.UrlDecode(Url.Action("MASBPSDT03", "BPS", new { BRDR_PS_SK = "row_BRDR_PS_SK" }).ToString())';
-                        link = link.replace("row_BRDR_PS_SK", row.BRDR_PS_SK);
+                    var link = '@HttpUtility.UrlDecode(Url.Action("MASBPSDT03", "BPS", new { BRDR_ALL_SK = "row_BRDR_ALL_SK" }).ToString())';
+                        link = link.replace("row_BRDR_ALL_SK", row.BRDR_ALL_SK);
                     var All_Botton = "<div class='d-flex align-items-center selectgroup-pills'>";
                         All_Botton = All_Botton + "<a href='" + link + "' class='selectgroup-button selectgroup-button-icon' title='Edit'><i class='fas fa-edit text-primary'></i></a>";
                         All_Botton = All_Botton + "</div>";

@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_CST" Width="1.5" PointX="11.375" PointY="4.75" />
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_USR" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_COMPANY" Width="1.5" PointX="3.375" PointY="13.75" />
+        <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_BRDR_ALL" Width="1.5" PointX="13.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
