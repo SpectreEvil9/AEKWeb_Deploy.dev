@@ -79,3 +79,12 @@ body {
     /*border-color: aliceblue;*/
     border-radius: 5px;
 }
+.txt-user-input {
+    color: rgb(12, 63, 245) !important;
+}
+
+/*----การตรวจสอบคุณภาพก่อนขาย----*/
+.body-qly-test {
+    position: relative;
+    top: -50px;
+}

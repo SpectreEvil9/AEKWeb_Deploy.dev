@@ -154,6 +154,10 @@
                                         <h4 class="card-title">1.1 การย้าย</h4>
                                     </div>
                                     <div class="card-body">
+                                        <input type="hidden" id="SIT" />
+                                        <input type="hidden" id="HSG" />
+                                        <input type="hidden" id="NDT" />
+                                        <input type="hidden" id="MDT" />
                                         <div class="table-responsive">
                                             <table id="tb_move" style="width:100%" border="1"
                                                    class="display table table-striped table-hover table-bordered">
@@ -167,6 +171,7 @@
                                                         <th style="text-align:center !important">เบอร์สุกรที่ย้าย</th>
                                                         <th style="text-align:center !important">โรงเรือนปลายทาง</th>
                                                         <th style="text-align:center !important">วันที่โรงเรือนปลายทาง</th>
+                                                        <th style="text-align:center !important">วันที่แรกรับเข้า</th>
                                                         <th style="align-content:center">
                                                             <div class="d-flex align-items-center selectgroup-pills">
                                                                 <button type="button"
@@ -528,13 +533,13 @@
             responsive: !0,
             "columnDefs": [
                 {
-                    targets: [1, 2, 3, 7],
+                    targets: [1, 2, 3, 7,8],
                     visible: false,
                     orderable: false,
                     className: "text-center",
                 },
                 {
-                    targets: [0, 4, 5,6,8],
+                    targets: [0, 4, 5,6,9],
                     orderable: false,
                     className: "text-center",
                 },
@@ -615,6 +620,7 @@
                     }
                 },
                 { 'data': 'DEST_HSG_DT', render: function (data, type, row) { return data != "" ? resJsonToDate(data) : ""; } },
+                { 'data': 'NEW_ARRV_DT', render: function (data, type, row) { return data != "" ? resJsonToDate(data) : ""; } },
                 {
                     mRender: function (data, type, row, meta) {
                         var pageInfo = tableMove.page.info();
@@ -1082,7 +1088,11 @@
         var gnd = $(btn).attr('gnd');
         var key = id.split('--')[1];
         $("#BT-ADD_MOVE").val(key);
-        $("#BT-ADD_MOVE").attr({ 'hsg': hsg, 'sit': sit, 'mdt': mdt, 'net': net, 'gnd': gnd });
+        $("#BT-ADD_MOVE").attr({ 'hsg': hsg, 'sit': sit, 'mdt': mdt, 'net': net, 'gnd': gnd,'ndt':ndt });
+        $("#SIT").val(sit);
+        $("#HSG").val(hsg);
+        $("#NDT").val(ndt);
+        $("#MDT").val(mdt);
         $.ajax({
             type: "POST",
             url: pathServer + "/RPL/HSGRPLDT01_SELECT_BRDR_MVMT",
@@ -1113,9 +1123,15 @@
         var gnd = $(btn).attr('gnd');
         var move_dt = $(btn).attr('mdt');
         var net_qty = $(btn).attr('net');
+        var new_dt = $(btn).attr('ndt');
+
         var dateObj = new Date(move_dt);
         var unixTimestamp = dateObj.getTime();
         var jsonDate = `/Date(${unixTimestamp})/`;
+
+        var dateObj2 = new Date(new_dt);
+        var unixTimestamp2 = dateObj2.getTime();
+        var jsonDate2 = `/Date(${unixTimestamp2})/`;
         if (tableMove.data().length < net_qty) {
             tableMove.row.add({
                 "UK_KEY": key,
@@ -1124,8 +1140,8 @@
                 "HSG_ID": hsg_id,
                 "BRDR_ID": "",
                 "DEST_HSG_ID": "",
-                "DEST_HSG_DT": jsonDate
-
+                "DEST_HSG_DT": jsonDate,
+                "NEW_ARRV_DT": jsonDate2
             }).draw(false);
             MoveReGenerate();
         } else {
@@ -1152,21 +1168,49 @@
                 console.log(key + "|" + tableMove.row(value).data().UK_KEY);
                 return key === tableMove.row(value).data().UK_KEY;
             }); // หา row ที่ต้องการจะลบ
-        Swal.fire({
-            icon: "warning",
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-        }).then((result) => {
-            if (result.isConfirmed) {
 
-                tableMove.rows(indexHead).remove().draw(); // ลบ row ที่ค้นหา
-                MoveReGenerate();
+        var sit = tableMove.row(indexHead).data().SITE_ID;
+        var hsg = tableMove.row(indexHead).data().DEST_HSG_ID;
+        var gnd = tableMove.row(indexHead).data().GND;
+        var ndt = resJsonToDate(tableMove.row(indexHead).data().NEW_ARRV_DT);
+        var brd = tableMove.row(indexHead).data().BRDR_ID;
 
+        $.ajax({
+            type: "POST",
+            url: pathServer + "/RPL/HSGRPLDT01_REVERT_CHECK",
+            dataType: "json",
+            cache: false,
+            data: { SITE_ID: sit, HSG_ID: hsg, GND: gnd, NEW_ARRV_DT: ndt, BRDR_ID: brd },
+            success: function (data) {
+                if (data == true) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            tableMove.rows(indexHead).remove().draw(); // ลบ row ที่ค้นหา
+                            MoveReGenerate();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: 'Not current!',
+                        text: "ไม่สามารถแก้ใขได้เนื่องจากสุกรกรที่เลือกไม่ปรากฏอยู่ในเล้าปลายทางหรือสถานะเปลี่ยนไปแล้ว!",
+                        showCancelButton: false,
+                        confirmButtonText: 'OK',
+                    });
+                }
+            },
+            error: function () {
+                errorAlert.init();
             }
         });
     }
+
     function MoveReGenerate() {
         // Get current page info for later use
         var pageInfo = tableMove.page.info();
@@ -1534,10 +1578,10 @@
         var DEST_HSG_ID = true;
         tableMove.rows().every(function (index) {
             var rowData = this.data();
-            if ($("#BRDR_ID--" + rowData.UK_KEY).val() == "") {
+            if (rowData.BRDR_ID == "") {
                 BRDR_ID = false;
             }
-            if ($("#DEST_HSG_ID--" + rowData.UK_KEY).val() == "") {
+            if (rowData.DEST_HSG_ID == "") {
                 DEST_HSG_ID = false;
             }
         });
@@ -1570,14 +1614,23 @@
         var TXN_HSG_RPLCMT_INCREASE = new Array();
         var TXN_HSG_RPLCMT_REDUCE = new Array();
         var TXN_HSG_RPLCMT = new Array();
+        var BRDR_MVMT_DEL = {};
         var TFR_QTY = 0;
         var ORIGIN = "";
         var GND = "";
         var NEW_ARRV_DT = "";
 
+        BRDR_MVMT_DEL.SITE_ID = $("#SIT").val();
+        BRDR_MVMT_DEL.HSG_ID = $("#HSG").val();
+        BRDR_MVMT_DEL.NEW_ARRV_DT = $("#NDT").val();
+        BRDR_MVMT_DEL.MVMT_DT = $("#MDT").val();
+
         for (var i = 0; i < tableMove.data().length; i++) {
+
+
             let tbmove = {};
             tbmove.DOC_CODE = tableMove.data()[i].UK_KEY.split('--')[0];
+            tbmove.NEW_ARRV_DT = resJsonToDate(tableMove.data()[i].NEW_ARRV_DT);
             tbmove.MVMT_DT = $("#searchDate").val();
             tbmove.SITE_ID = tableMove.data()[i].SITE_ID;
             tbmove.HSG_ID = tableMove.data()[i].HSG_ID;
@@ -1590,7 +1643,7 @@
             ORIGIN = tableMove.data()[i].HSG_ID;
             GND = tableMove.data()[i].GND;
         }
-        console.log(BRDR_MVMT);
+
         for (var i = 0; i < tableMain.data().length; i++) {
             var net = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].NEW_ARRV_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
             if (net > 0) {
@@ -1662,7 +1715,7 @@
         type: "POST",
             url: pathServer + "/RPL/HSGRPLDT01_MVMT_INSERT",
             dataType: "json",
-            data: JSON.stringify({BRDR_MVMT: BRDR_MVMT, TXN_HSG_RPLCMT_INCREASE: TXN_HSG_RPLCMT_INCREASE, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE }), //parameter Object,List
+            data: JSON.stringify({ BRDR_MVMT: BRDR_MVMT, TXN_HSG_RPLCMT_INCREASE: TXN_HSG_RPLCMT_INCREASE, TXN_HSG_RPLCMT_REDUCE: TXN_HSG_RPLCMT_REDUCE, BRDR_MVMT_DEL: BRDR_MVMT_DEL }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;

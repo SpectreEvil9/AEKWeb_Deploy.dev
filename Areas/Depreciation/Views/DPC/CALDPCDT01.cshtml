@@ -227,7 +227,8 @@
                                         <th style="text-align:center !important">เบอร์หู</th>
                                         <th style="text-align:center !important">ประเภท</th>
                                         <th style="text-align:center !important">รหัสพ่อแม่พันธุ์</th>
-                                        <th style="text-align:center !important">ซื้อราคาตัวละ(บาท)</th>
+                                        <th style="text-align:center !important">ต้นทุนซื้อ/ต้นทุนรับ</th>
+                                        <th style="text-align:center !important">ต้นทุนเล้าทดแทน</th>
                                         <th style="text-align:center !important">ราคาซาก/ตัว</th>
                                         <th style="text-align:center !important">มูลค่าที่ใช้คำนวณค่าเสื่อม(บาท)</th>
                                         <th style="text-align:center !important">วันที่ซื้อ/ได้มา</th>
@@ -344,7 +345,6 @@
                 if (aData.ST == 'N' || aData.ST == 'A' && ((dateDiff(new Date(resJsonToDate(aData.CRT_DT)), currentdate) == 0) && (currentdate.getHours() <= 23 && currentdate.getMinutes() <= 59))) {
                     $('td', nRow).eq(2).addClass('bg-new-green');
                 }
-                $('td', nRow).eq(12).addClass('bg-disabled-gray');
                 $('td', nRow).eq(13).addClass('bg-disabled-gray');
                 $('td', nRow).eq(14).addClass('bg-disabled-gray');
                 $('td', nRow).eq(15).addClass('bg-disabled-gray');
@@ -356,6 +356,7 @@
                 $('td', nRow).eq(21).addClass('bg-disabled-gray');
                 $('td', nRow).eq(22).addClass('bg-disabled-gray');
                 $('td', nRow).eq(23).addClass('bg-disabled-gray');
+                $('td', nRow).eq(24).addClass('bg-disabled-gray');
             },
             columnDefs: [
                 {
@@ -368,7 +369,7 @@
                     visible: false
                 },
                 {
-                    targets: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                    targets: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
                     orderable: false,
                     className: "text-left",
                 },
@@ -376,7 +377,7 @@
             "columns": [
                 {
                     "render": function (data, type, full, meta) {
-                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)); // index row
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
                         return (meta.row + 1) + page;
                     }
                 },
@@ -414,6 +415,12 @@
                         } else {
                             return numeral(data).format('0,0.00');
                         }
+                    }
+                },
+                {
+                    'data': 'COST_RP_TOT',
+                    render: function (data, type, row) {
+                        return numeral(data).format('0,0.00');
                     }
                 },
                 {
@@ -594,7 +601,7 @@
     function Calculate(indexDetail) {
         var page = tableDetail.page.info();
 
-        const netValue = (numeral(tableDetail.row(indexDetail).data().COST_AMT)._value - numeral(tableDetail.row(indexDetail).data().SCRP_VAL)._value);
+        const netValue = ((numeral(tableDetail.row(indexDetail).data().COST_AMT)._value + numeral(tableDetail.row(indexDetail).data().COST_RP_TOT)._value) - numeral(tableDetail.row(indexDetail).data().SCRP_VAL)._value);
         const startDate = new Date(resJsonToDate(tableDetail.row(indexDetail).data().ST_DT));
         const receiveDate = new Date(resJsonToDate(tableDetail.row(indexDetail).data().RCV_DT));
            receiveDate.setFullYear(receiveDate.getFullYear() + (tableDetail.row(indexDetail).data().BRDR_TP == 'F' ? 3 : 2));
@@ -630,8 +637,6 @@
 
         tableDetail.row(indexDetail).data(tableDetail.row(indexDetail).data()).draw();
         tableDetail.page(page.page).draw(false);
-
-        console.log(tableDetail.row(indexDetail).data());
     }
 
     $("#calBookValue").click(function () {
@@ -670,6 +675,7 @@
                 tb_dprc.ST = tableDetail.data()[i].ST;
                 tb_dprc.COST_AMT = numeral(tableDetail.data()[i].COST_AMT)._value;
                 tb_dprc.SCRP_VAL = numeral(tableDetail.data()[i].SCRP_VAL)._value;
+                tb_dprc.COST_RP_TOT = numeral(tableDetail.data()[i].COST_RP_TOT)._value;
                 tb_dprc.NET_VAL = numeral(tableDetail.data()[i].NET_VAL)._value;
                 tb_dprc.DT = resJsonToDate(tableDetail.data()[i].ST_DT);
 

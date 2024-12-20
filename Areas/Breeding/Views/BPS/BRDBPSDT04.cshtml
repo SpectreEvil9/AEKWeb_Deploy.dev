@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "BRDBPSDT04";
+}
+
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">
+                อัพโหลดข้อมูลการคัดพันธุ์เป็นสุกรพันธุ์ PS
+            </h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">PS</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <form class="m-form m-form--fit m-form--label-align-right">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-10">
+                                    <h1 class="card-title text-primary">นำเข้า</h1>
+                                </div>
+                                <div class="col-md-6 col-lg-2 d-flex" style="justify-content:flex-end !important">
+                                    <button onclick="DownloadAttachFile(this)" class="btn btn-secondary btn-round btn-sm"><i class="fas fa-file-excel"></i> Download Template</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-lg-2"></div>
+                                <div class="col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">ฟาร์ม</span>
+                                            <select class="form-select form-control input-req-date dropdown" id="SITE_ID" name="SITE_ID">
+                                                @foreach (var sit in ViewBag.MAS_SITE)
+                                                {
+                                                    <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกวันที่">
+                                            <span class="input-group-text" id="basic-addon1">วันที่ส่ง</span>
+                                            <input type="number" id="" class="form-control" />
+                                            <span class="input-group-icon">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-2">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกเล้า">
+                                            <span class="input-group-text" id="basic-addon1">เล้า</span>
+                                            <select class="form-select form-control dropdown input-req-date" id="searchHousingId" name="searchHousingId">
+                                                <option value="ALL" selected></option>
+                                                @foreach (var hsg in ViewBag.MAS_HSG)
+                                                {
+                                                    <option value="@hsg.HSG_ID">@hsg.HSG_CODE</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-3"></div>
+                                <div class="col-md-4 col-lg-6 ">
+                                    <div class="form-group" id="Upload">
+                                        <div class="input-group mb-3" role="group">
+                                            <span class="input-group-text col-lg-4">Select File (.xls or .xlsx)</span>
+                                            <input class="form-control" type="file" id="excelfile" name="excelfile">
+                                            <button id="btn_upload" class="btn btn-sm btn-success">Upload</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-footer"><br /></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#SITE_ID').val('BT').trigger("change");
+    });
+    function DownloadAttachFile() {
+        var fileNM = "PS_Template.xlsx";
+        var url = pathServer + "/BPS/DownloadAttachFile?";
+        url += "FileNM=" + fileNM;
+
+        window.open(url, '_blank');
+        setTimeout(function () {
+            $('#loading').fadeOut(400, "linear");
+        }, 300);
+    }
+</script>
