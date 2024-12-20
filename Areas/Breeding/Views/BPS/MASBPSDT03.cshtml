@@ -227,6 +227,13 @@
 </div>
 <script>
     $(document).ready(function () {
+        $("#FTHR_BRDR_ID,#MTHR_BRDR_ID").select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: false,
+            tags: true
+        });
         $("#FTHR_BRDR_ID").val(JSON.parse('@Html.Raw(Json.Encode(Model.FTHR_BRDR_ID))')).trigger("change");
         $("#MTHR_BRDR_ID").val(JSON.parse('@Html.Raw(Json.Encode(Model.MTHR_BRDR_ID))')).trigger("change");
         $("#GND").val(JSON.parse('@Html.Raw(Json.Encode(Model.GND))')).trigger("change");
