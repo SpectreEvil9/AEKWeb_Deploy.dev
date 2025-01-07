@@ -652,6 +652,7 @@
             let tbmove = {};
             tbmove.DOC_CODE = tableMove.data()[i].UK_KEY.split('--')[0];
             tbmove.MVMT_DT = $("#MVMT_DT").val();
+            tbmove.NEW_ARRV_DT = $("#MVMT_DT").val();
             tbmove.SITE_ID = tableMove.data()[i].SITE_ID;
             tbmove.HSG_ID = tableMove.data()[i].HSG_ID;
             tbmove.BRDR_ID = tableMove.data()[i].BRDR_ID;
@@ -664,7 +665,8 @@
             type: "POST",
             url: pathServer + "/MVT/TFRMVTDT02_MVMT_INSERT",
             dataType: "json",
-            data: JSON.stringify({ BRDR_MVMT: BRDR_MVMT }), //parameter Object,List
+            data: JSON.stringify({
+                BRDR_MVMT: BRDR_MVMT, FORM_HSG_TP: $("#FORM_HSG_TP").val(), TO_HSG_TP: $("#TO_HSG_TP").val() }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;

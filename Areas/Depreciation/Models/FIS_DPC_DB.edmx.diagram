@@ -6,8 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="cac65842d9634248921d4bf8d573f036" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="FIS_DPC_DBModel.V_DEPRECIATE" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FIS_DPC_DBModel.V_DEPRECIATE_RPT" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="FIS_DPC_DBModel.BRDR_DPRC" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FIS_DPC_DBModel.BRDR_DPRC" Width="1.5" PointX="4.875" PointY="0.75" />
+        <EntityTypeShape EntityType="FIS_DPC_DBModel.V_DEPRECIATE_RPT" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

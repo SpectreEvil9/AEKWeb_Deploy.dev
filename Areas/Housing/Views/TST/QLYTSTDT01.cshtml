@@ -47,12 +47,6 @@
                                                         <option value="@cqt.QLY_TST_TP" @(cqt.QLY_TST_TP == "PD0129" ? "selected" : "")>@cqt.QLY_TST_NM</option>
                                                     }
                                                 </select>
-                                                @*<select class="form-select form-control" id="typeSelect" name="typeSelect" required>
-                                                <option value="PD0129">สุกรหย่านม FM-PD-01/29</option>
-                                                <option value="PD0122">สุกรอนุบาล FM-PD-01/22</option>
-                                                <option value="PD0142">สุกรขุน FM-PD-01/42</option>
-                                                <option value="PD0124">สุกรรุ่นพันธุ์ FM-PD-01/24</option>
-                                            </select>*@
                                             </div>
                                         </div>
                                     </div>
@@ -142,7 +136,6 @@
                                 <div class="card-footer d-flex" style="justify-content:flex-end !important">
                                     <button type="button" id="SEARCH" class="btn btn-primary btn-round" style="z-index: 1;">Search</button>
                                 </div>
-                            
                          </form>
                     </div>
                     <div class="card-body body-qly-test" style="display:none">
@@ -193,76 +186,7 @@
                                                 <td>2) น้ำหนักเฉลี่ย</td>*@
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <!--<tr>
-                        <td style="text-align:center !important;">1</td>
-                        <td>B01</td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>-->
-                                        @*<td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>*@
-                                        <!--<td>
-                            <div class="d-flex align-items-center selectgroup-pills">
-                                <div class="icon-padding">
-                                    <button type="button"
-                                            class="selectgroup-button selectgroup-button-icon">
-                                        <i class="bi bi-camera-reels text-secondary"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center !important;">2</td>
-                        <td>B02</td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td><input type="number" class="form-control" /></td>
-                        <td>
-                            <div class="d-flex align-items-center selectgroup-pills">
-                                <div class="icon-padding">
-                                    <button type="button"
-                                            class="selectgroup-button selectgroup-button-icon">
-                                        <i class="bi bi-camera-reels text-secondary"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>-->
-                                    </tbody>
+                                    <tbody></tbody>
                                     <tfoot>
 
                                     </tfoot>
@@ -280,7 +204,7 @@
                                             <th rowspan="2">เล้า</th>
                                             <th colspan="7">1.ประมาณการน้ำหนักสุกรที่ผ่านเกณฑ์ (กก.)</th>
                                             <th colspan="11">2.สุกรที่ไม่ผ่านเกณฑ์มาตรฐาน ตามลักษณะผิดปกติ (ตัว)</th>
-                                            <td rowspan="2">รวมข้อ 1 และ 2</td>
+                                            <th rowspan="2">รวมข้อ 1 และ 2</th>
                                             <th colspan="11">3.ลักษณะผิดปกติที่ยอมรับได้ (ตัว)</th>
                                             <th rowspan="2">4. การตรวจสอบผลิตภัณฑ์ด้านอื่นๆ / หมายเหตุเพิ่มเติม</th>
                                         </tr>
@@ -318,96 +242,7 @@
                                             <th>รวม</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @*<tr>
-                                            <td style="text-align:center !important;">1</td>
-                                            <td>C01/1</td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="bi bi-camera-reels text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important;">2</td>
-                                            <td>C01/2</td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="bi bi-camera-reels text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>*@
-                                    </tbody>
+                                    <tbody></tbody>
                                     <tfoot>
 
                                     </tfoot>
@@ -464,98 +299,7 @@
                                             <th>รวมจำนวนตัวทั้งหมด = (1+2+3)</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @*<tr>
-                                            <td style="text-align:center !important;">1</td>
-                                            <td>C01/1</td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="text" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="bi bi-camera-reels text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center !important;">2</td>
-                                            <td>C01/2</td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="number" class="form-control" /></td>
-                                            <td><input type="text" class="form-control" /></td>
-                                            <td>
-                                                <div class="d-flex align-items-center selectgroup-pills">
-                                                    <div class="icon-padding">
-                                                        <button type="button"
-                                                                class="selectgroup-button selectgroup-button-icon">
-                                                            <i class="bi bi-camera-reels text-secondary"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>*@
-                                    </tbody>
+                                    <tbody></tbody>
                                     <tfoot>
 
                                     </tfoot>
@@ -955,8 +699,6 @@
         }
         if ('@ViewBag.housingId' != '') {
             $("#housingId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.housingId))')).trigger("change");
-        } else {
-            //$('#housingId :nth-child(1)').prop('selected', true);
         }
         if ('@ViewBag.testDate' != '') {
             $("#testDate").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.testDate))')).trigger("change");
@@ -1098,8 +840,7 @@
             } else if (typeSelect == 'PD0142') {
                 tableDetail3(housingCode);
             } else if (typeSelect == 'PD0124') {
-                tableDetail4_temp();
-                //tableDetail4(housingCode);
+                tableDetail4(housingCode);
             }
         });
 
@@ -1873,37 +1614,7 @@
             }).draw(false);
         }
         //------------------------End detail 3--------------------//
-        function tableDetail4_temp() {
-            tb_detail_4 = $("#tb_detail_4").DataTable({
-                lengthChange: false,
-                "processing": true, // for show progress bar
-                "orderMulti": false, // for disable multiple column at once
-                //"pageLength": 20,
-                scrollCollapse: true,
-                paging: false,
-                searching: false,
-                responsive: !0,
-                ordering: true,
-                info: true,
-                bAutoWidth: false,
-                order: [[1, "asc"]],
-                "bDestroy": true,
-                "drawCallback": function (data, settings) {
-                    $(".int").inputmask({
-                        'alias': 'numeric',
-                        'integerDigits': '12',
-                        'digits': 0,
-                        'min': '0',
-                        'prefix': '',
-                        rightAlign: true,
-                        allowMinus: false,
-                        autoGroup: true,
-                        groupSeparator: ','
-                    });
-                    $('#' + focusedElementId).focus();
-                },
-            });
-        }
+
         function tableDetail4(housingCode) {
             tb_detail_4 = $("#tb_detail_4").DataTable({
                 lengthChange: false,
@@ -1947,7 +1658,8 @@
                         className: "text-center",
                     },
                     {
-                        targets: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+                        targets: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+                                51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97],
                         orderable: false,
                         className: "text-center",
                     },

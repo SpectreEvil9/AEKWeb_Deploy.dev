@@ -1,0 +1,1280 @@
+﻿
+@{
+    ViewBag.Title = "INSSEMDT01";
+}
+
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">ห้องปฏิบัติการผสมเทียม (FM-PD-01/30)</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Housing" })">การจัดการในฟาร์มสุกร</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">บันทึกข้อมูลผสมเทียม</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">บันทึกข้อมูลผสมเทียม</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">ฟาร์ม</span>
+                                        <select class="form-select form-control input-req-date dropdown" id="SITE_ID" name="SITE_ID" disabled>
+                                            @foreach (var sit in ViewBag.MAS_SITE)
+                                            {
+                                                <option value="@sit.SITE_ID" @(sit.SITE_ID == "KZP" ? "selected" : "")>@sit.SITE_NM_TH</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุวันที่">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">วันที่</span>
+                                        <input type="text"
+                                               id="COLL_DT"
+                                               name="COLL_DT"
+                                               class="form-control"
+                                               placeholder="Select Date" />
+                                        <span class="input-group-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">สัปดาห์ที่</span>
+                                        <input type="text"
+                                               id="week"
+                                               class="form-control"
+                                               aria-describedby="basic-addon1" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                                <button type="button" id="SEARCH" class="btn btn-primary btn-round" style="z-index: 1;">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body body-qly-test">
+                        <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="line-tab1-tab" data-bs-toggle="pill" href="#line-tab1" role="tab" aria-controls="pills-tab1" aria-selected="true">I.การผลิตน้ำเชื้อ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="line-tab2-tab" data-bs-toggle="pill" href="#line-tab2" role="tab" aria-controls="pills-tab2" aria-selected="false">II.น้ำเชื้อที่ผลิตได้</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content mt-3 mb-3" id="line-tabContent">
+                            <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab1" role="tabpanel" aria-labelledby="line-tab1-tab">
+                                <input type="hidden" id="SIT" />
+                                <table id="tb_detail_1" style="width:100%;" border="1"
+                                       class="display table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" width="5%" style="text-align:center !important">ลำดับ</th>
+                                            <th rowspan="2">UK</th>
+                                            <th rowspan="2">sk</th>
+                                            <th rowspan="2" width="10%" style="text-align:center !important">เบอร์พ่อ</th>
+                                            <th rowspan="2" width="10%" style="text-align:center !important">สายพันธุ์</th>
+                                            <th rowspan="2" style="text-align:center !important">ปริมาณ (ml)</th>
+                                            <th rowspan="2" style="text-align:center !important">น้ำเชื้อ (grade)</th>
+                                            <th colspan="6" style="text-align:center !important">ความผิดปรกติของน้ำเชื้อ(Abnormal)</th>
+                                            <th rowspan="2" style="text-align:center !important">ค่าที่วัดจาก Spermacue</th>
+                                            <th colspan="2" style="text-align:center !important">ปริมาณโด๊สที่ผลิต</th>
+                                            <th style="align-content:center">
+                                                <div class="d-flex align-items-center selectgroup-pills">
+                                                    <button type="button"
+                                                            id="BT-ADD_INSEM"
+                                                            onclick="addSemCollection(this)"
+                                                            class="selectgroup-button selectgroup-button-icon">
+                                                        <i class="fa fa-plus text-success"></i>
+                                                    </button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align:center !important">Acrosome</th>
+                                            <th style="text-align:center !important">Head</th>
+                                            <th style="text-align:center !important">Neck</th>
+                                            <th style="text-align:center !important">Mid Piece</th>
+                                            <th style="text-align:center !important">Tail</th>
+                                            <th style="text-align:center !important">Immature</th>
+                                            <th style="text-align:center !important">1500 ล้านตัว</th>
+                                            <th style="text-align:center !important">ใช้จริง</th>
+                                            <th style="text-align:center !important"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @*<tr>
+                                            <td style="text-align:center !important">1</td>
+                                            <td style="text-align:center !important">
+                                                <select class="form-select form-control"
+                                                        id="smallSelect">
+                                                    <option>3703558241</option>
+                                                </select>
+                                            </td>
+                                            <td style="text-align:center !important">
+                                                <select class="form-select form-control"
+                                                        id="smallSelect">
+                                                    <option>Genesus</option>
+                                                </select>
+                                            </td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" value="439" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" value="4" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td>
+                                                <div class="d-flex align-items-center selectgroup-pills">
+                                                    <button type="button"
+                                                            class="selectgroup-button selectgroup-button-icon">
+                                                        <i class="fas fa-trash text-danger"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>*@
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="5" style="text-align:right">รวม</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade table-responsive tab-content mt-3 mb-3" id="line-tab2" role="tabpanel" aria-labelledby="line-tab2-tab">
+                                <table id="tb_detail_2" style="width:100%;" border="1"
+                                       class="display nowrap table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="1%" style="text-align:center !important">ลำดับ</th>
+                                            <th>UK</th>
+                                            <th>SK</th>
+                                            <th width="12%" style="text-align:center !important">รายการ</th>
+                                            <th width="12%" style="text-align:center !important">Size</th>
+                                            <th width="12%" style="text-align:center !important">วันที่ผลิต</th>
+                                            <th style="text-align:center !important">ยอดยกมา</th>
+                                            <th style="text-align:center !important">รับเข้า</th>
+                                            <th style="text-align:center !important">ใช้ไป</th>
+                                            <th style="text-align:center !important">จำหน่าย</th>
+                                            <th style="text-align:center !important">ทำลาย</th>
+                                            <th style="text-align:center !important">คงเหลือ</th>
+                                            <th style="text-align:center !important">หมายเหตุ</th>
+                                            <th style="align-content:center">
+                                                <div class="d-flex align-items-center selectgroup-pills">
+                                                    <button type="button"
+                                                            id="BT-ADD_PRDD"
+                                                            onclick="addSemProduced(this)"
+                                                            class="selectgroup-button selectgroup-button-icon">
+                                                        <i class="fa fa-plus text-success"></i>
+                                                    </button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @*<tr>
+                                            <td style="text-align:center !important">1</td>
+                                            <td style="text-align:center !important">
+                                                <select class="form-select form-control"
+                                                        id="smallSelect">
+                                                    <option>น้ำเชื่อ(โด๊ส)</option>
+                                                </select>
+                                            </td>
+                                            <td style="text-align:center !important">
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                           id="date"
+                                                           class="form-control"
+                                                           placeholder="Select Date" />
+                                                    <span class="input-group-icon">
+                                                        <i class="fas fa-calendar-alt"></i>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" value="439" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" value="4" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="number" class="form-control" /></td>
+                                            <td style="text-align:center !important"><input type="text" class="form-control" /></td>
+                                            <td>
+                                                <div class="d-flex align-items-center selectgroup-pills">
+                                                    <button type="button"
+                                                            class="selectgroup-button selectgroup-button-icon">
+                                                        <i class="fas fa-trash text-danger"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>*@
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="6" style="text-align:right">รวม</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button id="SAVE" class="btn btn-primary btn-round fix btn-fixed-position">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        if ('@ViewBag.SITE_ID' != '') {
+            $("#SITE_ID").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.SITE_ID))')).trigger("change");
+        }
+        if ('@ViewBag.COLL_DT' != '') {
+            $("#COLL_DT").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.COLL_DT))')).trigger("change");
+        } else {
+            $("#COLL_DT").datepicker({
+                todayHighlight: true,
+                orientation: 'bottom left',
+                format: 'dd-M-yyyy',
+                todayBtn: 'linked',
+                autoclose: 'true',
+                assumeNearbyYear: true,
+            }).datepicker('setDate', 'now');
+        }
+
+        $('#SITE_ID').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: true,
+            tags: true
+        });
+
+        $("#week").val(getWeekNumber(formatDate($("#COLL_DT").val())));
+
+    });
+
+    function getWeekNumber(dateStr) {
+        // Parse the date from the string
+        var date = new Date(dateStr);
+        // Set the date to the nearest Thursday: current date + 4 - current day number (with Sunday as 7)
+        date.setDate(date.getDate() + 4 - (date.getDay() || 7));
+        // Get the first day of the year
+        var yearStart = new Date(date.getFullYear(), 0, 1);
+        // Calculate full weeks to nearest Thursday
+        var weekNumber = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+
+        return weekNumber;
+    }
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        return [year, month, day].join('-');
+    }
+
+    function dateToJson(value) {
+        var unixTimestamp = new Date(value).getTime();
+        return `/Date(${unixTimestamp})/`;
+    }
+
+    $("#SEARCH").on('click', function () {
+        if ($("#SITE_ID").val() != "" && $("#COLL_DT").val() != "") {
+            tableDetail1();
+            tableDetail2();
+        } else {
+            if ($("#SITE_ID").val() == "") {
+                $($(SITE_ID).parent()).addClass('alert-validate');
+            }
+            if ($("#COLL_DT").val() == "") {
+                $($(COLL_DT).parent()).addClass('alert-validate-date');
+            }
+        }
+    });
+
+    function tableDetail1() {
+        let numRow = "";
+        let FTHR_BRDR_ID_DATA = null;
+        tb_detail_1 = $("#tb_detail_1").DataTable({
+            lengthChange: false,
+            "processing": true, // for show progress bar
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            scrollCollapse: true,
+            paging: false,
+            searching: false,
+            responsive: !0,
+            ordering: true,
+            info: true,
+            bAutoWidth: false,
+            order: [[1, "asc"]],
+            "bDestroy": true,
+            "ajax": {
+                url: pathServer + "/SEM/INSSEMDT01_SELECT",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    siteId: $("#SITE_ID").val(), collectionDate: formatDate($("#COLL_DT").val())
+                },
+                success: function (data) {
+                    tb_detail_1.clear().draw();
+                    FTHR_BRDR_ID_DATA = data.FTHR_BRDR_ID;
+
+                    if (data.V_AVY_BRDR_SEMEN_COLL.length == 0) {
+                        addSemCollection();
+                    } else {
+                        tb_detail_1.rows.add(data.V_AVY_BRDR_SEMEN_COLL).draw();
+                    }
+                    tb_detail_1.processing(false);
+                },
+            },
+            columnDefs: [
+                {
+                    targets: [0],
+                    orderable: false,
+                    className: "text-center",
+                },
+                {
+                    targets: [1, 2],
+                    visible: false
+                },
+                {
+                    targets: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+                    orderable: false,
+                    className: "text-right",
+                },
+            ],
+            "columns": [
+                {
+                    "render": function (data, type, full, meta) {
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                        numRow = (meta.row + 1) + page;
+                        return (meta.row + 1) + page;
+                    }
+                },
+                { 'data': 'UK_KEY' },
+                { 'data': 'AVY_BRDR_SEMEN_COLL_SK' },
+                {
+                    'data': 'FTHR_BRDR_ID',
+                    render: function (data, type, row, meta) {
+                        var optionList = "";
+                        $.each(FTHR_BRDR_ID_DATA, function (index, item) {
+                            if (row.FTHR_BRDR_ID !== null && row.FTHR_BRDR_ID == item.FTHR_BRDR_ID) {
+                                optionList = optionList + ' <option selected="selected" value="' + item.FTHR_BRDR_ID + '--' + item.GNE + '">' + item.FTHR_BRDR_ID + '</option> ';
+                            } else {
+                                optionList = optionList + ' <option value="' + item.FTHR_BRDR_ID + '--' + item.GNE + '">' + item.FTHR_BRDR_ID + '</option> ';
+                            }
+                        })
+                        var select = "<div class='input-group'><select class='form-select dropdown sem_select' onchange='modifyDirectly(this)' id='FTHR_BRDR_ID--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' require> <option value=''></option>" + optionList + "</select></div>";
+                        return select;
+                    }
+                },
+                {
+                    'data': 'GNE',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control text-center' id='GNE--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.GNE + "' readonly/>";
+                    }
+                },
+                {
+                    'data': 'AMT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input autocomplete='off' id='AMT--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.AMT + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'GRD',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='GRD--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.GRD + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'ACRS',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='ACRS--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.ACRS + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'HD',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='HD--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.HD + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'NECK',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='NECK--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NECK + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'MID_PCE',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='MID_PCE--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.MID_PCE + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'TAIL',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='TAIL--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.TAIL + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'IMPTR',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='IMPTR--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.IMPTR + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'SPMC',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='SPMC--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.SPMC + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'DOSE_1500M',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='DOSE_1500M--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DOSE_1500M + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    'data': 'DOSE_REAL_USED',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='DOSE_REAL_USED--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DOSE_REAL_USED + "' onchange='modifyDirectly(this)'/>";
+                    }
+                },
+                {
+                    mRender: function (data, type, row, meta) {
+                        return "<div class='d-flex align-items-center selectgroup-pills'><button type='button' onclick='delSemCollection(this)' id='BT-DEL_SEM--" + row.UK_KEY + "' class='selectgroup-button selectgroup-button-icon move_bt' ><i class='fas fa-trash text-danger'></i></button></div>";
+                    }
+                }
+            ],
+            "drawCallback": function (data, settings) {
+                var api = this.api();
+
+                $(".int").inputmask({
+                    'alias': 'numeric',
+                    'integerDigits': '12',
+                    'digits': 0,
+                    'min': '0',
+                    'prefix': '',
+                    rightAlign: true,
+                    allowMinus: false,
+                    autoGroup: true,
+                    groupSeparator: ','
+                });
+                $('#' + focusedElementId).focus();
+
+                $(".sem_select").select2({
+                    theme: "bootstrap-5",
+                    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                    placeholder: $(this).data('placeholder'),
+                    closeOnSelect: true,
+                    tags: true
+                });
+
+                api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+                    var pageInfo = api.page.info();
+                    var rowIndex = (i + 1) + pageInfo.page * pageInfo.length;
+                    $(cell).html(rowIndex);
+                });
+            },
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api();
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+
+                totalAMT = api
+                    .column(5)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(5).footer()).html(
+                    numeral(totalAMT).format('0,0.00')
+                );
+
+                totalGRD = api
+                    .column(6)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(6).footer()).html(
+                    numeral(totalGRD).format('0,0.00')
+                );
+
+                totalACRS = api
+                    .column(7)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(7).footer()).html(
+                    numeral(totalACRS).format('0,0.00')
+                );
+
+                totalHD = api
+                    .column(8)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(8).footer()).html(
+                    numeral(totalHD).format('0,0.00')
+                );
+
+                totalNECK = api
+                    .column(9)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(9).footer()).html(
+                    numeral(totalNECK).format('0,0.00')
+                );
+
+                totalMIDP = api
+                    .column(10)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(10).footer()).html(
+                    numeral(totalMIDP).format('0,0.00')
+                );
+
+                totalTAIL = api
+                    .column(11)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(11).footer()).html(
+                    numeral(totalTAIL).format('0,0.00')
+                );
+
+                totalIMPTR = api
+                    .column(12)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(12).footer()).html(
+                    numeral(totalIMPTR).format('0,0.00')
+                );
+
+                totalSPMC = api
+                    .column(13)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(13).footer()).html(
+                    numeral(totalSPMC).format('0,0.00')
+                );
+
+                totalDOSE1500M = api
+                    .column(14)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(14).footer()).html(
+                    numeral(totalDOSE1500M).format('0,0.00')
+                );
+
+                totalDOSERU = api
+                    .column(15)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(15).footer()).html(
+                    numeral(totalDOSERU).format('0,0.00')
+                );
+            },
+        });
+
+        tb_detail_1.on('order.dt', function () {
+            tb_detail_1.column(0, { order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw(false);
+    }
+
+    function tableDetail2() {
+        var numRow = "";
+        tb_detail_2 = $("#tb_detail_2").DataTable({
+            lengthChange: false,
+            "processing": true, // for show progress bar
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            scrollCollapse: true,
+            paging: false,
+            searching: false,
+            responsive: !0,
+            ordering: true,
+            info: true,
+            bAutoWidth: false,
+            order: [[1, "asc"]],
+            "bDestroy": true,
+            "ajax": {
+                url: pathServer + "/SEM/INSPDDDT01_SELECT",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    siteId: $("#SITE_ID").val(), collectionDate: formatDate($("#COLL_DT").val())
+                },
+                success: function (data) {
+                    tb_detail_2.clear().draw();
+
+                    if (data.V_AVY_BRDR_SEMEN_PDD.length == 0) {
+                        addSemProduced();
+                    } else {
+                        tb_detail_2.rows.add(data.V_AVY_BRDR_SEMEN_PDD).draw();
+                    }
+                    tb_detail_2.processing(false);
+                },
+            },
+            columnDefs: [
+                {
+                    targets: [0],
+                    orderable: false,
+                    className: "text-center",
+                },
+                {
+                    targets: [1, 2],
+                    visible: false
+                },
+                {
+                    targets: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+                    orderable: false,
+                    className: "text-right",
+                },
+            ],
+            "columns": [
+                {
+                    "render": function (data, type, full, meta) {
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                        numRow = (meta.row + 1) + page;
+                        return (meta.row + 1) + page;
+                    }
+                },
+                { 'data': 'UK_KEY' },
+                { 'data': 'AVY_BRDR_SEMEN_PDD_SK' },
+                {
+                    'data': 'ITM_NO',
+                    render: function (data, type, row, meta) {
+                        let optionList = "";
+                        let strItem = JSON.parse('@Html.Raw(Json.Encode(ViewBag.MAS_ITM))');
+                        $.each(strItem, function (index, item) {
+                            if (row.ITM_NO !== null && row.ITM_NO == item.ITM_NO) {
+                                optionList = optionList + ' <option selected="selected" value="' + item.ITM_NO + '">' + item.ITM_NM + ' (โด๊ส)</option> ';
+                            } else {
+                                optionList = optionList + ' <option value="' + item.ITM_NO + '"' + (item.ITM_NO == '340101' ? 'selected' : '') + '>' + item.ITM_NM + ' (โด๊ส)</option> ';
+                            }
+                        })
+                        var select = "<div class='input-group'><select class='form-select dropdown form-control' id='ITM_NO' row='" + meta.row + "' col='" + meta.col + "' disabled> <option value=''></option>" + optionList + "</select></div>";
+                        return select;
+                    }
+                },
+                {
+                    'data': 'SIZE',
+                    render: function (data, type, row, meta) {
+                        let optionList = "";
+                        let strItem = JSON.parse('@Html.Raw(Json.Encode(ViewBag.MAS_ITM_SIZE))');
+                        $.each(strItem, function (index, item) {
+                            if (row.SIZE !== null && row.SIZE == item.SIZE) {
+                                optionList = optionList + ' <option selected="selected" value="' + item.SIZE + '">' + item.SIZE + '</option> ';
+                            } else {
+                                optionList = optionList + ' <option value="' + item.SIZE + '">' + item.SIZE + '</option> ';
+                            }
+                        })
+                        var select = "<div class='input-group'><select class='form-select dropdown form-control txt-user-input' onchange='modifyDireclyDt2(this)' id='SIZE--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "'> <option value=''></option>" + optionList + "</select></div>";
+                        return select;
+                    }
+                },
+                {
+                    'data': 'PDD_DT',
+                    render: function (data, type, row, meta) {
+                        return "<div class='input-group'><input type='text' class='form-control producedDate' autocomplete='off' id='PDD_DT--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + (row.PDD_DT != null ? resJsonToDate(row.PDD_DT) : '') + "' onchange='modifyDireclyDt2(this)' style='color: rgb(12, 63, 245) !important;' /><span class='input-group-icon'><i class='fas fa-calendar-alt'></i></span></div>";
+                    }
+                },
+                {
+                    'data': 'RMAN',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' id='RMAN--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.RMAN + "' readonly/>";
+                    }
+                },
+                {
+                    'data': 'NEW_ARRV',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='NEW_ARRV--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NEW_ARRV + "' onchange='modifyDireclyDt2(this)'/>";
+                    }
+                },
+                {
+                    'data': 'USE',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='USE--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.USE + "' onchange='modifyDireclyDt2(this)'/>";
+                    }
+                },
+                {
+                    'data': 'SALE',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='SALE--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.SALE + "' onchange='modifyDireclyDt2(this)'/>";
+                    }
+                },
+                {
+                    'data': 'DSTY',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='DSTY--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.DSTY + "' onchange='modifyDireclyDt2(this)'/>";
+                    }
+                },
+                {
+                    'data': 'NET_AMT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' id='NET_AMT--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NET_AMT + "' readonly/>";
+                    }
+                },
+                {
+                    'data': 'NOTE',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control txt-user-input' autocomplete='off' id='NOTE--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + (row.NOTE != null ? row.NOTE : "") + "' onchange='modifyDireclyDt2(this)'/>";
+                    }
+                },
+                {
+                    mRender: function (data, type, row, meta) {
+                        return "<div class='d-flex align-items-center selectgroup-pills'><button type='button' onclick='delSemProduced(this)' id='BT-DEL_PDD--" + row.UK_KEY + "' class='selectgroup-button selectgroup-button-icon move_bt' ><i class='fas fa-trash text-danger'></i></button></div>";
+                    }
+                }
+                ],
+            "drawCallback": function (data, settings) {
+                $(".int").inputmask({
+                    'alias': 'numeric',
+                    'integerDigits': '12',
+                    'digits': 0,
+                    'min': '0',
+                    'prefix': '',
+                    rightAlign: true,
+                    allowMinus: false,
+                    autoGroup: true,
+                    groupSeparator: ','
+                });
+                $('#' + focusedElementId).focus();
+
+                $(".producedDate").datepicker({
+                    todayHighlight: true,
+                    orientation: 'bottom left',
+                    format: 'dd-M-yyyy',
+                    todayBtn: 'linked',
+                    autoclose: 'true',
+                    assumeNearbyYear: true
+                });
+            },
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api();
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+
+                totalRMAN = api
+                    .column(6)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(6).footer()).html(
+                    numeral(totalRMAN).format('0,0.00')
+                );
+
+                totalNEWARRV = api
+                    .column(7)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(7).footer()).html(
+                    numeral(totalNEWARRV).format('0,0.00')
+                );
+
+                totalUSE = api
+                    .column(8)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(8).footer()).html(
+                    numeral(totalUSE).format('0,0.00')
+                );
+
+                totalSALE = api
+                    .column(9)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(9).footer()).html(
+                    numeral(totalSALE).format('0,0.00')
+                );
+
+                totalDSTY = api
+                    .column(10)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(10).footer()).html(
+                    numeral(totalDSTY).format('0,0.00')
+                );
+
+                totalNETAMT = api
+                    .column(11)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                $(api.column(11).footer()).html(
+                    numeral(totalNETAMT).format('0,0.00')
+                );
+            },
+        });
+
+        tb_detail_2.on('order.dt', function () {
+            tb_detail_2.column(0, { order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw(false);
+    }
+
+    let focusedElementId;
+    // Detect focus for any focusable element within a specific container
+    $('#tb_detail_1, #tb_detail_2').on('focusin', 'input, select, textarea', function () {
+        focusedElementId = $(this).attr('id');
+    });
+
+    function addSemCollection() {
+        tb_detail_1.row.add({
+            "UK_KEY" : "",
+            "AVY_BRDR_SEMEN_COLL_SK" : "",
+            "FTHR_BRDR_ID": "",
+            "GNE": "",
+            "AMT": "",
+            "GRD": "",
+            "ACRS": "",
+            "HD": "",
+            "NECK": "",
+            "MID_PCE": "",
+            "TAIL": "",
+            "IMPTR": "",
+            "SPMC": "",
+            "DOSE_1500M": "",
+            "DOSE_REAL_USED": ""
+        }).draw(false);
+    }
+
+    function addSemProduced() {
+        if (tb_detail_2.data().length < 2) {
+            tb_detail_2.row.add({
+                "UK_KEY": "",
+                "AVY_BRDR_SEMEN_PDD_SK": "",
+                "SEMEN_LIST": "",
+                "PDD_DT": "",
+                "RMAN": "",
+                "NEW_ARRV": "",
+                "USE": "",
+                "SALE": "",
+                "DSTY": "",
+                "NET_AMT": "",
+                "NOTE": ""
+            }).draw(false);
+        } else {
+            Swal.fire({
+                icon: "warning",
+                title: 'Limited to adding only 2 rows!',
+                text: "You won't able to add more!",
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+            });
+        }
+    }
+
+    function delSemCollection(btn) {
+        let id = $(btn).attr('id');
+        let key = id.split('--')[1];
+
+        let indexDelete = tb_detail_1
+            .rows()
+            .indexes()
+            .filter(function (value, index) {
+                return key === tb_detail_1.row(value).data().UK_KEY;
+            }); // หา row ที่ต้องการจะลบ
+        Swal.fire({
+            icon: "warning",
+            title: 'Are you sure?',
+            text: "Do you want to delete this!",
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                tb_detail_1.row(indexDelete).remove().draw();
+            }
+        });
+    }
+
+    function delSemProduced(btn) {
+        let id = $(btn).attr('id');
+        let key = id.split('--')[1];
+
+        let indexDelete = tb_detail_2
+            .rows()
+            .indexes()
+            .filter(function (value, index) {
+                return key === tb_detail_2.row(value).data().UK_KEY;
+            });
+        Swal.fire({
+            icon: "warning",
+            title: 'Are you sure?',
+            text: "Do you want to delete this!",
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                tb_detail_2.row(indexDelete).remove().draw();
+            }
+        });
+    }
+
+    function modifyDirectly(btn) {
+        let id = $(btn).attr('id');
+        let row = $(btn).attr('row');
+        let col = $(btn).attr('col');
+        let values = $("#" + id).val();
+        let key = id.split('--')[1];
+        let id_fthr = id.split('--')[0];
+        focus = id;
+
+        let indexDetail = tb_detail_1.rows().indexes().filter(function (value, index) {
+            return key === tb_detail_1.row(value).data().numRow;
+        });
+
+        if (indexDetail !== undefined && tb_detail_1.row(indexDetail).length > 0) {
+            let page = tb_detail_1.page.info();
+
+            if (id_fthr == 'FTHR_BRDR_ID') {
+                let fth_val = values.split('--')[0];
+                let gne_val = values.split('--')[1];
+
+                tb_detail_1.page(page.page).cell(row, col).data(fth_val).draw(false);
+                tb_detail_1.page(page.page).cell(row, 4).data(gne_val).draw(false);
+            } else {
+                tb_detail_1.page(page.page).cell(row, col).data(values).draw(false);
+            }
+
+        } else {
+            console.log("Invalid row index:", indexDetail);
+        }
+    }
+
+    function modifyDireclyDt2(btn) {
+        let id = $(btn).attr('id');
+        let row = $(btn).attr('row');
+        let col = $(btn).attr('col');
+        let values = $("#" + id).val();
+        let id_key = id.split('--')[0]
+        let key = id.split('--')[1];
+        focus = id;
+
+        if (id_key == 'PDD_DT') {
+            values = dateToJson(values);
+        }
+
+        let indexDetail = tb_detail_2.rows().indexes().filter(function (value, index) {
+            return key === tb_detail_2.row(value).data().UK_KEY;
+        });
+
+        if (indexDetail !== undefined && tb_detail_2.row(indexDetail).length > 0) {
+            let page = tb_detail_2.page.info();
+            tb_detail_2.page(page.page).cell(row, col).data(values).draw(false);
+
+            if (id_key == 'SIZE') {
+                let netAmt = getNetAmt(values);
+                tb_detail_2.page(page.page).cell(row, 6).data((netAmt ? netAmt : 0)).draw(false);
+                calculate(indexDetail, row, 6);
+            }
+
+            if (col > 5 && col < 11) {
+                calculate(indexDetail, row, col);
+            }
+        } else {
+            console.log("Invalid row index:", indexDetail);
+        }
+    }
+
+    function calculate(indexDetail,  row, col) {
+        let page = tb_detail_2.page.info();
+        let totalAmt = numeral(tb_detail_2.page(page.page).cell(row, 6).data())._value
+            + numeral(tb_detail_2.page(page.page).cell(row, 7).data())._value
+            - numeral(tb_detail_2.page(page.page).cell(row, 8).data())._value
+            - numeral(tb_detail_2.page(page.page).cell(row, 9).data())._value
+            - numeral(tb_detail_2.page(page.page).cell(row, 10).data())._value;
+        tb_detail_2.page(page.page).cell(row, 11).data(totalAmt).draw(false);
+    }
+
+    function getNetAmt(size) {
+        let net_amt = null;
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            type: "POST",
+            url: pathServer + "/SEM/INSPDDDT01_GET_NET_AMT",
+            dataType: "json",
+            async: false,
+            data: JSON.stringify({ siteId: $("#SITE_ID").val(), collectionDate: formatDate($("#COLL_DT").val()), size: size }),
+            success: function (data) {
+                net_amt = data.NET_AMT[0];
+            },
+            error: function () {
+                errorAlert.init();
+            }
+        });
+        return net_amt;
+    }
+
+    $("#SAVE").click(function () {
+        if ($("#SITE_ID").val() != "" && $("#COLL_DT").val() != "") {
+            Swal.fire({
+                icon: "question",
+                title: 'Do you want to save?',
+                text: "Are you sure to Create this data",
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    saveSemenColl();
+                    saveProduced();
+                }
+            });
+        } else {
+            if ($("#SITE_ID").val() == "") {
+                $($(SITE_ID).parent()).addClass('alert-validate');
+            }
+            if ($("#COLL_DT").val() == "") {
+                $($(COLL_DT).parent()).addClass('alert-validate-date');
+            }
+        }
+    });
+
+    function saveSemenColl() {
+        let AVY_BRDR_SEMEN_COLL = new Array();
+        let SEMEN_COLL_DEL = {};
+        SEMEN_COLL_DEL.SITE_ID = $("#SITE_ID").val();
+        SEMEN_COLL_DEL.COLL_DT = formatDate($("#COLL_DT").val());
+
+        if (tb_detail_1.data().length > 0) {
+            for (let i = 0; i < tb_detail_1.data().length; i++) {
+                let avy_sem_coll = {};
+                avy_sem_coll.AVY_BRDR_SEMEN_COLL_SK = tb_detail_1.data()[i].AVY_BRDR_SEMEN_COLL_SK;
+                avy_sem_coll.SITE_ID = $("#SITE_ID").val();
+                avy_sem_coll.COLL_DT = formatDate($("#COLL_DT").val());
+                avy_sem_coll.FTHR_BRDR_ID = tb_detail_1.data()[i].FTHR_BRDR_ID;
+                avy_sem_coll.GNE = tb_detail_1.data()[i].GNE;
+                avy_sem_coll.AMT = numeral(tb_detail_1.data()[i].AMT)._value;
+                avy_sem_coll.GRD = numeral(tb_detail_1.data()[i].GRD)._value;
+                avy_sem_coll.ACRS = numeral(tb_detail_1.data()[i].ACRS)._value;
+                avy_sem_coll.HD = numeral(tb_detail_1.data()[i].HD)._value;
+                avy_sem_coll.NECK = numeral(tb_detail_1.data()[i].NECK)._value;
+                avy_sem_coll.MID_PCE = numeral(tb_detail_1.data()[i].MID_PCE)._value;
+                avy_sem_coll.TAIL = numeral(tb_detail_1.data()[i].TAIL)._value;
+                avy_sem_coll.IMPTR = numeral(tb_detail_1.data()[i].IMPTR)._value;
+                avy_sem_coll.SPMC = numeral(tb_detail_1.data()[i].SPMC)._value;
+                avy_sem_coll.DOSE_1500M = numeral(tb_detail_1.data()[i].DOSE_1500M)._value;
+                avy_sem_coll.DOSE_REAL_USED = numeral(tb_detail_1.data()[i].DOSE_REAL_USED)._value;
+
+                AVY_BRDR_SEMEN_COLL.push(avy_sem_coll);
+            }
+
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                type: "POST",
+                url: pathServer + "/SEM/INSSEMDT01_INSERT",
+                dataType: "json",
+                data: JSON.stringify({ AVY_BRDR_SEMEN_COLL: AVY_BRDR_SEMEN_COLL, SEMEN_COLL_DEL: SEMEN_COLL_DEL }),
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                    return xhr;
+                },
+                success: function (data) {
+                    clearInterval(interVal);
+                    $('#progress').css('width', 100 + "%");
+                    setTimeout(function () {
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved',
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            $("#SEARCH").click();
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    }
+
+    function saveProduced() {
+        let AVY_BRDR_SEMEN_PDD = new Array();
+        let SEMEN_PDD_DEL = {};
+        SEMEN_PDD_DEL.SITE_ID = $("#SITE_ID").val();
+        SEMEN_PDD_DEL.COLL_DT = formatDate($("#COLL_DT").val());
+
+        if (tb_detail_2.data().length > 0) {
+            for (let i = 0; i < tb_detail_2.data().length; i++) {
+                let avy_sem_pdd = {};
+                avy_sem_pdd.AVY_BRDR_SEMEN_PDD_SK = tb_detail_2.data()[i].AVY_BRDR_SEMEN_PDD_SK;
+                avy_sem_pdd.SITE_ID = $("#SITE_ID").val();
+                avy_sem_pdd.COLL_DT = formatDate($("#COLL_DT").val());
+                avy_sem_pdd.ITM_NO = tb_detail_2.data()[i].ITM_NO ? tb_detail_2.data()[i].ITM_NO : $("#ITM_NO").val();
+                avy_sem_pdd.SIZE = tb_detail_2.data()[i].SIZE;
+                avy_sem_pdd.PDD_DT = resJsonToDate(tb_detail_2.data()[i].PDD_DT);
+                avy_sem_pdd.RMAN = numeral(tb_detail_2.data()[i].RMAN)._value;
+                avy_sem_pdd.NEW_ARRV = numeral(tb_detail_2.data()[i].NEW_ARRV)._value;
+                avy_sem_pdd.USE = numeral(tb_detail_2.data()[i].USE)._value;
+                avy_sem_pdd.SALE = numeral(tb_detail_2.data()[i].SALE)._value;
+                avy_sem_pdd.DSTY = numeral(tb_detail_2.data()[i].DSTY)._value;
+                avy_sem_pdd.NET_AMT = numeral(tb_detail_2.data()[i].NET_AMT)._value;
+                avy_sem_pdd.NOTE = tb_detail_2.data()[i].NOTE;
+
+                AVY_BRDR_SEMEN_PDD.push(avy_sem_pdd);
+            }
+
+
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                type: "POST",
+                url: pathServer + "/SEM/INSPDDDT01_INSERT",
+                dataType: "json",
+                data: JSON.stringify({ AVY_BRDR_SEMEN_PDD: AVY_BRDR_SEMEN_PDD, SEMEN_PDD_DEL: SEMEN_PDD_DEL }),
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    let timerInterval;
+                    xhr_loading(xhr);
+                    clearInterval(timerInterval);
+                    return xhr;
+                },
+                success: function (data) {
+                    clearInterval(interVal);
+                    $('#progress').css('width', 100 + "%");
+                    setTimeout(function () {
+                        Swal.fire({
+                            icon: "success",
+                            title: 'Your data has been saved',
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            $("#SEARCH").click();
+                            //tb_detail_2.ajax.reload();
+                        });
+                    }, 1500);
+                },
+                error: function () {
+                    errorAlert.init();
+                }
+            });
+        }
+    }
+
+    jQuery(window).on("load", function () {
+        setTimeout(function () {
+            $("#SEARCH").click();
+        }, 700);
+    });
+</script>

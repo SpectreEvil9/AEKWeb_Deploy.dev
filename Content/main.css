@@ -54,6 +54,9 @@
     animation-name: ro;
     transform-origin: 50% 50%;
 }
+.text-right {
+    text-align: right !important;
+}
 /*----------ค่าเสื่อมพันธุ์---------*/
 .bg-new-green {
     background-color: #8bf180 !important;

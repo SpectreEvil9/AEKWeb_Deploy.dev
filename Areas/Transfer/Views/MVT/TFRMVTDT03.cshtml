@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกวันที่">
                                         <span class="input-group-text col-lg-3" id="basic-addon1">วันที่</span>
-                                        <input type="text" class="form-control input-req-date" id="MVMT_DT" placeholder="Select Date" value="@(Model.MVMT_DT == null ? "" : Convert.ToString(string.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(Model.MVMT_DT))))" />
+                                        <input type="text" class="form-control input-req-date" id="MVMT_DT" placeholder="Select Date" value="@(Model.MVMT_DT == null ? "" : Convert.ToString(string.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(Model.MVMT_DT))))" disabled/>
                                     </div>
                                 </div>
                             </div>
@@ -68,9 +68,7 @@
                                         <input type="text"
                                                style="text-align:center"
                                                class="form-control"
-                                               placeholder="Draft"
-                                               aria-label="Username"
-                                               aria-describedby="basic-addon1" readonly />
+                                               placeholder="Complated" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +156,7 @@
                                         <th width="5%" style="align-content:center">
                                             <div class="d-flex align-items-center selectgroup-pills">
                                                 <button type="button" id="BT-ADD_MOVE" onclick="AddMovement(this)"
-                                                        class="selectgroup-button selectgroup-button-icon">
+                                                        class="selectgroup-button selectgroup-button-icon add_bt">
                                                     <i class="fa fa-plus text-success"></i>
                                                 </button>
                                             </div>
@@ -210,7 +208,7 @@
         $("#MVMT_DT").change(function () {
             $($(MVMT_DT).parent()).removeClass('alert-validate-date');
         });
-
+        
         tableMove = $("#tb_move").DataTable({
             "searching": false,
             "paging": true,
@@ -303,13 +301,13 @@
                     render: function (data, type, row, meta) {
                         var optionList = "";
                         $.each(MAS_HSG_TO, function (index, item) {
-                            if (row.HSG_ID != item.HSG_ID) {
+
                                 if (row.DEST_HSG_ID !== null && row.DEST_HSG_ID == item.HSG_ID) {
                                     optionList = optionList + ' <option selected="selected" value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
                                 } else {
                                     optionList = optionList + ' <option value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
                                 }
-                            }
+                            
                         });
                         var pageInfo = tableMove.page.info();
                         var row_index = (meta.row + 1) + numeral(pageInfo.page)._value * numeral(pageInfo.length)._value;
@@ -330,7 +328,7 @@
                         if (row_index > 0) {
                             combines = "--" + row_index.toString();
                         }
-                        return "<div class='d-flex align-items-center selectgroup-pills'><button type='button' onclick='DelMovement(this)' id='BT-DEL_MOVE--" + row.UK_KEY + "' class='selectgroup-button selectgroup-button-icon move_bt' ><i class='fas fa-trash text-danger'></i></button></div>";
+                        return "<div class='d-flex align-items-center selectgroup-pills'><button type='button' onclick='DelMovement(this)' id='BT-DEL_MOVE--" + row.UK_KEY + "' class='disabled selectgroup-button selectgroup-button-icon del_bt'><i class='fas fa-trash text-danger'></i></button></div>";
                     }
                 }
 
@@ -408,6 +406,7 @@
 
         });
         SelectMovement();
+
     });
 
     function SelectMovement() {
@@ -424,6 +423,7 @@
                 tableMove.clear().draw();
                 tableMove.rows.add(BRDR_MVMT).draw();
                 MoveReGenerate();
+                $('#tb_move').find('input, select, textarea,button').prop('disabled', true);
             },
             error: function () {
                 errorAlert.init();
@@ -629,6 +629,7 @@
             let tbmove = {};
             tbmove.DOC_CODE = tableMove.data()[i].UK_KEY.split('--')[0];
             tbmove.MVMT_DT = $("#MVMT_DT").val();
+            tbmove.NEW_ARRV_DT = $("#MVMT_DT").val();
             tbmove.SITE_ID = tableMove.data()[i].SITE_ID;
             tbmove.HSG_ID = tableMove.data()[i].HSG_ID;
             tbmove.BRDR_ID = tableMove.data()[i].BRDR_ID;
@@ -639,7 +640,7 @@
         $.ajax({
             contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
             type: "POST",
-            url: pathServer + "/MVT/TFRMVTDT02_MVMT_INSERT",
+            url: pathServer + "/MVT/TFRMVTDT03_MVMT_INSERT",
             dataType: "json",
             data: JSON.stringify({ BRDR_MVMT: BRDR_MVMT }), //parameter Object,List
             xhr: function () {

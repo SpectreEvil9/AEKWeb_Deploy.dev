@@ -16,13 +16,13 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="@Url.Action("Index", "Home", new { Area = "Master" })">Master</a>
+                    <a href="@Url.Action("Index", "Home", new {Area="Breeding"})">การคัดพันธุ์สุกร</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="@HttpUtility.UrlDecode(Url.Action("MASBPSDT01", "BPS", new {}).ToString())">PS</a>
+                    <a href="@Url.Action("MASBPSDT01", "BPS", new {Area="Breeding"})">PS</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -39,6 +39,34 @@
                         <h1 class="card-title text-primary">สร้าง</h1>
                     </div>
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกฟาร์ม">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">ฟาร์มผลิต</span>
+                                        <select class="form-select form-control input-req-date dropdown" id="SITE" name="SITE">
+                                            @foreach (var sit in ViewBag.MAS_SITE)
+                                            {
+                                                <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกเล้า">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">เล้าผลิต</span>
+                                        <select class="form-select form-control input-req-date dropdown" id="HOUSING" name="HOUSING">
+                                            @foreach (var hsg in ViewBag.MAS_HSG)
+                                            {
+                                                <option value="@hsg.HSG_ID">@hsg.HSG_CODE</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
@@ -259,6 +287,8 @@
 
         function save() {
             var MAS_BRDR_ALL = {};
+            MAS_BRDR_ALL.SITE_ID = $("#SITE").val();
+            MAS_BRDR_ALL.HSG_ID = $("#HOUSING").val();
             MAS_BRDR_ALL.BRDR_ID = $("#BRDR_ID").val();
             MAS_BRDR_ALL.GNE = $("#GNE").val();
             MAS_BRDR_ALL.GND = $("#GND").val();

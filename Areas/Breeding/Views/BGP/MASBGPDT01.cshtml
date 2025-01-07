@@ -1,11 +1,12 @@
-﻿@{
-    ViewBag.Title = "MASBPSDT01";
+﻿
+@{
+    ViewBag.Title = "MASBGPDT01";
 }
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
             <h3 class="fw-bold mb-3">
-                ข้อมูลการคัดพันธุ์เป็นสุกรพันธุ์ PS
+                ข้อมูลการคัดพันธุ์เป็นสุกรพันธุ์ GGP และ GP
             </h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
@@ -23,7 +24,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">PS</a>
+                    <a href="#">GGP & GP</a>
                 </li>
             </ul>
         </div>
@@ -43,7 +44,7 @@
                                 <div class="col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกฟาร์ม">
-                                            <span class="input-group-text col-lg-4" id="basic-addon1">ฟาร์ม</span>
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์ม</span>
                                             <select class="form-select form-control input-req-date dropdown" id="searchSiteId" name="searchSiteId">
                                                 <option value="ALL">All</option>
                                                 @foreach (var sit in ViewBag.MAS_SITE)
@@ -57,7 +58,7 @@
                                 <div class="col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <div class="input-group mb-3 validate-input" data-validate="โปรดเลือกเล้า">
-                                            <span class="input-group-text col-lg-4" id="basic-addon1">เล้า</span>
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">เล้า</span>
                                             <select class="form-select form-control input-req-date dropdown" id="searchHousingId" name="searchHousingId">
                                                 <option value="ALL">All</option>
                                                 @foreach (var hsg in ViewBag.MAS_HSG)
@@ -72,7 +73,7 @@
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text col-lg-3" id="basic-addon1">เบอร์หู</span>
-                                            <select class="form-select dropdown-multiple" id="searchBreederId" name="searchBreederId">
+                                            <select class="form-select form-control" id="searchBreederId" name="searchBreederId">
                                                 <option value="ALL">All</option>
                                                 @foreach (var ggp in ViewBag.MAS_BRDR_ALL)
                                                 {
@@ -85,7 +86,21 @@
                                 <div class="col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">วันเกิด</span>
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">เพศ</span>
+                                            <select class="form-select form-control" id="searchGender" name="searchGender">
+                                                <option value="ALL">All</option>
+                                                <option value="M">Male</option>
+                                                <option value="F">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">วันเกิด</span>
                                             <input type="text"
                                                    id="searchDateOfbirth"
                                                    name="searchDateOfbirth"
@@ -97,15 +112,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">วันที่รับเข้า</span>
+                                            <span class="input-group-text col-lg-4" id="basic-addon1">วันทดสอบพันธุ์</span>
                                             <input type="text"
-                                                   id="searchImportDate"
-                                                   name="searchImportDate"
+                                                   id="searchGeneTestDate"
+                                                   name="searchGeneTestDate"
                                                    class="form-control"
                                                    placeholder="Select Date" />
                                             <span class="input-group-icon">
@@ -131,8 +144,8 @@
                                     </h6>
                                 </div>
                                 <div class="col-md-6 col-lg-2 d-flex" style="justify-content:flex-end !important">
-                                    <a href="@HttpUtility.UrlDecode(Url.Action("BRDBPSDT04", "BPS", new {
-                                     searchBreederId = ViewBag.searchBreederId == null ? null : string.Join("&searchBreederId=", (string[])ViewBag.searchBreederId) }).ToString())" 
+                                    <a href="@HttpUtility.UrlDecode(Url.Action("BRDBGPDT04", "BGP", new {
+                                     searchBreederId = ViewBag.searchBreederId == null ? null : string.Join("&searchBreederId=", (string[])ViewBag.searchBreederId) }).ToString())"
                                        class="btn btn-success btn-round"><i class="fas fa-file-import"></i> Import</a>
                                 </div>
                             </div>
@@ -145,25 +158,30 @@
                                         <tr>
                                             <th rowspan="2" width="3%" style="text-align:center !important">No.</th>
                                             <th rowspan="2">SK</th>
+                                            <th rowspan="2" style="text-align:center !important">วันที่ทดสอบพันธุ์</th>
                                             <th rowspan="2" style="text-align:center !important">ฟาร์ม</th>
                                             <th rowspan="2" style="text-align:center !important">เล้า</th>
-                                            <th rowspan="2" style="text-align:center !important">พันธุ์</th>
+                                            <th rowspan="2" style="text-align:center !important">สายพันธุ์</th>
                                             <th rowspan="2" style="text-align:center !important">เบอร์หู</th>
+                                            <th rowspan="2" style="text-align:center !important">line</th>
                                             <th rowspan="2" style="text-align:center !important">ระดับเลือด</th>
                                             <th rowspan="2" style="text-align:center !important">เบอร์พ่อ</th>
                                             <th rowspan="2" style="text-align:center !important">เบอร์แม่</th>
                                             <th rowspan="2" style="text-align:center !important">วันเกิด</th>
                                             <th colspan="2" style="text-align:center !important">เต้านม</th>
-                                            <th rowspan="2" style="text-align:center !important">วันที่รับเข้า</th>
-                                            <th rowspan="2" style="text-align:center !important">วันที่เริ่มใช้งานได้</th>
-                                            <th rowspan="2" style="text-align:center !important">โปรแกรมวัคซีน</th>
-                                            <th rowspan="2" style="text-align:center !important">Remark</th>
-                                            <th rowspan="2" style="text-align:center !important">STATUS</th>
+                                            <th rowspan="2" style="text-align:center !important">น.น2</th>
+                                            <th rowspan="2" style="text-align:center !important">ADG</th>
+                                            <th rowspan="2" style="text-align:center !important">FCR</th>
+                                            <th rowspan="2" style="text-align:center !important">INDEX</th>
+                                            <th rowspan="2" style="text-align:center !important">INDEX F</th>
+                                            <th rowspan="2" style="text-align:center !important">INBREED</th>
+                                            <th rowspan="2" style="text-align:center !important">หมายเหตุ</th>
+                                            <th rowspan="2" style="text-align:center !important">สถานะ</th>
                                             <th rowspan="2" style="text-align:center !important">ฟาร์มผลิต</th>
                                             <th rowspan="2" style="text-align:center !important">เล้าผลิต</th>
                                             <th rowspan="2" width="3%" style="align-content:center !important">
                                                 <div class="d-flex align-items-center selectgroup-pills">
-                                                    <a href="@HttpUtility.UrlDecode(Url.Action("MASBPSDT02", "BPS", new {
+                                                    <a href="@HttpUtility.UrlDecode(Url.Action("MASBGPDT02", "BGP", new {
                                                             searchBreederId = ViewBag.searchBreederId == null ? null : string.Join("&searchBreederId=", (string[])ViewBag.searchBreederId) }).ToString())"
                                                        class="selectgroup-button selectgroup-button-icon">
                                                         <i class="fa fa-plus text-success"></i>
@@ -191,7 +209,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#searchDateOfbirth, #searchImportDate").datepicker({
+        $("#searchDateOfbirth, #searchGeneTestDate").datepicker({
             todayHighlight: true,
             orientation: 'bottom left',
             format: 'dd-M-yyyy',
@@ -199,6 +217,7 @@
             autoclose: 'true',
             assumeNearbyYear: true,
         });
+
         if ('@ViewBag.searchSiteId' != '') {
             $("#searchSiteId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteId))')).trigger("change");
         }
@@ -208,14 +227,17 @@
         if ('@ViewBag.searchBreederId' != '') {
             $("#searchBreederId").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchBreederId))')).trigger("change");
         }
+        if ('@ViewBag.searchGender' != '') {
+            $("#searchGender").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchGender))')).trigger("change");
+        }
         if ('@ViewBag.searchDateOfbirth' != '') {
             $("#searchDateOfbirth").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchDateOfbirth))')).trigger("change");
         }
-        if ('@ViewBag.searchImportDate' != '') {
-            $("#searchImportDate").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchImportDate))')).trigger("change");
+        if ('@ViewBag.searchGeneTestDate' != '') {
+            $("#searchGeneTestDate").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchGeneTestDate))')).trigger("change");
         }
 
-        $('#searchBreederId, #searchHousingId').select2({
+        $('#searchBreederId').select2({
             theme: "bootstrap-5",
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
             placeholder: $(this).data('placeholder'),
@@ -237,15 +259,16 @@
             bAutoWidth: false,
             order: [[1, "asc"]],
             "ajax": {
-                url: pathServer + "/BPS/MASBPSDT01_SELECT",
+                url: pathServer + "/BGP/MASBGPDT01_SELECT",
                 type: "POST",
                 datatype: "json",
                 data: {
                     searchSiteId: $("#searchSiteId").val(),
                     searchHousingId: $("#searchHousingId").val(),
                     searchBreederId: $("#searchBreederId").val(),
+                    searchGender: $("#searchGender").val(),
                     searchDateOfbirth: $("#searchDateOfbirth").val(),
-                    searchImportDate: $("#searchImportDate").val()
+                    searchGeneTestDate: $("#searchGeneTestDate").val()
                 },
             },
             columnDefs: [
@@ -259,28 +282,42 @@
                     visible: false
                 },
                 {
-                    targets: [2, 3, 4, 5, 6, 7, 8, 14, 15, 16, 17, 18, 19],
+                    targets: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 14, 20, 21, 22, 23, 24],
                     orderable: false,
                     className: "text-left"
                 },
                 {
-                    targets: [9, 10, 11, 12, 13],
+                    targets: [12, 13],
                     orderable: false,
                     className: "text-center"
+                },
+                {
+                    "targets": [15, 16, 17, 18, 19],
+                    orderable: false,
+                    "className": "text-right",
+                    "mRender": function (data, type, full) {
+                        return data != null ? numeral(data).format('0,0.00') : '0.00';
+                    }
                 },
             ],
             "columns": [
                 {
                     "render": function (data, type, full, meta) {
-                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
-                        return (meta.row + 1) + page;
+                        return (meta.row + 1);
                     }
                 },
                 { 'data': 'BRDR_ALL_SK' },
+                {
+                    'data': 'GNE_TST_DT',
+                    render: function (data, type, row) {
+                        return resJsonToDate(data);
+                    }
+                },
                 { 'data': 'SITE_ID' },
                 { 'data': 'HSG_ID' },
                 { 'data': 'GNE' },
                 { 'data': 'BRDR_ID' },
+                { 'data': 'LINE' },
                 { 'data': 'BLOOD_LVL' },
                 { 'data': 'FTHR_BRDR_ID' },
                 { 'data': 'MTHR_BRDR_ID' },
@@ -292,26 +329,19 @@
                 },
                 { 'data': 'BRST_LEFT' },
                 { 'data': 'BRST_RGHT' },
-                {
-                    'data': 'DT_RCVD',
-                    render: function (data, type, row) {
-                        return resJsonToDate(data);
-                    }
-                },
-                {
-                    'data': 'DT_USED',
-                    render: function (data, type, row) {
-                        return resJsonToDate(data);
-                    }
-                },
-                { 'data': 'VACCINE'},
+                { 'data': 'WGHT_RCVD' },
+                {'data': 'ADG'},
+                {'data': 'FCR'},
+                {'data': 'INDEX'},
+                {'data': 'INDEX_F'},
+                {'data': 'INBRD'},
                 { 'data': 'REM' },
                 { 'data': 'ST' },
                 { 'data': 'MFG_SITE_ID' },
                 { 'data': 'MFG_HSG_ID' },
                 {
                     mRender: function (data, type, row) {
-                    var link = '@HttpUtility.UrlDecode(Url.Action("MASBPSDT03", "BPS", new { BRDR_ALL_SK = "row_BRDR_ALL_SK" }).ToString())';
+                    var link = '@HttpUtility.UrlDecode(Url.Action("MASBGPDT03", "BGP", new { BRDR_ALL_SK = "row_BRDR_ALL_SK" }).ToString())';
                         link = link.replace("row_BRDR_ALL_SK", row.BRDR_ALL_SK);
                     var All_Botton = "<div class='d-flex align-items-center selectgroup-pills'>";
                         All_Botton = All_Botton + "<a href='" + link + "' class='selectgroup-button selectgroup-button-icon' title='Edit'><i class='fas fa-edit text-primary'></i></a>";
@@ -330,4 +360,3 @@
 
     });
 </script>
-

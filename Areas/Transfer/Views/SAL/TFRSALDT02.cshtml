@@ -654,11 +654,12 @@
                             </ul>
                             <div class="tab-content mt-3 mb-3" id="line-tabContent">
                                 <div class="tab-pane fade show active table-responsive tab-content mt-3 mb-3" id="line-tab51">
-                                    <table id="basic-datatables2" style="width:100%" border="1"
+                                    <table id="tb_brdr" style="width:100%" border="1"
                                            class="display table table-striped table-hover table-bordered">
                                         <thead>
                                             <tr>
                                                 <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                                <th width="5%" style="text-align:center !important">KEY</th>
                                                 <th width="15%" style="text-align:center !important">เบอร์หู</th>
                                                 <th width="15%" style="text-align:center !important">เพศ</th>
                                                 <th width="15%" style="text-align:center !important">จำนวน</th>
@@ -667,6 +668,9 @@
                                                 <th width="8%" style="align-content:center">
                                                     <div class="d-flex align-items-center selectgroup-pills">
                                                         <button type="button"
+                                                                id="BT-ADD_BRDR"
+                                                                onclick="AddBrdr(this)"
+                                                                value="@ViewBag.SALE_DOC_ID"
                                                                 class="selectgroup-button selectgroup-button-icon">
                                                             <i class="fa fa-plus text-success"></i>
                                                         </button>
@@ -681,7 +685,7 @@
                             </div>
                         </div>
                         <div class="card-action">
-                            <button id="saveWnng" class="btn btn-primary btn-round fix btn-fixed-position">Save</button>
+                            <button id="SAVE" class="btn btn-primary btn-round fix btn-fixed-position">Save</button>
                         </div>
                     </div>
                 </div>
@@ -695,6 +699,7 @@
 <script>
     var MAS_HSG = @Html.Raw(Json.Encode(ViewBag.MAS_HSG));
     var tableWnng = null;
+    var BRDR_LIST = @Html.Raw(Json.Encode(ViewBag.MAS_BRDR_ALL));
     $(document).ready(function () {
         $('#CO_ID').val('MJG').trigger("change");
         $('#SITE_ID').val('BT').trigger("change");
@@ -878,6 +883,155 @@
             }
 
         });
+
+        tableBrdr = $("#tb_brdr").DataTable({
+            "searching": false,
+            "paging": true,
+            "ordering": true,
+            "info": false,
+            "bAutoWidth": false,
+            "lengthChange": false,
+            "order": [],
+            responsive: !0,
+            "columnDefs": [
+                {
+                    targets: [1],
+                    visible: true,
+                    orderable: false,
+                    className: "text-center",
+                },
+                {
+                    targets: [0, 2,3,7],
+                    orderable: false,
+                    className: "text-center",
+                },
+                {
+                    targets: [4],
+                    orderable: false,
+                    className: "text-left",
+                    mRender: function (data, type, full) {
+                        return numeral(data).format('0,0');
+                    }
+                },
+                {
+                    targets: [ 6],
+                    orderable: false,
+                    className: "text-left",
+                    mRender: function (data, type, full) {
+                        return numeral(data).format('0,0.00');
+                    }
+                },
+            ],
+            "columns": [
+                {
+                    "render": function (data, type, full, meta) {
+                        var pageInfo = tableBrdr.page.info();
+                        return (meta.row + 1) + numeral(pageInfo.page)._value * numeral(pageInfo.length)._value;
+                    }
+                },
+                {
+                    'data': 'UK_KEY'
+                },
+                {
+                    'data': 'BRDR_ID',
+                    render: function (data, type, row, meta) {
+                        var optionList = "";
+                        $.each(BRDR_LIST, function (index, item) {
+                            if (row.BRDR_ID !== null && row.BRDR_ID == item.BRDR_ID) {
+                                optionList = optionList + ' <option selected="selected" value="' + item.BRDR_ID + '">' + item.BRDR_ID + '</option> ';
+                            } else {
+                                optionList = optionList + ' <option value="' + item.BRDR_ID + '">' + item.BRDR_ID + '</option> ';
+                            }
+                        });
+                        var select = "<div class='input-group'><select class='form-select dropdown brdr_select' onchange='BrdrChange(this)' id='BRDR_ID--" + row.UK_KEY + "' brd='" + row.BRDR_ID + "' row='" + meta.row + "' col='" + meta.col + "' require> <option value=''></option>" + optionList + "</select></div>";
+                        return select;
+                    }
+                },
+                {
+                    'data': 'GND',
+                    render: function (e, a, t, n) {
+                        var s = {
+                            M: { title: "สุกรหนุ่ม", state: "primary" },
+                            F: { title: "สุกรสาว", state: "danger" },
+                        };
+                        return void 0 === s[e] ? e : '<span class="m-badge m-badge--' + s[e].state + ' m-badge--dot"></span>&nbsp;<span class="m--font-bold m--font-' + s[e].state + '">' + s[e].title + "</span>"
+                    }
+                },
+                {
+                    'data': 'PD_AMT',
+                },
+                {
+                    'data': 'HSG_ID',
+                    render: function (data, type, row, meta) {
+                        var optionList = "";
+                        $.each(MAS_HSG, function (index, item) {
+                            if (row.HSG_ID !== null && row.HSG_ID == item.HSG_ID) {
+                                optionList = optionList + ' <option selected="selected" value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
+                            } else {
+                                optionList = optionList + ' <option value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
+                            }
+                        });
+                        var select = "<div class='input-group'><select onchange='ModifyDirectlyBrdr(this)' class='form-select dropdown brdr_select' id='HSG_ID--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.HSG_ID + "'> <option value=''></option>" + optionList + "</select></div>";
+                        return select;
+                    }
+                },
+                {
+                    'data': 'PD_WGHT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectlyBrdr(this)' id='PD_WGHT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.PD_WGHT + "' />";
+                    }
+                },
+                {
+                    mRender: function (data, type, row, meta) {
+                        return "<div class='d-flex align-items-center selectgroup-pills'><button type='button' onclick='DelMovement(this)' id='BT-DEL_MOVE--" + row.UK_KEY + "' class='selectgroup-button selectgroup-button-icon move_bt' ><i class='fas fa-trash text-danger'></i></button></div>";
+                    }
+                }
+            ],
+            "rowCallback": function (row, data, index) {
+                var pageInfo = this.api().page.info();
+                var row_index = (index + 1) + pageInfo.page * pageInfo.length;
+                $('td:eq(0)', row).html(row_index);
+                if (data.UK_KEY.split('--').length == 1) {
+                    // Update UK_KEY value permanently in the data
+                    data.UK_KEY = data.UK_KEY + "--" + row_index;
+                    // Update the cell display
+                    //$('td:eq(1)', row).html(data.UK_KEY);
+                    //$('td:eq(5)', row).html("<div class='d-flex align-items-center selectgroup-pills'><button type='button' onclick='DelMovement(this)' id='BT-DEL_MOVE--" + data.UK_KEY + "' idx='" + $('td:eq(0)', row).html() + "' class='selectgroup-button selectgroup-button-icon move_bt' ><i class='fas fa-trash text-danger'></i></button></div>");
+                }
+
+            },
+            "drawCallback": function (settings, row, data, index) {
+                var api = this.api();
+
+                // Recalculate and update the index numbers after each draw
+                api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+                    var pageInfo = api.page.info();
+                    var rowIndex = (i + 1) + pageInfo.page * pageInfo.length;
+                    // Update the cell's content with the new row index
+                    $(cell).html(rowIndex);
+                });
+
+                $(".int").inputmask({
+                    'alias': 'currency',
+                    'integerDigits': '12',
+                    'digits': 0,
+                    'prefix': '',
+                    rightAlign: false
+                });
+                $(".brdr_select").each(function () {
+
+                    $(this).select2({
+                        theme: "bootstrap-5",
+                        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                        placeholder: $(this).data('placeholder'),
+                        closeOnSelect: false,
+                        tags: true
+                    });
+                });
+            }
+
+        });
+
     });
 
     $('#AC_NBR').change(function () {
@@ -1030,24 +1184,43 @@
             }
         });
     }
-    $("#saveWnng").click(function () {
+    $("#SAVE").click(function () {
         var minimum_row = false;
         var fully_row = true;
         var row_index = 0;
+        var pd_type = $("#PD_TP").val();
         if ($("#SALE_DT").val() != "" && $("#WGHT_PPR_ID").val() != "" && $("#PD_TP").val() != "" && $("#AC_NBR").val() != "") {
-            tableWnng.rows().every(function (index) {
-                var rowData = this.data();
-                if (rowData.HSG_ID != "" && numeral(rowData.PD_WGHT)._value != 0 && numeral(rowData.PD_AMT)._value != 0) {
-                    minimum_row = true;
-                }
-                if ((rowData.HSG_ID == "" || numeral(rowData.PD_WGHT)._value == 0 || numeral(rowData.PD_AMT)._value == 0) &&
-                    !(rowData.HSG_ID == "" && numeral(rowData.PD_WGHT)._value == 0 && numeral(rowData.PD_AMT)._value == 0)) {
-                    fully_row = false;
-                    row_index = index + 1;
-                }
-            });
-            if (minimum_row == true) {
-                if (fully_row == true && tableWnng.rows().count() > 0) {
+            if (pd_type == 2) {
+                tableWnng.rows().every(function (index) {
+                    var rowData = this.data();
+                    if (rowData.HSG_ID != "" && numeral(rowData.PD_WGHT)._value != 0 && numeral(rowData.PD_AMT)._value != 0) {
+                        minimum_row = true;
+                    }
+                    if ((rowData.HSG_ID == "" || numeral(rowData.PD_WGHT)._value == 0 || numeral(rowData.PD_AMT)._value == 0) &&
+                        !(rowData.HSG_ID == "" && numeral(rowData.PD_WGHT)._value == 0 && numeral(rowData.PD_AMT)._value == 0)) {
+                        fully_row = false;
+                        row_index = index + 1;
+                    }
+                });
+            }
+            else if (pd_type == 5)
+            {
+                tableBrdr.rows().every(function (index) {
+                    var rowData = this.data();
+                    if (rowData.HSG_ID != "" && numeral(rowData.PD_WGHT)._value != 0 && numeral(rowData.PD_AMT)._value != 0) {
+                        minimum_row = true;
+                    }
+                    if ((rowData.HSG_ID == "" || numeral(rowData.PD_WGHT)._value == 0 || numeral(rowData.PD_AMT)._value == 0) &&
+                        !(rowData.HSG_ID == "" && numeral(rowData.PD_WGHT)._value == 0 && numeral(rowData.PD_AMT)._value == 0)) {
+                        fully_row = false;
+                        row_index = index + 1;
+                    }
+
+                });
+            }
+
+            if (fully_row == true) {
+                if (fully_row == true && (tableWnng.rows().count() > 0 && pd_type == 2) || (tableBrdr.rows().count() > 0 && pd_type == 5)) {
                     Swal.fire({
                         icon: "question",
                         title: 'Do you want to save?',
@@ -1056,7 +1229,12 @@
                         confirmButtonText: 'Yes',
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            saveWnng();
+                            if (pd_type == 2) {
+                                saveWnng();
+                            } else if (pd_type == 5) {
+                                saveBrdr();
+                            }
+
                         }
                     });
                 } else {
@@ -1149,6 +1327,171 @@
             url: pathServer + "/SAL/TFRSALDT02_INSERT_WNNG",
             dataType: "json",
             data: JSON.stringify({ AVY_SALES_HDR: AVY_SALES_HDR, AVY_SALES_DTL: AVY_SALES_DTL, AVY_SALES_FOTR_WNNG: AVY_SALES_FOTR_WNNG }), //parameter Object,List
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                let timerInterval;
+                xhr_loading(xhr);
+                clearInterval(timerInterval);
+                return xhr;
+            },
+            success: function (data) {
+
+                clearInterval(interVal);
+                $('#progress').css('width', 100 + "%");
+                //successMessage.init();
+                setTimeout(function () {
+                    //Attach_File();
+                    Swal.fire({
+                        icon: "success",
+                        title: 'Your data has been saved',
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                    var url = decodeURIComponent("@HttpUtility.UrlDecode(Url.Action("TFRSALDT03", "SAL", new {
+                                                 SALE_DOC_ID = "DOC_IDRedirect",
+                    }).ToString())");
+                    const parseResult = new DOMParser().parseFromString(url, "text/html");
+                    url = parseResult.documentElement.textContent;
+                        url = url.replace("DOC_IDRedirect", data.SALE_DOC_ID);
+                        window.location.replace(url);
+                        //location.reload();
+                    });
+                }, 1500);
+            },
+            error: function () {
+                errorAlert.init();
+            }
+        });
+    }
+
+    function AddBrdr(btn) {
+        var key = $("#BT-ADD_BRDR").val();
+        tableBrdr.row.add({
+            "UK_KEY": key,
+            "BRDR_ID": "",
+            "GND": "",
+            "PD_AMT":1,
+            "HSG_ID": "",
+            "PD_WGHT": 0
+        }).draw(false);
+        BrdrReGenerate();
+    }
+
+    function BrdrReGenerate() {
+        // Get current page info for later use
+        var pageInfo = tableBrdr.page.info();
+        tableBrdr.rows().every(function (index) {
+            var rowData = this.data();
+            var newUK_KEY = String(rowData.UK_KEY).split('--')[0] + "--" + (index + 1);
+            rowData.UK_KEY = newUK_KEY; // Update UK_KEY in row data
+            this.data(rowData);
+        });
+        tableBrdr.page(pageInfo.page).draw(false);
+    }
+
+    function BrdrChange(btn) {
+        var id = $(btn).attr('id');
+        var selectID = $("#" + id).val();
+        var row = $(btn).attr('row');
+        $.ajax({
+            type: "GET",
+            url: pathServer + "/SAL/SELECT_BRDR",
+            data: {
+                selectID: selectID,
+            },
+            success: function (response) {
+                var page = tableBrdr.page.info();
+                tableBrdr.page(page.page).cell(row, 3).data(response.GND).draw(false);
+                ModifyDirectlyBrdr(btn);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function ModifyDirectlyBrdr(btn) {
+        var id = $(btn).attr('id');
+        var row = $(btn).attr('row');
+        var col = $(btn).attr('col');
+        var new_values = $("#" + id).val();
+        var key = id.split('--')[1] + '--' + id.split('--')[2];
+
+        console.log("New: " + id);
+        if (CheckBrdr(key, new_values) == false) {
+            var indexBrdr = tableBrdr
+                .rows()
+                .indexes()
+                .filter(function (value, index) {
+                    return key === tableBrdr.row(value).data().UK_KEY;
+                });
+
+            if (indexBrdr !== undefined && tableBrdr.row(indexBrdr).length > 0) {
+                var page = tableBrdr.page.info();
+                tableBrdr.page(page.page).cell(row, col).data(new_values).draw(false);
+            } else {
+                console.log("Invalid row index:", indexBrdr);
+            }
+        } else {
+            var page = tableBrdr.page.info();
+            tableBrdr.page(page.page).cell(row, col).data("").draw(false);
+        }
+    }
+
+    function CheckBrdr(key, new_values) {
+        var duplicate = 0;
+        for (var i = 0; i < tableBrdr.data().length; i++) {
+            if (tableBrdr.data()[i].BRDR_ID != "" && tableBrdr.data()[i].UK_KEY != key && new_values == tableBrdr.data()[i].BRDR_ID) {
+                console.log("Dup: " + new_values + "|" + tableBrdr.data()[i].BRDR_ID);
+                duplicate = duplicate + 1;
+            }
+        }
+
+        if (duplicate > 0) {
+            Swal.fire({
+                icon: "error",
+                title: 'Duplicate!',
+                text: "You won't able to select this!",
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+            });
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function saveBrdr() {
+        var AVY_SALES_HDR = {};
+        var AVY_SALES_DTL = new Array();
+
+        AVY_SALES_HDR.PD_TP = $("#PD_TP").val();
+        AVY_SALES_HDR.SALE_DOC_ID = $("#SALE_DOC_ID").val();
+        AVY_SALES_HDR.SALE_DT = $("#SALE_DT").val();
+        AVY_SALES_HDR.SITE_ID = $("#SITE_ID").val();
+        AVY_SALES_HDR.CST_ID = $("#AC_NBR").val();
+        AVY_SALES_HDR.WGHT_PPR_ID = $("#WGHT_PPR_ID").val().toString();
+
+        for (var i = 0; i < tableBrdr.data().length; i++) {
+            let tbbrdr_d = {};
+            tbbrdr_d.SALE_DOC_ID = $("#SALE_DOC_ID").val();
+            tbbrdr_d.SEQ = tableBrdr.data()[i].UK_KEY.split('--')[1];
+            tbbrdr_d.BRDR_ID = tableBrdr.data()[i].BRDR_ID;
+            tbbrdr_d.GND = tableBrdr.data()[i].GND;
+            tbbrdr_d.HSG_ID = tableBrdr.data()[i].HSG_ID;
+            tbbrdr_d.BRDR_F = "Y";
+            tbbrdr_d.PD_AMT = numeral(tableBrdr.data()[i].PD_AMT)._value;
+            tbbrdr_d.PD_WGHT = numeral(tableBrdr.data()[i].PD_WGHT)._value;
+            tbbrdr_d.PD_WGHT_AV = numeral(tableBrdr.data()[i].PD_WGHT_AV)._value;
+            AVY_SALES_DTL.push(tbbrdr_d);
+        }
+
+        $.ajax({
+            contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
+            type: "POST",
+            url: pathServer + "/SAL/TFRSALDT02_INSERT_BRDR",
+            dataType: "json",
+            data: JSON.stringify({ AVY_SALES_HDR: AVY_SALES_HDR, AVY_SALES_DTL: AVY_SALES_DTL }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;
