@@ -29,6 +29,13 @@
         <EntityTypeShape EntityType="FIS_HSG_DBModel.AVY_QLY_TST_PGGRY" Width="1.5" PointX="3.375" PointY="16.75" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.AVY_BRDR_SEMEN_COLL" Width="1.5" PointX="5.375" PointY="16.75" />
         <EntityTypeShape EntityType="FIS_HSG_DBModel.AVY_BRDR_SEMEN_PDD" Width="1.5" PointX="7.375" PointY="16.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.BRDR_FRRW_HIST" Width="1.5" PointX="17.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.TXN_HSG_FRRW" Width="1.5" PointX="17.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.AVY_BRDR_FRRW" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.V_HSGFRRDT01_BRDR_FRRW" Width="1.5" PointX="9.75" PointY="17.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.V_HSGFRRDT01_BRDR_LIST" Width="1.5" PointX="11.75" PointY="17.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.V_HSGFRRDT01_BRDR_LOST" Width="1.5" PointX="17.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FIS_HSG_DBModel.V_HSGFRRDT01_BRDR_MVMT" Width="1.5" PointX="13.75" PointY="17.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
