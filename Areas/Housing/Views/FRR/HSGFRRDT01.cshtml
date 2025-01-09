@@ -2670,9 +2670,9 @@
 
     function saveMovement() {
         var BRDR_MVMT = new Array();
-        var TXN_HSG_MATE_INCREASE = new Array();
-        var TXN_HSG_MATE_REDUCE = new Array();
-        var TXN_HSG_MATE = new Array();
+        var TXN_HSG_FRRW_INCREASE = new Array();
+        var TXN_HSG_FRRW_REDUCE = new Array();
+        var TXN_HSG_FRRW = new Array();
         var BRDR_MVMT_DEL = {};
         var TFR_QTY = 0;
         var ORIGIN = "";
@@ -2700,7 +2700,7 @@
         }
 
         for (var i = 0; i < tableMain.data().length; i++) {
-            var net = (tableMain.data()[i].BALANCE_QTY + numeral(tableMain.data()[i].FM_FRRW_QTY)._value + numeral(tableMain.data()[i].FM_RPLCMT_QTY)._value + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
+            var net = (tableMain.data()[i].BALANCE_QTY + numeral(tableMain.data()[i].FROM_HSG_MATE_QTY)._value + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
             if (net > 0) {
                 let tbmate = {};
                 tbmate.DOC_CODE = tableMain.data()[i].UK_KEY;
@@ -2710,7 +2710,7 @@
                 tbmate.GND = tableMain.data()[i].GND;
                 tbmate.NEW_ARRV_DT = resJsonToDate(tableMain.data()[i].NEW_ARRV_DT);
                 tbmate.NET_QTY = net;
-                TXN_HSG_MATE.push(tbmate);
+                TXN_HSG_FRRW.push(tbmate);
             }
         }
         for (var i = 0; i < tableMain.data().length; i++) {
@@ -2724,8 +2724,8 @@
                 tbmate.GND = tableMain.data()[i].GND;
                 tbmate.NEW_ARRV_DT = resJsonToDate(tableMain.data()[i].NEW_ARRV_DT);
                 tbmate.TFR_QTY = TFR_QTY
-                tbmate.NET_QTY = (tableMain.data()[i].BALANCE_QTY + numeral(tableMain.data()[i].FM_FRRW_QTY)._value + numeral(tableMain.data()[i].FM_RPLCMT_QTY)._value + tableMain.data()[i].RCV_QTY) - (TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
-                TXN_HSG_MATE_REDUCE.push(tbmate);
+                tbmate.NET_QTY = (tableMain.data()[i].BALANCE_QTY + numeral(tableMain.data()[i].FROM_HSG_MATE_QTY)._value + tableMain.data()[i].RCV_QTY) - (TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
+                TXN_HSG_FRRW_REDUCE.push(tbmate);
                 //console.log(resJsonToDate(tableMain.data()[i].NEW_ARRV_DT));
                 //GND = tableMain.data()[i].GND;
                 NEW_ARRV_DT = resJsonToDate(tableMain.data()[i].NEW_ARRV_DT);
@@ -2737,7 +2737,7 @@
             var DEST = false;
             var RCV_QTY = 0;
             var NET_QTY = 0;
-            let tbmate = {};
+            let tbfrrw = {};
 
             for (var n = 0; n < tableMove.data().length; n++) {
                 //console.log(tableMain.data()[i].HSG_ID +"|"+ tableMove.data()[n].DEST_HSG_ID);
@@ -2750,18 +2750,18 @@
 
             if (DEST == true) {
                 if (tableMain.data()[n].UK_KEY.indexOf('--') != -1) {
-                    tbmate.DOC_CODE = tableMain.data()[n].UK_KEY.split('--')[0];
+                    tbfrrw.DOC_CODE = tableMain.data()[n].UK_KEY.split('--')[0];
                 } else {
-                    tbmate.DOC_CODE = tableMain.data()[n].UK_KEY + $("#searchDate").val() + GND + NEW_ARRV_DT;
+                    tbfrrw.DOC_CODE = tableMain.data()[n].UK_KEY + $("#searchDate").val() + GND + NEW_ARRV_DT;
                 }
-                tbmate.SITE_ID = tableMain.data()[i].SITE_ID;
-                tbmate.HSG_ID = tableMain.data()[i].HSG_ID;
-                tbmate.TXN_DT = $("#searchDate").val();
-                tbmate.GND = GND;
-                tbmate.NEW_ARRV_DT = NEW_ARRV_DT
-                tbmate.RCV_QTY = RCV_QTY;
-                tbmate.NET_QTY = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].FM_FRRW_QTY + tableMain.data()[i].FM_RPLCMT_QTY + RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
-                TXN_HSG_MATE_INCREASE.push(tbmate);
+                tbfrrw.SITE_ID = tableMain.data()[i].SITE_ID;
+                tbfrrw.HSG_ID = tableMain.data()[i].HSG_ID;
+                tbfrrw.TXN_DT = $("#searchDate").val();
+                tbfrrw.GND = GND;
+                tbfrrw.NEW_ARRV_DT = NEW_ARRV_DT
+                tbfrrw.RCV_QTY = RCV_QTY;
+                tbfrrw.NET_QTY = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].FROM_HSG_MATE_QTY + RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
+                TXN_HSG_FRRW_INCREASE.push(tbfrrw);
             }
         }
 
@@ -2772,9 +2772,9 @@
         $.ajax({
         contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
         type: "POST",
-            url: pathServer + "/MAT/HSGMATDT01_MVMT_INSERT",
+            url: pathServer + "/FRR/HSGFRRDT01_MVMT_INSERT",
             dataType: "json",
-            data: JSON.stringify({ BRDR_MVMT: BRDR_MVMT, TXN_HSG_MATE_INCREASE: TXN_HSG_MATE_INCREASE, TXN_HSG_MATE_REDUCE: TXN_HSG_MATE_REDUCE, BRDR_MVMT_DEL: BRDR_MVMT_DEL }), //parameter Object,List
+            data: JSON.stringify({ BRDR_MVMT: BRDR_MVMT, TXN_HSG_FRRW_INCREASE: TXN_HSG_FRRW_INCREASE, TXN_HSG_FRRW_REDUCE: TXN_HSG_FRRW_REDUCE, BRDR_MVMT_DEL: BRDR_MVMT_DEL }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;
@@ -2838,8 +2838,8 @@
     });
     function saveLost() {
         var BRDR_LOST = new Array();
-        var TXN_HSG_MATE = new Array();
-        var TXN_HSG_MATE_REDUCE = new Array();
+        var TXN_HSG_FRRW = new Array();
+        var TXN_HSG_FRRW_REDUCE = new Array();
         var ORIGIN = "";
         var GND = "";
         var DIED_TOT = 0;
@@ -2866,31 +2866,31 @@
             }
         }
         for (var i = 0; i < tableMain.data().length; i++) {
-            var net = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].FM_FRRW_QTY + tableMain.data()[i].FM_RPLCMT_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
+            var net = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].FROM_HSG_MATE_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + tableMain.data()[i].DIED_TOT + tableMain.data()[i].DSCRD_TOT);
             if (net > 0) {
-                let tbmate = {};
-                tbmate.DOC_CODE = tableMain.data()[i].UK_KEY;
-                tbmate.SITE_ID = tableMain.data()[i].SITE_ID;
-                tbmate.HSG_ID = tableMain.data()[i].HSG_ID;
-                tbmate.TXN_DT = $("#searchDate").val();
-                tbmate.GND = tableMain.data()[i].GND;
-                tbmate.NET_QTY = net;
-                TXN_HSG_MATE.push(tbmate);
+                let tbfrrw = {};
+                tbfrrw.DOC_CODE = tableMain.data()[i].UK_KEY;
+                tbfrrw.SITE_ID = tableMain.data()[i].SITE_ID;
+                tbfrrw.HSG_ID = tableMain.data()[i].HSG_ID;
+                tbfrrw.TXN_DT = $("#searchDate").val();
+                tbfrrw.GND = tableMain.data()[i].GND;
+                tbfrrw.NET_QTY = net;
+                TXN_HSG_FRRW.push(tbfrrw);
             }
         }
         for (var i = 0; i < tableMain.data().length; i++) {
 
             if (tableMain.data()[i].HSG_ID == ORIGIN && tableMain.data()[i].GND == GND) {
-                let tbmate = {};
-                tbmate.DOC_CODE = tableLost.data()[0].UK_KEY.split('--')[0];
-                tbmate.SITE_ID = tableMain.data()[i].SITE_ID;
-                tbmate.HSG_ID = tableMain.data()[i].HSG_ID;
-                tbmate.TXN_DT = $("#searchDate").val();
-                tbmate.GND = tableMain.data()[i].GND;
-                tbmate.DIED_TOT = DIED_TOT;
-                tbmate.DSCRD_TOT = DSCRD_TOT;
-                tbmate.NET_QTY = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].FM_FRRW_QTY + tableMain.data()[i].FM_RPLCMT_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + DIED_TOT + DSCRD_TOT);
-                TXN_HSG_MATE_REDUCE.push(tbmate);
+                let tbfrrw = {};
+                tbfrrw.DOC_CODE = tableLost.data()[0].UK_KEY.split('--')[0];
+                tbfrrw.SITE_ID = tableMain.data()[i].SITE_ID;
+                tbfrrw.HSG_ID = tableMain.data()[i].HSG_ID;
+                tbfrrw.TXN_DT = $("#searchDate").val();
+                tbfrrw.GND = tableMain.data()[i].GND;
+                tbfrrw.DIED_TOT = DIED_TOT;
+                tbfrrw.DSCRD_TOT = DSCRD_TOT;
+                tbfrrw.NET_QTY = (tableMain.data()[i].BALANCE_QTY + tableMain.data()[i].FROM_HSG_MATE_QTY + tableMain.data()[i].RCV_QTY) - (tableMain.data()[i].TFR_QTY + DIED_TOT + DSCRD_TOT);
+                TXN_HSG_FRRW_REDUCE.push(tbfrrw);
             }
         }
         BRDR_LOST_DEL = {};
@@ -2901,9 +2901,9 @@
         $.ajax({
             contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
             type: "POST",
-            url: pathServer + "/MAT/HSGMATDT01_LOST_INSERT",
+            url: pathServer + "/FRR/HSGFRRDT01_LOST_INSERT",
             dataType: "json",
-            data: JSON.stringify({ TXN_HSG_MATE: TXN_HSG_MATE, BRDR_LOST: BRDR_LOST, TXN_HSG_MATE_REDUCE: TXN_HSG_MATE_REDUCE, BRDR_LOST_DEL: BRDR_LOST_DEL }), //parameter Object,List
+            data: JSON.stringify({ TXN_HSG_FRRW: TXN_HSG_FRRW, BRDR_LOST: BRDR_LOST, TXN_HSG_FRRW_REDUCE: TXN_HSG_FRRW_REDUCE, BRDR_LOST_DEL: BRDR_LOST_DEL }), //parameter Object,List
             xhr: function () {
                 var xhr = new window.XMLHttpRequest();
                 let timerInterval;
