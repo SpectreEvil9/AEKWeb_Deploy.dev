@@ -1614,7 +1614,7 @@
         var unixTimestamp2 = dateObj2.getTime();
         var jsonDate2 = `/Date(${unixTimestamp2})/`;
 
-        if (tableMove.data().length <= net_qty) {
+        if (tableMove.data().length < net_qty) {
             $.ajax({
                 type: "POST",
                 url: pathServer + "/MAT/HSGMATDT01_ADD_CHECK_MVMT",
@@ -1805,7 +1805,7 @@
         var dateObj = new Date(lost_dt);
         var unixTimestamp = dateObj.getTime();
         var jsonDate = `/Date(${unixTimestamp})/`;
-        if (tableLost.data().length <= net_qty) {
+        if (tableLost.data().length < net_qty) {
             $.ajax({
                 type: "POST",
                 url: pathServer + "/MAT/HSGMATDT01_ADD_CHECK_LOST",

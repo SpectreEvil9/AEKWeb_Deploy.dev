@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">ฟาร์ม</span>
-                                        <select class="form-select form-control input-req-date dropdown" id="SITE_ID" name="SITE_ID" disabled>
+                                        <select class="form-select form-control input-req-date dropdown" id="SITE_ID" name="SITE_ID" >
                                             @foreach (var sit in ViewBag.MAS_SITE)
                                             {
                                                 <option value="@sit.SITE_ID" @(sit.SITE_ID == "KZP" ? "selected" : "")>@sit.SITE_NM_TH</option>
@@ -306,8 +306,11 @@
         });
 
         $("#week").val(getWeekNumber(formatDate($("#COLL_DT").val())));
-
     });
+
+    $('#COLL_DT').on('change', function () {
+        $("#week").val(getWeekNumber(formatDate($("#COLL_DT").val())));
+    })
 
     function getWeekNumber(dateStr) {
         // Parse the date from the string
@@ -451,37 +454,37 @@
                 {
                     'data': 'ACRS',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='ACRS--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.ACRS + "' onchange='modifyDirectly(this)'/>";
+                        return "<input type='text' class='form-control decimal txt-user-input' autocomplete='off' id='ACRS--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.ACRS + "' onchange='modifyDirectly(this)'/>";
                     }
                 },
                 {
                     'data': 'HD',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='HD--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.HD + "' onchange='modifyDirectly(this)'/>";
+                        return "<input type='text' class='form-control decimal txt-user-input' autocomplete='off' id='HD--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.HD + "' onchange='modifyDirectly(this)'/>";
                     }
                 },
                 {
                     'data': 'NECK',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='NECK--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NECK + "' onchange='modifyDirectly(this)'/>";
+                        return "<input type='text' class='form-control decimal txt-user-input' autocomplete='off' id='NECK--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NECK + "' onchange='modifyDirectly(this)'/>";
                     }
                 },
                 {
                     'data': 'MID_PCE',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='MID_PCE--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.MID_PCE + "' onchange='modifyDirectly(this)'/>";
+                        return "<input type='text' class='form-control decimal txt-user-input' autocomplete='off' id='MID_PCE--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.MID_PCE + "' onchange='modifyDirectly(this)'/>";
                     }
                 },
                 {
                     'data': 'TAIL',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='TAIL--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.TAIL + "' onchange='modifyDirectly(this)'/>";
+                        return "<input type='text' class='form-control decimal txt-user-input' autocomplete='off' id='TAIL--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.TAIL + "' onchange='modifyDirectly(this)'/>";
                     }
                 },
                 {
                     'data': 'IMPTR',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='IMPTR--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.IMPTR + "' onchange='modifyDirectly(this)'/>";
+                        return "<input type='text' class='form-control decimal txt-user-input' autocomplete='off' id='IMPTR--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.IMPTR + "' onchange='modifyDirectly(this)'/>";
                     }
                 },
                 {
@@ -513,16 +516,28 @@
 
                 $(".int").inputmask({
                     'alias': 'numeric',
-                    'integerDigits': '12',
+                    'integerDigits': '6',
                     'digits': 0,
                     'min': '0',
                     'prefix': '',
                     rightAlign: true,
                     allowMinus: false,
                     autoGroup: true,
-                    groupSeparator: ','
+                    groupSeparator: ',',
+                    'placeholder': '0',
+                    'removeMaskOnSubmit': true
                 });
                 $('#' + focusedElementId).focus();
+
+                $(".decimal").inputmask({
+                    'alias': 'decimal',
+                    'integerDigits': '6',
+                    'digits': 2, 'digitsOptional': true,
+                    'placeholder': '0.0', 'autoGroup': true, groupSeparator: ',', 'removeMaskOnSubmit': true,
+                    'allowMinus': false, 'radixPoint': '.', 'rightAlign': true,
+                    'max': '999999.99',
+                    'min': '0'
+                });
 
                 $(".sem_select").select2({
                     theme: "bootstrap-5",
@@ -778,13 +793,13 @@
                 {
                     'data': 'RMAN',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int' autocomplete='off' id='RMAN--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.RMAN + "' readonly/>";
+                        return "<input type='text' class='form-control int' id='RMAN--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.RMAN + "' readonly/>";
                     }
                 },
                 {
                     'data': 'NEW_ARRV',
                     render: function (data, type, row, meta) {
-                        return "<input type='text' class='form-control int txt-user-input' autocomplete='off' id='NEW_ARRV--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NEW_ARRV + "' onchange='modifyDireclyDt2(this)'/>";
+                        return "<input type='text' class='form-control int txt-user-input' id='NEW_ARRV--" + numRow + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.NEW_ARRV + "' onchange='modifyDireclyDt2(this)'/>";
                     }
                 },
                 {
@@ -1080,10 +1095,15 @@
             let page = tb_detail_2.page.info();
             tb_detail_2.page(page.page).cell(row, col).data(values).draw(false);
 
-            if (id_key == 'SIZE') {
-                let netAmt = getNetAmt(values);
-                tb_detail_2.page(page.page).cell(row, 6).data((netAmt ? netAmt : 0)).draw(false);
-                calculate(indexDetail, row, 6);
+            if (id_key == 'PDD_DT' || id_key == 'SIZE') {
+                if ($('#PDD_DT--' + key).val() != "" && $('#SIZE--' + key).val() != "") {
+                    let pddDate = formatDate($('#PDD_DT--' + key).val());
+                    let size = $('#SIZE--' + key).val();
+                    let netAmt = getNetAmt(size, pddDate);
+
+                    tb_detail_2.page(page.page).cell(row, 6).data((netAmt ? netAmt : 0)).draw(false);
+                    calculate(indexDetail, row, 6);
+                }
             }
 
             if (col > 5 && col < 11) {
@@ -1096,15 +1116,24 @@
 
     function calculate(indexDetail,  row, col) {
         let page = tb_detail_2.page.info();
+
+        if (tb_detail_1.data().length > 0) {
+            let receive = 0;
+            for (let i = 0; i < tb_detail_1.data().length; i++) {
+                receive += numeral(tb_detail_1.data()[i].DOSE_REAL_USED)._value;
+            }
+            tb_detail_2.page(page.page).cell(row, 7).data(receive).draw(false);
+        }
+
         let totalAmt = numeral(tb_detail_2.page(page.page).cell(row, 6).data())._value
             + numeral(tb_detail_2.page(page.page).cell(row, 7).data())._value
             - numeral(tb_detail_2.page(page.page).cell(row, 8).data())._value
             - numeral(tb_detail_2.page(page.page).cell(row, 9).data())._value
             - numeral(tb_detail_2.page(page.page).cell(row, 10).data())._value;
-        tb_detail_2.page(page.page).cell(row, 11).data(totalAmt).draw(false);
+        tb_detail_2.page(page.page).cell(row, 11).data(totalAmt).draw(false);        
     }
 
-    function getNetAmt(size) {
+    function getNetAmt(size, pddDate) {
         let net_amt = null;
         $.ajax({
             contentType: "application/json; charset=utf-8",
@@ -1112,7 +1141,7 @@
             url: pathServer + "/SEM/INSPDDDT01_GET_NET_AMT",
             dataType: "json",
             async: false,
-            data: JSON.stringify({ siteId: $("#SITE_ID").val(), collectionDate: formatDate($("#COLL_DT").val()), size: size }),
+            data: JSON.stringify({ siteId: $("#SITE_ID").val(), size: size, producedDate: pddDate }),
             success: function (data) {
                 net_amt = data.NET_AMT[0];
             },
@@ -1134,7 +1163,6 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     saveSemenColl();
-                    saveProduced();
                 }
             });
         } else {
@@ -1149,11 +1177,12 @@
 
     function saveSemenColl() {
         let AVY_BRDR_SEMEN_COLL = new Array();
-        let SEMEN_COLL_DEL = {};
-        SEMEN_COLL_DEL.SITE_ID = $("#SITE_ID").val();
-        SEMEN_COLL_DEL.COLL_DT = formatDate($("#COLL_DT").val());
+        let AVY_BRDR_SEMEN_PDD = new Array();
+        let SEMEN_DEL = {};
+        SEMEN_DEL.SITE_ID = $("#SITE_ID").val();
+        SEMEN_DEL.COLL_DT = formatDate($("#COLL_DT").val());
 
-        if (tb_detail_1.data().length > 0) {
+        if (tb_detail_1.data().length > 0 || tb_detail_2.data().length > 0) {
             for (let i = 0; i < tb_detail_1.data().length; i++) {
                 let avy_sem_coll = {};
                 avy_sem_coll.AVY_BRDR_SEMEN_COLL_SK = tb_detail_1.data()[i].AVY_BRDR_SEMEN_COLL_SK;
@@ -1176,47 +1205,6 @@
                 AVY_BRDR_SEMEN_COLL.push(avy_sem_coll);
             }
 
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                type: "POST",
-                url: pathServer + "/SEM/INSSEMDT01_INSERT",
-                dataType: "json",
-                data: JSON.stringify({ AVY_BRDR_SEMEN_COLL: AVY_BRDR_SEMEN_COLL, SEMEN_COLL_DEL: SEMEN_COLL_DEL }),
-                xhr: function () {
-                    var xhr = new window.XMLHttpRequest();
-                    let timerInterval;
-                    xhr_loading(xhr);
-                    clearInterval(timerInterval);
-                    return xhr;
-                },
-                success: function (data) {
-                    clearInterval(interVal);
-                    $('#progress').css('width', 100 + "%");
-                    setTimeout(function () {
-                        Swal.fire({
-                            icon: "success",
-                            title: 'Your data has been saved',
-                            showConfirmButton: true,
-                            confirmButtonText: 'OK'
-                        }).then((result) => {
-                            $("#SEARCH").click();
-                        });
-                    }, 1500);
-                },
-                error: function () {
-                    errorAlert.init();
-                }
-            });
-        }
-    }
-
-    function saveProduced() {
-        let AVY_BRDR_SEMEN_PDD = new Array();
-        let SEMEN_PDD_DEL = {};
-        SEMEN_PDD_DEL.SITE_ID = $("#SITE_ID").val();
-        SEMEN_PDD_DEL.COLL_DT = formatDate($("#COLL_DT").val());
-
-        if (tb_detail_2.data().length > 0) {
             for (let i = 0; i < tb_detail_2.data().length; i++) {
                 let avy_sem_pdd = {};
                 avy_sem_pdd.AVY_BRDR_SEMEN_PDD_SK = tb_detail_2.data()[i].AVY_BRDR_SEMEN_PDD_SK;
@@ -1236,13 +1224,12 @@
                 AVY_BRDR_SEMEN_PDD.push(avy_sem_pdd);
             }
 
-
             $.ajax({
                 contentType: "application/json; charset=utf-8",
                 type: "POST",
-                url: pathServer + "/SEM/INSPDDDT01_INSERT",
+                url: pathServer + "/SEM/INSSEMDT01_INSERT",
                 dataType: "json",
-                data: JSON.stringify({ AVY_BRDR_SEMEN_PDD: AVY_BRDR_SEMEN_PDD, SEMEN_PDD_DEL: SEMEN_PDD_DEL }),
+                data: JSON.stringify({ AVY_BRDR_SEMEN_COLL: AVY_BRDR_SEMEN_COLL, AVY_BRDR_SEMEN_PDD: AVY_BRDR_SEMEN_PDD, SEMEN_DEL: SEMEN_DEL }),
                 xhr: function () {
                     var xhr = new window.XMLHttpRequest();
                     let timerInterval;
@@ -1261,7 +1248,6 @@
                             confirmButtonText: 'OK'
                         }).then((result) => {
                             $("#SEARCH").click();
-                            //tb_detail_2.ajax.reload();
                         });
                     }, 1500);
                 },

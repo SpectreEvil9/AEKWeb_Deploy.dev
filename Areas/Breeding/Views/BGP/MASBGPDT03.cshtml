@@ -48,7 +48,7 @@
                                             <select class="form-select form-control input-req-date dropdown" id="SITE" name="SITE">
                                                 @foreach (var sit in ViewBag.MAS_SITE)
                                                 {
-                                                    <option value="@sit.SITE_ID" @(sit.SITE_ID == @Model.SITE_ID ? "selected" : "")>@sit.SITE_NM_TH</option>
+                                                    <option value="@sit.SITE_ID" @(sit.SITE_ID == @Model.SITE_ID_ORIG ? "selected" : "")>@sit.SITE_NM_TH</option>
                                                 }
                                             </select>
                                         </div>
@@ -61,7 +61,7 @@
                                             <select class="form-select form-control input-req-date dropdown" id="HOUSING" name="HOUSING">
                                                 @foreach (var hsg in ViewBag.MAS_HSG)
                                                 {
-                                                    <option value="@hsg.HSG_ID" @(hsg.HSG_ID == @Model.HSG_ID ? "selected" : "")>@hsg.HSG_CODE</option>
+                                                    <option value="@hsg.HSG_ID" @(hsg.HSG_ID == @Model.HSG_ID_ORIG ? "selected" : "")>@hsg.HSG_CODE</option>
                                                 }
                                             </select>
                                         </div>
@@ -378,8 +378,8 @@
         function save() {
             let MAS_BRDR_ALL = {};
             MAS_BRDR_ALL.BRDR_ALL_SK = "@Model.BRDR_ALL_SK";
-            MAS_BRDR_ALL.SITE_ID = $("#SITE").val();
-            MAS_BRDR_ALL.HSG_ID = $("#HOUSING").val();
+            MAS_BRDR_ALL.SITE_ID_ORIG = $("#SITE").val();
+            MAS_BRDR_ALL.HSG_ID_ORIG = $("#HOUSING").val();
             MAS_BRDR_ALL.BRDR_ID = $("#BRDR_ID").val();
             MAS_BRDR_ALL.BRDR_ID_ORIG = $("#BRDR_ID_ORIG").val();
             MAS_BRDR_ALL.LINE = $("#LINE").val();

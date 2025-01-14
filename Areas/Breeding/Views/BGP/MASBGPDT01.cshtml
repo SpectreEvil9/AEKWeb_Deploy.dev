@@ -330,15 +330,15 @@
                 { 'data': 'BRST_LEFT' },
                 { 'data': 'BRST_RGHT' },
                 { 'data': 'WGHT_RCVD' },
-                {'data': 'ADG'},
-                {'data': 'FCR'},
-                {'data': 'INDEX'},
-                {'data': 'INDEX_F'},
-                {'data': 'INBRD'},
+                { 'data': 'ADG'},
+                { 'data': 'FCR'},
+                { 'data': 'INDEX'},
+                { 'data': 'INDEX_F'},
+                { 'data': 'INBRD'},
                 { 'data': 'REM' },
                 { 'data': 'ST' },
-                { 'data': 'MFG_SITE_ID' },
-                { 'data': 'MFG_HSG_ID' },
+                { 'data': 'SITE_ID_ORIG' },
+                { 'data': 'HSG_ID_ORIG' },
                 {
                     mRender: function (data, type, row) {
                     var link = '@HttpUtility.UrlDecode(Url.Action("MASBGPDT03", "BGP", new { BRDR_ALL_SK = "row_BRDR_ALL_SK" }).ToString())';
