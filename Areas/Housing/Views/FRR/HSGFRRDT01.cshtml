@@ -1941,7 +1941,7 @@
 
         $.ajax({
             type: "POST",
-            url: pathServer + "/MAT/HSGMATDT01_ADD_CHECK_MVMT",
+            url: pathServer + "/FRR/HSGFRRDT01_ADD_CHECK_MVMT",
             dataType: "json",
             cache: false,
             data: { SITE_ID: sit, HSG_ID: hsg, GND: gnd, TXN_DT: tdt, NEW_ARRV_DT: ndt },
@@ -1972,7 +1972,7 @@
         var brd = $("#" + id).val();
         $.ajax({
             type: "POST",
-            url: pathServer + "/MAT/HSGMATDT01_BRDR_MVMT_DETAIL",
+            url: pathServer + "/FRR/HSGFRRDT01_BRDR_MVMT_DETAIL",
             dataType: "json",
             cache: false,
             data: { SITE_ID: sit, HSG_ID: hsg, BRDR_ID:brd },
@@ -2319,7 +2319,7 @@
         if (tableLost.data().length < net_qty) {
             $.ajax({
                 type: "POST",
-                url: pathServer + "/MAT/HSGMATDT01_ADD_CHECK_LOST",
+                url: pathServer + "/FRR/HSGFRRDT01_ADD_CHECK_LOST",
                 dataType: "json",
                 cache: false,
                 data: { SITE_ID: sit_id, HSG_ID: hsg_id, GND: gnd, MVMT_DT: lost_dt },
@@ -2509,7 +2509,7 @@
 
         $.ajax({
             type: "POST",
-            url: pathServer + "/MAT/HSGMATDT01_REVERT_CHECK_LOST",
+            url: pathServer + "/FRR/HSGFRRDT01_REVERT_CHECK_LOST",
             dataType: "json",
             cache: false,
             data: { SITE_ID: sit, HSG_ID: hsg, GND: gnd, MVMT_DT: mdt, BRDR_ID: brd, LOST_TP: ltp },
@@ -3103,7 +3103,7 @@
                     if (new_values != "") {
                         $.ajax({
                             type: "POST",
-                            url: pathServer + "/MAT/BRDR_DETAIL",
+                            url: pathServer + "/FRR/BRDR_DETAIL",
                             dataType: "json",
                             cache: false,
                             data: { BRDR_ID: new_values },
@@ -3385,7 +3385,7 @@
         $.ajax({
             contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list
             type: "POST",
-            url: pathServer + "/MAT/HSGMATDT01_INSERT",
+            url: pathServer + "/FRR/HSGFRRDT01_INSERT",
             dataType: "json",
             data: JSON.stringify({ TXN_HSG_FRRW: TXN_HSG_FRRW, HSG_TEMP_HMD: HSG_TEMP_HMD }), //parameter Object,List
             xhr: function () {
