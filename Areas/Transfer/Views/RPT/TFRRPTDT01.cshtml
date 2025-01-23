@@ -1,0 +1,257 @@
+﻿
+@{
+    ViewBag.Title = "TFRRPTDT01";
+}
+<style>
+    .text-bold {
+        font-weight: bold;
+    }
+</style>
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">
+                รายงานโอนย้ายสุกรพันธุ์
+            </h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Transfer" })">Transfer</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Movement Report</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-primary">ค้นหา</h1>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("TFRRPTDT01", "RPT", FormMethod.Get, new { enctype = "multipart/form-data", @class = " bordered-row" }))
+                        {
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">เลขที่โอนย้าย</span>
+                                            @Html.TextBox("searchMVtno", ViewBag.searchMVtno as string, new { @class = "form-control", autocomplete = "off", tabindex = "1" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์ม</span>
+                                            <select class="form-select form-control" id="searchSiteid" name="searchSiteid">
+                                                <option value="ALL">All</option>
+                                                @foreach (var sit in ViewBag.MAS_SITE)
+                                                {
+                                                    <option value="@sit.SITE_ID" @(sit.SITE_ID == "BT" ? "selected" : "")>@sit.SITE_NM_TH</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 date">
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">จากวันที่</span>
+                                            @Html.TextBox("searchDateForm", ViewBag.searchDateForm as string, new { @class = "form-control m-input", autocomplete = "off", tabindex = "1", placeholder = "Select Date", id = "searchDateForm" })
+                                            <span class="input-group-icon">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3 date">
+                                            <span class="input-group-text col-lg-3" id="basic-addon1">ถึงวันที่</span>
+                                            @Html.TextBox("searchDateTo", ViewBag.searchDateTo as string, new { @class = "form-control m-input", autocomplete = "off", tabindex = "1", placeholder = "Select Date", id = "searchDateTo" })
+                                            <span class="input-group-icon">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-12 d-flex" style="justify-content:flex-end !important">
+                                    <button type="submit" class="btn btn-primary btn-round">Search</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-10">
+                                <h6 class="card-title text-primary">
+                                    รายละเอียด
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive tab-content mt-3 mb-3">
+                            <table id="tb_detail" style="width:100%" border="1"
+                                   class="display table table-striped table-hover table-bordered table-checkable nowrap dataTable">
+                                <thead>
+                                    <tr>
+                                        <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                        <th width="10%" style="text-align:center !important">เล้า</th>
+                                        <th width="10%" style="text-align:center !important">รหัสฟาร์ม</th>
+                                        <th style="text-align:center !important">ชื่อฟาร์ม</th>
+                                        <th style="text-align:center !important">เลขที่เอกสาร</th>
+                                        <th style="text-align:center !important">วันที่</th>
+                                        <th style="text-align:center !important">จำนวน</th>
+                                        <th width="5%" style="align-content:center !important">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var table = null;
+    $('#searchSiteid').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+        closeOnSelect: true,
+        tags: true
+    });
+    $(document).ready(function () {
+
+        if ('@ViewBag.searchMVtno' != '') {
+            $("#searchMVtno").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchMVtno))')).trigger("change");
+        }
+        if ('@ViewBag.searchSiteid' != '') {
+            $("#searchSiteid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteid))')).trigger("change");
+        }
+
+        $("#searchDateForm,#searchDateTo").datepicker({
+            todayHighlight: true,
+            orientation: 'bottom left',
+            format: 'dd-M-yyyy',
+            todayBtn: 'linked',
+            autoclose: 'true',
+            assumeNearbyYear: true
+        });
+
+        table = $("#tb_detail").DataTable({
+        lengthChange: false,
+        "processing": true, // for show progress bar
+        "orderMulti": false, // for disable multiple column at once
+        "pageLength": 10,
+        scrollCollapse: true,
+        paging: true,
+        searching: false,
+        responsive: !0,
+        ordering: true,
+        info: true,
+        bAutoWidth: false,
+        order: [[1, "asc"]],
+        "ajax": {
+            url: pathServer + "/RPT/TFRRPTDT01_SELECT",
+                type: "POST",
+                datatype: "json",
+            data: {
+                searchSiteid: $("#searchSiteid").val(), searchMVtno: $("#searchMVtno").val(), searchDateForm: $("#searchDateForm").val(), searchDateTo: $("#searchDateTo").val()
+                },
+        },
+        columnDefs: [
+            {
+                targets: [0],
+                orderable: false,
+                className: "text-center",
+            },
+            {
+                targets: [1],
+                orderable: false,
+                visible: false,
+                className: "text-left",
+            },
+            {
+                targets: [ 2, 3, 4],
+                orderable: false,
+                className: "text-right",
+            },
+            {
+                targets: [6],
+                orderable: false,
+                className: "text-left",
+            },
+            {
+                targets: [ 5, 7],
+                orderable: false,
+                className: "text-center",
+            },
+        ],
+        "columns": [
+            {
+                "render": function (data, type, full, meta) {
+                    var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                    return (meta.row + 1) + page;
+                }
+            },
+            { 'data': 'UK_KEY'},
+            { 'data': 'SITE_ID'},
+            { 'data': 'SITE_NM_TH'},
+            { 'data': 'DOC_CODE'},
+            { 'data': 'MVMT_DT', render: function (data, type, row) { return data != "" ? resJsonToDate(data) : ""; } },
+            { 'data': 'TOTAL_QTY'},
+            {
+                mRender: function (data, type, row) {
+                    var sit_id = row.SITE_ID;
+                    var link = '@HttpUtility.UrlDecode(Url.Action("TFRRPTDT02", "RPT", new {
+                               DOC_CODE = "row_DOC_CODE",
+                               searchSiteid = "row_SITE_ID",
+                               searchMVtno = ViewBag.searchMVtno,
+                               searchMVMTDT = "row_MVMT_DT",
+                           }).ToString())';
+                    link = link.replace("row_DOC_CODE", row.DOC_CODE);
+                    link = link.replace("row_SITE_ID", row.SITE_ID);
+                    link = link.replace("row_MVMT_DT", row.MVMT_DT);
+                    var All_Botton = "<div class='d-flex align-items-center selectgroup-pills'>";
+                    All_Botton = All_Botton + "<a href='" + link + "' class='selectgroup-button selectgroup-button-icon' title='View'><i class='bi bi-eye-fill'></i></a>";
+                        All_Botton = All_Botton + "</div>";
+                    return All_Botton;
+                    }
+                },
+            ]
+        });
+
+        table.on('order.dt', function () {
+            table.column(0, { order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+    });
+</script>

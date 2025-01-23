@@ -5,7 +5,7 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">สร้างข้อมูลราคาขายตามประกาศ (Sale Price)</h3>
+            <h3 class="fw-bold mb-3">สร้างข้อมูลราคาขาย และส่วนลดตามประกาศ (Sale Price)</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="#">
@@ -40,25 +40,12 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <div class="form-group">
-                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
-                                        <span class="input-group-text col-lg-2" id="basic-addon1">Item</span>
-                                        <select class="form-select dropdown-multiple" id="ITM_NO" name="ITM_NO" required>
-                                            @foreach (var itm in ViewBag.MAS_ITM)
-                                            {
-                                                <option value="@itm.ITM_NO">@itm.ITM_NO - @itm.ITM_NM</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
-                                        <span class="input-group-text">Line NO.</span>
-                                        <input type="number"
-                                               id="LINE_NO"
+                                        <span class="input-group-text" id="basic-addon1">PG Type</span>
+                                        <input type="text"
+                                               id="PG_TP"
                                                class="form-control"
                                                required />
                                     </div>
@@ -66,40 +53,8 @@
                             </div>
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Account</span>
-                                        <input type="text"
-                                               id="AC_REL"
-                                               class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 col-lg-3">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Size</span>
-                                        <input type="text"
-                                               id="SIZE"
-                                               class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Style</span>
-                                        <input type="text"
-                                               id="STYLE"
-                                               class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3">
-                                <div class="form-group">
                                     <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
-                                        <span class="input-group-text">From Date</span>
+                                        <span class="input-group-text">วันที่เริ่มประกาศ</span>
                                         <input type="text"
                                                id="FM_DT"
                                                class="form-control"
@@ -113,7 +68,7 @@
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
-                                        <span class="input-group-text">To Date</span>
+                                        <span class="input-group-text">ถึงวันที่ประกาศ</span>
                                         <input type="text"
                                                id="TO_DT"
                                                class="form-control"
@@ -124,13 +79,119 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text">Relation TH</span>
+                                        <input type="text"
+                                               id="REL_TH"
+                                               class="form-control"
+                                               required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Relation</span>
+                                        <input type="text"
+                                               id="REL"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Account Code</span>
+                                        <input type="text"
+                                               id="AC_CODE"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Account Selection</span>
+                                        <input type="text"
+                                               id="AC_SEL"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text">Item No.</span>
+                                        <input type="text"
+                                               id="ITM_NO"
+                                               class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text">Product Name</span>
+                                        <input type="text"
+                                               id="PD_NM"
+                                               class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text">Size</span>
+                                        <input type="text"
+                                               id="SIZE"
+                                               class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text">Style</span>
+                                        <input type="text"
+                                               id="STYLE"
+                                               class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text">Unit</span>
+                                        <input type="text"
+                                               id="UNIT"
+                                               class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
+                                        <span class="input-group-text text-right">Price Amount</span>
+                                        <input type="number"
+                                               id="PRC_AMT"
+                                               class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
                                         <span class="input-group-text">Site</span>
-                                        <select class="form-select dropdown-multiple" id="SITE_ID" name="SITE_ID" required>
+                                        <select class="form-select dropdown-multiple" id="SITE_ID" name="SITE_ID">
+                                            <option value="ALL" selected="selected">All</option>
                                             @foreach (var itm in ViewBag.MAS_SITE)
                                             {
                                                 <option value="@itm.SITE_ID">@itm.SITE_ID - @itm.SITE_NM_TH</option>
@@ -142,32 +203,10 @@
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
-                                        <span class="input-group-text">Amount</span>
-                                        <input type="number"
-                                               id="AMT"
-                                               class="form-control" required />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Currency</span>
-                                        <input type="text"
-                                               id="CRN"
-                                               placeholder="THB"
-                                               value="THB"
-                                               class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3">
-                                <div class="form-group">
-                                    <div class="input-group mb-3 validate-input" data-validate="จำเป็นต้องระบุ">
                                         <span class="input-group-text col-md-5" id="basic-addon1">Active Status</span>
                                         <select class="form-select dropdown-multiple" id="ACTV_ST" name="ACTV_ST" required>
-                                            <option value="1">Active</option>
-                                            <option value="0">InActive</option>
+                                            <option value="A">Active</option>
+                                            <option value="I">InActive</option>
                                         </select>
                                     </div>
                                 </div>
@@ -193,23 +232,21 @@
             assumeNearbyYear: true,
         });
 
-        $('#ITM_NO').select2({
-            theme: "bootstrap-5",
-            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-            placeholder: $(this).data('placeholder'),
-            closeOnSelect: true,
-            tags: true
-        });
-
-        $($(ITM_NO).parent()).removeClass('alert-validate');
-        $($(LINE_NO).parent()).removeClass('alert-validate');
+        $($(PG_TP).parent()).removeClass('alert-validate');
         $($(FM_DT).parent()).removeClass('alert-validate');
         $($(TO_DT).parent()).removeClass('alert-validate');
-        $($(SITE_ID).parent()).removeClass('alert-validate');
-        $($(AMT).parent()).removeClass('alert-validate');
+        $($(REL_TH).parent()).removeClass('alert-validate');
+        $($(ITM_NO).parent()).removeClass('alert-validate');
+        $($(PD_NM).parent()).removeClass('alert-validate');
+        $($(SIZE).parent()).removeClass('alert-validate');
+        $($(STYLE).parent()).removeClass('alert-validate');
+        $($(UNIT).parent()).removeClass('alert-validate');
+        $($(PRC_AMT).parent()).removeClass('alert-validate');
+        $($(ACTV_ST).parent()).removeClass('alert-validate');
 
         $("#SAVE").click(function () {
-            if ($("#ITM_NO").val() != "" && $("#LINE_NO").val() != "" && $("#FM_DT").val() != "" && $("#TO_DT").val() != "" && $("#SITE_ID").val() != "" && $("#AMT").val() != "") {
+            if ($("#PG_TP").val() != "" && $("#FM_DT").val() != "" && $("#TO_DT").val() != "" && $("#REL_TH").val() != "" && $("#ITM_NO").val() != ""
+                && $("#PD_NM").val() != "" && $("#SIZE").val() != "" && $("#STYLE").val() != "" && $("#UNIT").val() != "" && $("#PRC_AMT").val() != "" && $("#ACTV_ST").val() != "") {
                 Swal.fire({
                     icon: "question",
                     title: 'Do you want to save?',
@@ -222,11 +259,8 @@
                     }
                 });
             } else {
-                if ($("#ITM_NO").val() == "") {
-                    $($(ITM_NO).parent()).addClass('alert-validate');
-                }
-                if ($("#LINE_NO").val() == "") {
-                    $($(LINE_NO).parent()).addClass('alert-validate');
+                if ($("#PG_TP").val() == "") {
+                    $($(PG_TP).parent()).addClass('alert-validate');
                 }
                 if ($("#FM_DT").val() == "") {
                     $($(FM_DT).parent()).addClass('alert-validate');
@@ -234,29 +268,51 @@
                 if ($("#TO_DT").val() == "") {
                     $($(TO_DT).parent()).addClass('alert-validate');
                 }
-                if ($("#SITE_ID").val() == "") {
-                    $($(SITE_ID).parent()).addClass('alert-validate');
+                if ($("#REL_TH").val() == "") {
+                    $($(REL_TH).parent()).addClass('alert-validate');
                 }
-                if ($("#AMT").val() == "") {
-                    $($(AMT).parent()).addClass('alert-validate');
+                if ($("#ITM_NO").val() == "") {
+                    $($(ITM_NO).parent()).addClass('alert-validate');
+                }
+                if ($("#PD_NM").val() == "") {
+                    $($(PD_NM).parent()).addClass('alert-validate');
+                }
+                if ($("#SIZE").val() == "") {
+                    $($(SIZE).parent()).addClass('alert-validate');
+                }
+                if ($("#STYLE").val() == "") {
+                    $($(STYLE).parent()).addClass('alert-validate');
+                }
+                if ($("#UNIT").val() == "") {
+                    $($(UNIT).parent()).addClass('alert-validate');
+                }
+                if ($("#PRC_AMT").val() == "") {
+                    $($(PRC_AMT).parent()).addClass('alert-validate');
+                }
+                if ($("#ACTV_ST").val() == "") {
+                    $($(ACTV_ST).parent()).addClass('alert-validate');
                 }
             }
         });
 
         function save() {
             var STD_SALE_PRICE = {};
-            STD_SALE_PRICE.LINE_NO = $("#LINE_NO").val();
-            STD_SALE_PRICE.AC_REL = $("#AC_REL").val();
-            STD_SALE_PRICE.ITM_NO = $("#ITM_NO").val();
-            STD_SALE_PRICE.SIZE = $("#SIZE").val();
-            STD_SALE_PRICE.STYLE = $("#STYLE").val();
-            STD_SALE_PRICE.SITE_ID = $("#SITE_ID").val();
+            STD_SALE_PRICE.PG_TP = $("#PG_TP").val();
             STD_SALE_PRICE.FM_DT = $("#FM_DT").val();
             STD_SALE_PRICE.TO_DT = $("#TO_DT").val();
-            STD_SALE_PRICE.AMT = $("#AMT").val();
-            STD_SALE_PRICE.CRN = $("#CRN").val();
+            STD_SALE_PRICE.REL_TH = $("#REL_TH").val();
+            STD_SALE_PRICE.REL = $("#REL").val();
+            STD_SALE_PRICE.AC_CODE = $("#AC_CODE").val();
+            STD_SALE_PRICE.AC_SEL = $("#AC_SEL").val();
+            STD_SALE_PRICE.ITM_NO = $("#ITM_NO").val();
+            STD_SALE_PRICE.PD_NM = $("#PD_NM").val();
+            STD_SALE_PRICE.SIZE = $("#SIZE").val();
+            STD_SALE_PRICE.STYLE = $("#STYLE").val();
+            STD_SALE_PRICE.UNIT = $("#UNIT").val();
+            STD_SALE_PRICE.PRC_AMT = $("#PRC_AMT").val();
+            STD_SALE_PRICE.SITE_ID = $("#SITE_ID").val();
             STD_SALE_PRICE.ACTV_ST = $("#ACTV_ST").val();
-            STD_SALE_PRICE.CRT_USR_ID = 999;
+            STD_SALE_PRICE.CRT_USR_ID = 1;
 
             $.ajax({
             contentType: "application/json; charset=utf-8",// กำหนด content สำหรับส่งข้อมูลแบบ object or list

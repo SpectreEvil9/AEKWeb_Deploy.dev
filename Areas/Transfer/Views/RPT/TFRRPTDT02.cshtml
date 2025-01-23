@@ -1,0 +1,397 @@
+﻿
+@{
+    ViewBag.Title = "TFRRPTDT02";
+}
+<style>
+    .text-bold {
+        font-weight: bold;
+    }
+</style>
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">
+                รายงานโอนย้ายสุกรพันธุ์
+            </h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Transfer" })">Transfer</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Movement Report</a>
+                </li>
+                 <li class="separator">
+                     <i class="icon-arrow-right"></i>
+                 </li>
+                <li class="nav-item">
+                    <a href="#">Export To Excels</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-10">
+                                <h3 class="card-title text-primary">รายละเอียดรายงานการโอนย้าย</h3>
+                            </div>
+                            <div class="col-md-6 col-lg-2 d-flex" style="justify-content:flex-end !important">
+                                <button class="btn btn-success btn-round" id="saveToExcel">
+                                    <span class="btn-label"><i class="fas fa-print"></i></span>Export To Excel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">เลชที่เอกสาร</span>
+                                        <input type="text" class="form-control" id="DOC_CODE" value="@Model.DOC_CODE" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">วันที่</span>
+                                        <input type="text" class="form-control input-req-date" id="MVMT_DT" placeholder="Select Date" value="@(Model.MVMT_DT == null ? "" : Convert.ToString(string.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(Model.MVMT_DT))))" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-4" id="basic-addon1">สถานะ</span>
+                                        <input type="text"
+                                               style="text-align:center"
+                                               class="form-control"
+                                               placeholder="Complated" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์มต้นทาง</span>
+                                        <select class="form-select form-control input-req-date dropdown" id="FORM_SITE_ID" name="FORM_SITE_ID" disabled>
+                                            @foreach (var sit in ViewBag.MAS_SITE_FROM)
+                                            {
+                                                <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">ฟาร์มปลายทาง</span>
+                                        <select class="form-select form-control input-req-date dropdown" id="TO_SITE_ID" name="TO_SITE_ID" disabled>
+                                            @foreach (var sit in ViewBag.MAS_SITE_TO)
+                                            {
+                                                <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3">โรงเรือนต้นทาง</span>
+                                        <select class="form-select form-control input-req-date dropdown" id="FORM_HSG_TP" disabled>
+                                            @foreach (var item in ViewBag.HSG_TP_CODE as SelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text col-lg-3" id="basic-addon1">โรงเรือนปลายทาง</span>
+                                        <select class="form-select form-control input-req-date dropdown" id="TO_HSG_TP" disabled>
+                                            @foreach (var item in ViewBag.HSG_TP_CODE as SelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive tab-content mt-3 mb-3">
+                            <table id="tb_detail" style="width:100%" border="1"
+                                   class="display table table-striped table-hover table-bordered table-checkable nowrap dataTable">
+                                <thead>
+                                    <tr>
+                                        <th width="5%" style="text-align:center !important">ลำดับ</th>
+                                        <th>uk</th>
+                                        <th style="text-align:center !important">เลขที่เอกสาร</th>
+                                        <th style="text-align:center !important">วันที่ย้าย</th>
+                                        <th style="text-align:center !important">เบอร์หู</th>
+                                        <th style="text-align:center !important">รหัสฟาร์ม</th>
+                                        <th style="text-align:center !important">เล้าต้นทาง</th>
+                                        <th style="text-align:center !important">เล้าปลายทาง</th>
+                                        <th style="text-align:center !important">ค่าอาหาร</th>
+                                        <th style="text-align:center !important">ค่าวัคซีน</th>
+                                        <th style="text-align:center !important">ค่ายาและวิตามิน</th>
+                                        <th style="text-align:center !important">ค่าแรง</th>
+                                        <th style="text-align:center !important">ค่าโสหุ้ย</th>
+                                        <th style="text-align:center !important">ค่าบรรทุก</th>
+                                        <th style="text-align:center !important">ต้นทุนสะสม</th>
+                                        <th style="text-align:center !important">ค่าเสื่อมพันธุ์/วัน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="7" class="text-right">รวม</th>
+                                        <th style="padding-right: 1px !important"></th>
+                                        <th style="padding-right: 1px !important"></th>
+                                        <th style="padding-right: 1px !important"></th>
+                                        <th style="padding-right: 1px !important"></th>
+                                        <th style="padding-right: 1px !important"></th>
+                                        <th style="padding-right: 1px !important"></th>
+                                        <th style="padding-right: 1px !important"></th>
+                                        <th style="padding-right: 1px !important"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var table_detail = null;
+
+    $(document).ready(function () {
+        if ('@ViewBag.searchMVtno' != '') {
+            $("#searchMVtno").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchMVtno))')).trigger("change");
+        }
+        if ('@ViewBag.searchSiteid' != '') {
+            $("#searchSiteid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteid))')).trigger("change");
+        }
+
+        table_detail = $("#tb_detail").DataTable({
+            lengthChange: true,
+            "processing": true, // for show progress bar
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 25,
+            scrollCollapse: true,
+            paging: true,
+            searching: false,
+            responsive: !0,
+            ordering: true,
+            info: true,
+            bAutoWidth: false,
+            order: [[1, "asc"]],
+            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $('td', nRow).eq(12).addClass('text-bold');
+            },
+            columnDefs: [
+                {
+                    targets: [0],
+                    orderable: false,
+                    className: "text-center"
+                },
+                {
+                    targets: [1],
+                    visible: false
+                },
+                {
+                    targets: [2, 3, 4, 5, 6, 7],
+                    orderable: false,
+                    className: "text-left"
+                },
+                {
+                    targets: [8, 9, 10, 11, 12, 13, 14, 15],
+                    orderable: false,
+                    className: "text-right",
+                    mRender: function (data, type, full) {
+                        return numeral(data).format('0,0.00');
+                    }
+                }
+            ],
+            "columns": [
+                {
+                    "render": function (data, type, full, meta) {
+                        var page = (Math.ceil(meta.settings._iDisplayStart / meta.settings._iDisplayLength)) * 10; // index row
+                        return (meta.row + 1) + page;
+                    }
+                },
+                { 'data': 'UK_KEY' },
+                { 'data': 'DOC_CODE' },
+                { 'data': 'MVMT_DT', render: function (data, type, row) { return data != "" ? resJsonToDate(data) : ""; } },
+                { 'data': 'BRDR_ID' },
+                { 'data': 'SITE_ID'},
+                { 'data': 'HSG_ID'},
+                { 'data': 'DEST_HSG_ID' },
+                { 'data': 'COST_FEED_SM' },
+                { 'data': 'COST_VCCNE_SM' },
+                { 'data': 'COST_MDVTMN_SUM' },
+                { 'data': 'COST_DRC_LBOR' },
+                { 'data': 'COST_OVHD' },
+                { 'data': 'COST_LGST' },
+                {
+                    'data': 'COST_LGST',
+                    render: function (data, type, row) {
+                        let total = row.COST_FEED_SM + row.COST_VCCNE_SM + row.COST_MDVTMN_SUM
+                            + row.COST_DRC_LBOR + row.COST_OVHD + row.COST_LGST;
+                        return numeral(total).format('0,0.00');
+                    }
+                },
+                { 'data': 'DPC_PR_DY'},
+            ],
+            "drawCallback": function (row, data, index) {
+                var api = this.api();
+                api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+                    var pageInfo = api.page.info();
+                    var rowIndex = (i + 1) + pageInfo.page * pageInfo.length;
+                    $(cell).html(rowIndex);
+                });
+            },
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api();
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+
+                totalFeed = api
+                    .column(7)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                $(api.column(7).footer()).html(
+                    numeral(totalFeed).format('0,0.00')
+                );
+
+                totalVccine = api
+                    .column(8)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                $(api.column(8).footer()).html(
+                    numeral(totalVccine).format('0,0.00')
+                );
+
+                totalMVitamin = api
+                    .column(9)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                $(api.column(9).footer()).html(
+                    numeral(totalMVitamin).format('0,0.00')
+                );
+
+                totalDLabor = api
+                    .column(10)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                $(api.column(10).footer()).html(
+                    numeral(totalDLabor).format('0,0.00')
+                );
+
+                totalOverhead = api
+                    .column(11)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                $(api.column(11).footer()).html(
+                    numeral(totalOverhead).format('0,0.00')
+                );
+
+                totalLogis = api
+                    .column(12)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                $(api.column(12).footer()).html(
+                    numeral(totalLogis).format('0,0.00')
+                );
+
+                totalQty = api
+                    .column(13)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                let allQty = totalFeed + totalVccine + totalMVitamin + totalDLabor + totalOverhead + totalLogis;
+                $(api.column(13).footer()).html(
+                    numeral(allQty).format('0,0.00')
+                );
+            },
+        });
+        SelectDetails();
+    });
+
+    function SelectDetails() {
+        var doc = $("#DOC_CODE").val();
+        $.ajax({
+            type: "POST",
+            url: pathServer + "/RPT/TFRRPTDT02_SELECT",
+            dataType: "json",
+            cache: false,
+            data: { DOC_CODE: doc },
+            success: function (data) {
+                var V_TFRRPTDT01 = data.V_TFRRPTDT01;
+
+                table_detail.clear().draw();
+                table_detail.rows.add(V_TFRRPTDT01).draw();
+            },
+            error: function () {
+                errorAlert.init();
+            }
+        });
+    }
+
+    $("#saveToExcel").click(function () {
+        let searchSiteid = $("#FORM_SITE_ID").val();
+        let searchDocCd = $("#DOC_CODE").val();
+        let searchMvmtDt = $("#MVMT_DT").val();
+
+        var url = pathServer + "/RPT/MVTCOSRPT01?id=Excel";
+        url += "&searchSiteid=" + searchSiteid;
+        url += "&searchDocCode=" + searchDocCd;
+        url += "&searchMvmtDate=" + searchMvmtDt;
+        window.open(url, '_blank');
+    });
+</script>
+

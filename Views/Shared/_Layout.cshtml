@@ -385,7 +385,7 @@
                                         <span class="profile-username">
                                             <span class="op-7 nav-item">MJG</span>
                                             <span class="op-7 separator"><i class="icon-arrow-right"></i></span>
-                                            <span class="op-7 nav-item">BT</span>
+                                            <span class="op-7 nav-item">@Session["site_id"].ToString()</span>
                                             <span class="op-7 separator"><i class="icon-arrow-right"></i></span>
                                             <span class="fw-bold nav-item">Admin</span>
                                         </span>
@@ -401,7 +401,7 @@
                                                 </div>
                                                 <div class="u-text">
                                                     <h4>Admin</h4>
-                                                    <p class="text-muted">Admin@Iable.com</p>
+                                                    <p class="text-muted">@Session["usr_nm"].ToString()</p>
                                                     <a href="profile.html"
                                                        class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                                 </div>
@@ -415,7 +415,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Account Setting</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Logout</a>
+                                            <a class="dropdown-item" href="@Url.Action("Logout", "Authen", new { Area = "" })">Logout</a>
                                         </li>
                                     </ul>
                                 </li>

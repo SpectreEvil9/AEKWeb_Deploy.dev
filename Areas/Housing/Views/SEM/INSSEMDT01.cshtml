@@ -1101,7 +1101,7 @@
                     let size = $('#SIZE--' + key).val();
                     let netAmt = getNetAmt(size, pddDate);
 
-                    tb_detail_2.page(page.page).cell(row, 6).data((netAmt ? netAmt : 0)).draw(false);
+                    tb_detail_2.page(page.page).cell(row, 6).data((netAmt ? netAmt.NET_AMT : 0)).draw(false);
                     calculate(indexDetail, row, 6);
                 }
             }

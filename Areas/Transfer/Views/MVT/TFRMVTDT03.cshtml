@@ -153,6 +153,8 @@
                                         <th style="text-align:center !important">ค่าเสื่อมพันธุ์/วัน</th>
                                         <th style="text-align:center !important">โรงเรือนปลายทาง</th>
                                         <th style="text-align:center !important">วันที่โรงเรือนปลายทาง</th>
+                                        <th style="text-align:center !important">โรงเรือนปลายทาง(ลูก)</th>
+                                        <th width="5%" style="text-align:center !important">จำนวน(ลูก)</th>
                                         <th width="5%" style="align-content:center">
                                             <div class="d-flex align-items-center selectgroup-pills">
                                                 <button type="button" id="BT-ADD_MOVE" onclick="AddMovement(this)"
@@ -191,6 +193,7 @@
 <script>
     var MAS_HSG_FROM = @Html.Raw(Json.Encode(ViewBag.MAS_HSG_FROM));
     var MAS_HSG_TO = @Html.Raw(Json.Encode(ViewBag.MAS_HSG_TO));
+    var MAS_HSG_CHILD_TO = @Html.Raw(Json.Encode(ViewBag.MAS_HSG_CHILD_TO));
     var BRDR_LIST = null;
     $(document).ready(function () {
         $('#FORM_SITE_ID').val('BT').trigger("change");
@@ -208,7 +211,7 @@
         $("#MVMT_DT").change(function () {
             $($(MVMT_DT).parent()).removeClass('alert-validate-date');
         });
-        
+
         tableMove = $("#tb_move").DataTable({
             "searching": false,
             "paging": true,
@@ -234,7 +237,15 @@
                     }
                 },
                 {
-                    targets: [0, 3, 4, 7, 9],
+                    targets: [10],
+                    orderable: false,
+                    className: "text-right",
+                    "mRender": function (data, type, full) {
+                        return numeral(data).format('0,0');
+                    }
+                },
+                {
+                    targets: [0, 3, 4, 7, 9,11],
                     orderable: false,
                     className: "text-center",
                 },
@@ -307,7 +318,7 @@
                                 } else {
                                     optionList = optionList + ' <option value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
                                 }
-                            
+
                         });
                         var pageInfo = tableMove.page.info();
                         var row_index = (meta.row + 1) + numeral(pageInfo.page)._value * numeral(pageInfo.length)._value;
@@ -317,6 +328,28 @@
                 },
 
                 { 'data': 'DEST_HSG_DT', render: function (data, type, row) { return data != "" ? resJsonToDate(data) : ""; } },
+                {
+                    'data': 'DEST_HSG_ID_CHILD',
+                    render: function (data, type, row, meta) {
+                        var optionList = "";
+                        $.each(MAS_HSG_CHILD_TO, function (index, item) {
+                            if (row.HSG_ID != item.HSG_ID) {
+                                if (row.DEST_HSG_ID_CHILD !== null && row.DEST_HSG_ID_CHILD == item.HSG_ID) {
+                                    optionList = optionList + ' <option selected="selected" value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
+                                } else {
+                                    optionList = optionList + ' <option value="' + item.HSG_ID + '">' + item.HSG_ID + '</option> ';
+                                }
+                            }
+                        });
+                        return "<div class='input-group'><select class='form-select dropdown move_select' onchange='ModifyDirectlyMove(this)' id='DEST_HSG_ID_CHILD--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "'> <option value=''></option>" + optionList + "</select></div>";
+                    }
+                },
+                {
+                    'data': 'CHILD_TOT',
+                    render: function (data, type, row, meta) {
+                        return "<input type='text' class='form-control int' autocomplete='off' onchange='ModifyDirectlyMove(this)' id='CHILD_TOT--" + row.UK_KEY + "' row='" + meta.row + "' col='" + meta.col + "' value='" + row.CHILD_TOT + "' />";
+                    }
+                },
                 {
                     mRender: function (data, type, row, meta) {
                         var pageInfo = tableMove.page.info();

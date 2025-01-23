@@ -40,25 +40,52 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12 col-lg-6">
-                                    <div class="form-group">
-                                        <div class="input-group col-mb-12">
-                                            <span class="input-group-text col-mb-6" id="basic-addon1">Item</span>
-                                            <select class="form-select dropdown-multiple" id="searchItemNumber" name="searchItemNumber">
-                                                <option value="ALL">All</option>
-                                                @foreach (var itm in ViewBag.MAS_ITM)
-                                                {
-                                                    <option value="@itm.ITM_NO">@itm.ITM_NO - @itm.ITM_NM</option>
-                                                }
-                                            </select>
+                            @using (Html.BeginForm("STDSALDT01", "SAL", FormMethod.Get, new { enctype = "multipart/form-data", @class = " bordered-row" }))
+                            {
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="input-group col-mb-3">
+                                                <span class="input-group-text col-mb-6" id="basic-addon1">PG Type</span>
+                                                <select class="form-select dropdown-multiple" id="searchPgType" name="searchPgType">
+                                                    <option value="ALL">All</option>
+                                                    @foreach (var itm in ViewBag.STD_SALE_PRICE)
+                                                    {
+                                                        <option value="@itm.PG_TP">@itm.PG_TP</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text col-lg-4" id="basic-addon1">วันทีประกาศ</span>
+                                                @Html.TextBox("searchDateForm", ViewBag.searchDateForm as string, new { @class = "form-control m-input", autocomplete = "off", tabindex = "1", placeholder = "Select Date", id = "searchDateForm" })
+                                                <span class="input-group-icon">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text col-lg-4" id="basic-addon1">ถึงวันทีประกาศ</span>
+                                                @Html.TextBox("searchDateTo", ViewBag.searchDateTo as string, new { @class = "form-control m-input", autocomplete = "off", tabindex = "1", placeholder = "Select Date", id = "searchDateTo" })
+                                                <span class="input-group-icon">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex" style="justify-content:flex-end !important">
-                            <button type="submit" id="search" class="btn btn-primary btn-round">Search</button>
+                                <div class="row">
+                                    <div class="card-footer d-flex" style="justify-content:flex-end !important">
+                                        <button type="submit" class="btn btn-primary btn-round">Search</button>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -80,18 +107,18 @@
                                     <thead>
                                         <tr>
                                             <th width="3%" style="text-align:center !important">ลำดับ</th>
-                                            <th></th>
-                                            <th style="text-align:center !important">Line No.</th>
-                                            <th style="text-align:center !important">Account</th>
-                                            <th style="text-align:center !important">Item</th>
+                                            <th>sk</th>
+                                            <th style="text-align:center !important">FG Type</th>
+                                            <th style="text-align:center !important">วันที่เริ่มประกาศ</th>
+                                            <th style="text-align:center !important">ถึงวันที่ประกาศ</th>
+                                            <th style="text-align:center !important">Relation TH</th>
+                                            <th style="text-align:center !important">Item No.</th>
+                                            <th style="text-align:center !important">Product Name</th>
                                             <th style="text-align:center !important">Size</th>
                                             <th style="text-align:center !important">Style</th>
-                                            <th style="text-align:center !important">Site</th>
-                                            <th style="text-align:center !important">From Date</th>
-                                            <th style="text-align:center !important">To Date</th>
-                                            <th style="text-align:center !important">Amount</th>
-                                            <th style="text-align:center !important">Currency</th>
-                                            <th style="text-align:center !important">Active Status</th>
+                                            <th style="text-align:center !important">Unit</th>
+                                            <th style="text-align:center !important">Price Amount</th>
+                                            <th style="text-align:center !important">Status</th>
                                             <th width="5%" style="align-content:center !important">
                                                 <div class="d-flex align-items-center selectgroup-pills">
                                                     <a href="@HttpUtility.UrlDecode(Url.Action("STDSALDT02", "SAL", new { searchItemNumber = ViewBag.searchItemNumber == null ? null : string.Join("&searchItemNumber=", (string[])ViewBag.searchItemNumber) }).ToString())"
@@ -117,14 +144,25 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#searchItemNumber").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchItemNumber))')).trigger("change");
+        if ('@ViewBag.searchPgType' != '') {
+            $("#searchPgType").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchPgType))')).trigger("change");
+        }
 
-        $('#searchItemNumber').select2({
+        $('#searchPgType').select2({
             theme: "bootstrap-5",
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
             placeholder: $(this).data('placeholder'),
             closeOnSelect: true,
             tags: true
+        });
+
+        $("#searchDateForm,#searchDateTo").datepicker({
+            todayHighlight: true,
+            orientation: 'bottom left',
+            format: 'dd-M-yyyy',
+            todayBtn: 'linked',
+            autoclose: 'true',
+            assumeNearbyYear: true
         });
 
         const table = $("#tb_detail").DataTable({
@@ -145,7 +183,9 @@
                 type: "POST",
                 datatype: "json",
                 data: {
-                    searchItemNumber: $("#searchItemNumber").val()
+                    searchPgType: $("#searchPgType").val(),
+                    searchDateForm: $("#searchDateForm").val(),
+                    searchDateTo: $("#searchDateTo").val()
                 },
             },
             columnDefs: [
@@ -156,9 +196,7 @@
                 },
                 {
                     targets: [1],
-                    orderable: false,
-                    visible: false,
-                    className: "text-left",
+                    visible: false
                 },
                 {
                     targets: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -174,12 +212,7 @@
                     }
                 },
                 { 'data': 'SALE_PRC_SK' },
-                { 'data': 'LINE_NO' },
-                { 'data': 'AC_REL' },
-                { 'data': 'ITM_NO' },
-                { 'data': 'SIZE' },
-                { 'data': 'STYLE' },
-                { 'data': 'SITE_ID' },
+                { 'data': 'PG_TP' },
                 {
                     'data': 'FM_DT',
                     className: "text-center",
@@ -194,14 +227,19 @@
                         return resJsonToDate(data);
                     }
                 },
-                { 'data': 'AMT' },
-                { 'data': 'CRN' },
+                { 'data': 'REL_TH' },
+                { 'data': 'ITM_NO' },
+                { 'data': 'PD_NM' },
+                { 'data': 'SIZE' },
+                { 'data': 'STYLE' },
+                { 'data': 'UNIT' },
+                { 'data': 'PRC_AMT' },
                 {
                     'data': 'ACTV_ST',
                     className: "text-center",
                     render: function (data, type, row) {
                         let stataus;
-                        if (row.ACTV_ST == 1) {
+                        if (row.ACTV_ST == 'A') {
                             stataus = "Active";
                         } else {
                             stataus = "InActive";

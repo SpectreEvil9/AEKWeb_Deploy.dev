@@ -4,16 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4060f9fe898542a2b662238828e44e4b" Name="Diagram1" ZoomLevel="89">
-        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_TFRMVTDT01" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="FIS_TFR_DBModel.BRDR_MVMT" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FIS_TFR_DBModel.BRDR_LOST" Width="1.5" PointX="9.375" PointY="0.75" />
-        <EntityTypeShape EntityType="FIS_TFR_DBModel.AVY_SALES_DTL" Width="1.5" PointX="3.375" PointY="3.75" />
-        <EntityTypeShape EntityType="FIS_TFR_DBModel.AVY_SALES_HDR" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_TFRMVTDT02_BRDR_LIST" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="FIS_TFR_DBModel.AVY_SALES_FOTR_WNNG" Width="1.5" PointX="5.375" PointY="6.75" />
-        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_TFRSALDT01" Width="1.5" PointX="7.375" PointY="5.75" />
-        </Diagram>
+      <Diagram DiagramId="917d9d90dd584649a52718f625c5f085" Name="Diagram1">
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.AVY_SALES_DTL" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.AVY_SALES_FOTR_DCN" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.AVY_SALES_FOTR_NRSRY" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.AVY_SALES_FOTR_WNNG" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.AVY_SALES_HDR" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.BRDR_LOST" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.BRDR_MVMT" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_RPT_SAL_DTL" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_RPT_SAL_HDR" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_RPT_SAL_WNNG_FOTR" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_TFRMVTDT01" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_TFRMVTDT02_BRDR_LIST" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_TFRRPTDT01" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_TFRSALDT01" Width="1.5" PointX="6.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_RPT_COM_ADR" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_RPT_MVMT_COST_DTL" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FIS_TFR_DBModel.V_RPT_MVMT_COST_HDR" Width="1.5" PointX="3.375" PointY="13.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

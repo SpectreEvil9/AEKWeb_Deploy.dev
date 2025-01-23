@@ -17,11 +17,19 @@
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_BRDR_PS" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_CST" Width="1.5" PointX="11.375" PointY="5.625" />
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_COMPANY" Width="1.5" PointX="3.375" PointY="13.75" />
-        <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_USR" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_AC" Width="1.5" PointX="5.375" PointY="14.75" />
         <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_BRDR_ALL" Width="1.5" PointX="13.375" PointY="6.75" />
-        <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_SITE" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="FIS_MAS_DBModel.STD_SALE_PRICE" Width="1.5" PointX="7.375" PointY="14.75" />
+<<<<<<< HEAD
+        
+        
+        
+        <EntityTypeShape EntityType="FIS_MAS_DBModel.STD_SALE_PRICE" Width="1.5" PointX="11.173037577035389" PointY="22.794570695047533" />
+        <EntityTypeShape EntityType="FIS_MAS_DBModel.MAS_SITE" Width="1.5" PointX="11.717744400593334" PointY="21.915220822168152" />
+=======
+        
+        
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; DEV1_20250124
+      &gt;&gt;&gt;&gt;&gt;&gt;&gt; DEV1_20250124
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

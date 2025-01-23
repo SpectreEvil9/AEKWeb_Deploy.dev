@@ -1,0 +1,146 @@
+﻿
+@{
+    Layout = null;
+}
+
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    @Styles.Render("~/Content/login.css")
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/validate_input.css")
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <div class="form-toggle"></div>
+            <div class="form-panel one">
+                <div class="form-header form-group" style="justify-content: center;">
+                    <h1>AEK FIS Account Login</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-content">
+                            <div class="form-group">
+                                <img src="../assets/img/undraw_remotely_2j6y.svg" width="300" height="320" alt="IMG">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6" style="padding-top: 50px;">
+                        <div class="form-content">
+                            <form>
+                                <div class="form-group validate-input" data-validate="Username is required" data-valid="Please enter a valid Username">
+                                    <input class="input-req" type="text" id="username" name="username" required="required" placeholder="Username" />
+                                </div>
+                                <div class="form-group validate-input" data-validate="Password is required" data-valid="Please enter a valid Password">
+                                    <input class="input-req" type="password" id="password" name="password" required="required" placeholder="Password"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-remember">
+                                        <input type="checkbox" />Remember Me
+                                    </label><a class="form-recovery" href="#">Forgot Password?</a>
+                                </div>
+                                <div class="form-group">
+                                    <button id="login_submit" type="button">Log In</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="form-panel two">
+                <div class="form-header">
+                    <h1>Support Account</h1>
+                </div>
+                <div class="form-content">
+                    <form>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" required="required" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @Scripts.Render("~/Scripts/bootstrap.min.js")
+        @Scripts.Render("~/Scripts/jquery-3.7.1.min.js")
+        @Scripts.Render("~/Scripts/validate_input.js")
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        var panelOne = $('.form-panel.two').height(),
+            panelTwo = $('.form-panel.two')[0].scrollHeight;
+
+        $('.form-panel.two').not('.form-panel.two.active').on('click', function (e) {
+            e.preventDefault();
+
+            $('.form-toggle').addClass('visible');
+            $('.form-panel.one').addClass('hidden');
+            $('.form-panel.two').addClass('active');
+            $('.form').animate({
+                'height': panelTwo
+            }, 200);
+        });
+
+        $('.form-toggle').on('click', function (e) {
+            e.preventDefault();
+            $(this).removeClass('visible');
+            $('.form-panel.one').removeClass('hidden');
+            $('.form-panel.two').removeClass('active');
+            $('.form').animate({
+                'height': panelOne
+            }, 200);
+        });
+    });
+
+    $("#login_submit").click(function () {
+        if ($('#username').val() != "" && $('#password').val() != "") { 
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Validate", "Authen")',
+                data: {
+                    usr_nm: $('#username').val(),
+                    password: $('#password').val()
+                },
+                error: function (result) {
+                    alert("There is a Problem, Try Again!");
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result.status == true) {
+                        window.location.href = '@Url.Action("Index", "Home")';
+                    } else {
+                        switch (result.message) {
+                            case "Invalid_Username":
+                                showvalid($('#username'));
+                                $('#username').val('');
+                                $('#password').val('');
+                                break;
+                            case "Invalid_Password":
+                                showvalid($('#password'));
+                                $('#password').val('');
+                                break;
+                        }
+                    }
+                }
+
+            });
+        } else {
+            if ($('#username').val() == "") {
+                $($(username).parent()).addClass('alert-validate');
+            }
+            if ($('#password').val() == "") {
+                $($(password).parent()).addClass('alert-validate');
+            }
+        }
+    });
+</script> 
