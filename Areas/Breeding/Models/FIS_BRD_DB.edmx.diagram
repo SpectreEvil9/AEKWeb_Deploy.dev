@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eae9a6f9ae964b3e963364c7fd767e19" Name="Diagram1">
-        <EntityTypeShape EntityType="FIS_BRD_DB.STG_BRDR_GGP" Width="1.5" PointX="2.5" PointY="0.75" />
-        <EntityTypeShape EntityType="FIS_BRD_DB.STG_BRDR_PS" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FIS_BRD_DB.V_MAS_BRDR_ALL" Width="1.5" PointX="4.25" PointY="0.75" />
+      <Diagram DiagramId="7201676d3d3243f597f872015a38b145" Name="Diagram1" ZoomLevel="43">
+        <EntityTypeShape EntityType="FIS_BRD_DBModel.STG_BRDR_GGP" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_BRD_DBModel.STG_BRDR_PS" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FIS_BRD_DBModel.V_MAS_BRDR_ALL" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

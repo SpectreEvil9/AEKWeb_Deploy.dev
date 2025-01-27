@@ -349,7 +349,15 @@
                     return All_Botton;
                     }
                 },
-            ]
+            ],
+            "drawCallback": function (data, settings) {
+                var api = this.api();
+                api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+                    var pageInfo = api.page.info();
+                    var rowIndex = (i + 1) + pageInfo.page * pageInfo.length;
+                    $(cell).html(rowIndex);
+                });
+            },
         });
 
         table.on('order.dt', function () {

@@ -9,12 +9,12 @@
     <Shape ID="DesignTable:V_TFRRPTDT01" ZOrder="7" X="1097" Y="89" Height="365" Width="276" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
     <Shape ID="DesignTable:V_RPT_MVMT_COST_DTL" ZOrder="9" X="766" Y="91" Height="273" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="214" />
     <Shape ID="DesignTable:V_RPT_MVMT_COST_HDR" ZOrder="8" X="431" Y="92" Height="273" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="214" />
-    <Shape ID="DesignTable:V_RPT_SAL_NRSRY_FOTR" ZOrder="6" X="757" Y="469" Height="365" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
-    <Shape ID="DesignTable:V_RPT_SAL_WNNG_FOTR" ZOrder="4" X="1095" Y="476" Height="365" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
-    <Shape ID="DesignTable:V_RPT_SAL_DTL" ZOrder="3" X="416" Y="474" Height="296" Width="279" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="237" />
-    <Shape ID="DesignTable:V_RPT_COM_ADR" ZOrder="2" X="117" Y="90" Height="319" Width="292" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="260" />
-    <Shape ID="DesignTable:Parameter" ZOrder="5" X="1417" Y="91" Height="79" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="75" />
-    <Shape ID="DesignTable:V_RPT_SAL_HDR" ZOrder="1" X="117" Y="479" Height="365" Width="284" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
+    <Shape ID="DesignTable:V_RPT_SAL_WNNG_FOTR" ZOrder="5" X="1095" Y="476" Height="365" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
+    <Shape ID="DesignTable:V_RPT_SAL_DTL" ZOrder="4" X="433" Y="473" Height="296" Width="279" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="237" />
+    <Shape ID="DesignTable:V_RPT_COM_ADR" ZOrder="3" X="117" Y="90" Height="319" Width="292" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="260" />
+    <Shape ID="DesignTable:V_RPT_SAL_HDR" ZOrder="2" X="117" Y="479" Height="365" Width="284" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
+    <Shape ID="DesignTable:Parameter" ZOrder="6" X="1417" Y="91" Height="79" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="75" />
+    <Shape ID="DesignTable:V_RPT_SAL_NRSRY_FOTR" ZOrder="1" X="753" Y="471" Height="365" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

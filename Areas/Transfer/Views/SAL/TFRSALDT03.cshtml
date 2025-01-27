@@ -36,10 +36,14 @@
                                 <h3 class="card-title text-primary">สร้างใบส่งสินค้า</h3>
                             </div>
                             <div class="col-md-6 col-lg-2 d-flex" style="justify-content:flex-end !important">
-                                <button class="btn btn-success btn-round">
+                                <a href="@HttpUtility.UrlDecode(Url.Action("SALNRSRPT01", "RPT" , new {id = "Excel"}).ToString())" id="RPT_NRS" class="btn btn-success btn-round">
                                     <span class="btn-label"><i class="fas fa-print"></i></span>
                                     Print
-                                </button>
+                                </a>
+                                <a href="@HttpUtility.UrlDecode(Url.Action("SALWNGRPT01", "RPT" , new {id = "Excel"}).ToString())" id="RPT_WNNG" class="btn btn-success btn-round">
+                                    <span class="btn-label"><i class="fas fa-print"></i></span>
+                                    Print
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -538,10 +542,10 @@
                         <div class="card-body" id="body3">
                             <ul class="nav nav-tabs nav-line nav-color-secondary" id="line-tab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="line-tab31-tab" data-bs-toggle="pill" href="#line-tab31" role="tab" aria-controls="pills-tab31" aria-selected="true">รายละเอียดใบส่งสินค้า</a>
+                                    <a class="nav-link active" id="line-tab31-tab" data-bs-toggle="pill" href="#line-tab31" role="tab" aria-controls="pills-tab31" aria-selected="true">I.รายละเอียดใบส่งสินค้า</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="line-tab32-tab" data-bs-toggle="pill" href="#line-tab32" role="tab" aria-controls="pills-tab32" aria-selected="false">จำนวนเงินที่ต้องชำระ</a>
+                                    <a class="nav-link" id="line-tab32-tab" data-bs-toggle="pill" href="#line-tab32" role="tab" aria-controls="pills-tab32" aria-selected="false">II.จำนวนเงินที่ต้องชำระ</a>
                                 </li>
                             </ul>
                             <div class="tab-content mt-3 mb-3" id="line-tabContent">
@@ -1038,12 +1042,14 @@
     var MAS_DCN_CUST = @Html.Raw(Json.Encode(ViewBag.MAS_DCN_CUST));
     var tableWnng = null;
     $(document).ready(function () {
+        $("#RPT_NRS").hide();
+        $("#RPT_WNNG").hide();
         $(".int").inputmask({
             'alias': 'currency',
             'integerDigits': '12',
             'digits': 0,
             'prefix': '',
-            rightAlign: false
+            rightAlign: true
         });
         $(".decimal").inputmask({
             'alias': 'currency',
@@ -1096,11 +1102,19 @@
                     className: "text-center",
                 },
                 {
-                    targets: [3, 4, 5],
+                    targets: [3, 4],
                     orderable: false,
                     className: "text-right",
                     mRender: function (data, type, full) {
                         return numeral(data).format('0,0');
+                    }
+                },
+                {
+                    targets: [5],
+                    orderable: false,
+                    className: "text-right",
+                    mRender: function (data, type, full) {
+                        return numeral(data).format('0,0.00');
                     }
                 },
                 {
@@ -1178,7 +1192,7 @@
                     'integerDigits': '12',
                     'digits': 0,
                     'prefix': '',
-                    rightAlign: false
+                    rightAlign: true
                 });
                 $(".wnng_select").each(function () {
 
@@ -1216,11 +1230,19 @@
                     className: "text-center",
                 },
                 {
-                    targets: [2, 3, 4],
+                    targets: [2, 3],
                     orderable: false,
                     className: "text-right",
                     mRender: function (data, type, full) {
                         return numeral(data).format('0,0');
+                    }
+                },
+                {
+                    targets: [4],
+                    orderable: false,
+                    className: "text-right",
+                    mRender: function (data, type, full) {
+                        return numeral(data).format('0,0.00');
                     }
                 },
                 {
@@ -1297,7 +1319,7 @@
                     'integerDigits': '12',
                     'digits': 0,
                     'prefix': '',
-                    rightAlign: false
+                    rightAlign: true
                 });
                 $(".nrs_select").each(function () {
 
@@ -1416,7 +1438,7 @@
                     'integerDigits': '12',
                     'digits': 0,
                     'prefix': '',
-                    rightAlign: false
+                    rightAlign: true
                 });
                 $(".dcn_select").each(function () {
 
@@ -1432,8 +1454,10 @@
         });
         if ($("#PD_TP").val() == 2) {
             SelectWnngDetail();
+            $("#RPT_WNNG").show();
         } else if ($("#PD_TP").val() == 3) {
             SelectNrsDetail();
+            $("#RPT_NRS").show();
         }
 
     });
@@ -1442,7 +1466,7 @@
         if ($("#PD_TP").val() == 1) {
             $("#body1").show();
         } else if ($("#PD_TP").val() == 2) {
-            $("#body2").show();
+            $("#body2").show();           
         } else if ($("#PD_TP").val() == 3) {
             $("#body3").show();
         } else if ($("#PD_TP").val() == 4) {
@@ -1466,6 +1490,7 @@
         $("#body3").hide();
         $("#body4").hide();
         $("#body5").hide();
+
     }
 
     function SelectWnngDetail() {
@@ -1653,7 +1678,7 @@
                     tableWnng.row.add({
                         "UK_KEY": key,
                         "SEQ": "",
-                        "PD_AMT": 0,
+                        "PD_AMT": 5,
                         "HSG_ID": "",
                         "PD_WGHT": 0,
                         "PD_WGHT_AV": 0
@@ -1777,7 +1802,7 @@
                 while (i < 20) {
                     tableNrs.row.add({
                         "UK_KEY": key,
-                        "PD_AMT": 0,
+                        "PD_AMT": 5,
                         "HSG_ID": "",
                         "PD_WGHT": 0,
                         "PD_WGHT_AV": 0
@@ -2136,7 +2161,7 @@
                 Swal.fire({
                     icon: "error",
                     title: 'Empty!',
-                    text: "ต้องมีข้อมูลครบถ้วนอย่างน้อย 1 รายการ",
+                    text: "กรุณาระบุข้อมูลให้ครบถ้วน",
                     showCancelButton: false,
                     confirmButtonText: 'OK',
                 });

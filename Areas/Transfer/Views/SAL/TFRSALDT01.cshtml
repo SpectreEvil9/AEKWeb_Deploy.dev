@@ -52,7 +52,6 @@
                                         <div class="input-group mb-3">
                                             <span class="input-group-text col-lg-3" id="basic-addon1">ฟาร์ม</span>
                                             <select class="form-select form-control dropdown-multiple" id="searchSiteid" name="searchSiteid" multiple="multiple">
-                                                <option value="ALL" selected="selected">All</option>
                                                 @foreach (var sit in ViewBag.MAS_SITE)
                                                 {
                                                     <option value="@sit.SITE_ID">@sit.SITE_NM_TH</option>
@@ -89,8 +88,8 @@
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text col-lg-4" id="basic-addon1">ประเภทสินค้า</span>
-                                            <select class="form-select form-control dropdown" id="searchProductType" name="searchProductType">
-                                                <option value=""></option>
+                                            <select class="form-select form-control dropdown-multiple" id="searchProductType" name="searchProductType" multiple="multiple">
+                                                <option value="">ALL</option>
                                                 <option value="1">สุกรขุน</option>
                                                 <option value="2">ลูกสุกรหย่านม</option>
                                                 <option value="3">สุกรอนุบาล</option>
@@ -165,20 +164,24 @@
 </div>
 <script>
     var table = null;
-    $('#searchSiteid').select2({
+    console.log('Navigated to:', document.location.href);
+    $('#searchSiteid,#searchProductType').select2({
         theme: "bootstrap-5",
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
         placeholder: $(this).data('placeholder'),
         closeOnSelect: true,
         tags: true
     });
-        if ($("#searchSiteid").val() == "ALL") {
+
+    if ($("#searchSiteid").val() == "ALL") {
             $("#searchSiteid").val("");
-        }
+    }
+
     $(document).ready(function () {
 
         $("#searchSALno").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSALno))')).trigger("change");
         $("#searchSiteid").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchSiteid))')).trigger("change");
+        $("#searchProductType").val(JSON.parse('@Html.Raw(Json.Encode(ViewBag.searchProductType))')).trigger("change");
 
         $("#searchDateForm,#searchDateTo").datepicker({
             todayHighlight: true,
@@ -217,15 +220,15 @@
                 className: "text-center",
             },
             {
-                targets: [1,2],
+                targets: [1],
                 orderable: false,
                 visible: false,
                 className: "text-left",
             },
             {
-                targets: [ 3, 4, 5],
+                targets: [4],
                 orderable: false,
-                className: "text-right",
+                className: "text-left",
             },
             {
                 targets: [7],
@@ -236,7 +239,7 @@
                 }
             },
             {
-                targets: [ 6, 8],
+                targets: [2, 3, 5, 6, 8],
                 orderable: false,
                 className: "text-center",
             },
@@ -256,12 +259,12 @@
                 render: function (e, a, t, n) {
                     var s = {
                         1: { title: "สุกรขุน", state: "primary" },
-                        2: { title: "ลูกสุกรหย่านม", state: "primary" },
-                        3: { title: "สุกรอนุบาล", state: "primary" },
-                        4: { title: "สุกรพ่อแม่พันธุ์คัดทิ้ง", state: "primary" },
-                        5: { title: "สุกรพันธุ์", state: "primary" },
+                        2: { title: "ลูกสุกรหย่านม", state: "secondary" },
+                        3: { title: "สุกรอนุบาล", state: "info" },
+                        4: { title: "สุกรพ่อแม่พันธุ์คัดทิ้ง", state: "success" },
+                        5: { title: "สุกรพันธุ์", state: "warning" },
                     };
-                    return void 0 === s[e] ? e : "<div class='input-group'><ul class='0-legend html-legend'><li><span class='btn-" + s[e].state + "'></span>" + s[e].title + "</li></ul></div>";
+                    return void 0 === s[e] ? e : "<div class='input-group' style='left: 100px;'><ul style='justify-content:left;' class='0-legend html-legend'><li><span class='btn-" + s[e].state + "'></span>" + s[e].title + "</li></ul></div>";
                 }
             },
             { 'data':'SALE_DOC_ID'},
